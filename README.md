@@ -26,18 +26,18 @@ sfdep maintains classes created by spdep when possible.
 
 ## TODO:
 
-\[\] implement localC
+[] implement localC
 
-\[\] implement kernel weights
+[] implement kernel weights
 
-\[\] implement neighbor match test
+[] implement neighbor match test
 
-\[\] Document Kernels
+[] Document Kernels
 
-\[\] implement tests
+[] implement tests
 
-\[\] write plotting / mapping functions
+[] write plotting / mapping functions
 
-\[\] vastly improve documentation.
+[] vastly improve documentation.
 
-\[\] use s2 for nbdists with polygons
+[] use s2 for nbdists with polygons

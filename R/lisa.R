@@ -5,14 +5,15 @@
 #' @param ... See `?spdep::localmoran()` for more options.
 #' @importFrom spdep localmoran_perm
 #' @family stats
+#' @return
 #' @export
 #' @examples
 #' library(tidyverse)
 #'
-# lisa <- sfweight::acs %>%
-#   mutate(nb = st_contiguity(geometry),
-#          wt = st_weights(nb),
-#          moran = local_moran(med_house_income, nb, wt))
+#' lisa <- sfweight::acs %>%
+#'   mutate(nb = st_contiguity(geometry),
+#'          wt = st_weights(nb),
+#'          moran = local_moran(med_house_income, nb, wt))
 #'
 #' pluck(lisa, "moran")
 local_moran <- function(x, nb, wt, alternative = "two.sided",

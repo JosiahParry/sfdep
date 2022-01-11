@@ -35,4 +35,4 @@ wt <- st_weights(nb)
 
 listw <- recreate_listw(nb, wt)
 
-lag.listw(listw, x, NAOK = TRUE)
+lag.listw(listw, x, NAOK = F)
