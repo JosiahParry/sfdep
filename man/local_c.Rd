@@ -2,9 +2,12 @@
 % Please edit documentation in R/localC.R
 \name{local_c}
 \alias{local_c}
+\alias{local_c_perm}
 \title{Compute Local Geary statistic}
 \usage{
 local_c(x, nb, wt, ...)
+
+local_c_perm(x, nb, wt, nsim = 499, alternative = "two.sided", ...)
 }
 \arguments{
 \item{x}{a numeric vector, or list of numeric vectors of equal length.}
@@ -14,17 +17,36 @@ local_c(x, nb, wt, ...)
 \item{wt}{a weights list}
 
 \item{...}{other arguments passed to \code{spdep::localC}}
+
+\item{nsim}{The number of simulations used to generate reference distribution.}
+
+\item{zero.policy}{default NULLL. If TRUE assign zero to zones without neighbors. If FALSE, assign NA. Must be passed via \code{...}}
 }
 \description{
 The Local Geary is a local adaptation of Geary's C statistic of spatial autocorrelation. The Local Geary uses squared differences to measure dissimilarity unlike the Local Moran. Low values of the Local Geary indicate positive spatial autocorrelation and large refers to negative spatial autocorrelation.
 Inference for the Local Geary is based on a permutation approach which compares the observed value to the reference distribution under spatial randomness. The Local Geary creates a pseudo p-value. This is not an analytical p-value and is based on the number of permutations and as such should be used with care.
 }
 \details{
+\subsection{Overview}{
+
 The Local Geary can be extended to a multivariate context. When \code{x} is a numeric vector, the univariate Local Geary will be calculated. To calculate the multivariate Local Moran provide either a list or a matrix. When \code{x} is a list, each element must be a numeric vector of the same length and of the same length as the neighbours in \code{listw}. In the case that \code{x} is a matrix the number of rows must be the same as the length of the neighbours in \code{listw}.
 
 While not required in the univariate context, the standardized Local Geary is calculated. The multivariate Local Geary is \emph{always} standardized.
 
 The univariate Local Geary is calculated as \eqn{c_i = \sum_j w_{ij}(x_i - x_j)^2} and the multivariate Local Geary is calculated as \eqn{c_{k,i} = \sum_{v=1}^{k} c_{v,i}} as described in Anselin (2019).
+}
+
+\subsection{Implementation}{
+
+These functions are based on the implementations of the local Geary statistic in the development version of spdep. They are based on \link[spdep:localC]{spdep::localC} and \link[spdep:localC]{spdep::localC_perm}.
+
+\link[spdep:localC]{spdep::localC_perm} and thus \link{local_c_perm} utilize a conditional permutation approach to approximate a reference distribution where each observation \code{i} is held fixed, randomly samples neighbors, and calculated the local C statistic for that tuple (\code{ci}). This is repeated \code{nsim} times. From the simulations 3 different types of p-values are calculated—all of which have their potential flaws. So be \emph{extra judicious} with using p-values to make conclusions.
+\itemize{
+\item \code{p_ci}: utilizes the sample mean and standard deviation. The p-value is then calculated using \code{pnorm()}--asuming a normal distribution which isn't always true.
+\item \code{p_ci_sim}: uses the rank of the observed statistic.
+\item \code{p_folded_sim}: followss the \link{pysal} implementation where p-values are in the range of \link{0, 0.5}. This excludes 1/2 of all p-values and should be used with caution.
+}
+}
 }
 \references{
 {Anselin, L. (1995), Local Indicators of Spatial Association—LISA. Geographical Analysis, 27: 93-115. \doi{10.1111/j.1538-4632.1995.tb00338.x}}

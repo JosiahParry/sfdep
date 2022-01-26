@@ -19,12 +19,19 @@ local_moran(
 
 \item{...}{See \code{?spdep::localmoran()} for more options.}
 }
+\value{
+
+}
 \description{
 Calculate the Local Moran's I Statistic
 }
 \examples{
 library(tidyverse)
 
+lisa <- sfweight::acs \%>\%
+  mutate(nb = st_contiguity(geometry),
+         wt = st_weights(nb),
+         moran = local_moran(med_house_income, nb, wt))
 
 pluck(lisa, "moran")
 }
