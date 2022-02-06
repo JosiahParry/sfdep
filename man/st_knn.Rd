@@ -16,7 +16,10 @@ st_knn(x, k = 1, symmetric = FALSE, ...)
 \item{...}{additional arguments to be passed to \code{knearneigh()}.}
 }
 \description{
-Calculate K-Nearest Neighbors
+Identifies the \code{k} nearest neighbors for given point geometry. If polygon geometry is provided, the centroids of the polygon will be used and a warning will be emitted.
+}
+\details{
+This function utilizes \code{\link[spdep:knearneigh]{spdep::knearneigh()}} and \code{\link[spdep:knn2nb]{spdep::knn2nb()}}.
 }
 \seealso{
 Other neighbors: 

@@ -9,14 +9,26 @@ st_weights(nb, style = "W", allow_zero = NULL, ...)
 \arguments{
 \item{nb}{A neighbor list object as created by \code{st_neighbors()}.}
 
-\item{style}{Default \code{"W"} for row standardized weights.}
+\item{style}{Default \code{"W"} for row standardized weights. This value can also be "B", "C", "U", "minmax", and "S". See \code{\link[spdep:nb2listw]{spdep::nb2listw()}} for details.}
 }
 \description{
-Calculate spatial weights
+Calculate polygon spatial weights from a \code{nb} list. See \code{\link[spdep:nb2listw]{spdep::nb2listw()}} for further details.
+}
+\details{
+Under the hood, \code{\link[=st_weights]{st_weights()}} creates a \code{listw} object and then extracts the weights elements from it as the \code{neighbours} element is already--presumably--already existent in the neighbors list you've already created. \code{listw} objects are recreated using \code{\link[=recreate_listw]{recreate_listw()}} when calculating other statistics.
+}
+\examples{
+guerry \%>\%
+ dplyr::mutate(nb = st_contiguity(geometry),
+               wt = st_weights(nb))
+
+# using geometry column directly
+nb <- st_contiguity(guerry$geometry)
+wt <- st_weights(nb)
 }
 \seealso{
 Other weights: 
 \code{\link{st_inverse_weights}()},
-\code{\link{st_kernel_weight}()}
+\code{\link{st_kernel_weights}()}
 }
 \concept{weights}

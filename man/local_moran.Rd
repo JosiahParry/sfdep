@@ -4,36 +4,34 @@
 \alias{local_moran}
 \title{Calculate the Local Moran's I Statistic}
 \usage{
-local_moran(
-  x,
-  nb,
-  wt,
-  alternative = "two.sided",
-  nsim = 499,
-  conditional = TRUE,
-  ...
-)
+local_moran(x, nb, wt, alternative = "two.sided", nsim = 499, ...)
 }
 \arguments{
 \item{x}{A numeric vector.}
 
-\item{...}{See \code{?spdep::localmoran()} for more options.}
+\item{nsim}{The number of simulations to run.}
+
+\item{...}{See \code{?spdep::localmoran_perm()} for more options.}
 }
 \value{
 
 }
 \description{
-Calculate the Local Moran's I Statistic
+Moran's I is calculated for each polygon based on the neighbor and weight lists.
+}
+\details{
+\code{\link[=local_moran]{local_moran()}} calls \code{\link[spdep:localmoran]{spdep::localmoran_perm()}} and calculates the Moran I for each polygon. As well as provide simulated p-values.
 }
 \examples{
 library(tidyverse)
 
-lisa <- sfweight::acs \%>\%
+lisa <- guerry \%>\%
   mutate(nb = st_contiguity(geometry),
          wt = st_weights(nb),
-         moran = local_moran(med_house_income, nb, wt))
+         moran = local_moran(crime_pers, nb, wt))
 
-pluck(lisa, "moran")
+# unnest the dataframe column
+tidyr::unnest(lisa, moran)
 }
 \seealso{
 Other stats: 

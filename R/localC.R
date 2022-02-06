@@ -41,7 +41,7 @@ local_c <- function(x, nb, wt, ...) {
 }
 
 #' @param nsim The number of simulations used to generate reference distribution.
-#' @alternative A character defining the alternative hypothesis. Must be one of "two.sided", "less" or "greater".
+#' @param alternative A character defining the alternative hypothesis. Must be one of "two.sided", "less" or "greater".
 #' @param zero.policy default NULLL. If TRUE assign zero to zones without neighbors. If FALSE, assign NA. Must be passed via \code{...}
 #' @rdname local_c
 local_c_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", ...) {

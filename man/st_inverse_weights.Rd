@@ -4,12 +4,16 @@
 \alias{st_inverse_weights}
 \title{Calculate Inverse Distance Bands}
 \usage{
-st_inverse_weights(x, nb, scale = 100)
+st_inverse_weights(x, nb, scale = 100, threshold = NULL)
 }
 \arguments{
 \item{x}{Spatial points. Typically the \code{geometry} column of an sf object.}
 
 \item{nb}{A nb neighbor list such as created from \code{st_knn(x, k = 1)}.}
+
+\item{scale}{The scaling factor to use when calculating the inverse distance band.}
+
+\item{threshold}{The critical threshold to use for distance band.}
 }
 \description{
 Calculate Inverse Distance Bands
@@ -19,7 +23,7 @@ See implementation details \href{https://spatialanalysis.github.io/lab_tutorials
 }
 \seealso{
 Other weights: 
-\code{\link{st_kernel_weight}()},
+\code{\link{st_kernel_weights}()},
 \code{\link{st_weights}()}
 }
 \concept{weights}

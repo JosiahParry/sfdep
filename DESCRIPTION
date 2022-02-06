@@ -19,4 +19,8 @@ RoxygenNote: 7.1.2
 Imports: 
     sf,
     cli,
-    spdep
+    spdep,
+    magrittr
+Depends: 
+    R (>= 2.10)
+LazyData: true

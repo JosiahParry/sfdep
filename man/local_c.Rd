@@ -20,6 +20,8 @@ local_c_perm(x, nb, wt, nsim = 499, alternative = "two.sided", ...)
 
 \item{nsim}{The number of simulations used to generate reference distribution.}
 
+\item{alternative}{A character defining the alternative hypothesis. Must be one of "two.sided", "less" or "greater".}
+
 \item{zero.policy}{default NULLL. If TRUE assign zero to zones without neighbors. If FALSE, assign NA. Must be passed via \code{...}}
 }
 \description{

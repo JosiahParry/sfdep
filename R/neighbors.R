@@ -13,6 +13,11 @@ st_contiguity <- function(x, queen = TRUE, ...) {
 
 #' Calculate K-Nearest Neighbors
 #'
+#' Identifies the `k` nearest neighbors for given point geometry. If polygon geometry is provided, the centroids of the polygon will be used and a warning will be emitted.
+#'
+#' @details
+#'
+#' This function utilizes [spdep::knearneigh()] and [spdep::knn2nb()].
 #'
 #' @param x an sf or sfc object.
 #' @param k number of nearest neighbours to be returned
@@ -28,7 +33,7 @@ st_knn <- function(x, k = 1, symmetric = FALSE, ...) {
 
   if (polygon_check) {
 
-    cli::cli_alert_info("Polygon provided. Using centroid.")
+    cli::cli_alert_warning("Polygon provided. Using centroid.")
     pnts <- st_centroid(x)
   } else {
     pnts <- x

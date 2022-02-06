@@ -20,37 +20,76 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/sfdep)](https://CRAN.R-project.org/package=sfdep)
 <!-- badges: end -->
 
-The goal of sfdep is to ...
+sfdep is an interface to the spdep package that is intended to work within your normal dplyr workflow by using sf objects and list columns. 
 
 ## Installation
 
 You can install the development version of sfdep like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+remotes::install_github("josiahparry/sfdep")
 ```
 
-## Example
+## Usage
 
-This is a basic example which shows you how to solve a common problem:
+To identify polygon neighbors, one uses `st_contiguity()` on the sf geometry column. This creates a `nb` object which will be utilized in most other computations. To create row standardized weights utilize `st_weights()`. 
 
-```{r example}
+
+```{r, message = FALSE, warn = FALSE}
 library(sfdep)
-## basic example code
+library(dplyr)
+library(ggplot2)
+
+# create neighbors and weights
+g <- guerry %>% 
+  mutate(nb = st_contiguity(geometry),
+         wt = st_weights(nb))
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Then calculate the spatial lag with `st_lag()`. Given that we've only modified an sf object, we can visualize this with ggplot2.
 
-```{r cars}
-summary(cars)
+```{r}
+# create spatial lag
+g %>% 
+  mutate(crime_pers_lag = st_lag(crime_pers, nb, wt)) %>% 
+  ggplot(aes(fill = crime_pers_lag)) + 
+  geom_sf(lwd = 0.2, color = "black") +
+  theme_void()
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
+Most users will be interested in local indicators of spatial association (LISA). Utilize `local_moran()` to do this. `local_moran()` will create a data frame column which contains a number of informative variables. For example the cluster that a polygon falls into based on mean, median, or pysal calulations. This will need to be unnested or certain variables hoisted.
 
-You can also embed plots, for example:
+Create the Local Moran data frame column.
+```{r}
+lisa <- g %>% 
+  mutate(moran = local_moran(crime_pers, nb, wt))
 
-```{r pressure, echo = FALSE}
-plot(pressure)
+pull(lisa, moran) %>% 
+  glimpse()
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+Visualize this.
+
+```{r}
+lisa %>% 
+  tidyr::unnest(moran) %>% 
+  ggplot(aes(fill = mean)) +
+  geom_sf() +
+  geom_sf(lwd = 0.2, color = "black") +
+  theme_void() +
+  scale_fill_manual(values = c("#1C4769", "#24975E", "#EACA97", "#B20016"))
+```
+
+<!-- ## Neighbor apply function -->
+
+<!-- In the case that you want to create custom local level metrics, you can do so with the function `st_nb_apply()`. This provides a purrr like interface to do calculation on an observation $x_{i}$ using it's neighbors, $x_{ij}$, and their respective weights $w_{ij}$. In the formula syntax utilize `.xij`, `.nb` and `.wt` for these values respectively. We can specify the type of output with the suffix argument. By default this will be `"dbl"`. These can be any purrr sufix. To get the default list output use `"list"`.  -->
+
+<!-- For example  -->
+
+<!-- ```{r} -->
+<!-- g %>%  -->
+<!--   transmute(x = st_nb_apply(crime_pers, nb, wt,  -->
+<!--                             .f = function(.xij, .wt, ...) sum((.xij - crime_pers)^2) / (length(.wt) + 1), suffix = "dbl")) -->
+<!-- ``` -->
+
+

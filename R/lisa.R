@@ -1,8 +1,15 @@
 #' Calculate the Local Moran's I Statistic
-
-#' @param x A numeric vector.
+#'
+#' Moran's I is calculated for each polygon based on the neighbor and weight lists.
+#'
+#' @details
+#'
+#' [local_moran()] calls [spdep::localmoran_perm()] and calculates the Moran I for each polygon. As well as provide simulated p-values.
+#'
 #' @inheritParams recreate_listw
-#' @param ... See `?spdep::localmoran()` for more options.
+#' @param x A numeric vector.
+#' @param nsim The number of simulations to run.
+#' @param ... See `?spdep::localmoran_perm()` for more options.
 #' @importFrom spdep localmoran_perm
 #' @family stats
 #' @return
@@ -10,15 +17,15 @@
 #' @examples
 #' library(tidyverse)
 #'
-#' lisa <- sfweight::acs %>%
+#' lisa <- guerry %>%
 #'   mutate(nb = st_contiguity(geometry),
 #'          wt = st_weights(nb),
-#'          moran = local_moran(med_house_income, nb, wt))
+#'          moran = local_moran(crime_pers, nb, wt))
 #'
-#' pluck(lisa, "moran")
+#' # unnest the dataframe column
+#' tidyr::unnest(lisa, moran)
 local_moran <- function(x, nb, wt, alternative = "two.sided",
-                        nsim = 499,
-                        conditional = TRUE, ...) {
+                        nsim = 499, ...) {
 
   listw <- recreate_listw(nb, wt)
 
@@ -26,7 +33,6 @@ local_moran <- function(x, nb, wt, alternative = "two.sided",
                   listw,
                   nsim = nsim,
                   alternative = alternative,
-                  conditional = conditional,
                   ...)
 
 
@@ -39,4 +45,3 @@ local_moran <- function(x, nb, wt, alternative = "two.sided",
   cbind(lm_res, lm_cats)
 
 }
-
