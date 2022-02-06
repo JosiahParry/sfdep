@@ -7,7 +7,7 @@
 #' @export
 st_cardinalties <- function(nb) {
 
-  if (any(class(nb) == TRUE)) {
+  if (any(class(nb) == "nb")) {
    return(spdep::card(nb))
   }
 

@@ -5,29 +5,28 @@ template:
 
 
 reference:
+
+- title: Neighbors
+  contents:
+  - st_contiguity
+  - st_cardinalties
+  - st_knn
+  - contains("nb_")
+
 - title: Weights
   contents:
   - contains("weights")
   - kernels
 
-- title: Neighbors
-  contents:
-  - st_contiguity
-  - st_knn
-  - contains("nb")
-
 - title: Local Indicators of Spatial Association (LISA)
   contents:
+  - st_lag
   - starts_with("local")
 
 - title: Data
   contents:
   - starts_with("guerry")
 
-- title: Other
-  contents:
-  - st_lag
-  - st_cardinalties
 
 - title: Internal functions
   contents:

@@ -8,7 +8,7 @@ Authors@R:
            email = "josiah.parry@gmail.com",
            comment = c(ORCID = "0000-0001-9910-865X"))
 Description: An interface to spdep to integrate with sf objects and the tidyverse. 
-License: MIT + file LICENSE
+License: GPL (>= 3)
 Suggests: 
     purrr,
     testthat (>= 3.0.0)

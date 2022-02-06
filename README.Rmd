@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/sfdep)](https://CRAN.R-project.org/package=sfdep)
 <!-- badges: end -->
 
-sfdep is an interface to the spdep package that is intended to work within your normal dplyr workflow by using sf objects and list columns. 
+sfdep builds on the great shoulders of spdep package for spatial dependence. sfdep creates an sf and tidyverse friendly interface to the package as well as introduces new functionality that is not present in spdep. sfdep utilizes list columns extensively to make this interface possible. 
 
 ## Installation
 
@@ -32,15 +32,54 @@ remotes::install_github("josiahparry/sfdep")
 
 ## Usage
 
-To identify polygon neighbors, one uses `st_contiguity()` on the sf geometry column. This creates a `nb` object which will be utilized in most other computations. To create row standardized weights utilize `st_weights()`. 
+There are three main categories of functionality relating to geometry neighbors, weights, and local indicators of spatial association (LISAs). 
 
+### Neighbors
 
-```{r, message = FALSE, warn = FALSE}
+The most fundamental usage is to find contiguous neighbors from a polygon. This is done with `st_contiguity()` which, by default creates queen weights. If rook weights are desired, set `queen = FALSE`. Additional arguments can be passed to the underlying `spdep::poly2nb()` via `...`. `st_contiguity()` creates an object of class `nb` as used by `spdep`. 
+
+```{r message=FALSE}
+library(sf)
 library(sfdep)
 library(dplyr)
-library(ggplot2)
 
-# create neighbors and weights
+# grab geometry
+geo <- st_geometry(guerry)
+
+nb <- st_contiguity(geo)
+
+nb
+```
+
+We can identify higher order neighbors with `st_nb_lag()` and the cumulative higher order neighbors with `st_nb_lag_cumul()`.
+
+```{r}
+st_nb_lag(nb, 2)
+st_nb_lag_cumul(nb, 2)
+```
+
+Other point geometry neighbor functions are `st_knn()`, `st_nb_band()`, `st_nb_dists()`. 
+
+
+### Weights
+
+
+Polygon weights are created with `st_weights()` (which calls `spdep::nb2listw`). By default they are row standardized weights. 
+
+```{r}
+wt <- st_weights(nb)
+
+wt[1:2]
+```
+
+Other point based weights can be created with `st_kernel_weights()` and `st_inverse_weights()`.
+
+
+### Local Indicators of Spatial Association (LISAs)
+
+LISAs are created from a combination of neighbors and weights and are intended to be used inside of a dplyr pipeline. The below is a worked example of calculating the spatial lag and the local moran.
+
+```{r, message = FALSE, warn = FALSE}
 g <- guerry %>% 
   mutate(nb = st_contiguity(geometry),
          wt = st_weights(nb))
@@ -49,6 +88,8 @@ g <- guerry %>%
 Then calculate the spatial lag with `st_lag()`. Given that we've only modified an sf object, we can visualize this with ggplot2.
 
 ```{r}
+library(ggplot2)
+
 # create spatial lag
 g %>% 
   mutate(crime_pers_lag = st_lag(crime_pers, nb, wt)) %>% 

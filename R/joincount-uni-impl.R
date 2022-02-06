@@ -1,24 +1,48 @@
+#' Compute local univariate join count
+#'
+#' The univariate local join count statistic is used to identify clusters of rarely occurring binary variables. The binary variable of interest should occur less
+#' than half of the time.
+#' @details
+#'
+#' The local join count statistic requires a binary weights list which can be generated with `st_weights(nb, style = "B")`. Additionally, ensure that the binary variable of interest is rarely occurring in no more than half of observations.
+#'
+#' P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see [Geoda Glossary](https://geodacenter.github.io/glossary.html#ppvalue).
+#'
+#' @inheritParams jc_uni_impl
+#' @param nb a neighbors list object.
+#' @param wt default `st_weights(nb, style = "B")`. A binary weights list as created by `st_weights(nb, style = "B")`.
+#' @export
+#' @examples
+#' guerry %>%
+#'   dplyr::transmute(top_crime = crime_prop > 9000,
+#'                    nb = st_contiguity(geometry),
+#'                    wt = st_weights(nb, style = "B"),
+#'                    jc = local_jc_uni(top_crime, nb, wt)) %>%
+#'   tidyr::unnest(jc)
+local_jc_uni <- function(x, nb, wt = st_weights(nb, style = "B"),
+                         nsim = 499, alternative = "greater") {
+  listw <- recreate_listw(nb ,wt)
+  jc_uni_impl(x, listw, nsim, alternative)
+}
+
 #' Implementation of the univariate join count on listw objects
 #'
 #' The univariate local join count statistic is used to identify clusters of rarely occurring binary variables.
-#' Compute the univariate local join count statistic for a binary variable.
 #'
 #' @param x a binary variable either numeric or logical
 #' @param listw a listw object where `attr(, "mode")` is `"binary"`
 #' @param nsim the number of conditional permutation simulations
 #' @param alternative default `"greater"`. One of `"less"` or `"greater"`.
-#' @export
+#' @keywords internal
 #' @references https://geodacenter.github.io/workbook/6d_local_discrete/lab6d.html#univariate-local-join-count-statistic
-jc_uni_impl <- function(x, listw, nsim = 499) {
+jc_uni_impl <- function(x, listw, nsim, alternative) {
 
   # TODO Check neighbor attribute and cast to Binary if need be.
   # Check for x input type  and proportion of 1s vs TRUES
   nb <- listw[["neighbours"]]
   wt <- listw[["weights"]]
-
+  xj <- find_xj(x, nb) # find xj values
   obs <- mapply(jc_uni_calc, x, xj, wt) # observed join count
-
-  xj <- find_xj(x, nb)
 
   x_index <- which(x == 1L)
   xj_index <- which(unlist(lapply(xj, function(x) any(x == 1L))) == TRUE)
@@ -81,7 +105,7 @@ jc_uni_perm_impl <- function (x, listw, index) {
 #'
 #' Formula is
 #'
-#' \deqn{x_i \times \Sigma{w_i * x_j}}
+#' \eqn{x_i \times \Sigma{w_i * x_j}}
 #'
 #' @keywords internal
 jc_uni_calc <- function(x, xj, wt) {
@@ -121,7 +145,8 @@ permute_listw <- function(listw) {
 #'
 #' Used in conditional permutation and the function `permute_listw()`.
 #'
-#' @param i the index position of observation $i$
+#' @param i the index position of observation `i`
+#' @keywords internal
 shuffle_nbs <- function(i, n, card) {
   x <- 1:n
   sample(x[-i], size = card)

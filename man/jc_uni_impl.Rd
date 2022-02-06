@@ -4,7 +4,7 @@
 \alias{jc_uni_impl}
 \title{Implementation of the univariate join count on listw objects}
 \usage{
-jc_uni_impl(x, listw, nsim = 499)
+jc_uni_impl(x, listw, nsim, alternative)
 }
 \arguments{
 \item{x}{a binary variable either numeric or logical}
@@ -17,8 +17,8 @@ jc_uni_impl(x, listw, nsim = 499)
 }
 \description{
 The univariate local join count statistic is used to identify clusters of rarely occurring binary variables.
-Compute the univariate local join count statistic for a binary variable.
 }
 \references{
 https://geodacenter.github.io/workbook/6d_local_discrete/lab6d.html#univariate-local-join-count-statistic
 }
+\keyword{internal}

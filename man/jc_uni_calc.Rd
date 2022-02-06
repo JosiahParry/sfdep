@@ -12,6 +12,6 @@ Calculates the local join count statistic for a given xi, xj, and binary weights
 \details{
 Formula is
 
-\deqn{x_i \times \Sigma{w_i * x_j}}
+\eqn{x_i \times \Sigma{w_i * x_j}}
 }
 \keyword{internal}

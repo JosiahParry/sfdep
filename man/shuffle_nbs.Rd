@@ -7,8 +7,9 @@
 shuffle_nbs(i, n, card)
 }
 \arguments{
-\item{i}{the index position of observation $i$}
+\item{i}{the index position of observation \code{i}}
 }
 \description{
 Used in conditional permutation and the function \code{permute_listw()}.
 }
+\keyword{internal}
