@@ -20,7 +20,7 @@
 #'                    jc = local_jc_uni(top_crime, nb, wt)) %>%
 #'   tidyr::unnest(jc)
 local_jc_uni <- function(x, nb, wt = st_weights(nb, style = "B"),
-                         nsim = 499, alternative = "greater") {
+                         nsim = 499, alternative = "two.sided") {
   listw <- recreate_listw(nb ,wt)
   jc_uni_impl(x, listw, nsim, alternative)
 }
@@ -50,10 +50,16 @@ jc_uni_impl <- function(x, listw, nsim, alternative) {
 
   reps <- replicate(nsim, jc_uni_perm_impl(x, listw, index))
 
+  # TODO check order for greater and lesser
+  # This might be incorrect
+
+  g <- (rowSums(reps <= obs[index]) + 1) / (nsim + 1)
+  l <- (rowSums(reps >= obs[index]) + 1)/ (nsim + 1)
   p_value <- switch(
     alternative,
-    less = (rowSums(reps = obs[index]) + 1) / (nsim + 1),
-    greater = (rowSums(reps >= obs[index]) + 1)/ (nsim + 1)
+    less = l,
+    greater = g,
+    two.sided = pmin(l, 1 -l)
   )
 
   p_values <- rep(NA_real_, length(x))
@@ -64,6 +70,7 @@ jc_uni_impl <- function(x, listw, nsim, alternative) {
     p_value = p_values
   )
 }
+
 
 
 # Steps for calculating local join count:
@@ -112,48 +119,6 @@ jc_uni_calc <- function(x, xj, wt) {
   x * sum(wt * xj)
 }
 
-
-#' Idenitfy xj values
-#'
-#' Find `xj` values given an x and neighbors list.
-#'
-#' @keywords internal
-find_xj <- function(x, nb) {
-  lapply(nb, FUN = function(nbs_i) x[nbs_i])
-}
-
-
-#' Conditionally permutes a listw object
-#'
-#' @param a listw object.
-#'
-#' @keywords internal
-permute_listw <- function(listw) {
-  n <- length(listw$neighbours)
-
-  cards <- lengths(listw$neighbours)
-  # Shuffle the neighbors by randomly sampling from all possible neighbors
-  # except where x exists
-  perm_nb <- mapply(shuffle_nbs, 1:n, n, cards)
-  class(perm_nb) <- c("nb", "list")
-  listw$neighbours <- perm_nb
-
-  listw
-}
-
-#' Internal function to shuffle neighbors
-#'
-#' Used in conditional permutation and the function `permute_listw()`.
-#'
-#' @param i the index position of observation `i`
-#' @keywords internal
-shuffle_nbs <- function(i, n, card) {
-  x <- 1:n
-  sample(x[-i], size = card)
-}
-
-
-
 # Example data to match geoda if for debugging
 # library(spdep)
 # library(sf)
@@ -162,5 +127,3 @@ shuffle_nbs <- function(i, n, card) {
 # nbsp <- poly2nb(chi)
 # listw <- nb2listw(nbsp, style = "B")
 # x <- chi$popplus
-
-

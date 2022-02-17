@@ -20,22 +20,22 @@ class_modify <- function(x, class = "list") {
 
 #' Create a listw object from a neighbors and weight list
 #'
-#' @param neighbors A neighbor list object as created by `st_neighbors()`.
-#' @param weights A weights list as created by `st_weights()`.
+#' @param nb a neighbor list object for example as created by `st_contiguity()`.
+#' @param wt a weights list as created by `st_weights()`.
 #' @keywords internal
-recreate_listw <- function(neighbors, weights) {
-  which_style <- c(attr(weights, "W") %||% NA,
-                   attr(weights, "B") %||% NA,
-                   attr(weights, "C") %||% NA,
-                   attr(weights, "U") %||% NA,
-                   attr(weights, "minmax") %||% NA,
-                   attr(weights, "S") %||% NA)
+recreate_listw <- function(nb, wt) {
+  which_style <- c(attr(wt, "W") %||% NA,
+                   attr(wt, "B") %||% NA,
+                   attr(wt, "C") %||% NA,
+                   attr(wt, "U") %||% NA,
+                   attr(wt, "minmax") %||% NA,
+                   attr(wt, "S") %||% NA)
 
   possible_styles <- c("W", "B", "C", "U", "minmax", "S")
 
   listw <- list(style = possible_styles[!is.na(which_style)],
-                neighbours = neighbors,
-                weights = weights)
+                neighbours = nb,
+                weights = wt)
 
   class(listw) <- c("listw", "nb", "list")
 
@@ -71,5 +71,15 @@ kernels <- list(
   quartic = function(x, thresh) (15/16)*(1-(x/thresh)^2)^2,
   gaussian =  function(x, thresh) sqrt(2*pi)*exp((-(x/thresh)^2)/2)
 )
+
+
+#' Idenitfy xj values
+#'
+#' Find `xj` values given an x and neighbors list.
+#'
+#' @keywords internal
+find_xj <- function(x, nb) {
+  lapply(nb, FUN = function(nbs_i) x[nbs_i])
+}
 
 
