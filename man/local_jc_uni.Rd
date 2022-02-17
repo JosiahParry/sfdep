@@ -9,7 +9,7 @@ local_jc_uni(
   nb,
   wt = st_weights(nb, style = "B"),
   nsim = 499,
-  alternative = "greater"
+  alternative = "two.sided"
 )
 }
 \arguments{

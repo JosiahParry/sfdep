@@ -134,3 +134,30 @@ lisa %>%
 <!-- ``` -->
 
 
+## Development Tracking
+
+### Pysal ESDA functionality
+
+#### Global Statistics
+
+- [] Moran's I
+- [] Join Count
+- [] Gettis-Ord
+
+#### LISAs
+
+- [x] Local Moran
+  - [] Bivariate local moran
+- [] Local Join Count
+  - [x] Univariate
+  - [] Bivariate
+    - No colocation
+    - colocation
+  - [] Multivarite
+- [x] LOSH
+- [x] Gi 
+- [x] Gi*
+
+### Utilities
+
+- [x] Conditional permutation

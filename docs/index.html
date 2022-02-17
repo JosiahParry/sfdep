@@ -148,14 +148,14 @@
 <span class="co">#&gt; Rows: 85</span>
 <span class="co">#&gt; Columns: 12</span>
 <span class="co">#&gt; $ ii           &lt;dbl&gt; 0.52226452, 0.82801651, 0.80353997, 0.74188966, 0.2311871…</span>
-<span class="co">#&gt; $ eii          &lt;dbl&gt; -3.048113e-02, 1.607057e-02, -6.016299e-03, -2.451001e-02…</span>
-<span class="co">#&gt; $ var_ii       &lt;dbl&gt; 0.3812395277, 0.1189950457, 0.1452026743, 0.2365428140, 0…</span>
-<span class="co">#&gt; $ z_ii         &lt;dbl&gt; 0.8952130, 2.3537627, 2.1245147, 1.5757976, 1.2406735, 1.…</span>
-<span class="co">#&gt; $ p_ii         &lt;dbl&gt; 0.370673242, 0.018584471, 0.033627131, 0.115072459, 0.214…</span>
-<span class="co">#&gt; $ p_ii_sim     &lt;dbl&gt; 0.372, 0.040, 0.040, 0.144, 0.216, 0.120, 0.556, 0.112, 0…</span>
-<span class="co">#&gt; $ p_folded_sim &lt;dbl&gt; 0.186, 0.020, 0.020, 0.072, 0.108, 0.060, 0.278, 0.056, 0…</span>
-<span class="co">#&gt; $ skewness     &lt;dbl&gt; 0.152880983, 0.297694427, -0.168805933, 0.138666105, -0.1…</span>
-<span class="co">#&gt; $ kurtosis     &lt;dbl&gt; -0.38631061, 0.06805122, -0.07366417, -0.20828972, -0.223…</span>
+<span class="co">#&gt; $ eii          &lt;dbl&gt; -0.0635392218, -0.0269589868, -0.0154067671, -0.002995492…</span>
+<span class="co">#&gt; $ var_ii       &lt;dbl&gt; 0.3744086161, 0.1224757473, 0.1419565848, 0.2463437163, 0…</span>
+<span class="co">#&gt; $ z_ii         &lt;dbl&gt; 0.9573687, 2.4430290, 2.1735913, 1.5007853, 1.2784691, 1.…</span>
+<span class="co">#&gt; $ p_ii         &lt;dbl&gt; 0.338381192, 0.014564568, 0.029735843, 0.133411098, 0.201…</span>
+<span class="co">#&gt; $ p_ii_sim     &lt;dbl&gt; 0.328, 0.012, 0.028, 0.152, 0.176, 0.116, 0.560, 0.100, 0…</span>
+<span class="co">#&gt; $ p_folded_sim &lt;dbl&gt; 0.164, 0.006, 0.014, 0.076, 0.088, 0.058, 0.280, 0.050, 0…</span>
+<span class="co">#&gt; $ skewness     &lt;dbl&gt; -0.026814213, 0.018206733, -0.005666792, 0.080406964, -0.…</span>
+<span class="co">#&gt; $ kurtosis     &lt;dbl&gt; -0.223332517, -0.431340554, -0.505912601, -0.405115373, -…</span>
 <span class="co">#&gt; $ mean         &lt;fct&gt; High-High, High-High, High-High, Low-Low, Low-Low, Low-Lo…</span>
 <span class="co">#&gt; $ median       &lt;fct&gt; High-High, High-High, High-High, Low-Low, Low-Low, Low-Lo…</span>
 <span class="co">#&gt; $ pysal        &lt;fct&gt; High-High, High-High, High-High, Low-Low, Low-Low, Low-Lo…</span></code></pre></div>
@@ -177,6 +177,67 @@
 <!--   transmute(x = st_nb_apply(crime_pers, nb, wt,  -->
 <!--                             .f = function(.xij, .wt, ...) sum((.xij - crime_pers)^2) / (length(.wt) + 1), suffix = "dbl")) -->
 <!-- ``` -->
+</div>
+</div>
+<div class="section level2">
+<h2 id="development-tracking">Development Tracking<a class="anchor" aria-label="anchor" href="#development-tracking"></a>
+</h2>
+<div class="section level3">
+<h3 id="pysal-esda-functionality">Pysal ESDA functionality<a class="anchor" aria-label="anchor" href="#pysal-esda-functionality"></a>
+</h3>
+<div class="section level4">
+<h4 id="global-statistics">Global Statistics<a class="anchor" aria-label="anchor" href="#global-statistics"></a>
+</h4>
+<ul>
+<li>[] Moran’s I</li>
+<li>[] Join Count</li>
+<li>[] Gettis-Ord</li>
+</ul>
+</div>
+<div class="section level4">
+<h4 id="lisas">LISAs<a class="anchor" aria-label="anchor" href="#lisas"></a>
+</h4>
+<ul>
+<li>
+<input type="checkbox" disabled checked>
+Local Moran<ul>
+<li>[] Bivariate local moran</li>
+</ul>
+</li>
+<li>[] Local Join Count
+<ul>
+<li>
+<input type="checkbox" disabled checked>
+Univariate</li>
+<li>[] Bivariate
+<ul>
+<li>No colocation</li>
+<li>colocation</li>
+</ul>
+</li>
+<li>[] Multivarite</li>
+</ul>
+</li>
+<li>
+<input type="checkbox" disabled checked>
+LOSH</li>
+<li>
+<input type="checkbox" disabled checked>
+Gi</li>
+<li>
+<input type="checkbox" disabled checked>
+Gi*</li>
+</ul>
+</div>
+</div>
+<div class="section level3">
+<h3 id="utilities">Utilities<a class="anchor" aria-label="anchor" href="#utilities"></a>
+</h3>
+<ul class="task-list">
+<li>
+<input type="checkbox" disabled checked>
+Conditional permutation</li>
+</ul>
 </div>
 </div>
 </div>

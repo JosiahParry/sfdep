@@ -12,6 +12,7 @@ reference:
   - st_cardinalties
   - st_knn
   - contains("nb_")
+  - cond_permute_nb
 
 - title: Weights
   contents:
@@ -22,6 +23,8 @@ reference:
   contents:
   - st_lag
   - starts_with("local")
+  - losh
+  - losh_perm
 
 - title: Data
   contents:

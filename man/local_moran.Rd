@@ -9,6 +9,10 @@ local_moran(x, nb, wt, alternative = "two.sided", nsim = 499, ...)
 \arguments{
 \item{x}{A numeric vector.}
 
+\item{nb}{a neighbor list object for example as created by \code{st_contiguity()}.}
+
+\item{wt}{a weights list as created by \code{st_weights()}.}
+
 \item{nsim}{The number of simulations to run.}
 
 \item{...}{See \code{?spdep::localmoran_perm()} for more options.}

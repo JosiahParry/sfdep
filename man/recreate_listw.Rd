@@ -4,12 +4,12 @@
 \alias{recreate_listw}
 \title{Create a listw object from a neighbors and weight list}
 \usage{
-recreate_listw(neighbors, weights)
+recreate_listw(nb, wt)
 }
 \arguments{
-\item{neighbors}{A neighbor list object as created by \code{st_neighbors()}.}
+\item{nb}{a neighbor list object for example as created by \code{st_contiguity()}.}
 
-\item{weights}{A weights list as created by \code{st_weights()}.}
+\item{wt}{a weights list as created by \code{st_weights()}.}
 }
 \description{
 Create a listw object from a neighbors and weight list

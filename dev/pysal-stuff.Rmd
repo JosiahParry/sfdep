@@ -1,0 +1,46 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+reticulate::use_condaenv("geo")
+```
+
+```{python}
+import esda
+from esda.join_counts_local_bv import Local_Join_Counts_BV
+import libpysal
+import geopandas as gpd
+fp = libpysal.examples.root + "/guerry/" + "Guerry.shp" 
+guerry_ds = gpd.read_file(fp)
+
+guerry_ds['infq5'] = 0
+guerry_ds['donq5'] = 0
+guerry_ds.loc[(guerry_ds['Infants'] > 23574), 'infq5'] = 1
+guerry_ds.loc[(guerry_ds['Donatns'] > 10973), 'donq5'] = 1
+
+w = libpysal.weights.Queen.from_dataframe(guerry_ds)
+
+LJC_BV_Case2 = esda.Join_Counts_Local_BV(connectivity=w).fit(guerry_ds['infq5'], guerry_ds['donq5'], case='CLC')
+
+LJC_BV_Case2.LJC
+LJC_BV_Case2.p_sim
+
+
+
+```
+
+
+```{python}
+import esda
+import libpysal
+import geopandas as gpd
+commpop = gpd.read_file("https://github.com/jeffcsauer/GSOC2020/raw/master/validation/data/commpop.gpkg")
+w = libpysal.weights.Queen.from_dataframe(commpop)
+LJC_BV_Case1 = esda.Join_Counts_Local_BV(connectivity=w).fit(commpop['popneg'], commpop['popplus'], case='BJC')
+LJC_BV_Case1.LJC
+LJC_BV_Case1.p_sim
+
+```
+

@@ -1,3 +1,5 @@
+^renv$
+^renv\.lock$
 ^sfdep\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
@@ -9,3 +11,6 @@
 ^data-raw$
 ^joincounts-dev\.R$
 ^\.github$
+R/joincount-bv-impl.R
+^dev$
+^R/joincount-bv-dev\.R$

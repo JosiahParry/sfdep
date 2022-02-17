@@ -22,6 +22,9 @@
     <loc>/reference/class_modify.html</loc>
   </url>
   <url>
+    <loc>/reference/cond_permute_nb.html</loc>
+  </url>
+  <url>
     <loc>/reference/find_xj.html</loc>
   </url>
   <url>
@@ -46,10 +49,19 @@
     <loc>/reference/local_c.html</loc>
   </url>
   <url>
+    <loc>/reference/local_g.html</loc>
+  </url>
+  <url>
+    <loc>/reference/local_gstar.html</loc>
+  </url>
+  <url>
     <loc>/reference/local_jc_uni.html</loc>
   </url>
   <url>
     <loc>/reference/local_moran.html</loc>
+  </url>
+  <url>
+    <loc>/reference/losh.html</loc>
   </url>
   <url>
     <loc>/reference/permute_listw.html</loc>
