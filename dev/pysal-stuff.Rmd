@@ -44,3 +44,96 @@ LJC_BV_Case1.p_sim
 
 ```
 
+```{python}
+import libpysal
+import geopandas as gpd
+from esda.join_counts_local_bv import Join_Counts_Local_BV
+
+fp = libpysal.examples.root + "/guerry/" + "Guerry.shp" 
+guerry_ds = gpd.read_file(fp)
+
+guerry_ds['infq5'] = 0
+guerry_ds['donq5'] = 0
+guerry_ds.loc[(guerry_ds['Infants'] > 23574), 'infq5'] = 1
+guerry_ds.loc[(guerry_ds['Donatns'] > 10973), 'donq5'] = 1
+w = libpysal.weights.Queen.from_dataframe(guerry_ds)
+LJC_BV_Case2 = Join_Counts_Local_BV(connectivity=w).fit(guerry_ds['infq5'], guerry_ds['donq5'], case='CLC')
+LJC_BV_Case2.LJC
+LJC_BV_Case2.p_sim
+```
+
+```{python}
+from esda.join_counts_local_mv import Join_Counts_Local_MV
+guerry_ds['infq5'] = 0
+guerry_ds['donq5'] = 0
+guerry_ds['suic5'] = 0
+guerry_ds.loc[(guerry_ds['Infants'] > 23574), 'infq5'] = 1
+guerry_ds.loc[(guerry_ds['Donatns'] > 10973), 'donq5'] = 1
+guerry_ds.loc[(guerry_ds['Suicids'] > 55564), 'suic5'] = 1
+w = libpysal.weights.Queen.from_dataframe(guerry_ds)
+LJC_MV = Join_Counts_Local_MV(connectivity=w).fit([guerry_ds['infq5'], guerry_ds['donq5'], guerry_ds['suic5']])
+LJC_MV.LJC
+LJC_MV.p_sim
+```
+
+
+```{python}
+
+import libpysal
+import numpy as np
+w = libpysal.weights.lat2W(4, 4)
+x = np.ones(16)
+x[0:8] = 0
+z = [0,1,0,1,1,1,1,1,0,0,1,1,0,0,1,1]
+y = [0,1,1,1,1,1,1,1,0,0,0,1,0,0,1,1]
+LJC_MV = Join_Counts_Local_MV(connectivity=w).fit([x, y, z])
+LJC_MV.LJC
+LJC_MV.p_sim
+```
+
+```{python}
+LJC_MV.connectivity.neighbors
+```
+
+
+```{python}
+import pandas as pd
+variables = [x, y, z]
+np.vstack(variables)
+np.prod(np.vstack(variables), axis = 0)
+np.array(np.prod(np.vstack(variables), axis=0)
+
+adj_list = w.to_adjlist(remove_symmetric=False)
+
+# The zseries
+zseries = [pd.Series(i, index=w.id_order) for i in variables]
+# The focal values
+focal = [zseries[i].loc[adj_list.focal].values for i in range(len(variables))]
+# The neighbor values
+neighbor = [
+    zseries[i].loc[adj_list.neighbor].values for i in range(len(variables))
+]
+
+focal_all = np.array(np.all(np.dstack(focal) == 1, axis=2))
+focal_all
+
+neighbor_all = np.array(np.all(np.dstack(neighbor) == 1, axis=2))
+MCLC = (focal_all == True) & (neighbor_all == True)
+# Convert list of True/False to boolean array
+# and unlist (necessary for building pd.DF)
+MCLC = list(MCLC * 1)
+
+# Create a df that uses the adjacency list
+# focal values and the BBs counts
+adj_list_MCLC = pd.DataFrame(adj_list.focal.values, MCLC).reset_index()
+# Temporarily rename the columns
+adj_list_MCLC.columns = ["MCLC", "ID"]
+adj_list_MCLC = adj_list_MCLC.groupby(by="ID").sum()
+
+```
+
+
+```{r}
+py$focal_all
+```
+

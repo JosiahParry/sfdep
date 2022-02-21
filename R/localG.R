@@ -1,9 +1,9 @@
 #' Local G
 #'
+#' @export
 #' @inheritParams local_moran
 #' @inheritParams recreate_listw
 #' @param ... methods passed to [spdep::localG()] or [spdep::localG_perm()]
-#' @export
 #' x <- guerry$crime_pers
 #' nb <- st_contiguity(guerry)
 #' wt <- st_weights(nb)

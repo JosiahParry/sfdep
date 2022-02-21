@@ -67,7 +67,7 @@ jc_uni_impl <- function(x, listw, nsim, alternative) {
 
   data.frame(
     join_count = obs,
-    p_value = p_values
+    p_sim = p_values
   )
 }
 

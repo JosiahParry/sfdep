@@ -16,7 +16,10 @@ local_g_perm(x, nb, wt, nsim = 499, alternative = "two.sided", ...)
 
 \item{wt}{a weights list as created by \code{st_weights()}.}
 
-\item{...}{methods passed to \code{\link[spdep:localG]{spdep::localG()}} or \code{\link[spdep:localG]{spdep::localG_perm()}}}
+\item{...}{methods passed to \code{\link[spdep:localG]{spdep::localG()}} or \code{\link[spdep:localG]{spdep::localG_perm()}}
+x <- guerry$crime_pers
+nb <- st_contiguity(guerry)
+wt <- st_weights(nb)}
 
 \item{nsim}{The number of simulations to run.}
 }

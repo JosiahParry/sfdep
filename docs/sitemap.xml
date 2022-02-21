@@ -34,6 +34,15 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/jc_bjc_calc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/jc_bjc_perm_impl.html</loc>
+  </url>
+  <url>
+    <loc>/reference/jc_clc_perm_impl.html</loc>
+  </url>
+  <url>
     <loc>/reference/jc_uni_calc.html</loc>
   </url>
   <url>
@@ -53,6 +62,9 @@
   </url>
   <url>
     <loc>/reference/local_gstar.html</loc>
+  </url>
+  <url>
+    <loc>/reference/local_jc_bv.html</loc>
   </url>
   <url>
     <loc>/reference/local_jc_uni.html</loc>

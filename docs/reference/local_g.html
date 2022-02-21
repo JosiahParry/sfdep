@@ -56,7 +56,10 @@
 <dt>wt</dt>
 <dd><p>a weights list as created by <code><a href="st_weights.html">st_weights()</a></code>.</p></dd>
 <dt>...</dt>
-<dd><p>methods passed to <code><a href="https://r-spatial.github.io/spdep/reference/localG.html" class="external-link">spdep::localG()</a></code> or <code><a href="https://r-spatial.github.io/spdep/reference/localG.html" class="external-link">spdep::localG_perm()</a></code></p></dd>
+<dd><p>methods passed to <code><a href="https://r-spatial.github.io/spdep/reference/localG.html" class="external-link">spdep::localG()</a></code> or <code><a href="https://r-spatial.github.io/spdep/reference/localG.html" class="external-link">spdep::localG_perm()</a></code>
+x &lt;- guerry$crime_pers
+nb &lt;- st_contiguity(guerry)
+wt &lt;- st_weights(nb)</p></dd>
 <dt>nsim</dt>
 <dd><p>The number of simulations to run.</p></dd>
 </dl></div>
