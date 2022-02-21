@@ -26,6 +26,10 @@ reference:
   - losh
   - losh_perm
 
+- title: Global Measure of Spatial Autocorrelation
+  contents:
+  - starts_with("global")
+
 - title: Data
   contents:
   - starts_with("guerry")

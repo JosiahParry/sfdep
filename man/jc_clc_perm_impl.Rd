@@ -8,6 +8,12 @@ jc_clc_perm_impl(x, z, listw, index)
 }
 \arguments{
 \item{x}{a binary variable consisting of 1 and 0, or \code{TRUE} and \code{FALSE}.}
+
+\item{listw}{a \code{listw} object}
+
+\item{index}{an integeter vector identifying positions to subset.}
+
+\item{a}{binary variable consisting of 1 and 0, or \code{TRUE} and \code{FALSE}.}
 }
 \description{
 Calculate CLC BV for conditional permutations

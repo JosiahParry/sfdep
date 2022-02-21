@@ -78,9 +78,9 @@ jc_clc_calc <- function(x, xj, z, zj, wt) {
 #' Calculate CLC BV for conditional permutations
 #'
 #' @param x  a binary variable consisting of 1 and 0, or `TRUE` and `FALSE`.
-#' @param z
-#' @param listw
-#' @param index
+#' @param a binary variable consisting of 1 and 0, or `TRUE` and `FALSE`.
+#' @param listw a `listw` object
+#' @param index an integeter vector identifying positions to subset.
 #' @keywords internal
 jc_clc_perm_impl <- function(x, z, listw, index) {
   p_listw <- permute_listw(listw)
