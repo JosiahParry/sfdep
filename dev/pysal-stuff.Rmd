@@ -132,8 +132,20 @@ adj_list_MCLC = adj_list_MCLC.groupby(by="ID").sum()
 
 ```
 
+## Bivariate Locl Moran
 
-```{r}
-py$focal_all
+```{python}
+import esda
+import libpysal
+import geopandas as gpd
+fp = libpysal.examples.root + "/guerry/" + "Guerry.shp" 
+guerry_ds = gpd.read_file(fp)
+w = libpysal.weights.Queen.from_dataframe(guerry_ds)
+
+from esda.moran import Moran_Local_BV
+lm = Moran_Local_BV(guerry_ds["Crm_prs"], guerry_ds["Wealth"], w)
+
+lm.Is
+lm.p_sim
 ```
 

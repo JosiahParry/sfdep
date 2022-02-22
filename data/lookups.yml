@@ -8,6 +8,9 @@ global_stats:
   global_moran_test:
     impl: spdep::moran.test()
     pysal: esda.Moran()
+  global_moran_bv:
+    impl: internal
+    pysal: esda.Moran_BV()
   global_c:
     impl: spdep::geary()
     pysal:
@@ -61,15 +64,16 @@ lisas:
     pysal: esda.LOSH()
   local_moran:
     impl: spdep::localmoran_perm()
-    pysal: esda.Moran()
-
+    pysal: esda.Moran_Local()
+  local_moran_bv:
+    impl: internal
+    pysal: esda.Moran_Local_BV()
 not implemented:
   - esda.adbscan.ADBSCAN
   - esda.Gamma
   - esda.Join_Counts_Local_MV
   - esda.LOSH(inference = "chi-square")
   - esda.Smaup
-  - esda.Moran_BV
   - esda.Moran_Rate
   - esda.Moran_Local_Rate
   - esda.shape
