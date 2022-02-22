@@ -16,10 +16,9 @@ Creates a conditional permutation of neighbors list holding i fixed and shufflin
 }
 \examples{
 nb <- st_contiguity(guerry)
-
+nb[1:5]
 # conditionally permute neighbors
 perm_nb <- cond_permute_nb(nb)
-
+perm_nb[1:5]
 # get permuted neighbor weight
-st_weights(perm_nb)
 }

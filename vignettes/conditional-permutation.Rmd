@@ -1,0 +1,57 @@
+---
+title: "Conditional Permutations with sfdep"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Conditional Permutations with sfdep}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+In the lattice approach to spatial analysis, calculating p-values is often done based on a conditional permutation approach as outlined by Anselin 1995.
+
+Conditional permutation can be summed up with the question "if I were to hold this observation constant, and change it's neighbors, will my statistic be the same?" 
+
+First obtain our neighbors and weights lists, as well as our numeric variable.
+
+```{r setup}
+library(sfdep)
+
+nb <- st_contiguity(guerry)
+wt <- st_weights(nb)
+x <- guerry$crime_pers
+
+```
+
+
+Use `cond_permute_nb()` to create a conditional permutation of the neighbors list. Then calculate the Moran's I 299 times with a different permutation each time. These results are stores in `permutes`. 
+```{r}
+permutes <- purrr::map_dbl(1:299, ~{
+ p_nb <- cond_permute_nb(nb)
+ p_wt <- st_weights(p_nb)
+ global_moran(x, p_nb, p_wt)[["I"]]
+})
+
+permutes[1:10]
+```
+We then find the observed Moran's I statistics. 
+```{r}
+# the observed global moran
+observed <- global_moran(x, nb, wt)
+observed
+```
+
+Then calculate the pseudo p-value using the formula $(M + 1) / (R + 1)$
+
+```{r}
+# simulated p-value
+(sum(observed[["I"]] <= permutes) + 1) / (299 + 1)
+```
+
+This is the approach taken by Pysal and by sfdep where other methods do not apply or are not provided by spdep. 

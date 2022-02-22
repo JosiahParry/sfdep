@@ -4,7 +4,7 @@
 \alias{local_moran_bv}
 \title{Compute the Local Bivariate Moran's I Statistic}
 \usage{
-local_moran_bv(x, y, nb, wt, nsim)
+local_moran_bv(x, y, nb, wt, nsim = 499)
 }
 \arguments{
 \item{x}{a numeric vector of same length as \code{nb}.}

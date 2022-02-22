@@ -147,5 +147,7 @@ lm = Moran_Local_BV(guerry_ds["Crm_prs"], guerry_ds["Wealth"], w)
 
 lm.Is
 lm.p_sim
+
+
 ```
 

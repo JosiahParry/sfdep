@@ -76,7 +76,6 @@ not implemented:
   - esda.Smaup
   - esda.Moran_Rate
   - esda.Moran_Local_Rate
-  - esda.shape
   - esda.boundary_silhouette
   - esda.path_silhouette
   - esda.silhouettes.nearest_label
