@@ -94,6 +94,7 @@ global_c <- function(x, nb, wt, allow_zero = NULL) {
 #' @inheritParams global_moran_perm
 #' @param ... additional arguments passed to [spdep::geary.mc()].
 #' @family global_c
+#' @export
 #' @examples
 #' global_c_perm(x, nb, wt)
 global_c_perm <- function(x, nb, wt, nsim = 499, alternative = "greater",

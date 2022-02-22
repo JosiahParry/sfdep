@@ -1,0 +1,57 @@
+---
+title: "Comparison to spdep and pysal"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{spdep-and-pysal}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  echo = FALSE,
+  comment = "#>"
+)
+library(tidyverse)
+df <- yaml::read_yaml("../data/lookups.yml", error.label = "")
+```
+
+```{r setup}
+
+```
+
+## Global Statistics
+
+Measures of global spatial autocorrelation.
+
+```{r}
+enframe(df$global) %>% 
+  unnest_wider(value) %>% 
+  mutate(pysal = replace_na(pysal, "")) %>% 
+  knitr::kable()
+```
+
+## Local Indicators of Spatial Association
+
+Measures of local spatial autocorrelation. 
+
+```{r}
+df$lisas %>% 
+  enframe() %>% 
+  unnest_wider(value) %>% 
+  mutate(pysal = map_chr(pysal, ~str_c(.x, collapse = ", "))) %>% 
+  knitr::kable()
+```
+
+### Not implemented
+
+Functions present in Pysal that are not implemented in sfdep.
+
+```{r}
+df[["not implemented"]] %>% 
+  as_tibble() %>% 
+  rename(`function` = value) %>% 
+  knitr::kable()
+```
+

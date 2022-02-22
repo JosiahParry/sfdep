@@ -39,3 +39,5 @@ losh_perm <- function(x, nb, wt, a = 2, nsim = 499, ...) {
   setNames(res, c("hi", "x_bar_i", "ei", "p_sim"))
 }
 
+
+# TODO implement LOSH Chi-Sq

@@ -1,0 +1,78 @@
+global_stats:
+  global_moran:
+    impl: spdep::moran()
+    pysal: esda.Moran()
+  global_moran_perm:
+    impl: spdep::moran.mc()
+    pysal: esda.Moran()
+  global_moran_test:
+    impl: spdep::moran.test()
+    pysal: esda.Moran()
+  global_c:
+    impl: spdep::geary()
+    pysal:
+  global_c_perm:
+    impl: spdep::geary.mc()
+    pysal: esda.Geary()
+  global_c_test:
+    impl: spdep::geary.mc()
+    pysal:
+  global_g_test:
+    impl: spdep::globalG.test()
+    pysal: esda.G()
+  global_jc_perm:
+    impl: spdep::joincount.mc()
+    pysal: esda.Join_Counts()
+  global_jc_test:
+    impl: spdep::joincount.test()
+    pysal:
+lisas:
+  local_c:
+    impl: spdep::localC()
+    pysal:
+  local_c_perm:
+    impl: spdep::localC_perm()
+    pysal:
+      - esda.Geary_Local()
+      - esda.Geary_Local_MV()
+  local_g:
+    impl: spdep::localG()
+    pysal:
+  local_gstar:
+    impl: spdep::localG()
+    pysal:
+  local_g_perm:
+    impl: spdep::localG_perm()
+    pysal: esda.G_Local()
+  local_gstar_perm:
+    impl: spdep::localG_perm
+    pysal: esda.G_Local()
+  local_jc_uni:
+    impl: internal
+    pysal: esda.Join_Counts_Local()
+  local_jc_bv:
+    impl: internal
+    pysal: esda.Join_Counts_Local_BV()
+  losh:
+    impl: spdep::LOSH()
+    pysal: esda.LOSH()
+  losh_perm:
+    impl: spdep::LOSH.mc()
+    pysal: esda.LOSH()
+  local_moran:
+    impl: spdep::localmoran_perm()
+    pysal: esda.Moran()
+
+not implemented:
+  - esda.adbscan.ADBSCAN
+  - esda.Gamma
+  - esda.Join_Counts_Local_MV
+  - esda.LOSH(inference = "chi-square")
+  - esda.Smaup
+  - esda.Moran_BV
+  - esda.Moran_Rate
+  - esda.Moran_Local_Rate
+  - esda.shape
+  - esda.boundary_silhouette
+  - esda.path_silhouette
+  - esda.silhouettes.nearest_label
