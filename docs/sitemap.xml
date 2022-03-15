@@ -37,6 +37,9 @@
     <loc>/reference/find_xj.html</loc>
   </url>
   <url>
+    <loc>/reference/folded_p_sim.html</loc>
+  </url>
+  <url>
     <loc>/reference/global_c.html</loc>
   </url>
   <url>
@@ -131,6 +134,18 @@
   </url>
   <url>
     <loc>/reference/moran_bv_perm_impl.html</loc>
+  </url>
+  <url>
+    <loc>/reference/nb_match_test.html</loc>
+  </url>
+  <url>
+    <loc>/reference/nmt_calc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/nmt_impl.html</loc>
+  </url>
+  <url>
+    <loc>/reference/nmt_perm_impl.html</loc>
   </url>
   <url>
     <loc>/reference/permute_listw.html</loc>

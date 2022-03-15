@@ -120,7 +120,7 @@ permute_listw <- function(listw) {
   cards <- lengths(listw$neighbours)
   # Shuffle the neighbors by randomly sampling from all possible neighbors
   # except where x exists
-  perm_nb <- mapply(shuffle_nbs, 1:n, n, cards)
+  perm_nb <- mapply(shuffle_nbs, 1:n, n, cards, SIMPLIFY = FALSE)
   class(perm_nb) <- c("nb", "list")
   listw$neighbours <- perm_nb
 

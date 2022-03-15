@@ -9,6 +9,7 @@ Authors@R:
            comment = c(ORCID = "0000-0001-9910-865X"))
 Description: An interface to spdep to integrate with sf objects and the tidyverse. 
 License: GPL (>= 3)
+URL: https://sfdep.josiahparry.com, https://github.com/josiahparry/sfdep
 Suggests: 
     knitr,
     purrr,

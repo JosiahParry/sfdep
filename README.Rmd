@@ -132,32 +132,3 @@ lisa %>%
 <!--   transmute(x = st_nb_apply(crime_pers, nb, wt,  -->
 <!--                             .f = function(.xij, .wt, ...) sum((.xij - crime_pers)^2) / (length(.wt) + 1), suffix = "dbl")) -->
 <!-- ``` -->
-
-
-## Development Tracking
-
-### Pysal ESDA functionality
-
-#### Global Statistics
-
-- [] Moran's I
-- [] Join Count
-- [] Gettis-Ord
-
-#### LISAs
-
-- [x] Local Moran
-  - [] Bivariate local moran
-- [] Local Join Count
-  - [x] Univariate
-  - [] Bivariate
-    - No colocation
-    - colocation
-  - [] Multivarite
-- [x] LOSH
-- [x] Gi 
-- [x] Gi*
-
-### Utilities
-
-- [x] Conditional permutation

@@ -1,7 +1,28 @@
 url: ~
 template:
   bootstrap: 5
-  bootswatch: simplex
+  #bootswatch: simplex
+  bslib:
+    heading_font: {google: "Merriweather"}
+    code_font: {google: "Anonymous Pro"}
+    base_font: {google: "Noto Sans Display"}
+    bg: "#fcfcfc"
+    fg: "#02382a"
+    primary: "#2c382d"
+    secondary: "#F1F5A7"
+    success: "#3D6F15"
+    info: "#577F90"
+    warning: "#D5A064"
+    danger: "#9A523C"
+    # navbar-default-type: "dark"
+    # navbar-default-bg: "dark"
+    # navbar-inverse-type: "light"
+    # navbar-inverse-bg: "secondary"
+
+  includes:
+    in_header: <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/atelier-estuary-light.min.css">
+
+
 
 
 reference:
@@ -13,6 +34,7 @@ reference:
   - st_knn
   - contains("nb_")
   - cond_permute_nb
+  - -contains("nb_match_test")
 
 - title: Weights
   contents:
@@ -25,6 +47,7 @@ reference:
   - starts_with("local")
   - losh
   - losh_perm
+  - nb_match_test
 
 - title: Global Measure of Spatial Autocorrelation
   contents:
