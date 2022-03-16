@@ -5,6 +5,9 @@
 #' @param nb A neighbor list object as created by `st_neighbors()`.
 #' @family other
 #' @export
+#' @examples
+#' nb <- st_contiguity(sf::st_geometry(guerry))
+#' st_cardinalties(nb)
 st_cardinalties <- function(nb) {
 
   if (any(class(nb) == "nb")) {

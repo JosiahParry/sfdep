@@ -40,10 +40,21 @@ local_c <- function(x, nb, wt, ...) {
   spdep::localC(x, listw, ...)
 }
 
+#' Compute Local Geary Statistic
 #' @param nsim The number of simulations used to generate reference distribution.
 #' @param alternative A character defining the alternative hypothesis. Must be one of "two.sided", "less" or "greater".
 #' @param zero.policy default NULLL. If TRUE assign zero to zones without neighbors. If FALSE, assign NA. Must be passed via \code{...}
 #' @rdname local_c
+#' @export
+#' @examples
+#' guerry %>%
+#'   dplyr::transmute(nb = st_contiguity(geometry),
+#'                    wt = st_weights(nb),
+#'                    geary = local_c_perm(
+#'                      x = list(crime_pers, literacy),
+#'                      nb, wt
+#'                    )) %>%
+#'   tidyr::unnest(geary)
 local_c_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", ...) {
 
   lc_cols <- c("ci", "cluster", "e_ci", "var_ci", "z_ci", "p_ci",

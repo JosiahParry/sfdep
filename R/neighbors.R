@@ -5,6 +5,14 @@
 #' @importFrom spdep poly2nb
 #' @family neighbors
 #' @export
+#' @examples
+#' # on basic polygons
+#' geo <- sf::st_geometry(guerry)
+#' st_contiguity(geo)
+#'
+#' # in a pipe
+#' guerry %>%
+#'   dplyr::mutate(nb = st_contiguity(geometry), .before = 1)
 st_contiguity <- function(x, queen = TRUE, ...) {
   nb <- spdep::poly2nb(x, queen = queen, ...)
   class_modify(nb)
@@ -27,17 +35,21 @@ st_contiguity <- function(x, queen = TRUE, ...) {
 #' @importFrom spdep knn2nb knearneigh
 #' @family neighbors
 #' @export
+#' @examples
+#' st_knn(sf::st_geometry(guerry), k = 8)
 st_knn <- function(x, k = 1, symmetric = FALSE, ...) {
 
-  polygon_check <- any(class(x) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))
+  # polygon_check <- any(class(x) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))
+  #
+  # if (polygon_check) {
+  #
+  #   cli::cli_alert_warning("Polygon provided. Using centroid.")
+  #   pnts <- st_centroid(x)
+  # } else {
+  #   pnts <- x
+  # }
 
-  if (polygon_check) {
-
-    cli::cli_alert_warning("Polygon provided. Using centroid.")
-    pnts <- st_centroid(x)
-  } else {
-    pnts <- x
-  }
+  pnts <- check_polygon(x)
 
   ks <- spdep::knearneigh(pnts, k = k, ...)
   nb <- spdep::knn2nb(ks, sym = symmetric)
@@ -55,7 +67,10 @@ st_knn <- function(x, k = 1, symmetric = FALSE, ...) {
 #' @param ... Passed to `spdep::dnearneigh()`.
 #' @family neighbors
 #' @export
+#' @examples
+#' st_nb_band(sf::st_geometry(guerry), upper = 97000)
 st_nb_band <- function(x, lower = 0, upper = .01, ...) {
+  x <- check_polygon(x)
   class_modify(spdep::dnearneigh(x, lower, upper, ...))
 }
 
@@ -69,6 +84,9 @@ st_nb_band <- function(x, lower = 0, upper = .01, ...) {
 #' @importFrom spdep nblag
 #' @family other
 #' @export
+#' @examples
+#' nb <- st_contiguity(sf::st_geometry(guerry))
+#' st_nb_lag(nb, 3)
 st_nb_lag <- function(nb, order) {
   class_modify(nblag(nb, order)[[order]])
 }
@@ -84,6 +102,38 @@ st_nb_lag <- function(nb, order) {
 #' @importFrom spdep nblag_cumul nblag
 #' @family other
 #' @export
+#' @examples
+#' nb <- st_contiguity(sf::st_geometry(guerry))
+#' st_nb_lag_cumul(nb, 3)
 st_nb_lag_cumul <- function(nb, order) {
   class_modify(nblag_cumul(nblag(nb, order)))
 }
+
+
+#' Checks geometry for polygons.
+#'
+#' If the provided geometry is a polygon, the centroids of the polygons will be return using [sf::st_centroid()]
+#' @param x an sfc object
+#' @keywords internal
+#' @examples
+#' # make sfc object
+#' grid <- sf::st_make_grid()
+#' ps <- check_polygon(grid)
+#' ps
+#'
+#' # plot for demonstration
+#' plot(grid)
+#' plot(check_polygon(grid), add = TRUE, col = "blue")
+check_polygon <- function(x) {
+
+  polygon_check <- any(class(x) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))
+
+  if (polygon_check) {
+
+    cli::cli_alert_warning("Polygon provided. Using centroid.")
+    return(sf::st_centroid(x))
+  }
+  x
+}
+
+

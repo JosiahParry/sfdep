@@ -19,6 +19,13 @@ From an nb list and point geometry, return a list of distances for each observat
 \details{
 Utilizes \code{spdep::nbdists()} for distance calculation.
 }
+\examples{
+geo <- sf::st_geometry(guerry)
+nb <- st_contiguity(geo)
+dists <- st_nb_dists(geo, nb)
+
+head(dists)
+}
 \seealso{
 Other stats: 
 \code{\link{local_moran}()},

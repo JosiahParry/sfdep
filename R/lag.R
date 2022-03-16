@@ -10,6 +10,13 @@
 #' @param ... See `?spdep::lag.listw` for more.
 #' @family stats
 #' @export
+#' @examples
+#' geo <- sf::st_geometry(guerry)
+#' nb <- st_contiguity(geo)
+#' wt <- st_weights(nb)
+#'
+#' st_lag(guerry$crime_pers, nb, wt)
+
 st_lag <- function(x, nb, wt, na_ok = FALSE, allow_zero = NULL, ...) {
   listw <- recreate_listw(nb, wt)
   spdep::lag.listw(listw, x, NAOK = na_ok, zero.policy = allow_zero, ...)

@@ -21,6 +21,9 @@ Identifies the \code{k} nearest neighbors for given point geometry. If polygon g
 \details{
 This function utilizes \code{\link[spdep:knearneigh]{spdep::knearneigh()}} and \code{\link[spdep:knn2nb]{spdep::knn2nb()}}.
 }
+\examples{
+st_knn(sf::st_geometry(guerry), k = 8)
+}
 \seealso{
 Other neighbors: 
 \code{\link{st_contiguity}()},

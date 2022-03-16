@@ -14,6 +14,10 @@ st_nb_lag(nb, order)
 \description{
 Identify higher order neighbors from a neighbor list. \code{order} must be greater than 1. When order equals 2 then the neighbors of the neighbors list is returned and so forth. See \href{https://spatial.uchicago.edu/sites/spatial.uchicago.edu/files/1_introandreview_reducedsize.pdf}{Anselin's slides} for an example.
 }
+\examples{
+nb <- st_contiguity(sf::st_geometry(guerry))
+st_nb_lag(nb, 3)
+}
 \seealso{
 Other other: 
 \code{\link{st_cardinalties}()},

@@ -4,7 +4,7 @@ template:
   #bootswatch: simplex
   bslib:
     heading_font: {google: "Merriweather"}
-    code_font: {google: "Anonymous Pro"}
+    code_font: {google: "Noto Sans Mono"}
     base_font: {google: "Noto Sans Display"}
     bg: "#fcfcfc"
     fg: "#02382a"
@@ -19,11 +19,6 @@ template:
     # navbar-inverse-type: "light"
     # navbar-inverse-bg: "secondary"
 
-  includes:
-    in_header: <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/atelier-estuary-light.min.css">
-
-
-
 
 reference:
 
@@ -32,9 +27,8 @@ reference:
   - st_contiguity
   - st_cardinalties
   - st_knn
-  - contains("nb_")
+  - contains("_nb_")
   - cond_permute_nb
-  - -contains("nb_match_test")
 
 - title: Weights
   contents:

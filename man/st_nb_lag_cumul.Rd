@@ -16,6 +16,10 @@ Creates an encompassing neighbor list of the order specified.
 For example, if the order is 2 the result contains both 1st
 and 2nd order neighbors.
 }
+\examples{
+nb <- st_contiguity(sf::st_geometry(guerry))
+st_nb_lag_cumul(nb, 3)
+}
 \seealso{
 Other other: 
 \code{\link{st_cardinalties}()},

@@ -14,6 +14,15 @@ st_contiguity(x, queen = TRUE, ...)
 \description{
 Identify polygon neighbors
 }
+\examples{
+# on basic polygons
+geo <- sf::st_geometry(guerry)
+st_contiguity(geo)
+
+# in a pipe
+guerry \%>\%
+  dplyr::mutate(nb = st_contiguity(geometry), .before = 1)
+}
 \seealso{
 Other neighbors: 
 \code{\link{st_knn}()},

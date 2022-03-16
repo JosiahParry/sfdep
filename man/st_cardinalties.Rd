@@ -12,6 +12,10 @@ st_cardinalties(nb)
 \description{
 Identify the cardinality of a neighbor object. Utilizes \code{spdep::card()} for objects with class \code{nb}, otherwise returns \code{lengths(nb)}.
 }
+\examples{
+nb <- st_contiguity(sf::st_geometry(guerry))
+st_cardinalties(nb)
+}
 \seealso{
 Other other: 
 \code{\link{st_nb_lag_cumul}()},

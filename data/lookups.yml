@@ -68,6 +68,9 @@ lisas:
   local_moran_bv:
     impl: internal
     pysal: esda.Moran_Local_BV()
+  nb_match_test:
+    impl: internal
+    pysal:
 not implemented:
   - esda.adbscan.ADBSCAN
   - esda.Gamma

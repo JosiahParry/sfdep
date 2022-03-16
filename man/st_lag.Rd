@@ -22,6 +22,13 @@ st_lag(x, nb, wt, na_ok = FALSE, allow_zero = NULL, ...)
 \description{
 Calculates the spatial lag of a numeric variable given a neighbor and weights list.
 }
+\examples{
+geo <- sf::st_geometry(guerry)
+nb <- st_contiguity(geo)
+wt <- st_weights(nb)
+
+st_lag(guerry$crime_pers, nb, wt)
+}
 \seealso{
 Other stats: 
 \code{\link{local_moran}()},

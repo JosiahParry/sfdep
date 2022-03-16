@@ -18,6 +18,9 @@ st_nb_band(x, lower = 0, upper = 0.01, ...)
 \description{
 Creates neighbors based on a distance band.
 }
+\examples{
+st_nb_band(sf::st_geometry(guerry), upper = 97000)
+}
 \seealso{
 Other neighbors: 
 \code{\link{st_contiguity}()},

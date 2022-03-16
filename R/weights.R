@@ -26,6 +26,8 @@ st_weights <- function(nb, style = "W", allow_zero = NULL, ...) {
   listw[["weights"]]
 }
 
+# TODO i dont think inverse distance band is correct.
+# returning too many observations
 
 #' Calculate Inverse Distance Bands
 #'
@@ -37,13 +39,13 @@ st_weights <- function(nb, style = "W", allow_zero = NULL, ...) {
 #'
 #' @importFrom spdep dnearneigh nbdists
 #' @family weights
-#' @export
 st_inverse_weights <- function(x, nb, scale = 100, threshold = NULL) {
   # As implemented by Luc Anselin
   # https://spatialanalysis.github.io/lab_tutorials/Spatial_Weights_as_Distance_Functions.html#inverse-distance-weights
-  if (is.null(threshold)) threshold <- max(unlist(nbdists(nb, x)))
-  dist_band <- dnearneigh(x, 0, threshold)
-  distances <- nbdists(dist_band, x)
+  x <- check_polygon(x)
+  if (is.null(threshold)) threshold <- max(unlist(spdep::nbdists(nb, x)))
+  dist_band <- spdep::dnearneigh(x, 0, threshold)
+  distances <- spdep::nbdists(dist_band, x)
   lapply(distances, function(x) (1/(x/scale)))
 
 }
@@ -61,7 +63,6 @@ st_inverse_weights <- function(x, nb, scale = 100, threshold = NULL) {
 #' @param kernel One of "uniform", "gaussian",  "triangular", "epanechnikov", or "quartic".
 #' @importFrom spdep nbdists dnearneigh include.self
 #' @family weights
-#' @export
 st_kernel_weights <- function(x, nb, kernel = "uniform", threshold = NULL) {
 
   match.arg(kernel, names(kernels))

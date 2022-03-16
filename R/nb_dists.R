@@ -8,7 +8,14 @@
 #' @details Utilizes `spdep::nbdists()` for distance calculation.
 #' @family stats
 #' @export
+#' @examples
+#' geo <- sf::st_geometry(guerry)
+#' nb <- st_contiguity(geo)
+#' dists <- st_nb_dists(geo, nb)
+#'
+#' head(dists)
 st_nb_dists <- function(x, nb, longlat = NULL) {
+  x <- check_polygon(x)
   spdep::nbdists(nb, x, longlat)
 }
 
