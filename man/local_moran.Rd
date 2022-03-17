@@ -13,12 +13,11 @@ local_moran(x, nb, wt, alternative = "two.sided", nsim = 499, ...)
 
 \item{wt}{a weights list as created by \code{st_weights()}.}
 
+\item{alternative}{default \code{"two.sided"}. Should be one of \code{"greater"}, \code{"less"}, or \code{"two.sided"} to specify the alternative hypothesis.}
+
 \item{nsim}{The number of simulations to run.}
 
 \item{...}{See \code{?spdep::localmoran_perm()} for more options.}
-}
-\value{
-
 }
 \description{
 Moran's I is calculated for each polygon based on the neighbor and weight lists.

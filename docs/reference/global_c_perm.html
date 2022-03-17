@@ -76,6 +76,10 @@
 <dd><p>a weights list as created by <code><a href="st_weights.html">st_weights()</a></code>.</p></dd>
 <dt>nsim</dt>
 <dd><p>number of simulations to run.</p></dd>
+<dt>alternative</dt>
+<dd><p>default <code>"two.sided"</code>. Should be one of <code>"greater"</code>, <code>"less"</code>, or <code>"two.sided"</code> to specify the alternative hypothesis.</p></dd>
+<dt>allow_zero</dt>
+<dd><p>If <code>TRUE</code>, assigns zero as lagged value to zone without neighbors.</p></dd>
 <dt>...</dt>
 <dd><p>additional arguments passed to <code><a href="https://r-spatial.github.io/spdep/reference/geary.mc.html" class="external-link">spdep::geary.mc()</a></code>.</p></dd>
 </dl></div>
@@ -88,8 +92,21 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">global_c_perm</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in attr(wt, "W") %||% NA:</span> object 'wt' not found</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geo</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">crime_pers</span></span>
+<span class="r-in"><span class="fu">global_c_perm</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of Geary C</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  x </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> number of simulations + 1: 500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 0.56459, observed rank = 1, p-value = 0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

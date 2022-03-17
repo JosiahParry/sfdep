@@ -12,6 +12,8 @@ global_c(x, nb, wt, allow_zero = NULL)
 \item{nb}{a neighbor list object for example as created by \code{st_contiguity()}.}
 
 \item{wt}{a weights list as created by \code{st_weights()}.}
+
+\item{allow_zero}{If \code{TRUE}, assigns zero as lagged value to zone without neighbors.}
 }
 \description{
 Compute Geary's C

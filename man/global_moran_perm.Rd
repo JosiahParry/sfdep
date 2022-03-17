@@ -13,6 +13,8 @@ global_moran_perm(x, nb, wt, alternative = "two.sided", nsim = 499, ...)
 
 \item{wt}{a weights list as created by \code{st_weights()}.}
 
+\item{alternative}{default \code{"two.sided"}. Should be one of \code{"greater"}, \code{"less"}, or \code{"two.sided"} to specify the alternative hypothesis.}
+
 \item{nsim}{number of simulations to run.}
 
 \item{...}{additional arguments passed to \code{\link[spdep:moran.mc]{spdep::moran.mc()}}}

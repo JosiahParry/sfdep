@@ -15,12 +15,18 @@ global_c_test(x, nb, wt, randomization = TRUE, allow_zero = NULL, ...)
 
 \item{randomization}{default \code{TRUE}. Calculate variance based on randomization. If \code{FALSE}, under the assumption of normality.}
 
-\item{...}{additional arguments passed to \code{\link[spdep:moran]{spdep::moran()}}.}
+\item{allow_zero}{If \code{TRUE}, assigns zero as lagged value to zone without neighbors.}
+
+\item{...}{additional arguments passed to \code{\link[spdep:moran.mc]{spdep::moran.mc()}}}
 }
 \description{
 Global C Test
 }
 \examples{
+geo <- sf::st_geometry(guerry)
+nb <- st_contiguity(geo)
+wt <- st_weights(nb)
+x <- guerry$crime_pers
 global_c_test(x, nb, wt)
 }
 \seealso{

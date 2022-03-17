@@ -12,14 +12,4 @@ check_polygon(x)
 \description{
 If the provided geometry is a polygon, the centroids of the polygons will be return using \code{\link[sf:geos_unary]{sf::st_centroid()}}
 }
-\examples{
-# make sfc object
-grid <- sf::st_make_grid()
-ps <- check_polygon(grid)
-ps
-
-# plot for demonstration
-plot(grid)
-plot(check_polygon(grid), add = TRUE, col = "blue")
-}
 \keyword{internal}

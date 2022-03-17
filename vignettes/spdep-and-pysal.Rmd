@@ -13,12 +13,9 @@ knitr::opts_chunk$set(
   echo = FALSE,
   comment = "#>"
 )
-library(tidyverse)
-df <- yaml::read_yaml("../data/lookups.yml", error.label = "")
-```
-
-```{r setup}
-
+library(magrittr)
+fp <- system.file("extdata", "lookups.yml", package = "sfdep")
+df <- yaml::read_yaml(fp, error.label = "")
 ```
 
 ## Global Statistics
@@ -26,9 +23,9 @@ df <- yaml::read_yaml("../data/lookups.yml", error.label = "")
 Measures of global spatial autocorrelation.
 
 ```{r}
-enframe(df$global) %>% 
-  unnest_wider(value) %>% 
-  mutate(pysal = replace_na(pysal, "")) %>% 
+tibble::enframe(df$global_stats) %>% 
+  tidyr::unnest_wider(value) %>% 
+  dplyr::mutate(pysal = ifelse(is.na(pysal), "", pysal)) %>%
   knitr::kable()
 ```
 
@@ -38,9 +35,9 @@ Measures of local spatial autocorrelation.
 
 ```{r}
 df$lisas %>% 
-  enframe() %>% 
-  unnest_wider(value) %>% 
-  mutate(pysal = map_chr(pysal, ~str_c(.x, collapse = ", "))) %>% 
+  tibble::enframe() %>% 
+  tidyr::unnest_wider(value) %>% 
+  dplyr::mutate(pysal = purrr::map_chr(pysal, ~stringr::str_c(.x, collapse = ", "))) %>% 
   knitr::kable()
 ```
 
@@ -50,8 +47,8 @@ Functions present in Pysal that are not implemented in sfdep.
 
 ```{r}
 df[["not implemented"]] %>% 
-  as_tibble() %>% 
-  rename(`function` = value) %>% 
+  tibble::as_tibble() %>% 
+  dplyr::rename(`function` = value) %>% 
   knitr::kable()
 ```
 

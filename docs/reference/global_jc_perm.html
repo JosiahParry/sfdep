@@ -79,19 +79,154 @@ Global Join Count Test"><!-- mathjax --><script src="https://cdnjs.cloudflare.co
 <dd><p>a neighbor list object for example as created by <code><a href="st_contiguity.html">st_contiguity()</a></code>.</p></dd>
 <dt>wt</dt>
 <dd><p>a weights list as created by <code><a href="st_weights.html">st_weights()</a></code>.</p></dd>
+<dt>alternative</dt>
+<dd><p>default <code>"two.sided"</code>. Should be one of <code>"greater"</code>, <code>"less"</code>, or <code>"two.sided"</code> to specify the alternative hypothesis.</p></dd>
 <dt>nsim</dt>
 <dd><p>number of simulations to run.</p></dd>
+<dt>allow_zero</dt>
+<dd><p>If <code>TRUE</code>, assigns zero as lagged value to zone without neighbors.</p></dd>
 <dt>...</dt>
 <dd><p>additional arguments passed to <code><a href="https://r-spatial.github.io/spdep/reference/joincount.test.html" class="external-link">spdep::joincount.test()</a></code></p></dd>
 </dl></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">fx</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">region</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geo</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span>, style <span class="op">=</span> <span class="st">"B"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">fx</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">region</span></span>
 <span class="r-in"><span class="fu">global_jc_perm</span><span class="op">(</span><span class="va">fx</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in attr(wt, "W") %||% NA:</span> object 'wt' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> number of simulations + 1: 500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Join-count statistic for C = 35, rank of observed statistic = 500,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p-value = 0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               8.154309               7.066502 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> number of simulations + 1: 500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Join-count statistic for E = 29, rank of observed statistic = 500,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p-value = 0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               7.977956               5.519593 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> number of simulations + 1: 500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Join-count statistic for N = 29, rank of observed statistic = 500,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p-value = 0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               8.036072               5.617170 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> number of simulations + 1: 500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Join-count statistic for S = 32, rank of observed statistic = 500,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p-value = 0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               8.028056               6.561460 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> number of simulations + 1: 500 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Join-count statistic for W = 31, rank of observed statistic = 500,</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> p-value = 0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                8.02004                6.12008 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="fu">global_jc_test</span><span class="op">(</span><span class="va">fx</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in attr(wt, "W") %||% NA:</span> object 'wt' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Join count test under nonfree sampling</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Std. deviate for C = 10.886, p-value &lt; 2.2e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Same colour statistic           Expectation              Variance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             35.000000              8.000000              6.151883 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Join count test under nonfree sampling</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Std. deviate for E = 8.4667, p-value &lt; 2.2e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Same colour statistic           Expectation              Variance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             29.000000              8.000000              6.151883 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Join count test under nonfree sampling</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Std. deviate for N = 8.4667, p-value &lt; 2.2e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Same colour statistic           Expectation              Variance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             29.000000              8.000000              6.151883 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Join count test under nonfree sampling</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Std. deviate for S = 9.6763, p-value &lt; 2.2e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Same colour statistic           Expectation              Variance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             32.000000              8.000000              6.151883 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 	Join count test under nonfree sampling</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> data:  fx </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> weights: listw </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Std. deviate for W = 9.2731, p-value &lt; 2.2e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Same colour statistic           Expectation              Variance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             31.000000              8.000000              6.151883 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

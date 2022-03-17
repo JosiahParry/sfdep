@@ -28,7 +28,7 @@ global_moran <- function(x, nb, wt, na_ok = FALSE, ...) {
 }
 
 #' Global Moran Permutation Test
-#' @inheritParams global_moran
+#' @inheritParams local_moran
 #' @param nsim number of simulations to run.
 #' @param ... additional arguments passed to [spdep::moran.mc()]
 #' @export
@@ -49,7 +49,7 @@ global_moran_perm <- function(x, nb, wt, alternative = "two.sided",
 }
 
 #' Global Moran Test
-#' @inheritParams global_moran
+#' @inheritParams global_moran_perm
 #' @param randomization default `TRUE`. Calculate variance based on randomization. If `FALSE`, under the assumption of normality.
 #' @family global_moran
 #' @export
@@ -74,6 +74,7 @@ global_moran_test <- function(x, nb, wt, alternative = "greater",
 #' Compute Geary's C
 #'
 #' @inheritParams global_moran
+#' @param allow_zero If `TRUE`, assigns zero as lagged value to zone without neighbors.
 #' @export
 #' @family global_c
 #' @examples
@@ -92,10 +93,15 @@ global_c <- function(x, nb, wt, allow_zero = NULL) {
 #' Global C Permutation Test
 #'
 #' @inheritParams global_moran_perm
+#' @param allow_zero If `TRUE`, assigns zero as lagged value to zone without neighbors.
 #' @param ... additional arguments passed to [spdep::geary.mc()].
 #' @family global_c
 #' @export
 #' @examples
+#' geo <- sf::st_geometry(guerry)
+#' nb <- st_contiguity(geo)
+#' wt <- st_weights(nb)
+#' x <- guerry$crime_pers
 #' global_c_perm(x, nb, wt)
 global_c_perm <- function(x, nb, wt, nsim = 499, alternative = "greater",
                           allow_zero = NULL, ...) {
@@ -108,9 +114,14 @@ global_c_perm <- function(x, nb, wt, nsim = 499, alternative = "greater",
 
 #' Global C Test
 #' @inheritParams global_moran_test
+#' @param allow_zero If `TRUE`, assigns zero as lagged value to zone without neighbors.
 #' @export
 #' @family global_c
 #' @examples
+#' geo <- sf::st_geometry(guerry)
+#' nb <- st_contiguity(geo)
+#' wt <- st_weights(nb)
+#' x <- guerry$crime_pers
 #' global_c_test(x, nb, wt)
 global_c_test <- function(x, nb, wt, randomization = TRUE, allow_zero = NULL, ...) {
   listw <- recreate_listw(nb, wt)
@@ -118,11 +129,18 @@ global_c_test <- function(x, nb, wt, randomization = TRUE, allow_zero = NULL, ..
                     zero.policy = allow_zero, ...)
 }
 
-# Gettis-ord G
+
 #' Getis-Ord Global G
-#'
+#' @inheritParams global_moran_test
+#' @inheritParams recreate_listw
+#' @param allow_zero If `TRUE`, assigns zero as lagged value to zone without neighbors.
+#' @param ... additional methods passed to [spdep::globalG.test()].
 #' @export
 #' @examples
+#' geo <- sf::st_geometry(guerry)
+#' nb <- st_contiguity(geo)
+#' wt <- st_weights(nb, style = "B")
+#' x <- guerry$crime_pers
 #' global_g_test(x, nb, wt)
 global_g_test <- function(x, nb, wt, alternative = "greater",
                           allow_zero = NULL, ...) {
@@ -141,9 +159,13 @@ global_g_test <- function(x, nb, wt, alternative = "greater",
 #'
 #' @param fx a factor or character vector of the same length as nb.
 #' @inheritParams global_moran_perm
+#' @param allow_zero If `TRUE`, assigns zero as lagged value to zone without neighbors.
 #' @param ... additional arguments passed to [spdep::joincount.mc()].
 #' @export
 #' @examples
+#' geo <- sf::st_geometry(guerry)
+#' nb <- st_contiguity(geo)
+#' wt <- st_weights(nb, style = "B")
 #' fx <- guerry$region
 #' global_jc_perm(fx, nb, wt)
 global_jc_perm <- function(fx, nb, wt, alternative = "greater", nsim = 499, allow_zero = FALSE, ...) {
@@ -157,6 +179,7 @@ global_jc_perm <- function(fx, nb, wt, alternative = "greater", nsim = 499, allo
 #' Global Join Count Test
 #' @rdname global_jc_perm
 #' @inheritParams global_jc_perm
+#' @param allow_zero If `TRUE`, assigns zero as lagged value to zone without neighbors.
 #' @param ... additional arguments passed to [spdep::joincount.test()]
 #' @export
 #' @examples

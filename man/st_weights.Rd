@@ -10,6 +10,10 @@ st_weights(nb, style = "W", allow_zero = NULL, ...)
 \item{nb}{A neighbor list object as created by \code{st_neighbors()}.}
 
 \item{style}{Default \code{"W"} for row standardized weights. This value can also be "B", "C", "U", "minmax", and "S". See \code{\link[spdep:nb2listw]{spdep::nb2listw()}} for details.}
+
+\item{allow_zero}{If \code{TRUE}, assigns zero as lagged value to zone without neighbors.}
+
+\item{...}{additional arguments passed to \code{\link[spdep:nb2listw]{spdep::nb2listw()}}.}
 }
 \description{
 Calculate polygon spatial weights from a \code{nb} list. See \code{\link[spdep:nb2listw]{spdep::nb2listw()}} for further details.
@@ -20,11 +24,13 @@ Under the hood, \code{\link[=st_weights]{st_weights()}} creates a \code{listw} o
 \examples{
 guerry \%>\%
  dplyr::mutate(nb = st_contiguity(geometry),
-               wt = st_weights(nb))
+               wt = st_weights(nb),
+               .before = 1)
 
 # using geometry column directly
 nb <- st_contiguity(guerry$geometry)
 wt <- st_weights(nb)
+wt[1:3]
 }
 \seealso{
 Other weights: 

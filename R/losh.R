@@ -1,6 +1,7 @@
 #' Local spatial heteroscedacity
 #'
 #' @param x a numeric vector.
+#' @param a the exponent applied to the local residuals
 #' @param nb a neighbor list for example created by [st_contiguity()]
 #' @param wt a weights list for example created by [st_weights()]
 #' @param ... methods passed to [spdep::LOSH]
@@ -11,7 +12,6 @@
 #' x <- guerry$crime_pers
 #' losh(x, nb, wt)
 #' losh(x, nb, wt, var_hi = FALSE)
-
 losh <- function(x, nb, wt, a = 2, ...) {
   listw <- recreate_listw(nb, wt)
   # capture dots
@@ -23,12 +23,11 @@ losh <- function(x, nb, wt, a = 2, ...) {
     losh_names <- c("hi", "e_hi", "var_hi", "z_hi", "x_bar_i", "ei")
   }
   res <- as.data.frame(spdep::LOSH(x, listw, a = a, ...))
-  setNames(res, losh_names)
+  stats::setNames(res, losh_names)
 }
 
 
-#' @inheritParams losh
-#' @param nsim number of simulations
+#' @param nsim number of simulations to run
 #' @rdname losh
 #' @export
 #' @examples
@@ -36,7 +35,7 @@ losh <- function(x, nb, wt, a = 2, ...) {
 losh_perm <- function(x, nb, wt, a = 2, nsim = 499, ...) {
   listw <- recreate_listw(nb, wt)
   res <- as.data.frame(spdep::LOSH.mc(x, listw, a = a, nsim = nsim, ...))
-  setNames(res, c("hi", "x_bar_i", "ei", "p_sim"))
+  stats::setNames(res, c("hi", "x_bar_i", "ei", "p_sim"))
 }
 
 

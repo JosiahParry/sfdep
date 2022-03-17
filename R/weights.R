@@ -8,17 +8,21 @@
 #'
 #' @param nb A neighbor list object as created by `st_neighbors()`.
 #' @param style Default `"W"` for row standardized weights. This value can also be "B", "C", "U", "minmax", and "S". See [spdep::nb2listw()] for details.
+#' @param allow_zero If `TRUE`, assigns zero as lagged value to zone without neighbors.
+#' @param ... additional arguments passed to [spdep::nb2listw()].
 #' @importFrom spdep nb2listw
 #' @family weights
 #' @export
 #' @examples
 #' guerry %>%
 #'  dplyr::mutate(nb = st_contiguity(geometry),
-#'                wt = st_weights(nb))
+#'                wt = st_weights(nb),
+#'                .before = 1)
 #'
 #' # using geometry column directly
 #' nb <- st_contiguity(guerry$geometry)
 #' wt <- st_weights(nb)
+#' wt[1:3]
 st_weights <- function(nb, style = "W", allow_zero = NULL, ...) {
 
   listw <- nb2listw(nb, style = style, zero.policy = allow_zero, ...)
@@ -51,28 +55,28 @@ st_inverse_weights <- function(x, nb, scale = 100, threshold = NULL) {
 }
 
 
-#' Calculate Kernel Weights
+# Calculate Kernel Weights
 #'
-#' @details
+# @details
 #'
-#' By default [st_kernel_weight()] utilizes a critical threshold of the maximum neighbor distance. If desired, the critical threshold can be specified manually. The `threshold` will be passed to the underlying kernel.
+# By default `st_kernel_weight()` utilizes a critical threshold of the maximum neighbor distance. If d ired, the critical threshold can be specified manually. The `threshold` will be passed to the underlying k nel.
 #'
-#' See [kernels] for more.
+# See kernels for more.
 #'
-#' @inheritParams st_inverse_weights
-#' @param kernel One of "uniform", "gaussian",  "triangular", "epanechnikov", or "quartic".
-#' @importFrom spdep nbdists dnearneigh include.self
-#' @family weights
-st_kernel_weights <- function(x, nb, kernel = "uniform", threshold = NULL) {
-
-  match.arg(kernel, names(kernels))
-
-  # set threshold if not set
-  if (is.null(threshold)) threshold <- max(unlist(nbdists(nb, x)))
-
-  kernal_nb <- dnearneigh(x, 0, threshold)
-  kernal_nb <- include.self(kernal_nb)
-  kernal_dists <- nbdists(kernal_nb, x)
-  lapply(kernal_dists, kernels[[kernel]], threshold)
-
-}
+# @inheritParams st_inverse_weights
+# @param kernel One of "uniform", "gaussian",  "triangular", "epanechnikov", or "quartic".
+# @importFrom spdep nbdists dnearneigh include.self
+# @family weights
+# st_kernel_weights <- function(x, nb, kernel = "uniform", threshold = NULL) {
+#
+#   match.arg(kernel, names(kernels))
+#
+#   # set threshold if not set
+#   if (is.null(threshold)) threshold <- max(unlist(nbdists(nb, x)))
+#
+#   kernal_nb <- dnearneigh(x, 0, threshold)
+#   kernal_nb <- include.self(kernal_nb)
+#   kernal_dists <- nbdists(kernal_nb, x)
+#   lapply(kernal_dists, kernels[[kernel]], threshold)
+#
+# }

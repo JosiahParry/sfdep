@@ -65,6 +65,7 @@ nmt_impl <- function(x, k, listw, nsim = 199,
                      scale = TRUE, .method = "euclidian",
                      .p = 2) {
 
+  if (!requireNamespace("dbscan")) rlang::abort("Package `dbscan` must installed.")
   nb <- listw[["neighbours"]]
 
   m <- Reduce(cbind.data.frame, x)

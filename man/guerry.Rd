@@ -19,7 +19,7 @@ guerry
 guerry_nb
 }
 \description{
-This dataset has been widely used to demonstrate geospatial methods and techniques. As such it is useful for inclusion to this R package for the purposes of example. The dataset in this package is modified from \link{Guerry} by \href{https://www.datavis.ca/}{Michael Friendly}.
+This dataset has been widely used to demonstrate geospatial methods and techniques. As such it is useful for inclusion to this R package for the purposes of example. The dataset in this package is modified from Guerry by \href{https://www.datavis.ca/}{Michael Friendly}.
 }
 \details{
 \code{guerry} and \code{guerry_nb} objects are sf class objects. These are polygons of the boundaries of France (excluding Corsica) as they were in 1830.

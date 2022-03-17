@@ -66,15 +66,13 @@
 <dd><p>a neighbor list object for example as created by <code><a href="st_contiguity.html">st_contiguity()</a></code>.</p></dd>
 <dt>wt</dt>
 <dd><p>a weights list as created by <code><a href="st_weights.html">st_weights()</a></code>.</p></dd>
+<dt>alternative</dt>
+<dd><p>default <code>"two.sided"</code>. Should be one of <code>"greater"</code>, <code>"less"</code>, or <code>"two.sided"</code> to specify the alternative hypothesis.</p></dd>
 <dt>nsim</dt>
 <dd><p>The number of simulations to run.</p></dd>
 <dt>...</dt>
 <dd><p>See <code>?spdep::localmoran_perm()</code> for more options.</p></dd>
 </dl></div>
-    <div class="section level2">
-    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    
-    </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p><code>local_moran()</code> calls <code><a href="https://r-spatial.github.io/spdep/reference/localmoran.html" class="external-link">spdep::localmoran_perm()</a></code> and calculates the Moran I for each polygon. As well as provide simulated p-values.</p>

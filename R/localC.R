@@ -24,7 +24,7 @@
 #'
 #' - `p_ci`: utilizes the sample mean and standard deviation. The p-value is then calculated using `pnorm()`--asuming a normal distribution which isn't always true.
 #' - `p_ci_sim`: uses the rank of the observed statistic.
-#' - `p_folded_sim`: followss the [pysal] implementation where p-values are in the range of [0, 0.5]. This excludes 1/2 of all p-values and should be used with caution.
+#' - `p_folded_sim`: follows the pysal implementation where p-values are in the range of \[0, 0.5\]. This excludes 1/2 of all p-values and should be used with caution.
 #'
 #' @author Josiah Parry, \email{josiah.parry@gmail.com}
 #' @references {Anselin, L. (1995), Local Indicators of Spatial Association—LISA. Geographical Analysis, 27: 93-115. \doi{10.1111/j.1538-4632.1995.tb00338.x}}
@@ -43,7 +43,7 @@ local_c <- function(x, nb, wt, ...) {
 #' Compute Local Geary Statistic
 #' @param nsim The number of simulations used to generate reference distribution.
 #' @param alternative A character defining the alternative hypothesis. Must be one of "two.sided", "less" or "greater".
-#' @param zero.policy default NULLL. If TRUE assign zero to zones without neighbors. If FALSE, assign NA. Must be passed via \code{...}
+#' @param ... other arguments passed to [spdep::localC_perm()], e.g. `zero.policy = TRUE` to allow for zones without neighbors.
 #' @rdname local_c
 #' @export
 #' @examples
@@ -65,5 +65,5 @@ local_c_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", ...) 
                cluster = attr(lcp, "cluster"),
                as.data.frame(attr(lcp, "pseudo-p")))
 
-  setNames(res, lc_cols)
+  stats::setNames(res, lc_cols)
 }

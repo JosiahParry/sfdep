@@ -23,12 +23,20 @@ global_c_perm(
 
 \item{nsim}{number of simulations to run.}
 
+\item{alternative}{default \code{"two.sided"}. Should be one of \code{"greater"}, \code{"less"}, or \code{"two.sided"} to specify the alternative hypothesis.}
+
+\item{allow_zero}{If \code{TRUE}, assigns zero as lagged value to zone without neighbors.}
+
 \item{...}{additional arguments passed to \code{\link[spdep:geary.mc]{spdep::geary.mc()}}.}
 }
 \description{
 Global C Permutation Test
 }
 \examples{
+geo <- sf::st_geometry(guerry)
+nb <- st_contiguity(geo)
+wt <- st_weights(nb)
+x <- guerry$crime_pers
 global_c_perm(x, nb, wt)
 }
 \seealso{

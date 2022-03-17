@@ -68,15 +68,39 @@
 <dd><p>a neighbor list object for example as created by <code><a href="st_contiguity.html">st_contiguity()</a></code>.</p></dd>
 <dt>wt</dt>
 <dd><p>a weights list as created by <code><a href="st_weights.html">st_weights()</a></code>.</p></dd>
+<dt>alternative</dt>
+<dd><p>default <code>"two.sided"</code>. Should be one of <code>"greater"</code>, <code>"less"</code>, or <code>"two.sided"</code> to specify the alternative hypothesis.</p></dd>
 <dt>...</dt>
-<dd><p>methods passed to <code><a href="https://r-spatial.github.io/spdep/reference/localG.html" class="external-link">spdep::localG()</a></code> or <code><a href="https://r-spatial.github.io/spdep/reference/localG.html" class="external-link">spdep::localG_perm()</a></code>
-x &lt;- guerry$crime_pers
-nb &lt;- st_contiguity(guerry)
-wt &lt;- st_weights(nb)</p></dd>
+<dd><p>methods passed to <code><a href="https://r-spatial.github.io/spdep/reference/localG.html" class="external-link">spdep::localG()</a></code> or <code><a href="https://r-spatial.github.io/spdep/reference/localG.html" class="external-link">spdep::localG_perm()</a></code></p></dd>
 <dt>nsim</dt>
 <dd><p>The number of simulations to run.</p></dd>
 </dl></div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">crime_pers</span></span>
+<span class="r-in"><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_g_perm</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            gi       e_gi       var_gi    p_value p_sim p_folded_sim    skewness</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.013819020 0.01174834 4.761824e-06 0.34266387 0.380        0.190  0.17832070</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.016115180 0.01189608 3.376822e-06 0.02167761 0.024        0.012  0.33865309</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.015686557 0.01203606 2.938527e-06 0.03320898 0.032        0.016  0.05958926</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.008553106 0.01193989 4.899270e-06 0.12599018 0.128        0.064  0.01313437</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.008955895 0.01197296 6.387315e-06 0.23256294 0.252        0.126  0.16857638</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.009334367 0.01196433 2.824225e-06 0.11759525 0.112        0.056 -0.03531718</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      kurtosis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.32439442</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.06807062</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.20037833</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.12791407</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.24087821</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.37462652</span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

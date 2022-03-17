@@ -16,10 +16,9 @@ local_gstar_perm(x, nb, wt, nsim = 499, alternative = "two.sided", ...)
 
 \item{wt}{a weights list as created by \code{st_weights()}.}
 
-\item{...}{methods passed to \code{\link[spdep:localG]{spdep::localG()}} or \code{\link[spdep:localG]{spdep::localG_perm()}}
-x <- guerry$crime_pers
-nb <- st_contiguity(guerry)
-wt <- st_weights(nb)}
+\item{alternative}{default \code{"two.sided"}. Should be one of \code{"greater"}, \code{"less"}, or \code{"two.sided"} to specify the alternative hypothesis.}
+
+\item{...}{methods passed to \code{\link[spdep:localG]{spdep::localG()}} or \code{\link[spdep:localG]{spdep::localG_perm()}}}
 
 \item{nsim}{The number of simulations to run.}
 }
@@ -30,6 +29,10 @@ Local G*
 nb <- st_contiguity(guerry)
 wt <- st_weights(nb)
 x <- guerry$crime_pers
-local_g_perm(x, nb, wt)
-local_gstar_perm(x, nb, wt)
+
+res <- local_gstar_perm(x, nb, wt)
+head(res)
+
+res <- local_gstar(x, nb, wt)
+head(res)
 }

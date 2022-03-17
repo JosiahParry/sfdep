@@ -19,9 +19,9 @@ st_kernel_weights(x, nb, kernel = "uniform", threshold = NULL)
 Calculate Kernel Weights
 }
 \details{
-By default \code{\link[=st_kernel_weight]{st_kernel_weight()}} utilizes a critical threshold of the maximum neighbor distance. If desired, the critical threshold can be specified manually. The \code{threshold} will be passed to the underlying kernel.
+By default \code{st_kernel_weight()} utilizes a critical threshold of the maximum neighbor distance. If desired, the critical threshold can be specified manually. The \code{threshold} will be passed to the underlying kernel.
 
-See \link{kernels} for more.
+See kernels for more.
 }
 \seealso{
 Other weights: 

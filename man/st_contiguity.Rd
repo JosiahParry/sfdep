@@ -9,7 +9,9 @@ st_contiguity(x, queen = TRUE, ...)
 \arguments{
 \item{x}{an sf or sfc object.}
 
-\item{queen}{Default \code{TRUE}. For more see \code{?spdep::poly2nb}}
+\item{queen}{default \code{TRUE}. For more see \code{?spdep::poly2nb}}
+
+\item{...}{additional arguments passed to \code{\link[spdep:poly2nb]{spdep::poly2nb()}}}
 }
 \description{
 Identify polygon neighbors

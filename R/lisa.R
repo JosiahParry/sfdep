@@ -8,11 +8,11 @@
 #'
 #' @inheritParams recreate_listw
 #' @param x A numeric vector.
+#' @param alternative default `"two.sided"`. Should be one of `"greater"`, `"less"`, or `"two.sided"` to specify the alternative hypothesis.
 #' @param nsim The number of simulations to run.
 #' @param ... See `?spdep::localmoran_perm()` for more options.
 #' @importFrom spdep localmoran_perm
 #' @family stats
-#' @return
 #' @export
 #' @examples
 #' library(tidyverse)
@@ -39,7 +39,7 @@ local_moran <- function(x, nb, wt, alternative = "two.sided",
   lm_cols <- c("ii", "eii", "var_ii", "z_ii", "p_ii",
                "p_ii_sim", "p_folded_sim", "skewness", "kurtosis")
 
-  lm_res <- setNames(data.frame(lmp), lm_cols)
+  lm_res <- stats::setNames(data.frame(lmp), lm_cols)
   lm_cats <- attr(lmp, "quadr")
 
   cbind(lm_res, lm_cats)

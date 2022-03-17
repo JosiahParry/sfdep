@@ -64,10 +64,10 @@ mvclc
 # approach w/ arbitrary columns -------------------------------------------
 
 dotnames <- paste0("var", 1:length(dots))
-dots <- setNames(dots, dotnames)
+dots <- stats::setNames(dots, dotnames)
 
 
-df <- list2DF(setNames(all_nbs, dotnames))
+df <- list2DF(stats::setNames(all_nbs, dotnames))
 
 all_nb_ones <- apply(df, 1, \(x) prod(unlist(x)))
 

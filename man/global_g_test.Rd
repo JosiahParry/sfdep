@@ -6,9 +6,26 @@
 \usage{
 global_g_test(x, nb, wt, alternative = "greater", allow_zero = NULL, ...)
 }
+\arguments{
+\item{x}{A numeric vector.}
+
+\item{nb}{a neighbor list object for example as created by \code{st_contiguity()}.}
+
+\item{wt}{a weights list as created by \code{st_weights()}.}
+
+\item{alternative}{default \code{"two.sided"}. Should be one of \code{"greater"}, \code{"less"}, or \code{"two.sided"} to specify the alternative hypothesis.}
+
+\item{allow_zero}{If \code{TRUE}, assigns zero as lagged value to zone without neighbors.}
+
+\item{...}{additional methods passed to \code{\link[spdep:globalG.test]{spdep::globalG.test()}}.}
+}
 \description{
 Getis-Ord Global G
 }
 \examples{
+geo <- sf::st_geometry(guerry)
+nb <- st_contiguity(geo)
+wt <- st_weights(nb, style = "B")
+x <- guerry$crime_pers
 global_g_test(x, nb, wt)
 }

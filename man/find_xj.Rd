@@ -2,11 +2,33 @@
 % Please edit documentation in R/utils.R
 \name{find_xj}
 \alias{find_xj}
-\title{Idenitfy xj values}
+\title{Match kernel functions}
 \usage{
 find_xj(x, nb)
 }
+\arguments{
+\item{x}{kernel distances}
+
+\item{thresh}{critical threshold}
+
+\item{...}{unused
+Idenitfy xj values
+
+Find \code{xj} values given an x and neighbors list.}
+}
 \description{
-Find \code{xj} values given an x and neighbors list.
+Kernel functions for creating kernel based weights with [\code{t_kernel_weight()}.
+}
+\details{
+Supported kernels are below.
+
+Formulas come from Anselin & Morrison's \href{https://spatialanalysis.github.io/lab_tutorials/atial_Weights_as_Distance_Functions.html#kernal-weights}{notes}.
+\itemize{
+\item \code{uniform}:  K(z) = 1/2 for ∣z∣<1
+\item \code{triangular}: K(z) = (1−∣z∣) for ∣z∣ < 1
+\item \code{epanechnikov}: K(z) = (3/4)(1−z^2) for ∣z∣ < 1
+\item \code{quartic}: K(z) = (15/16)*(1−(z/threshold)^2^)2 for ∣z∣ < 1
+\item \code{guassian}: K(z) = (2pi)^{1/2} * exp(−z^2/2)
+}
 }
 \keyword{internal}

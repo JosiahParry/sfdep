@@ -1,7 +1,8 @@
 #' Identify polygon neighbors
 #'
 #' @param x an sf or sfc object.
-#' @param queen Default `TRUE`. For more see `?spdep::poly2nb`
+#' @param queen default `TRUE`. For more see `?spdep::poly2nb`
+#' @param ... additional arguments passed to [spdep::poly2nb()]
 #' @importFrom spdep poly2nb
 #' @family neighbors
 #' @export
@@ -115,15 +116,6 @@ st_nb_lag_cumul <- function(nb, order) {
 #' If the provided geometry is a polygon, the centroids of the polygons will be return using [sf::st_centroid()]
 #' @param x an sfc object
 #' @keywords internal
-#' @examples
-#' # make sfc object
-#' grid <- sf::st_make_grid()
-#' ps <- check_polygon(grid)
-#' ps
-#'
-#' # plot for demonstration
-#' plot(grid)
-#' plot(check_polygon(grid), add = TRUE, col = "blue")
 check_polygon <- function(x) {
 
   polygon_check <- any(class(x) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))
@@ -135,5 +127,4 @@ check_polygon <- function(x) {
   }
   x
 }
-
 

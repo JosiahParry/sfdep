@@ -24,7 +24,11 @@ global_jc_test(fx, nb, wt, alternative = "greater", allow_zero = NULL, ...)
 
 \item{wt}{a weights list as created by \code{st_weights()}.}
 
+\item{alternative}{default \code{"two.sided"}. Should be one of \code{"greater"}, \code{"less"}, or \code{"two.sided"} to specify the alternative hypothesis.}
+
 \item{nsim}{number of simulations to run.}
+
+\item{allow_zero}{If \code{TRUE}, assigns zero as lagged value to zone without neighbors.}
 
 \item{...}{additional arguments passed to \code{\link[spdep:joincount.test]{spdep::joincount.test()}}}
 }
@@ -34,6 +38,9 @@ Global Join Count Permutation Test
 Global Join Count Test
 }
 \examples{
+geo <- sf::st_geometry(guerry)
+nb <- st_contiguity(geo)
+wt <- st_weights(nb, style = "B")
 fx <- guerry$region
 global_jc_perm(fx, nb, wt)
 global_jc_test(fx, nb, wt)

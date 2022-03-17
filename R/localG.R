@@ -4,9 +4,14 @@
 #' @inheritParams local_moran
 #' @inheritParams recreate_listw
 #' @param ... methods passed to [spdep::localG()] or [spdep::localG_perm()]
+#' @examples
 #' x <- guerry$crime_pers
 #' nb <- st_contiguity(guerry)
 #' wt <- st_weights(nb)
+#'
+#' res <- local_g_perm(x, nb, wt)
+#'
+#' head(res)
 local_g <- function(x, nb, wt, alternative = "two.sided", ...) {
   if (!is.null(attr(nb, "self.included"))) {
     cli::cli_alert_warning("attr `self.include` is `TRUE`. Reporting Gi*.")
@@ -27,7 +32,7 @@ local_g_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", ...) 
   localg_names <- c("gi", "e_gi", "var_gi", "p_value",
                     "p_sim", "p_folded_sim", "skewness", "kurtosis")
 
-  setNames(as.data.frame(attr(res, "internals")), localg_names)
+  stats::setNames(as.data.frame(attr(res, "internals")), localg_names)
 }
 
 

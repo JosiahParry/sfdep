@@ -16,13 +16,11 @@ local_c_perm(x, nb, wt, nsim = 499, alternative = "two.sided", ...)
 
 \item{wt}{a weights list}
 
-\item{...}{other arguments passed to \code{spdep::localC}}
+\item{...}{other arguments passed to \code{\link[spdep:localC]{spdep::localC_perm()}}, e.g. \code{zero.policy = TRUE} to allow for zones without neighbors.}
 
 \item{nsim}{The number of simulations used to generate reference distribution.}
 
 \item{alternative}{A character defining the alternative hypothesis. Must be one of "two.sided", "less" or "greater".}
-
-\item{zero.policy}{default NULLL. If TRUE assign zero to zones without neighbors. If FALSE, assign NA. Must be passed via \code{...}}
 }
 \description{
 The Local Geary is a local adaptation of Geary's C statistic of spatial autocorrelation. The Local Geary uses squared differences to measure dissimilarity unlike the Local Moran. Low values of the Local Geary indicate positive spatial autocorrelation and large refers to negative spatial autocorrelation.
@@ -46,7 +44,7 @@ These functions are based on the implementations of the local Geary statistic in
 \itemize{
 \item \code{p_ci}: utilizes the sample mean and standard deviation. The p-value is then calculated using \code{pnorm()}--asuming a normal distribution which isn't always true.
 \item \code{p_ci_sim}: uses the rank of the observed statistic.
-\item \code{p_folded_sim}: followss the \link{pysal} implementation where p-values are in the range of \link{0, 0.5}. This excludes 1/2 of all p-values and should be used with caution.
+\item \code{p_folded_sim}: follows the pysal implementation where p-values are in the range of [0, 0.5]. This excludes 1/2 of all p-values and should be used with caution.
 }
 }
 }

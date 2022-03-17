@@ -27,11 +27,11 @@ all_nbs <- lapply(dots, find_xj, nb)
 # -------------------------------------------------------------------------
 
 dotnames <- paste0("var", 1:length(dots))
-dots <- setNames(dots, dotnames)
+dots <- stats::setNames(dots, dotnames)
 
 lhs_prod <- Reduce(`*`, dots)
 
-df <- list2DF(setNames(all_nbs, dotnames))
+df <- list2DF(stats::setNames(all_nbs, dotnames))
 
 
 all_nb_ones <- apply(df, 1, \(x) prod(unlist(x)))

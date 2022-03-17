@@ -20,9 +20,11 @@ global_moran_test(
 
 \item{wt}{a weights list as created by \code{st_weights()}.}
 
+\item{alternative}{default \code{"two.sided"}. Should be one of \code{"greater"}, \code{"less"}, or \code{"two.sided"} to specify the alternative hypothesis.}
+
 \item{randomization}{default \code{TRUE}. Calculate variance based on randomization. If \code{FALSE}, under the assumption of normality.}
 
-\item{...}{additional arguments passed to \code{\link[spdep:moran]{spdep::moran()}}.}
+\item{...}{additional arguments passed to \code{\link[spdep:moran.mc]{spdep::moran.mc()}}}
 }
 \description{
 Global Moran Test

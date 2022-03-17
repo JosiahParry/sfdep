@@ -16,9 +16,11 @@ losh_perm(x, nb, wt, a = 2, nsim = 499, ...)
 
 \item{wt}{a weights list for example created by \code{\link[=st_weights]{st_weights()}}}
 
+\item{a}{the exponent applied to the local residuals}
+
 \item{...}{methods passed to \link[spdep:LOSH]{spdep::LOSH}}
 
-\item{nsim}{number of simulations}
+\item{nsim}{number of simulations to run}
 }
 \description{
 Local spatial heteroscedacity
