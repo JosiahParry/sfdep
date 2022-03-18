@@ -13,13 +13,13 @@ global_stats:
     pysal: esda.Moran_BV()
   global_c:
     impl: spdep::geary()
-    pysal:
+    pysal: esda.Geary()
   global_c_perm:
     impl: spdep::geary.mc()
     pysal: esda.Geary()
   global_c_test:
     impl: spdep::geary.mc()
-    pysal:
+    pysal: esda.Geary()
   global_g_test:
     impl: spdep::globalG.test()
     pysal: esda.G()
@@ -28,11 +28,11 @@ global_stats:
     pysal: esda.Join_Counts()
   global_jc_test:
     impl: spdep::joincount.test()
-    pysal:
+    pysal: esda.Join_Counts()
 lisas:
   local_c:
     impl: spdep::localC()
-    pysal:
+    pysal: esda.Geary_Local()
   local_c_perm:
     impl: spdep::localC_perm()
     pysal:
@@ -40,10 +40,10 @@ lisas:
       - esda.Geary_Local_MV()
   local_g:
     impl: spdep::localG()
-    pysal:
+    pysal: esda.G_local().Gs
   local_gstar:
     impl: spdep::localG()
-    pysal:
+    pysal: esda.G_local(star = True)
   local_g_perm:
     impl: spdep::localG_perm()
     pysal: esda.G_Local()
