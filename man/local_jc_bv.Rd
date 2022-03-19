@@ -4,7 +4,7 @@
 \alias{local_jc_bv}
 \title{Bivariate local join count}
 \usage{
-local_jc_bv(x, z, nb, wt, nsim = 499, case = c("BJC", "CLC"))
+local_jc_bv(x, z, nb, wt, nsim = 499)
 }
 \arguments{
 \item{x}{a binary variable either numeric or logical}

@@ -15,7 +15,7 @@
 #' @family stats
 #' @export
 #' @examples
-#' library(tidyverse)
+#' library(dplyr)
 #'
 #' lisa <- guerry %>%
 #'   mutate(nb = st_contiguity(geometry),

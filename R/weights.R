@@ -43,16 +43,16 @@ st_weights <- function(nb, style = "W", allow_zero = NULL, ...) {
 #'
 #' @importFrom spdep dnearneigh nbdists
 #' @family weights
-st_inverse_weights <- function(x, nb, scale = 100, threshold = NULL) {
-  # As implemented by Luc Anselin
-  # https://spatialanalysis.github.io/lab_tutorials/Spatial_Weights_as_Distance_Functions.html#inverse-distance-weights
-  x <- check_polygon(x)
-  if (is.null(threshold)) threshold <- max(unlist(spdep::nbdists(nb, x)))
-  dist_band <- spdep::dnearneigh(x, 0, threshold)
-  distances <- spdep::nbdists(dist_band, x)
-  lapply(distances, function(x) (1/(x/scale)))
-
-}
+#st_inverse_weights <- function(x, nb, scale = 100, threshold = NULL) {
+#  # As implemented by Luc Anselin
+#  # https://spatialanalysis.github.io/lab_tutorials#/Spatial_Weights_as_Distance_Functions.html#inverse-distance-weights
+#  x <- check_polygon(x)
+#  if (is.null(threshold)) threshold <- max(unlist(spdep::nbdists(nb, x)))
+#  dist_band <- spdep::dnearneigh(x, 0, threshold)
+#  distances <- spdep::nbdists(dist_band, x)
+#  lapply(distances, function(x) (1/(x/scale)))
+#
+#}
 
 
 # Calculate Kernel Weights

@@ -26,7 +26,7 @@ Moran's I is calculated for each polygon based on the neighbor and weight lists.
 \code{\link[=local_moran]{local_moran()}} calls \code{\link[spdep:localmoran]{spdep::localmoran_perm()}} and calculates the Moran I for each polygon. As well as provide simulated p-values.
 }
 \examples{
-library(tidyverse)
+library(dplyr)
 
 lisa <- guerry \%>\%
   mutate(nb = st_contiguity(geometry),

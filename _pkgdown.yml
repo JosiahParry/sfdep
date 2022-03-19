@@ -33,7 +33,7 @@ reference:
 - title: Weights
   contents:
   - contains("weights")
-  - kernels
+
 
 - title: Local Indicators of Spatial Association (LISA)
   contents:

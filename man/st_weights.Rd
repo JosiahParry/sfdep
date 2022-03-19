@@ -32,9 +32,4 @@ nb <- st_contiguity(guerry$geometry)
 wt <- st_weights(nb)
 wt[1:3]
 }
-\seealso{
-Other weights: 
-\code{\link{st_inverse_weights}()},
-\code{\link{st_kernel_weights}()}
-}
 \concept{weights}

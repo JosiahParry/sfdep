@@ -7,10 +7,6 @@
 st_nb_dists(x, nb, longlat = NULL)
 }
 \arguments{
-\item{x}{Spatial points. Typically the \code{geometry} column of an sf object.}
-
-\item{nb}{A nb neighbor list such as created from \code{st_knn(x, k = 1)}.}
-
 \item{longlat}{\code{TRUE} if point coordinates are longitude-latitude decimal degrees, in which case distances are measured in kilometers. See \code{?spdep::nbdists()} for more.}
 }
 \description{

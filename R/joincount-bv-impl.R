@@ -10,11 +10,11 @@
 #' nb <- st_contiguity(guerry)
 #' wt <- st_weights(nb, style = "B")
 #' local_jc_bv(x, z, nb, wt)
-local_jc_bv <- function(x, z, nb, wt, nsim = 499, case = c("BJC", "CLC")) {
+local_jc_bv <- function(x, z, nb, wt, nsim = 499) {
 
-  if (!rlang::is_scalar_character(case)) {
-    case <- ifelse(any(x + z > 1), "CLC", "BJC")
-  }
+
+  case <- ifelse(any(x + z > 1), "CLC", "BJC")
+
 
   xj <- find_xj(x, nb)
   zj <- find_xj(z, nb)
