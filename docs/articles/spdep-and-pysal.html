@@ -44,6 +44,7 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">The Basics of sfdep</a>
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
@@ -115,7 +116,7 @@
 <tr class="odd">
 <td align="left">global_c</td>
 <td align="left">spdep::geary()</td>
-<td align="left"></td>
+<td align="left">esda.Geary()</td>
 </tr>
 <tr class="even">
 <td align="left">global_c_perm</td>
@@ -125,7 +126,7 @@
 <tr class="odd">
 <td align="left">global_c_test</td>
 <td align="left">spdep::geary.mc()</td>
-<td align="left"></td>
+<td align="left">esda.Geary()</td>
 </tr>
 <tr class="even">
 <td align="left">global_g_test</td>
@@ -140,7 +141,7 @@
 <tr class="even">
 <td align="left">global_jc_test</td>
 <td align="left">spdep::joincount.test()</td>
-<td align="left"></td>
+<td align="left">esda.Join_Counts()</td>
 </tr>
 </tbody>
 </table>
@@ -164,7 +165,7 @@
 <tr class="odd">
 <td align="left">local_c</td>
 <td align="left">spdep::localC()</td>
-<td align="left"></td>
+<td align="left">esda.Geary_Local()</td>
 </tr>
 <tr class="even">
 <td align="left">local_c_perm</td>
@@ -174,12 +175,12 @@
 <tr class="odd">
 <td align="left">local_g</td>
 <td align="left">spdep::localG()</td>
-<td align="left"></td>
+<td align="left">esda.G_local().Gs</td>
 </tr>
 <tr class="even">
 <td align="left">local_gstar</td>
 <td align="left">spdep::localG()</td>
-<td align="left"></td>
+<td align="left">esda.G_local(star = True)</td>
 </tr>
 <tr class="odd">
 <td align="left">local_g_perm</td>

@@ -51,6 +51,11 @@ reference:
   contents:
   - starts_with("guerry")
 
+- title: Networks
+  contents:
+  - st_as_graph
+  - st_as_edges
+  - st_as_nodes
 
 - title: Internal functions
   contents:

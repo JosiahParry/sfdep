@@ -1,6 +1,8 @@
 # Bivariate local moran
-# x <- scale(x)
-# y <- scale(y)
+# x <- scale(guerry$suicides)
+# y <- scale(guerry$crime_pers)
+# nb <- guerry_nb$nb
+# wt <- guerry_nb$wt
 # yj <- find_xj(y, nb)
 # listw <- recreate_listw(nb, wt)
 #
