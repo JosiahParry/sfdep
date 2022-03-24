@@ -18,5 +18,13 @@ st_as_nodes(x, ...)
 \item{nb}{a neighbor list. If \code{x} is class \code{sf}, the unquote named of the column. If \code{x} is class \code{sfc}, an object of class \code{nb} as created from \code{st_contiguity()}.}
 }
 \description{
-Given geometry and a neighbor list, creates an \code{sf} object to be used as nodes in an \code{\link[sfnetworks:sfnetwork]{sfnetworks::sfnetwork()}}.
+Given geometry and a neighbor list, creates an \code{sf} object to be used as nodes in an \code{\link[sfnetworks:sfnetwork]{sfnetworks::sfnetwork()}}. If the provided geometry is a polygon, \code{\link[sf:geos_unary]{sf::st_point_on_surface()}} will be used to create the node point.
+}
+\details{
+\code{st_as_node()} adds a row \code{i} based on the attribute \code{"region.id"} in the \code{nb} object. If the \code{nb} object is created with \code{sfdep}, then the values will always be row indexes.
+}
+\examples{
+guerry_nb \%>\%
+  st_as_nodes(nb) \%>\%
+  select(i)
 }

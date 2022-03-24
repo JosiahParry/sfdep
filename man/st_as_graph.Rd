@@ -22,3 +22,7 @@ st_as_graph(x, ...)
 \description{
 Given an \code{sf} or \code{sfc} object and neighbor and weights lists, create an \code{sfnetwork} object.
 }
+\examples{
+guerry_nb \%>\%
+  st_as_graph(nb, wt)
+}

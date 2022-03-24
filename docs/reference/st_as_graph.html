@@ -75,6 +75,51 @@
 <dd><p>a weights list. If <code>x</code> is class <code>sf</code>, the unquote named of the column. If <code>x</code> is class <code>sfc</code>, the weights list itself.</p></dd>
 </dl></div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">guerry_nb</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+<span class="r-in">  <span class="fu">st_as_graph</span><span class="op">(</span><span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>st_point_on_surface may not give correct results for longitude/latitude data</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>st_point_on_surface may not give correct results for longitude/latitude data</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Checking if spatial network structure is valid...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Spatial network structure is valid</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># A sfnetwork with</span> <span style="color: #555555;">85</span> <span style="color: #555555;">nodes and</span> <span style="color: #555555;">420</span> <span style="color: #555555;">edges</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># CRS: </span> <span style="color: #555555;">EPSG:4326</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># A directed simple graph with 1 component with spatially explicit edges</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data:     85 × 30 (active)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Geometry type: POINT</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Dimension:     XY</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Bounding box:  xmin: -3.824049 ymin: 42.62427 xmax: 7.542411 ymax: 50.53039</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   i     code_dept count ave_id_geo  dept region department crime_pers crime_prop</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1     01            1         49     1 E      Ain             <span style="text-decoration: underline;">28</span>870      <span style="text-decoration: underline;">15</span>890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2     02            1        812     2 N      Aisne           <span style="text-decoration: underline;">26</span>226       <span style="text-decoration: underline;">5</span>521</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3     03            1       <span style="text-decoration: underline;">1</span>418     3 C      Allier          <span style="text-decoration: underline;">26</span>747       <span style="text-decoration: underline;">7</span>925</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4     04            1       <span style="text-decoration: underline;">1</span>603     4 E      Basses-Al…      <span style="text-decoration: underline;">12</span>935       <span style="text-decoration: underline;">7</span>289</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5     05            1       <span style="text-decoration: underline;">1</span>802     5 E      Hautes-Al…      <span style="text-decoration: underline;">17</span>488       <span style="text-decoration: underline;">8</span>174</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6     07            1       <span style="text-decoration: underline;">2</span>249     7 S      Ardeche          <span style="text-decoration: underline;">9</span>474      <span style="text-decoration: underline;">10</span>263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 79 more rows, and 21 more variables: literacy &lt;int&gt;, donations &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   infants &lt;int&gt;, suicides &lt;int&gt;, main_city &lt;ord&gt;, wealth &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   commerce &lt;int&gt;, clergy &lt;int&gt;, crime_parents &lt;int&gt;, infanticide &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   donation_clergy &lt;int&gt;, lottery &lt;int&gt;, desertion &lt;int&gt;, instruction &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   prostitutes &lt;int&gt;, distance &lt;dbl&gt;, area &lt;int&gt;, pop1831 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   geometry &lt;POINT [°]&gt;, nb &lt;nb&gt;, wt &lt;list&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data:     420 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Geometry type: LINESTRING</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Dimension:     XY</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Bounding box:  xmin: -3.824049 ymin: 42.62427 xmax: 7.542411 ymax: 50.53039</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    from    to i     j        wt                               geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;LINESTRING [°]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1    36 1     36     0.25 (5.284586 46.06432, 5.634432 45.28961)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1    37 1     37     0.25 (5.284586 46.06432, 5.782842 46.78175)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1    67 1     67     0.25  (5.284586 46.06432, 4.61552 45.87845)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 417 more rows</span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

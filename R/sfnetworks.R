@@ -8,8 +8,35 @@
 #'
 #' Given geometry and neighbor and weights lists, create an edge list `sf` object.
 #'
+#' @return
+#'
+#' Returns an `sf` object with edges represented as a `LINESTRING`.
+#'
+#' * `from`: node index. This is the row position of `x`.
+#' * `to`: node index. This is the neighbor value stored in `nb`.
+#' * `i`: node index. This is the row position of `x`.
+#' * `j`: node index. This is the neighbor value stored in `nb`.
+#' * `wt`: the weight value of `j` stored in `wt`.
+#'
+#' @details
+#'
+#' Creating an edge list creates a column for each `i` position and `j` between an observation and their neighbors. You can recreate these values by expanding the `nb` and `wt` list columns.
+#'
+#' ```{r}
+#' guerry_nb %>%
+#'   tibble::as_tibble() %>%
+#'   dplyr::select(nb, wt) %>%
+#'   dplyr::mutate(i = dplyr::row_number(), .before = 1) %>%
+#'   tidyr::unnest(c(nb, wt))
+#' ```
+#'
 #' @export
 #' @examples
+#' guerry %>%
+#'   mutate(nb = st_contiguity(geometry),
+#'          wt = st_weights(nb)) %>%
+#'   st_as_edges(nb, wt)
+
 st_as_edges <- function(x, ...) {
   UseMethod("st_as_edges")
 }
@@ -20,6 +47,7 @@ st_as_edges <- function(x, ...) {
 #' @rdname st_as_edges
 #' @export
 st_as_edges.sf <- function(x, nb, wt) {
+  check_pkg_suggests("dplyr")
   nb <- x[[rlang::ensym(nb)]]
   wt <- x[[rlang::ensym(wt)]]
 
@@ -45,9 +73,17 @@ st_as_edges.sfc <- function(x, nb, wt) {
 
 #' Convert to a node point object
 #'
-#' Given geometry and a neighbor list, creates an `sf` object to be used as nodes in an [`sfnetworks::sfnetwork()`].
+#' Given geometry and a neighbor list, creates an `sf` object to be used as nodes in an [`sfnetworks::sfnetwork()`]. If the provided geometry is a polygon, [`sf::st_point_on_surface()`] will be used to create the node point.
+#'
+#' @details
+#'
+#' `st_as_node()` adds a row `i` based on the attribute `"region.id"` in the `nb` object. If the `nb` object is created with `sfdep`, then the values will always be row indexes.
 #'
 #' @export
+#' @examples
+#' guerry_nb %>%
+#'   st_as_nodes(nb) %>%
+#'   select(i)
 st_as_nodes <- function(x, ...) {
   UseMethod("st_as_nodes")
 }
@@ -64,7 +100,8 @@ st_as_nodes.sf <- function(x, nb) {
   new_names <- vctrs::vec_as_names(c("i", curr_names), repair = "universal")
   i_col <- new_names[1]
   # this is based on spdep::nb2lines
-  if (inherits(geo, "sfc_MULTIPOLYGON") || "sfc_POLYGON") {
+  geo_class <- class(st_geometry(x))
+  if (any(geo_class %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))) {
     sf::st_geometry(x) <- sf::st_point_on_surface(sf::st_geometry(x))
   }
 
@@ -72,13 +109,15 @@ st_as_nodes.sf <- function(x, nb) {
 
 }
 
+# guerry_nb %>%
+#   st_as_nodes(nb)
+
 #' @rdname st_as_nodes
 #' @export
 st_as_nodes.sfc <- function(x, nb) {
   if (inherits(x, "sfc")) {
     if (!inherits(x, "sfc_POINT")) {
-      if (inherits(x, "sfc_POLYGON") || inherits(x,
-                                                      "sfc_MULTIPOLYGON"))
+      if (inherits(x, "sfc_POLYGON") || inherits(x,"sfc_MULTIPOLYGON"))
         x <- sf::st_point_on_surface(x)
       else stop("Point-conforming geometries required")
     }
@@ -88,6 +127,8 @@ st_as_nodes.sfc <- function(x, nb) {
 
 }
 
+# st_geometry(guerry) %>%
+#   st_as_nodes(guerry_nb$nb)
 #
 #
 # nb <- guerry_nb$nb
@@ -106,7 +147,11 @@ st_as_nodes.sfc <- function(x, nb) {
 #'
 #' Given an `sf` or `sfc` object and neighbor and weights lists, create an `sfnetwork` object.
 #'
+#'
 #' @export
+#' @examples
+#' guerry_nb %>%
+#'   st_as_graph(nb, wt)
 st_as_graph <- function(x, ...) {
   UseMethod("st_as_graph")
 }
@@ -128,6 +173,10 @@ st_as_graph.sf <- function(x, nb, wt) {
 
   sfnetworks::sfnetwork(nodes, edges)
 }
+
+#
+# guerry_nb %>%
+#   st_as_graph(nb, wt)
 
 #' @inheritParams st_as_edges.sfc
 #' @rdname st_as_graph
@@ -153,5 +202,3 @@ check_pkg_suggests <- function(x) {
   if (any(missing_pkgs))
     cli::cli_abort('Missing packages: {paste("`", x[missing_pkgs], "`", sep = "", collapse = ", ")}')
 }
-
-# example -----------------------------------------------------------------

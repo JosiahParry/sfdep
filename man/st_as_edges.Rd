@@ -19,6 +19,44 @@ st_as_edges(x, ...)
 
 \item{wt}{a weights list. If \code{x} is class \code{sf}, the unquote named of the column. If \code{x} is class \code{sfc}, the weights list itself.}
 }
+\value{
+Returns an \code{sf} object with edges represented as a \code{LINESTRING}.
+\itemize{
+\item \code{from}: node index. This is the row position of \code{x}.
+\item \code{to}: node index. This is the neighbor value stored in \code{nb}.
+\item \code{i}: node index. This is the row position of \code{x}.
+\item \code{j}: node index. This is the neighbor value stored in \code{nb}.
+\item \code{wt}: the weight value of \code{j} stored in \code{wt}.
+}
+}
 \description{
 Given geometry and neighbor and weights lists, create an edge list \code{sf} object.
+}
+\details{
+Creating an edge list creates a column for each \code{i} position and \code{j} between an observation and their neighbors. You can recreate these values by expanding the \code{nb} and \code{wt} list columns.\if{html}{\out{<div class="sourceCode r">}}\preformatted{guerry_nb \%>\%
+  tibble::as_tibble() \%>\%
+  dplyr::select(nb, wt) \%>\%
+  dplyr::mutate(i = dplyr::row_number(), .before = 1) \%>\%
+  tidyr::unnest(c(nb, wt))
+}\if{html}{\out{</div>}}\preformatted{## # A tibble: 420 × 3
+##        i    nb    wt
+##    <int> <int> <dbl>
+##  1     1    36 0.25 
+##  2     1    37 0.25 
+##  3     1    67 0.25 
+##  4     1    69 0.25 
+##  5     2     7 0.167
+##  6     2    49 0.167
+##  7     2    57 0.167
+##  8     2    58 0.167
+##  9     2    73 0.167
+## 10     2    76 0.167
+## # … with 410 more rows
+}
+}
+\examples{
+guerry \%>\%
+  mutate(nb = st_contiguity(geometry),
+         wt = st_weights(nb)) \%>\%
+  st_as_edges(nb, wt)
 }
