@@ -1,6 +1,8 @@
 # Bivariate local moran
-# x <- scale(x)
-# y <- scale(y)
+# x <- scale(guerry$suicides)
+# y <- scale(guerry$crime_pers)
+# nb <- guerry_nb$nb
+# wt <- guerry_nb$wt
 # yj <- find_xj(y, nb)
 # listw <- recreate_listw(nb, wt)
 #
@@ -27,7 +29,7 @@ local_moran_bv_perm_impl <- function(x, y, listw) {
 
   p_yj <- find_xj(y, nb)
 
-  local_moran_bv_calc(x, p_yj, wt)
+  lm_bv_calc(x, p_yj, wt)
 }
 
 # local_moran_bv_perm_impl(x, y, listw)

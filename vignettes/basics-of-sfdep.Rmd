@@ -1,0 +1,213 @@
+---
+title: "The Basics of sfdep"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The Basics of sfdep}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "600px"
+)
+```
+
+```{r setup, message = FALSE}
+library(sfdep)
+library(dplyr)
+library(ggplot2)
+```
+
+The goal of this vignette is to familiarize you with the basics of sfdep:
+
+- creating neighbors
+- creating weights
+- calculating a LISA
+-
+
+## Intro / what is spatial relationship
+
+
+sfdep provides users with a way to conduct "Exploratory Spatial Data Analysis", or ESDA for short. ESDA differs from typical exploratory data analysis in that we are strictly exploring spatial relationships. As you might have guessed, ESDA evaluates whether the phenomena captured in your data are dependent upon space--or are spatially auto-correlated. Much of ESDA is focused on "Local Indicators of Spatial Association", LISAs for short. LISAs are measures that are developed to identify whether some observed pattern is truly random or impacted by its relationship in space. 
+
+Much of the philosophy of LISAs and ESDA are captured in Tobler's First Law of Geography 
+
+> "Everything is related to everything else. But near things are more related than distant things." - Waldo R. Tobler, 1969
+
+
+It's tough to state this any more simply. Things that are next to each other tend to be more similar than things that are further away. 
+
+To assess whether near things are related and further things less so, we typically **lattice data**. A lattice is created when a landscape or region is divided into sub-areas. Most naturally, these types of data are represented as vector polygons. 
+
+
+## Neighbors
+
+To describe neighbors I'm going to steal extensively from my own post ["Understanding Spatial Autocorrelation"](https://www.urban-informatics.org/tutorials/2021-05-07-spatial-autocorrelation-in-r/). 
+
+
+If we assume that there is a spatial relationship in our data, we are taking on the belief that our data are not completely independent of each other. If nearer things are more related, then census tracts that are close to each other will have similar values. 
+
+In order to evaluate whether nearer things are related, we must know what observations are nearby. With polygon data we identify neighbors based on their contiguity. To be contiguous means to be connected or touching—think of the _contiguous_ lower 48 states.
+
+### Contiguities 
+
+The two most common contiguities are based on the game of chess. Let's take a simple chess board. 
+
+```{r, echo = FALSE}
+chess_board <- expand.grid(x = 1:8, y = 1:8) %>% 
+  mutate(z = ifelse((x + y) %% 2 == 0, TRUE, FALSE))
+
+board <- chess_board %>% 
+  ggplot(aes(x, y, fill = z)) + 
+  geom_tile() +
+  scale_fill_manual(values = c("white", "black")) +
+  theme_void() +
+  coord_fixed() +
+  theme(legend.position = "none")
+
+board
+```
+
+In chess each piece can move in a different way. All pieces, with the exception of the knight, move either diagonally or horizontally and vertically. The most common contiguities are queen and rook contiguities. In chess, a queen can move diagonally and horizontal and vertically whereas a rook can only move horizontal and vertically. 
+
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(patchwork)
+library(spdep)
+# create chess spatial object
+chess_sf <- chess_board %>% 
+  st_as_sf(coords = c("x", "y")) %>% 
+  st_make_grid(n = 8) %>% 
+  st_sf() %>% 
+  mutate(color = pull(chess_board, z))
+
+
+# Create chess board neighbors
+chess_nb_q <- poly2nb(chess_sf)
+chess_nb_r <- poly2nb(chess_sf, queen = FALSE)
+
+neighbors_tidy <- nb2lines(chess_nb_q, coords = st_geometry(chess_sf), as_sf = TRUE)
+neighbors_tidy_r <- nb2lines(chess_nb_r, coords = st_geometry(chess_sf), as_sf = TRUE)
+
+queen_gg <- ggplot() +
+  geom_sf(data = chess_sf, aes(fill = color)) + 
+  geom_sf(data = neighbors_tidy, color = "#528672") +
+  scale_fill_manual(values = c("white", "black")) +
+  labs(title = "Queen Contiguities") +
+  theme_void() +
+  theme(legend.position = "none")
+  
+
+rook_gg <- ggplot() +
+  geom_sf(data = chess_sf, aes(fill = color)) + 
+  geom_sf(data = neighbors_tidy_r, color = "#528672") +
+  scale_fill_manual(values = c("white", "black")) +
+  labs(title = "Rook Contiguities") +
+  theme_void() +
+  theme(legend.position = "none")
+
+
+queen_gg + rook_gg 
+```
+
+
+We extend this idea to polygons. Queen contiguities identify neighbors based on any polygon that is touching. With rook contiguities, we identify neighbors based on polygons that touch on the side. For most social science research, we only need to be concerned with queen contiguities. 
+
+While a chess board might make intuitive sense, geographies are really wonky in real life. Below is map of the 47th observation in the `guerry` object and it's queen contiguity neighbors. 
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+geo <- st_geometry(guerry)
+ggplot() +
+  geom_sf(data = geo[st_knn(geo, k = 20)[[47]]],
+          fill = NA, color = "black", lwd = 1/4) +
+  geom_sf(data = geo[guerry_nb$nb[[47]]],
+          fill = "grey50", lwd = .25, color = "black") +
+  geom_sf(data = geo[47], 
+          fill = "black", lwd = 0.25, color = "black") +
+  theme_void()
+
+```
+
+You can see that any polygon that is touching, even at a corner, will be considered a neighbor to the point in question. This will be done for _every_ polygon in our data set. 
+
+## Understanding the spatial weights
+
+Once neighbors are identified, they can then be used to calculate **spatial weights**. The typical method of calculating the spatial weights is through row standardization (`st_weights(nb, style = "W")`). Each neighbor that touches our census tract will be assigned an equal weight. We do this by assigning each neighbor a value of 1 then dividing by the number of neighbors. If we have 5 neighboring census tracts, each of them will have a spatial weight of 0.2 (1 / 5 = 0.2).
+
+Going back to the chess board example, we can take the position d4 and look at the queen contiguities. There are 8 squares that immediately touch the square. Each one of these squares is considered a neighbor and given a value of 1. Then each square is divided by the total number or neighbors, 8. 
+
+```{r, echo = FALSE}
+chess_nb_q <- poly2nb(chess_sf)
+
+board +
+  geom_point(data = slice(chess_board, chess_nb_q[[28]]), color= "red") +
+  geom_point(data = slice(chess_board, 28), color = "blue") 
+
+```
+Very simply it looks like the following
+
+```{r}
+(d4_nbs <- rep(1, 8))
+
+d4_nbs / length(d4_nbs)
+```
+
+## Creating Neighbors and Weights
+
+sfdep utilizes list objects for both neighbors and weights. The neighbors and weights lists. 
+
+To identify contiguity-based neighbors, we use `st_contiguity()` on the sf geometry column. And to calculate the weights from the neighbors list, we use `st_weights()` on the resultant neighbors list. By convention these are typically called `nb` and `wt`.  
+
+These lists can be created line by line or within a pipe. The most common usecase is likely via a dplyr pipeline.
+
+```{r}
+guerry_nb <- guerry %>% 
+  mutate(nb = st_contiguity(geometry),
+         wt = st_weights(nb),
+         .before = 1) # to put them in the front
+
+guerry_nb
+```
+
+## Calculating LISAs
+
+To calculate LISAs we typically will provide a numeric object(s), a neighbor list, and a weights list--and often the argument `nsim` to determine the number of simulations to run. Most LISAs return a data frame of the same number of rows as the input dataframe. The resultant data frame can be unnested, or columns hoisted for ease of analysis. 
+
+
+For example to calculate the Local Moran we use the function `local_moran()`
+
+```{r}
+lisa <- guerry_nb %>% 
+  mutate(local_moran = local_moran(crime_pers, nb, wt, nsim = 199),
+         .before = 1)
+
+lisa
+```
+
+Now that we have a data frame, we need to unnest it. 
+
+```{r}
+lisa %>% 
+  tidyr::unnest(local_moran)
+```
+
+This can then be used for visualization or further analysis.
+
+Additionally, for other LISAs that can take any number of inputs, e.g. 3 or more numeric variables, we provide this as a list. Take for example the Local C statistic. 
+
+
+```{r}
+guerry_nb %>% 
+  mutate(local_c = local_c_perm(list(crime_pers, wealth), nb, wt), 
+         .before = 1) %>% 
+  tidyr::unnest(local_c)
+```
+
+
+
+

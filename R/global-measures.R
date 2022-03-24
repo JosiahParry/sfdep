@@ -42,10 +42,12 @@ global_moran <- function(x, nb, wt, na_ok = FALSE, ...) {
 global_moran_perm <- function(x, nb, wt, alternative = "two.sided",
                               nsim = 499, ...) {
   listw <- recreate_listw(nb, wt)
-  spdep::moran.mc(x, listw = listw,
+  res <- spdep::moran.mc(x, listw = listw,
            nsim = nsim,
            alternative = alternative,
            ...)
+
+  class_modify(res)
 }
 
 #' Global Moran Test
@@ -63,9 +65,10 @@ global_moran_test <- function(x, nb, wt, alternative = "greater",
                               ...) {
 
   listw <- recreate_listw(nb, wt)
-  spdep::moran.test(x, listw, randomisation = randomization,
+  res <- spdep::moran.test(x, listw, randomisation = randomization,
                     alternative = alternative, ...)
 
+  class_modify(res)
 }
 
 
@@ -106,10 +109,11 @@ global_c <- function(x, nb, wt, allow_zero = NULL) {
 global_c_perm <- function(x, nb, wt, nsim = 499, alternative = "greater",
                           allow_zero = NULL, ...) {
   listw <- recreate_listw(nb, wt)
-  spdep::geary.mc(x, listw, nsim = nsim,
+  res <- spdep::geary.mc(x, listw, nsim = nsim,
                  zero.policy = allow_zero,
                  alternative = alternative,
                  ...)
+  class_modify(res)
 }
 
 #' Global C Test
@@ -125,8 +129,9 @@ global_c_perm <- function(x, nb, wt, nsim = 499, alternative = "greater",
 #' global_c_test(x, nb, wt)
 global_c_test <- function(x, nb, wt, randomization = TRUE, allow_zero = NULL, ...) {
   listw <- recreate_listw(nb, wt)
-  spdep::geary.test(x, listw, randomisation = randomization,
+  res <- spdep::geary.test(x, listw, randomisation = randomization,
                     zero.policy = allow_zero, ...)
+  class_modify(res)
 }
 
 
@@ -146,10 +151,12 @@ global_g_test <- function(x, nb, wt, alternative = "greater",
                           allow_zero = NULL, ...) {
   # TODO make friendlier warnings for weights type.
   listw <- recreate_listw(nb, wt)
-  spdep::globalG.test(x, listw,
+  res <- spdep::globalG.test(x, listw,
                       zero.policy = allow_zero,
                       alternative = alternative,
                       ...)
+
+  class_modify(res)
 }
 
 
@@ -172,8 +179,9 @@ global_jc_perm <- function(fx, nb, wt, alternative = "greater", nsim = 499, allo
   fx <- as.factor(fx)
   # TODO create broom tidy method
   listw <- recreate_listw(nb, wt)
-  spdep::joincount.mc(fx, listw, nsim = nsim,
+  res <- spdep::joincount.mc(fx, listw, nsim = nsim,
                       zero.policy = allow_zero, ...)
+  class_modify(res)
 }
 
 #' Global Join Count Test
@@ -188,7 +196,8 @@ global_jc_test <- function(fx, nb, wt, alternative = "greater", allow_zero = NUL
   fx <- as.factor(fx)
   # TODO create broom tidy method
   listw <- recreate_listw(nb, wt)
-  spdep::joincount.test(fx, listw,
+  res <- spdep::joincount.test(fx, listw,
                         alternative = alternative,
                         zero.policy = allow_zero, ...)
+  class_modify(res)
 }

@@ -13,6 +13,9 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/articles/basics-of-sfdep.html</loc>
+  </url>
+  <url>
     <loc>/articles/conditional-permutation.html</loc>
   </url>
   <url>
@@ -28,10 +31,16 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/reference/check_pkg_suggests.html</loc>
+  </url>
+  <url>
     <loc>/reference/check_polygon.html</loc>
   </url>
   <url>
     <loc>/reference/class_modify.html</loc>
+  </url>
+  <url>
+    <loc>/reference/cond_permute.html</loc>
   </url>
   <url>
     <loc>/reference/cond_permute_nb.html</loc>
@@ -161,6 +170,15 @@
   </url>
   <url>
     <loc>/reference/shuffle_nbs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/st_as_edges.html</loc>
+  </url>
+  <url>
+    <loc>/reference/st_as_graph.html</loc>
+  </url>
+  <url>
+    <loc>/reference/st_as_nodes.html</loc>
   </url>
   <url>
     <loc>/reference/st_cardinalties.html</loc>

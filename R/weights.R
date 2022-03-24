@@ -41,7 +41,7 @@ st_weights <- function(nb, style = "W", allow_zero = NULL, ...) {
 #' @param threshold The critical threshold to use for distance band.
 #' @details See implementation details [here](https://spatialanalysis.github.io/lab_tutorials/Spatial_Weights_as_Distance_Functions.html#kernal-weights). For more on distance band based weights see [here](https://spatialanalysis.github.io/lab_tutorials/Distance_Based_Spatial_Weights.html#creating-distance-band-weights).
 #'
-#' @importFrom spdep dnearneigh nbdists
+# @importFrom spdep dnearneigh nbdists
 #' @family weights
 #st_inverse_weights <- function(x, nb, scale = 100, threshold = NULL) {
 #  # As implemented by Luc Anselin
