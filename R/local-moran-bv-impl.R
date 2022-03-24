@@ -29,7 +29,7 @@ local_moran_bv_perm_impl <- function(x, y, listw) {
 
   p_yj <- find_xj(y, nb)
 
-  lm_bv_calc(x, p_yj, wt)
+  local_moran_bv_calc(x, p_yj, wt)
 }
 
 # local_moran_bv_perm_impl(x, y, listw)
