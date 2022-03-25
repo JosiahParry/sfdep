@@ -6,7 +6,7 @@
 \alias{st_as_graph.sfc}
 \title{Create an sfnetwork}
 \usage{
-st_as_graph(x, ...)
+st_as_graph(x, nb, wt)
 
 \method{st_as_graph}{sf}(x, nb, wt)
 
@@ -25,4 +25,7 @@ Given an \code{sf} or \code{sfc} object and neighbor and weights lists, create a
 \examples{
 guerry_nb \%>\%
   st_as_graph(nb, wt)
+}
+\seealso{
+\code{\link[=st_as_nodes]{st_as_nodes()}} and \code{\link[=st_as_edges]{st_as_edges()}}
 }

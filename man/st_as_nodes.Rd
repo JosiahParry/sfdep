@@ -6,7 +6,7 @@
 \alias{st_as_nodes.sfc}
 \title{Convert to a node point object}
 \usage{
-st_as_nodes(x, ...)
+st_as_nodes(x, nb)
 
 \method{st_as_nodes}{sf}(x, nb)
 
@@ -24,7 +24,7 @@ Given geometry and a neighbor list, creates an \code{sf} object to be used as no
 \code{st_as_node()} adds a row \code{i} based on the attribute \code{"region.id"} in the \code{nb} object. If the \code{nb} object is created with \code{sfdep}, then the values will always be row indexes.
 }
 \examples{
-guerry_nb \%>\%
-  st_as_nodes(nb) \%>\%
-  select(i)
+guerry \%>\%
+  dplyr::transmute(nb = st_contiguity(geometry)) \%>\%
+  st_as_nodes(nb)
 }

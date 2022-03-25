@@ -6,7 +6,7 @@
 \alias{st_as_edges.sfc}
 \title{Convert to an edge lines object}
 \usage{
-st_as_edges(x, ...)
+st_as_edges(x, nb, wt)
 
 \method{st_as_edges}{sf}(x, nb, wt)
 
@@ -56,7 +56,7 @@ Creating an edge list creates a column for each \code{i} position and \code{j} b
 }
 \examples{
 guerry \%>\%
-  mutate(nb = st_contiguity(geometry),
+  dplyr::mutate(nb = st_contiguity(geometry),
          wt = st_weights(nb)) \%>\%
   st_as_edges(nb, wt)
 }

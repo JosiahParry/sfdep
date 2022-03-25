@@ -56,7 +56,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">st_as_graph</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">st_as_graph</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span>
 
 <span class="co"># S3 method for sf</span>
 <span class="fu">st_as_graph</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span>
@@ -74,25 +74,27 @@
 <dt>wt</dt>
 <dd><p>a weights list. If <code>x</code> is class <code>sf</code>, the unquote named of the column. If <code>x</code> is class <code>sfc</code>, the weights list itself.</p></dd>
 </dl></div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p><code><a href="st_as_nodes.html">st_as_nodes()</a></code> and <code><a href="st_as_edges.html">st_as_edges()</a></code></p></div>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">guerry_nb</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">st_as_graph</span><span class="op">(</span><span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>st_point_on_surface may not give correct results for longitude/latitude data</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>st_point_on_surface may not give correct results for longitude/latitude data</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Checking if spatial network structure is valid...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Spatial network structure is valid</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># A sfnetwork with</span> <span style="color: #555555;">85</span> <span style="color: #555555;">nodes and</span> <span style="color: #555555;">420</span> <span style="color: #555555;">edges</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># CRS: </span> <span style="color: #555555;">EPSG:4326</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># CRS: </span> <span style="color: #555555;">EPSG:27572</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># A directed simple graph with 1 component with spatially explicit edges</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data:     85 × 30 (active)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Geometry type: POINT</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Dimension:     XY</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Bounding box:  xmin: -3.824049 ymin: 42.62427 xmax: 7.542411 ymax: 50.53039</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Bounding box:  xmin: 143129.7 ymin: 1735692 xmax: 983300.8 ymax: 2615768</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   i     code_dept count ave_id_geo  dept region department crime_pers crime_prop</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1     01            1         49     1 E      Ain             <span style="text-decoration: underline;">28</span>870      <span style="text-decoration: underline;">15</span>890</span>
@@ -106,17 +108,17 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   commerce &lt;int&gt;, clergy &lt;int&gt;, crime_parents &lt;int&gt;, infanticide &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   donation_clergy &lt;int&gt;, lottery &lt;int&gt;, desertion &lt;int&gt;, instruction &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   prostitutes &lt;int&gt;, distance &lt;dbl&gt;, area &lt;int&gt;, pop1831 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   geometry &lt;POINT [°]&gt;, nb &lt;nb&gt;, wt &lt;list&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   geometry &lt;POINT [m]&gt;, nb &lt;nb&gt;, wt &lt;list&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data:     420 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Geometry type: LINESTRING</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Dimension:     XY</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Bounding box:  xmin: -3.824049 ymin: 42.62427 xmax: 7.542411 ymax: 50.53039</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    from    to i     j        wt                               geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;LINESTRING [°]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1    36 1     36     0.25 (5.284586 46.06432, 5.634432 45.28961)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1    37 1     37     0.25 (5.284586 46.06432, 5.782842 46.78175)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1    67 1     67     0.25  (5.284586 46.06432, 4.61552 45.87845)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Bounding box:  xmin: 143129.7 ymin: 1735692 xmax: 983300.8 ymax: 2615768</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    from    to i     j        wt                             geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;LINESTRING [m]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1    36 1     36     0.25   (827911.9 2122906, 855919 2037343)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1    37 1     37     0.25 (827911.9 2122906, 862938.6 2202980)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1    67 1     67     0.25 (827911.9 2122906, 776985.9 2100624)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 417 more rows</span></span>
 </code></pre></div>
     </div>

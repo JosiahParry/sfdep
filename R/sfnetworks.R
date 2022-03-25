@@ -29,15 +29,14 @@
 #'   dplyr::mutate(i = dplyr::row_number(), .before = 1) %>%
 #'   tidyr::unnest(c(nb, wt))
 #' ```
-#'
 #' @export
 #' @examples
 #' guerry %>%
-#'   mutate(nb = st_contiguity(geometry),
+#'   dplyr::mutate(nb = st_contiguity(geometry),
 #'          wt = st_weights(nb)) %>%
 #'   st_as_edges(nb, wt)
 
-st_as_edges <- function(x, ...) {
+st_as_edges <- function(x, nb, wt) {
   UseMethod("st_as_edges")
 }
 
@@ -79,28 +78,34 @@ st_as_edges.sfc <- function(x, nb, wt) {
 #'
 #' `st_as_node()` adds a row `i` based on the attribute `"region.id"` in the `nb` object. If the `nb` object is created with `sfdep`, then the values will always be row indexes.
 #'
+# @param ... arguments passed to methods.
 #' @export
 #' @examples
-#' guerry_nb %>%
-#'   st_as_nodes(nb) %>%
-#'   select(i)
-st_as_nodes <- function(x, ...) {
+#' guerry %>%
+#'   dplyr::transmute(nb = st_contiguity(geometry)) %>%
+#'   st_as_nodes(nb)
+st_as_nodes <- function(x, nb) {
   UseMethod("st_as_nodes")
 }
 
+#' @importFrom rlang :=
 #' @inheritParams st_as_edges.sfc
 #' @rdname st_as_nodes
 #' @export
 st_as_nodes.sf <- function(x, nb) {
   # if required packages are missing fail
+
   check_pkg_suggests(c("vctrs", "dplyr", "sf"))
 
   nb <- x[[rlang::ensym(nb)]]
+
   curr_names <- rlang::names2(x)
+
   new_names <- vctrs::vec_as_names(c("i", curr_names), repair = "universal")
   i_col <- new_names[1]
   # this is based on spdep::nb2lines
   geo_class <- class(st_geometry(x))
+
   if (any(geo_class %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))) {
     sf::st_geometry(x) <- sf::st_point_on_surface(sf::st_geometry(x))
   }
@@ -147,12 +152,12 @@ st_as_nodes.sfc <- function(x, nb) {
 #'
 #' Given an `sf` or `sfc` object and neighbor and weights lists, create an `sfnetwork` object.
 #'
-#'
+#' @seealso [st_as_nodes()] and [st_as_edges()]
 #' @export
 #' @examples
 #' guerry_nb %>%
 #'   st_as_graph(nb, wt)
-st_as_graph <- function(x, ...) {
+st_as_graph <- function(x, nb, wt) {
   UseMethod("st_as_graph")
 }
 

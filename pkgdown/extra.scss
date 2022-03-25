@@ -14,3 +14,10 @@
 .navbar-toggler {
   background-color: #ffffff7a;
 }
+
+// change hover color
+// https://stackoverflow.com/questions/16625972/change-color-of-bootstrap-navbar-on-hover-link
+.navbar-nav .nav-item.active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    color: $gray-500;
+}

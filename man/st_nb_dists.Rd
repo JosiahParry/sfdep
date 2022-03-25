@@ -7,6 +7,10 @@
 st_nb_dists(x, nb, longlat = NULL)
 }
 \arguments{
+\item{x}{an object of class \code{sfc}.}
+
+\item{nb}{a neighbor list for example created by \code{\link[=st_contiguity]{st_contiguity()}}}
+
 \item{longlat}{\code{TRUE} if point coordinates are longitude-latitude decimal degrees, in which case distances are measured in kilometers. See \code{?spdep::nbdists()} for more.}
 }
 \description{
