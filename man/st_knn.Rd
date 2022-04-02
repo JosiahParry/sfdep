@@ -27,6 +27,6 @@ st_knn(sf::st_geometry(guerry), k = 8)
 \seealso{
 Other neighbors: 
 \code{\link{st_contiguity}()},
-\code{\link{st_nb_band}()}
+\code{\link{st_dist_band}()}
 }
 \concept{neighbors}

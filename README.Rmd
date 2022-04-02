@@ -58,7 +58,7 @@ st_nb_lag(nb, 2)
 st_nb_lag_cumul(nb, 2)
 ```
 
-Other point geometry neighbor functions are `st_knn()`, `st_nb_band()`, `st_nb_dists()`. 
+Other point geometry neighbor functions are `st_knn()`, `st_dist_band()`, `st_nb_dists()`. 
 
 
 ### Weights

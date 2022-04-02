@@ -69,8 +69,8 @@ st_knn <- function(x, k = 1, symmetric = FALSE, ...) {
 #' @family neighbors
 #' @export
 #' @examples
-#' st_nb_band(sf::st_geometry(guerry), upper = 97000)
-st_nb_band <- function(x, lower = 0, upper = .01, ...) {
+#' st_dist_band(sf::st_geometry(guerry), upper = 97000)
+st_dist_band <- function(x, lower = 0, upper = .01, ...) {
   x <- check_polygon(x)
   class_modify(spdep::dnearneigh(x, lower, upper, ...))
 }
