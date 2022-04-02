@@ -27,6 +27,7 @@ reference:
   - st_contiguity
   - st_cardinalties
   - st_knn
+  - st_dist_band
   - contains("_nb_")
   - cond_permute_nb
 
