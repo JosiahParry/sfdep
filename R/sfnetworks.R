@@ -203,7 +203,7 @@ st_as_graph.sf <- function(x, nb, wt) {
 
 #' @inheritParams st_as_edges.sfc
 #' @rdname st_as_graph
-#' @export sdfsd sdfsedfsdfsdfsdfdsfsdfs
+#' @export
 st_as_graph.sfc <- function(x, nb, wt) {
   if (!inherits(x, "sfc")) rlang::abort("`x` must be an object of class `sf` or `sfc`")
 
