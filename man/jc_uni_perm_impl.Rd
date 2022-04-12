@@ -18,7 +18,7 @@ Creates conditional permutations on an index and calculates the local univariate
 join count for that index.
 }
 \details{
-TODO this conditional permutation indexing can be useful eslewhere if subsetting
+TODO this conditional permutation indexing can be useful elsewhere if subsetting
 is further required for other functions
 }
 \keyword{internal}

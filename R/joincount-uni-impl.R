@@ -88,7 +88,7 @@ jc_uni_impl <- function(x, listw, nsim, alternative) {
 #' Creates conditional permutations on an index and calculates the local univariate
 #' join count for that index.
 #'
-#' TODO this conditional permutation indexing can be useful eslewhere if subsetting
+#' TODO this conditional permutation indexing can be useful elsewhere if subsetting
 #' is further required for other functions
 #'
 #' @param x binary variable

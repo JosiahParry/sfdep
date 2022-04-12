@@ -9,7 +9,7 @@ cond_permute_nb(nb, seed = NULL)
 \arguments{
 \item{nb}{a neighbor list.}
 
-\item{seed}{default null. A value to pass to \code{set.seed()} for reproducibily.}
+\item{seed}{default null. A value to pass to \code{set.seed()} for reproducibility.}
 }
 \description{
 Creates a conditional permutation of neighbors list holding i fixed and shuffling it's neighbors.

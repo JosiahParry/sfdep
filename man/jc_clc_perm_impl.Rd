@@ -11,7 +11,7 @@ jc_clc_perm_impl(x, z, listw, index)
 
 \item{listw}{a \code{listw} object}
 
-\item{index}{an integeter vector identifying positions to subset.}
+\item{index}{an integer vector identifying positions to subset.}
 
 \item{a}{binary variable consisting of 1 and 0, or \code{TRUE} and \code{FALSE}.}
 }

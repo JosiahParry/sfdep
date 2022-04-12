@@ -1,13 +1,13 @@
 Package: sfdep
-Title: Spatial Dependence for sf objects
-Version: 0.0.0.9000
+Title: Spatial Dependence for Simple Features
+Version: 0.1.0
 Authors@R: 
     person(given = "Josiah",
            family = "Parry",
            role = c("aut", "cre"),
            email = "josiah.parry@gmail.com",
            comment = c(ORCID = "0000-0001-9910-865X"))
-Description: An interface to spdep to integrate with sf objects and the tidyverse. 
+Description: An interface to spdep to integrate with sf objects and the tidyverse. sfdep enables users to perform spatial analysis and statistics within their preferred toolchain. 
 License: GPL-3 + file LICENSE
 URL: https://sfdep.josiahparry.com, https://github.com/josiahparry/sfdep
 Suggests: 

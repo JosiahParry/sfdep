@@ -50,7 +50,7 @@ recreate_listw <- function(nb, wt) {
 ##
 ## Supported kernels are below.
 ##
-##' Formulas come from Anselin & Morrison's [notes](https://spatialanalysis.github.io/lab_tutorials/atial_Weights_as_Distance_Functions.html#kernal-weights).
+##' Formulas come from Anselin & Morrison's [notes](https://spatialanalysis.github.io/lab_tutorials/Spatial_Weights_as_Distance_Functions.html#kernal-weights).
 ##
 ## - `uniform`:  K(z) = 1/2 for ∣z∣<1
 ## - `triangular`: K(z) = (1−∣z∣) for ∣z∣ < 1
@@ -85,7 +85,7 @@ find_xj <- function(x, nb) {
 #' Creates a conditional permutation of neighbors list holding i fixed and shuffling it's neighbors.
 #'
 #' @param nb a neighbor list.
-#' @param seed default null. A value to pass to `set.seed()` for reproducibily.
+#' @param seed default null. A value to pass to `set.seed()` for reproducibility.
 #' @export
 #' @examples
 #' nb <- st_contiguity(guerry)

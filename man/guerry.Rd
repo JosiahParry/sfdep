@@ -11,7 +11,7 @@ An object of class \code{sf} (inherits from \code{tbl_df}, \code{tbl}, \code{dat
 \code{guerry} an sf object with 85 observations and 27 variables. \code{guerry_nb} has 2 additional variables created by \code{sfdep}.
 }
 \source{
-\link[Guerry:gfrance85]{Guerry::gfrance85}
+\code{Guerry::gfrance85}
 }
 \usage{
 guerry

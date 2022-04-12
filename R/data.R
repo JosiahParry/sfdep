@@ -8,5 +8,5 @@
 
 #' @rdname guerry
 #' @format `guerry` an sf object with 85 observations and 27 variables. `guerry_nb` has 2 additional variables created by `sfdep`.
-#' @source [Guerry::gfrance85]
+#' @source `Guerry::gfrance85`
 "guerry_nb"

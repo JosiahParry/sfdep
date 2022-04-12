@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{find_xj}
 \alias{find_xj}
-\title{Formulas come from Anselin & Morrison's \href{https://spatialanalysis.github.io/lab_tutorials/atial_Weights_as_Distance_Functions.html#kernal-weights}{notes}.
+\title{Formulas come from Anselin & Morrison's \href{https://spatialanalysis.github.io/lab_tutorials/Spatial_Weights_as_Distance_Functions.html#kernal-weights}{notes}.
 Idenitfy xj values}
 \usage{
 find_xj(x, nb)

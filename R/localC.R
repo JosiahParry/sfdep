@@ -22,7 +22,7 @@
 #'
 #' [spdep::localC_perm] and thus [local_c_perm] utilize a conditional permutation approach to approximate a reference distribution where each observation `i` is held fixed, randomly samples neighbors, and calculated the local C statistic for that tuple (`ci`). This is repeated `nsim` times. From the simulations 3 different types of p-values are calculated—all of which have their potential flaws. So be _extra judicious_ with using p-values to make conclusions.
 #'
-#' - `p_ci`: utilizes the sample mean and standard deviation. The p-value is then calculated using `pnorm()`--asuming a normal distribution which isn't always true.
+#' - `p_ci`: utilizes the sample mean and standard deviation. The p-value is then calculated using `pnorm()`--assuming a normal distribution which isn't always true.
 #' - `p_ci_sim`: uses the rank of the observed statistic.
 #' - `p_folded_sim`: follows the pysal implementation where p-values are in the range of \[0, 0.5\]. This excludes 1/2 of all p-values and should be used with caution.
 #'
