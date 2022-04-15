@@ -16,7 +16,6 @@ This talk titled Exploratory "Exploratory Spatial Data Analysis in the tidyverse
 
 Following, I'll introduce attendees to a new R package "sfdep" and walk attendees through the basics of ESDA. Lastly, I'll compare it to the dominant python library pysal.
 
-
 My hope is that attendees will walk away feeling that they do not have to learn a new programming language strictly for doing ESDA. That they feel confident in their abilities to pick up a new R package that fits within their current dplyr and sf workflow. And most importantly, to bolster to spatial toolset within the R community.
 
 Why it's important:
