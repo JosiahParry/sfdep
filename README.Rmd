@@ -73,7 +73,7 @@ wt <- st_weights(nb)
 wt[1:2]
 ```
 
-Other point based weights can be created with `st_kernel_weights()` and `st_inverse_weights()`.
+Other point based weights can be created with `st_nb_dists()`,  `st_kernel_weights()` and `st_inverse_weights()`.
 
 
 ### Local Indicators of Spatial Association (LISAs)
