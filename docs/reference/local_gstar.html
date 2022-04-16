@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,9 @@
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -76,6 +79,16 @@
 <dt>nsim</dt>
 <dd><p>The number of simulations to run.</p></dd>
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>a <code>data.frame</code> with columns:</p><ul><li><p><code>gi</code>: the observed statistic</p></li>
+<li><p><code>e_gi</code>: the permutation sample mean</p></li>
+<li><p><code>var_gi</code>: the permutation sample variance</p></li>
+<li><p><code>p_value</code>: the p-value using sample mean and standard deviation</p></li>
+<li><p><code>p_folded_sim</code>: p-value based on the implementation of Pysal which always assumes a two-sided test taking the minimum possible p-value</p></li>
+<li><p><code>skewness</code>: sample skewness</p></li>
+<li><p><code>kurtosis</code>: sample kurtosis</p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -86,20 +99,20 @@
 <span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_gstar_perm</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> attr `self.include` is `TRUE`. Reporting Gi*.</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            gi       e_gi       var_gi     p_value p_sim p_folded_sim</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.014270222 0.01194552 4.082475e-06 0.249918352 0.260        0.130</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.015807678 0.01190520 2.264539e-06 0.009506251 0.028        0.014</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.015485705 0.01203560 2.489637e-06 0.028773438 0.032        0.016</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.008315062 0.01191103 3.521924e-06 0.055347798 0.060        0.030</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.009224485 0.01189376 5.032238e-06 0.234082902 0.232        0.116</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.008819945 0.01191517 2.470528e-06 0.048926440 0.052        0.026</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      skewness    kurtosis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.24414828 -0.28152610</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.21535808  0.29913134</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.08588067 -0.03060243</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.03733502 -0.35673040</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.08760001  0.04641520</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.06721227  0.31582200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            gi       e_gi       var_gi    p_value p_sim p_folded_sim</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.014270222 0.01164670 3.713398e-06 0.17337429 0.192        0.096</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.015807678 0.01186450 2.834944e-06 0.01918415 0.020        0.010</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.015485705 0.01194011 2.596506e-06 0.02778115 0.044        0.022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.008315062 0.01184657 3.697524e-06 0.06627537 0.064        0.032</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.009224485 0.01199008 4.918527e-06 0.21239214 0.236        0.118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.008819945 0.01194006 1.882580e-06 0.02296504 0.020        0.010</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       skewness    kurtosis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.224322875 -0.06974026</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.008506161 -0.45558200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.215861780  0.12930117</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.014282511 -0.34073738</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.214235580  0.13925700</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.022532214 -0.41367686</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_gstar</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> attr `self.include` is `TRUE`. Reporting Gi*.</span>

@@ -11,6 +11,13 @@
 #'                              nb, nsim = 999)) %>%
 #'   tidyr::unnest(nmt)
 #' @export
+#' @returns a `data.frame` with columns
+#'
+#' - `n_shared` (integer): the number of shared neighbors between geographic and attribute space
+#' - `nb_matches` (list): matched neighbor indexes. Each element is an iteger vector of same length as the ith observation of `n_shared`
+#' - `knn_nb` (list): the neighbors in attribute space
+#' - `probability` (numeric): the geometric probability of observing the number of matches
+#' - `p_sim` (numeric): a folded simulated p-value
 nb_match_test <- function(x, nb, wt = st_weights(nb),
                           k = 10, nsim = 499,
                           scale = TRUE, .method = "euclidian",
@@ -38,7 +45,7 @@ nmt_calc <- function(knn_nb, nb) {
 
 
 #' Find conditionally permuted neighbor matches
-#'
+
 #' Given a kNN attribute neighbor list and a listw object, find the number of matches given a conditional permutation.
 #'
 #' @param knn_nb a list with numeric elements. For example as made by [`dbscan::adjacencylist()`]
@@ -108,11 +115,11 @@ nmt_impl <- function(x, k, listw, nsim = 199,
 
 
 # TODO create this function
-#' Folded Simulated P-value
-#'
-#' Given observed statistics and replicates, calculated a simulated folded p value.
-#' @param obs observed values
-#' @param reps a matrix
-folded_p_sim <- function(obs, reps) {
-}
+# Folded Simulated P-value
+#
+# Given observed statistics and replicates, calculated a simulated folded p value.
+# @param obs observed values
+# @param reps a matrix
+# folded_p_sim <- function(obs, reps) {
+# }
 

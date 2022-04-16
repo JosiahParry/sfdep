@@ -25,16 +25,19 @@ reference:
 - title: Neighbors
   contents:
   - st_contiguity
-  - st_cardinalties
   - st_knn
+  - st_cardinalties
   - st_dist_band
-  - contains("_nb_")
+  - st_nb_lag
+  - st_nb_lag_cumul
   - cond_permute_nb
 
 - title: Weights
   contents:
-  - contains("weights")
-
+  - st_weights
+  - st_nb_dists
+  - st_kernel_weights
+  - st_inverse_distance
 
 - title: Local Indicators of Spatial Association (LISA)
   contents:
@@ -57,6 +60,14 @@ reference:
   - st_as_graph
   - st_as_edges
   - st_as_nodes
+
+- title: Utility Functions
+  contents:
+  - find_xj
+  - include_self
+  - remove_self
+  - critical_threshold
+  - st_nb_apply
 
 - title: Internal functions
   contents:

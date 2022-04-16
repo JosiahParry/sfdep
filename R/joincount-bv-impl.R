@@ -10,6 +10,7 @@
 #' nb <- st_contiguity(guerry)
 #' wt <- st_weights(nb, style = "B")
 #' local_jc_bv(x, z, nb, wt)
+#' @returns a `data.frame` with two columns `join_count` and `p_sim` and number of rows equal to the length of arguments `x`, `z`, `nb`, and `wt`.
 local_jc_bv <- function(x, z, nb, wt, nsim = 499) {
 
 

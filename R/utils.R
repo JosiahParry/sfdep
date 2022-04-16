@@ -42,39 +42,19 @@ recreate_listw <- function(nb, wt) {
   listw
 }
 
-## Match kernel functions
-##
-## Kernel functions for creating kernel based weights with [`st_kernel_weight()`.
-##
-## @details
-##
-## Supported kernels are below.
-##
-##' Formulas come from Anselin & Morrison's [notes](https://spatialanalysis.github.io/lab_tutorials/Spatial_Weights_as_Distance_Functions.html#kernal-weights).
-##
-## - `uniform`:  K(z) = 1/2 for ∣z∣<1
-## - `triangular`: K(z) = (1−∣z∣) for ∣z∣ < 1
-## - `epanechnikov`: K(z) = (3/4)(1−z^2) for ∣z∣ < 1
-## - `quartic`: K(z) = (15/16)*(1−(z/threshold)^2^)2 for ∣z∣ < 1
-## - `guassian`: K(z) = (2pi)^{1/2} * exp(−z^2/2)
-##
-## @param x kernel distances
-## @param thresh critical threshold
-## @param ... unused
-#kernels <- list(
-#  uniform = function(x, ...) x * 0 + .5,
-#  triangular = function(x, thresh) 1 - abs(x / thresh),
-#  epanechnikov = function(x, thresh) .75 * (1- (x / thresh)^2),
-#  quartic = function(x, thresh) (15/16)*(1-(x/thresh)^2)^2,
-#  gaussian =  function(x, thresh) sqrt(2*pi)*exp((-(x/thresh)^2)/2)
-#)
-
-
-#' Idenitfy xj values
+#' Identify xj values
 #'
-#' Find `xj` values given an x and neighbors list.
+#' Find `xj` values given a numeric vector, `x`, and neighbors list, `nb`.
 #'
-#' @keywords internal
+#' @param x a vector of any class
+#' @param nb a `nb` object e.g. created by [`st_contiguity()`] or [`st_knn()`]
+#' @export
+#' @returns
+#' A list of length `x` where each element is a numeric vector with the same length as the corresponding element in `nb`.
+#' @examples
+#' nb <- st_contiguity(sf::st_geometry(guerry))
+#' xj <- find_xj(guerry$crime_prop, nb)
+#' xj[1:3]
 find_xj <- function(x, nb) {
   lapply(nb, FUN = function(nbs_i) x[nbs_i])
 }
@@ -93,7 +73,7 @@ find_xj <- function(x, nb) {
 #' # conditionally permute neighbors
 #' perm_nb <- cond_permute_nb(nb)
 #' perm_nb[1:5]
-#' # get permuted neighbor weight
+#' @returns A list of class `nb` where each element contains a random sample of neighbors excluding the observed regioin.
 cond_permute_nb <- function(nb, seed = NULL) {
   if (!is.null(seed)) set.seed(seed)
   n <- length(nb)

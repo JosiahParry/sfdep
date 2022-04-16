@@ -12,6 +12,14 @@
 #' x <- guerry$crime_pers
 #' losh(x, nb, wt)
 #' losh(x, nb, wt, var_hi = FALSE)
+#' @returns a `data.frame` with columns
+#'
+#' - `hi`: the observed statistic
+#' - `e_hi`: the sample average
+#' - `var_hi`: the sample variance
+#' - `z_hi` the approximately Chi-square distributed test statistic
+#' - `x_bar_i`: the local spatially weight mean for observation `i`
+#' - `ei`: residuals
 losh <- function(x, nb, wt, a = 2, ...) {
   listw <- recreate_listw(nb, wt)
   # capture dots

@@ -67,6 +67,7 @@ local_moran_bv_impl <- function(x, y, listw, nsim) {
 #' nb <- guerry_nb$nb
 #' wt <- guerry_nb$wt
 #' local_moran_bv(x, y, nb, wt)
+#' @returns a `data.frame` containing two columns `Ib` and `p_sim` containing the local bivariate Moran's I and simulated p-values respectively.
 local_moran_bv <- function(x, y, nb, wt, nsim = 499) {
   listw <- recreate_listw(nb, wt)
   local_moran_bv_impl(x, y, listw, nsim = nsim)

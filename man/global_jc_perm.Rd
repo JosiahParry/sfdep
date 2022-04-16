@@ -32,6 +32,11 @@ global_jc_test(fx, nb, wt, alternative = "greater", allow_zero = NULL, ...)
 
 \item{...}{additional arguments passed to \code{\link[spdep:joincount.test]{spdep::joincount.test()}}}
 }
+\value{
+an object of class \code{jclist} which is a list where each element is of class \code{htest} and \code{mc.sim}.
+
+an object of class \code{jclist} which is a list where each element is of class \code{htest} and \code{mc.sim}.
+}
 \description{
 Global Join Count Permutation Test
 
@@ -43,5 +48,10 @@ nb <- st_contiguity(geo)
 wt <- st_weights(nb, style = "B")
 fx <- guerry$region
 global_jc_perm(fx, nb, wt)
+geo <- sf::st_geometry(guerry)
+nb <- st_contiguity(geo)
+wt <- st_weights(nb, style = "B")
+fx <- guerry$region
 global_jc_test(fx, nb, wt)
+global_jc_perm(fx, nb, wt)
 }

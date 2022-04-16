@@ -55,6 +55,17 @@ local_c <- function(x, nb, wt, ...) {
 #'                      nb, wt
 #'                    )) %>%
 #'   tidyr::unnest(geary)
+#' @returns a `data.frame` with columns
+#'
+#' - `ci`: Local Geary statistic
+#' - `e_ci`: expected value of the Local Geary based on permutations
+#' - `z_ci`: standard deviation based on permutations
+#' - `var_ci`: variance based on permutations
+#' - `p_ci`: p-value based on permutation sample standard deviation and means
+#' - `p_ci_sim`: p-value based on rank of observed statistic
+#' - `p_folded_sim`: p-value based on the implementation of Pysal which always assumes a two-sided test taking the minimum possible p-value
+#' - `skewness`: sample skewness
+#' - `kurtosis`: sample kurtosis
 local_c_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", ...) {
 
   lc_cols <- c("ci", "cluster", "e_ci", "var_ci", "z_ci", "p_ci",

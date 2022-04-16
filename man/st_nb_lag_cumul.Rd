@@ -11,10 +11,16 @@ st_nb_lag_cumul(nb, order)
 
 \item{order}{The order of neighbors.}
 }
+\value{
+a list of class \code{nb}
+}
 \description{
 Creates an encompassing neighbor list of the order specified.
 For example, if the order is 2 the result contains both 1st
 and 2nd order neighbors.
+}
+\details{
+Utilizes \code{\link[spdep:nblag]{spdep::nblag_cumul()}}
 }
 \examples{
 nb <- st_contiguity(sf::st_geometry(guerry))

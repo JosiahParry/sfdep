@@ -15,6 +15,9 @@ global_c(x, nb, wt, allow_zero = NULL)
 
 \item{allow_zero}{If \code{TRUE}, assigns zero as lagged value to zone without neighbors.}
 }
+\value{
+a list with two names elements \code{C} and \code{K} returning the value of Geary's C and sample kurtosis respectively.
+}
 \description{
 Compute Geary's C
 }

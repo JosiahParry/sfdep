@@ -89,6 +89,7 @@ moran_bv_impl <- function(x, y, listw, nsim) {
 #' nb <- guerry_nb$nb
 #' wt <- guerry_nb$wt
 #' global_moran_bv(x, y, nb, wt)
+#' @returns a named list with two elements `Ib` and `p_sim` containing the bivariate Moran'sI and simulated p-value respectively.
 global_moran_bv <- function(x, y, nb, wt, nsim = 99) {
   listw <- recreate_listw(nb, wt)
   moran_bv_impl(x, y, listw, nsim = nsim)

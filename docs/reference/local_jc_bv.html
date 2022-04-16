@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,9 @@
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -72,6 +75,10 @@
 <dt>nsim</dt>
 <dd><p>the number of conditional permutation simulations</p></dd>
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>a <code>data.frame</code> with two columns <code>join_count</code> and <code>p_sim</code> and number of rows equal to the length of arguments <code>x</code>, <code>z</code>, <code>nb</code>, and <code>wt</code>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -96,7 +103,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 15          0    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16          2 0.010</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16          2 0.026</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 17          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 18          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 19          0    NA</span>
@@ -107,7 +114,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 24          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 25          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 26          0    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27          1 0.118</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27          1 0.108</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 28          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 29          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 30          0    NA</span>
@@ -134,7 +141,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 51          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 52          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 53          0    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54          1 0.178</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54          1 0.166</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 55          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 56          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 57          0    NA</span>
@@ -155,13 +162,13 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 72          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 73          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 74          0    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75          2 0.032</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75          2 0.022</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 76          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 77          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 78          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 79          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 80          0    NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81          2 0.018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81          2 0.008</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 82          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 83          0    NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 84          0    NA</span>

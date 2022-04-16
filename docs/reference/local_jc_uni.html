@@ -12,7 +12,7 @@ than half of the time."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,9 @@ than half of the time."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -82,6 +85,10 @@ than half of the time.</p>
 <dd><p>default <code>"greater"</code>. One of <code>"less"</code> or <code>"greater"</code>.</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>a <code>data.frame</code> with two columns <code>join_count</code> and <code>p_sim</code> and number of rows equal to the length of arguments <code>x</code>, <code>nb</code>, and <code>wt</code>.</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The local join count statistic requires a binary weights list which can be generated with <code>st_weights(nb, style = "B")</code>. Additionally, ensure that the binary variable of interest is rarely occurring in no more than half of observations.</p>
 <p>P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see <a href="https://geodacenter.github.io/glossary.html#ppvalue" class="external-link">Geoda Glossary</a>.</p>
@@ -99,20 +106,20 @@ than half of the time.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Projected CRS: NTF (Paris) / Lambert zone II</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 85 × 6</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    top_crime nb        wt        join_count  p_sim                      geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON [m]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> TRUE      <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span>          1  0.24  (((801150 2092615, 800669 20…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> TRUE      <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span>          1  0.22  (((801150 2092615, 800669 20…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> FALSE     <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((729326 2521619, 729320 25…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> FALSE     <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((710830 2137350, 711746 21…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> FALSE     <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((882701 1920024, 882408 19…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> FALSE     <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((886504 1922890, 885733 19…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> TRUE      <span style="color: #949494;">&lt;int [7]&gt;</span> <span style="color: #949494;">&lt;dbl [7]&gt;</span>          2  0.362 (((747008 1925789, 746630 19…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> TRUE      <span style="color: #949494;">&lt;int [7]&gt;</span> <span style="color: #949494;">&lt;dbl [7]&gt;</span>          2  0.364 (((747008 1925789, 746630 19…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> FALSE     <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((818893 2514767, 818614 25…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> TRUE      <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>          1  0.36  (((509103 1747787, 508820 17…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> TRUE      <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>          1  0.344 (((509103 1747787, 508820 17…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> FALSE     <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((775400 2345600, 775068 23…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> TRUE      <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span>          2  0.414 (((626230 1810121, 626269 18…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> TRUE      <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span>          2  0.484 (((626230 1810121, 626269 18…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 75 more rows</span></span>
 </code></pre></div>
     </div>

@@ -29,6 +29,9 @@ global_c_perm(
 
 \item{...}{additional arguments passed to \code{\link[spdep:geary.mc]{spdep::geary.mc()}}.}
 }
+\value{
+an object of classes \code{htest} and \code{mc.sim}
+}
 \description{
 Global C Permutation Test
 }

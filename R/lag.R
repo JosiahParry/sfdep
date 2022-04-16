@@ -16,7 +16,7 @@
 #' wt <- st_weights(nb)
 #'
 #' st_lag(guerry$crime_pers, nb, wt)
-
+#' @returns a numeric vector with same length as `x`
 st_lag <- function(x, nb, wt, na_ok = FALSE, allow_zero = NULL, ...) {
   listw <- recreate_listw(nb, wt)
   spdep::lag.listw(listw, x, NAOK = na_ok, zero.policy = allow_zero, ...)

@@ -4,22 +4,26 @@
 \alias{st_dist_band}
 \title{Neighbors from a distance band}
 \usage{
-st_dist_band(x, lower = 0, upper = 0.01, ...)
+st_dist_band(geometry, lower = 0, upper = critical_threshold(geometry), ...)
 }
 \arguments{
-\item{x}{An sf or sfc object.}
+\item{geometry}{An sf or sfc object.}
 
 \item{lower}{The lower threshold of the distance band. It is recommended to keep this as 0.}
 
-\item{upper}{The upper threshold of the distance band.}
+\item{upper}{The upper threshold of the distance band. By default is set to a critical threshold using \code{\link[=critical_threshold]{critical_threshold()}} ensuring that each region has a minimum of one neighbor.}
 
 \item{...}{Passed to \code{spdep::dnearneigh()}.}
 }
+\value{
+a list of class \code{nb}
+}
 \description{
-Creates neighbors based on a distance band.
+Creates neighbors based on a distance band. By default, creates a distance band with the maximum distance of k-nearest neighbors where k = 1 (the critical threshold) to ensure that there are no regions that are missing neighbors.
 }
 \examples{
-st_dist_band(sf::st_geometry(guerry), upper = 97000)
+geo <- sf::st_geometry(guerry)
+st_dist_band(geo, upper = critical_threshold(geo))
 }
 \seealso{
 Other neighbors: 

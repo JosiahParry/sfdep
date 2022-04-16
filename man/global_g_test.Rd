@@ -19,6 +19,9 @@ global_g_test(x, nb, wt, alternative = "greater", allow_zero = NULL, ...)
 
 \item{...}{additional methods passed to \code{\link[spdep:globalG.test]{spdep::globalG.test()}}.}
 }
+\value{
+an \code{htest} object
+}
 \description{
 Getis-Ord Global G
 }

@@ -9,6 +9,9 @@ st_cardinalties(nb)
 \arguments{
 \item{nb}{A neighbor list object as created by \code{st_neighbors()}.}
 }
+\value{
+an integer vector with the same length as \code{nb}.
+}
 \description{
 Identify the cardinality of a neighbor object. Utilizes \code{spdep::card()} for objects with class \code{nb}, otherwise returns \code{lengths(nb)}.
 }

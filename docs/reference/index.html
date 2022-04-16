@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,9 @@
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -66,29 +69,19 @@
         <dd>Identify polygon neighbors</dd>
       </dl><dl><dt>
           
-          <code><a href="st_cardinalties.html">st_cardinalties()</a></code> 
-        </dt>
-        <dd>Calculate neighbor cardinalities</dd>
-      </dl><dl><dt>
-          
           <code><a href="st_knn.html">st_knn()</a></code> 
         </dt>
         <dd>Calculate K-Nearest Neighbors</dd>
       </dl><dl><dt>
           
+          <code><a href="st_cardinalties.html">st_cardinalties()</a></code> 
+        </dt>
+        <dd>Calculate neighbor cardinalities</dd>
+      </dl><dl><dt>
+          
           <code><a href="st_dist_band.html">st_dist_band()</a></code> 
         </dt>
         <dd>Neighbors from a distance band</dd>
-      </dl><dl><dt>
-          
-          <code><a href="st_nb_apply.html">st_nb_apply()</a></code> 
-        </dt>
-        <dd>Apply a function to neighbors</dd>
-      </dl><dl><dt>
-          
-          <code><a href="st_nb_dists.html">st_nb_dists()</a></code> 
-        </dt>
-        <dd>Calculate neighbor distances</dd>
       </dl><dl><dt>
           
           <code><a href="st_nb_lag.html">st_nb_lag()</a></code> 
@@ -120,6 +113,21 @@
           <code><a href="st_weights.html">st_weights()</a></code> 
         </dt>
         <dd>Calculate spatial weights</dd>
+      </dl><dl><dt>
+          
+          <code><a href="st_nb_dists.html">st_nb_dists()</a></code> 
+        </dt>
+        <dd>Calculate neighbor distances</dd>
+      </dl><dl><dt>
+          
+          <code><a href="st_kernel_weights.html">st_kernel_weights()</a></code> 
+        </dt>
+        <dd>Calculate Kernel Weights</dd>
+      </dl><dl><dt>
+          
+          <code><a href="st_inverse_distance.html">st_inverse_distance()</a></code> 
+        </dt>
+        <dd>Calculate inverse distance weights</dd>
       </dl></div><div class="section level2">
       <h2 id="local-indicators-of-spatial-association-lisa-">Local Indicators of Spatial Association (LISA)<a class="anchor" aria-label="anchor" href="#local-indicators-of-spatial-association-lisa-"></a></h2>
       
@@ -280,6 +288,37 @@
         </dt>
         <dd>Convert to a node point object</dd>
       </dl></div><div class="section level2">
+      <h2 id="utility-functions">Utility Functions<a class="anchor" aria-label="anchor" href="#utility-functions"></a></h2>
+      
+      
+
+      
+    </div><div id="" class="section level2">
+      
+      
+      
+
+      <dl><dt>
+          
+          <code><a href="find_xj.html">find_xj()</a></code> 
+        </dt>
+        <dd>Identify xj values</dd>
+      </dl><dl><dt>
+          
+          <code><a href="include_self.html">include_self()</a></code> <code><a href="include_self.html">remove_self()</a></code> 
+        </dt>
+        <dd>Includes self in neighbor list</dd>
+      </dl><dl><dt>
+          
+          <code><a href="critical_threshold.html">critical_threshold()</a></code> 
+        </dt>
+        <dd>Identify critical threshold</dd>
+      </dl><dl><dt>
+          
+          <code><a href="st_nb_apply.html">st_nb_apply()</a></code> 
+        </dt>
+        <dd>Apply a function to neighbors</dd>
+      </dl></div><div class="section level2">
       <h2 id="internal-functions">Internal functions<a class="anchor" aria-label="anchor" href="#internal-functions"></a></h2>
       
       
@@ -307,10 +346,9 @@
         <dd>Modify object classes</dd>
       </dl><dl><dt>
           
-          <code><a href="find_xj.html">find_xj()</a></code> 
+          <code><a href="inverse_dist_calc.html">inverse_dist_calc()</a></code> 
         </dt>
-        <dd>Formulas come from Anselin &amp; Morrison's <a href="https://spatialanalysis.github.io/lab_tutorials/atial_Weights_as_Distance_Functions.html#kernal-weights" class="external-link">notes</a>.
-Idenitfy xj values</dd>
+        <dd>Calculate inverse distance weights</dd>
       </dl><dl><dt>
           
           <code><a href="jc_bjc_calc.html">jc_bjc_calc()</a></code> 
@@ -341,6 +379,11 @@ Idenitfy xj values</dd>
           <code><a href="jc_uni_perm_impl.html">jc_uni_perm_impl()</a></code> 
         </dt>
         <dd>Conditional permutation of univariate local join count</dd>
+      </dl><dl><dt>
+          
+          <code><a href="kernels.html">kernels</a></code> 
+        </dt>
+        <dd>Kernel functions</dd>
       </dl><dl><dt>
           
           <code><a href="local_moran_bv_calc.html">local_moran_bv_calc()</a></code> 
@@ -385,7 +428,8 @@ Idenitfy xj values</dd>
           
           <code><a href="nmt_perm_impl.html">nmt_perm_impl()</a></code> 
         </dt>
-        <dd>Find conditionally permuted neighbor matches</dd>
+        <dd>Find conditionally permuted neighbor matches
+Given a kNN attribute neighbor list and a listw object, find the number of matches given a conditional permutation.</dd>
       </dl><dl><dt>
           
           <code><a href="permute_listw.html">permute_listw()</a></code> 

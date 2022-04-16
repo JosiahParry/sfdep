@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,6 +29,9 @@
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
 </li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
 
@@ -46,7 +49,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Calculate spatial weights</h1>
-      <small class="dont-index">Source: <a href="https://github.com/josiahparry/sfdep/blob/HEAD/R/weights.R" class="external-link"><code>R/weights.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/josiahparry/sfdep/blob/HEAD/R/weights-contiguity.R" class="external-link"><code>R/weights-contiguity.R</code></a></small>
       <div class="d-none name"><code>st_weights.Rd</code></div>
     </div>
 
@@ -71,8 +74,19 @@
 <dd><p>additional arguments passed to <code><a href="https://r-spatial.github.io/spdep/reference/nb2listw.html" class="external-link">spdep::nb2listw()</a></code>.</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>a list where each element is a numeric vector</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Under the hood, <code>st_weights()</code> creates a <code>listw</code> object and then extracts the weights elements from it as the <code>neighbours</code> element is already--presumably--already existent in the neighbors list you've already created. <code>listw</code> objects are recreated using <code><a href="recreate_listw.html">recreate_listw()</a></code> when calculating other statistics.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other weights: 
+<code><a href="st_inverse_distance.html">st_inverse_distance</a>()</code>,
+<code><a href="st_kernel_weights.html">st_kernel_weights</a>()</code>,
+<code><a href="st_nb_dists.html">st_nb_dists</a>()</code></p></div>
     </div>
 
     <div class="section level2">
@@ -85,7 +99,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Projected CRS: NTF (Paris) / Lambert zone II</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 85 × 29</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    nb        wt    code_dept count ave_id_geo  dept region department crime_pers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lis&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -104,7 +118,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   wealth &lt;int&gt;, commerce &lt;int&gt;, clergy &lt;int&gt;, crime_parents &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   infanticide &lt;int&gt;, donation_clergy &lt;int&gt;, lottery &lt;int&gt;, desertion &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   instruction &lt;int&gt;, prostitutes &lt;int&gt;, distance &lt;dbl&gt;, area &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pop1831 &lt;dbl&gt;, geometry &lt;MULTIPOLYGON [m]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   pop1831 &lt;dbl&gt;, geometry &lt;MULTIPOLYGON&gt;</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="co"># using geometry column directly</span></span>
 <span class="r-in"><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">$</span><span class="va">geometry</span><span class="op">)</span></span>

@@ -2,12 +2,23 @@
 % Please edit documentation in R/utils.R
 \name{find_xj}
 \alias{find_xj}
-\title{Formulas come from Anselin & Morrison's \href{https://spatialanalysis.github.io/lab_tutorials/Spatial_Weights_as_Distance_Functions.html#kernal-weights}{notes}.
-Idenitfy xj values}
+\title{Identify xj values}
 \usage{
 find_xj(x, nb)
 }
-\description{
-Find \code{xj} values given an x and neighbors list.
+\arguments{
+\item{x}{a vector of any class}
+
+\item{nb}{a \code{nb} object e.g. created by \code{\link[=st_contiguity]{st_contiguity()}} or \code{\link[=st_knn]{st_knn()}}}
 }
-\keyword{internal}
+\value{
+A list of length \code{x} where each element is a numeric vector with the same length as the corresponding element in \code{nb}.
+}
+\description{
+Find \code{xj} values given a numeric vector, \code{x}, and neighbors list, \code{nb}.
+}
+\examples{
+nb <- st_contiguity(sf::st_geometry(guerry))
+xj <- find_xj(guerry$crime_prop, nb)
+xj[1:3]
+}

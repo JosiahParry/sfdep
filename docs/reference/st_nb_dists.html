@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,9 @@
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -69,14 +72,19 @@
 <dd><p><code>TRUE</code> if point coordinates are longitude-latitude decimal degrees, in which case distances are measured in kilometers. See <code>?spdep::nbdists()</code> for more.</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>a list where each element is a numeric vector.</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Utilizes <code><a href="https://r-spatial.github.io/spdep/reference/nbdists.html" class="external-link">spdep::nbdists()</a></code> for distance calculation.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other stats: 
-<code><a href="local_moran.html">local_moran</a>()</code>,
-<code><a href="st_lag.html">st_lag</a>()</code></p></div>
+    <div class="dont-index"><p>Other weights: 
+<code><a href="st_inverse_distance.html">st_inverse_distance</a>()</code>,
+<code><a href="st_kernel_weights.html">st_kernel_weights</a>()</code>,
+<code><a href="st_weights.html">st_weights</a>()</code></p></div>
     </div>
 
     <div class="section level2">
@@ -84,26 +92,26 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geo</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">dists</span> <span class="op">&lt;-</span> <span class="fu">st_nb_dists</span><span class="op">(</span><span class="va">geo</span>, <span class="va">nb</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Polygon provided. Using centroid.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Polygon provided. Using point on surface.</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dists</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 94622.84 74876.40 60438.55 86742.87</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 90030.63 87399.28 55587.69 85693.43</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  78599.67  84091.42 101845.49  83847.15 113411.37 102512.99</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  85221.38  75937.49 125737.35  86797.26 102272.51 105519.50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  91683.65  96296.70 105885.80  83770.92  74337.25 107558.70</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  85460.95  92562.86  96614.50  88010.48  66400.10 111763.74</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  62028.42 107180.60  73932.42  86186.17</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 53294.18 98250.20 83762.06 83973.87</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 62028.42 86892.02 85919.08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 53294.18 86812.56 91755.83</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [[6]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  59404.30  86545.40 107129.78 110296.32  64295.38  77906.59 102318.73</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  67062.90  96221.69 107959.75 108017.90  54530.02  75976.27 110723.87</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

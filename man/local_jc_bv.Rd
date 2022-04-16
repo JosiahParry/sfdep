@@ -17,6 +17,9 @@ local_jc_bv(x, z, nb, wt, nsim = 499)
 
 \item{nsim}{the number of conditional permutation simulations}
 }
+\value{
+a \code{data.frame} with two columns \code{join_count} and \code{p_sim} and number of rows equal to the length of arguments \code{x}, \code{z}, \code{nb}, and \code{wt}.
+}
 \description{
 Bivariate local join count
 }

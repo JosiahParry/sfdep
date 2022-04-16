@@ -13,8 +13,14 @@ st_contiguity(x, queen = TRUE, ...)
 
 \item{...}{additional arguments passed to \code{\link[spdep:poly2nb]{spdep::poly2nb()}}}
 }
+\value{
+a list of class \code{nb}
+}
 \description{
-Identify polygon neighbors
+Given an sf geometry of type \code{POLYGON} or \code{MULTIPOLYGON} identify contiguity based neighbors.
+}
+\details{
+Utilizes \code{\link[spdep:poly2nb]{spdep::poly2nb()}}
 }
 \examples{
 # on basic polygons

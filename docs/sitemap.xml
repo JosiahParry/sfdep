@@ -31,6 +31,9 @@
     <loc>/index.html</loc>
   </url>
   <url>
+    <loc>/news/index.html</loc>
+  </url>
+  <url>
     <loc>/reference/check_pkg_suggests.html</loc>
   </url>
   <url>
@@ -44,6 +47,9 @@
   </url>
   <url>
     <loc>/reference/cond_permute_nb.html</loc>
+  </url>
+  <url>
+    <loc>/reference/critical_threshold.html</loc>
   </url>
   <url>
     <loc>/reference/find_xj.html</loc>
@@ -82,7 +88,13 @@
     <loc>/reference/guerry.html</loc>
   </url>
   <url>
+    <loc>/reference/include_self.html</loc>
+  </url>
+  <url>
     <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/inverse_dist_calc.html</loc>
   </url>
   <url>
     <loc>/reference/jc_bjc_calc.html</loc>
@@ -188,6 +200,9 @@
   </url>
   <url>
     <loc>/reference/st_dist_band.html</loc>
+  </url>
+  <url>
+    <loc>/reference/st_inverse_distance.html</loc>
   </url>
   <url>
     <loc>/reference/st_inverse_weights.html</loc>

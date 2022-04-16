@@ -19,6 +19,9 @@ global_c_test(x, nb, wt, randomization = TRUE, allow_zero = NULL, ...)
 
 \item{...}{additional arguments passed to \code{\link[spdep:moran.mc]{spdep::moran.mc()}}}
 }
+\value{
+an \code{htest} object
+}
 \description{
 Global C Test
 }

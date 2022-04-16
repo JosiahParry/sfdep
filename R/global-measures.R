@@ -18,6 +18,7 @@
 #' wt <- guerry_nb$wt
 #' x <- guerry_nb$crime_pers
 #' moran <- global_moran(x, nb, wt)
+#' @returns an `htest` object
 global_moran <- function(x, nb, wt, na_ok = FALSE, ...) {
   listw <- recreate_listw(nb, wt)
   spdep::moran(x, listw = listw,
@@ -39,6 +40,7 @@ global_moran <- function(x, nb, wt, na_ok = FALSE, ...) {
 #' x <- guerry_nb$crime_pers
 #' moran <- global_moran_perm(x, nb, wt)
 #' broom::tidy(moran)
+#' @returns an object of classes `htest`, and `mc.sim`.
 global_moran_perm <- function(x, nb, wt, alternative = "two.sided",
                               nsim = 499, ...) {
   listw <- recreate_listw(nb, wt)
@@ -60,6 +62,7 @@ global_moran_perm <- function(x, nb, wt, alternative = "two.sided",
 #' wt <- guerry_nb$wt
 #' x <- guerry_nb$crime_pers
 #' global_moran_test(x, nb, wt)
+#' @returns an object of class `htest`
 global_moran_test <- function(x, nb, wt, alternative = "greater",
                               randomization = TRUE,
                               ...) {
@@ -85,6 +88,7 @@ global_moran_test <- function(x, nb, wt, alternative = "greater",
 #' wt <- guerry_nb$wt
 #' x <- guerry_nb$crime_pers
 #' global_c(x, nb, wt)
+#' @returns a list with two names elements `C` and `K` returning the value of Geary's C and sample kurtosis respectively.
 global_c <- function(x, nb, wt, allow_zero = NULL) {
   listw <- recreate_listw(nb, wt)
   spdep::geary(x, listw,
@@ -106,6 +110,7 @@ global_c <- function(x, nb, wt, allow_zero = NULL) {
 #' wt <- st_weights(nb)
 #' x <- guerry$crime_pers
 #' global_c_perm(x, nb, wt)
+#' @returns an object of classes `htest` and `mc.sim`
 global_c_perm <- function(x, nb, wt, nsim = 499, alternative = "greater",
                           allow_zero = NULL, ...) {
   listw <- recreate_listw(nb, wt)
@@ -127,6 +132,7 @@ global_c_perm <- function(x, nb, wt, nsim = 499, alternative = "greater",
 #' wt <- st_weights(nb)
 #' x <- guerry$crime_pers
 #' global_c_test(x, nb, wt)
+#' @returns an `htest` object
 global_c_test <- function(x, nb, wt, randomization = TRUE, allow_zero = NULL, ...) {
   listw <- recreate_listw(nb, wt)
   res <- spdep::geary.test(x, listw, randomisation = randomization,
@@ -147,6 +153,7 @@ global_c_test <- function(x, nb, wt, randomization = TRUE, allow_zero = NULL, ..
 #' wt <- st_weights(nb, style = "B")
 #' x <- guerry$crime_pers
 #' global_g_test(x, nb, wt)
+#' @returns an `htest` object
 global_g_test <- function(x, nb, wt, alternative = "greater",
                           allow_zero = NULL, ...) {
   # TODO make friendlier warnings for weights type.
@@ -175,6 +182,7 @@ global_g_test <- function(x, nb, wt, alternative = "greater",
 #' wt <- st_weights(nb, style = "B")
 #' fx <- guerry$region
 #' global_jc_perm(fx, nb, wt)
+#' @returns an object of class `jclist` which is a list where each element is of class `htest` and `mc.sim`.
 global_jc_perm <- function(fx, nb, wt, alternative = "greater", nsim = 499, allow_zero = FALSE, ...) {
   fx <- as.factor(fx)
   # TODO create broom tidy method
@@ -191,7 +199,13 @@ global_jc_perm <- function(fx, nb, wt, alternative = "greater", nsim = 499, allo
 #' @param ... additional arguments passed to [spdep::joincount.test()]
 #' @export
 #' @examples
+#' geo <- sf::st_geometry(guerry)
+#' nb <- st_contiguity(geo)
+#' wt <- st_weights(nb, style = "B")
+#' fx <- guerry$region
 #' global_jc_test(fx, nb, wt)
+#' global_jc_perm(fx, nb, wt)
+#' @returns an object of class `jclist` which is a list where each element is of class `htest` and `mc.sim`.
 global_jc_test <- function(fx, nb, wt, alternative = "greater", allow_zero = NULL, ...) {
   fx <- as.factor(fx)
   # TODO create broom tidy method

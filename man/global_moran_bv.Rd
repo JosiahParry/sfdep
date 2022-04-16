@@ -17,6 +17,9 @@ global_moran_bv(x, y, nb, wt, nsim = 99)
 
 \item{nsim}{the number of simulations to run.}
 }
+\value{
+a named list with two elements \code{Ib} and \code{p_sim} containing the bivariate Moran'sI and simulated p-value respectively.
+}
 \description{
 Given two continuous numeric variables, calculate the bivariate Moran's I.
 }

@@ -17,6 +17,9 @@ global_moran(x, nb, wt, na_ok = FALSE, ...)
 
 \item{...}{additional arguments passed to \code{\link[spdep:moran]{spdep::moran()}}.}
 }
+\value{
+an \code{htest} object
+}
 \description{
 Calculate Global Moran's I
 }

@@ -12,7 +12,7 @@ Inference for the Local Geary is based on a permutation approach which compares 
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,6 +30,9 @@ Inference for the Local Geary is based on a permutation approach which compares 
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -80,6 +83,18 @@ Inference for the Local Geary is based on a permutation approach which compares 
 <dd><p>A character defining the alternative hypothesis. Must be one of "two.sided", "less" or "greater".</p></dd>
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>a <code>data.frame</code> with columns</p><ul><li><p><code>ci</code>: Local Geary statistic</p></li>
+<li><p><code>e_ci</code>: expected value of the Local Geary based on permutations</p></li>
+<li><p><code>z_ci</code>: standard deviation based on permutations</p></li>
+<li><p><code>var_ci</code>: variance based on permutations</p></li>
+<li><p><code>p_ci</code>: p-value based on permutation sample standard deviation and means</p></li>
+<li><p><code>p_ci_sim</code>: p-value based on rank of observed statistic</p></li>
+<li><p><code>p_folded_sim</code>: p-value based on the implementation of Pysal which always assumes a two-sided test taking the minimum possible p-value</p></li>
+<li><p><code>skewness</code>: sample skewness</p></li>
+<li><p><code>kurtosis</code>: sample kurtosis</p></li>
+</ul></div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     
 <div class="section">
@@ -96,7 +111,7 @@ Inference for the Local Geary is based on a permutation approach which compares 
 
 
 <p>These functions are based on the implementations of the local Geary statistic in the development version of spdep. They are based on <a href="https://r-spatial.github.io/spdep/reference/localC.html" class="external-link">spdep::localC</a> and <a href="https://r-spatial.github.io/spdep/reference/localC.html" class="external-link">spdep::localC_perm</a>.</p>
-<p><a href="https://r-spatial.github.io/spdep/reference/localC.html" class="external-link">spdep::localC_perm</a> and thus local_c_perm utilize a conditional permutation approach to approximate a reference distribution where each observation <code>i</code> is held fixed, randomly samples neighbors, and calculated the local C statistic for that tuple (<code>ci</code>). This is repeated <code>nsim</code> times. From the simulations 3 different types of p-values are calculated—all of which have their potential flaws. So be <em>extra judicious</em> with using p-values to make conclusions.</p><ul><li><p><code>p_ci</code>: utilizes the sample mean and standard deviation. The p-value is then calculated using <code><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">pnorm()</a></code>--asuming a normal distribution which isn't always true.</p></li>
+<p><a href="https://r-spatial.github.io/spdep/reference/localC.html" class="external-link">spdep::localC_perm</a> and thus local_c_perm utilize a conditional permutation approach to approximate a reference distribution where each observation <code>i</code> is held fixed, randomly samples neighbors, and calculated the local C statistic for that tuple (<code>ci</code>). This is repeated <code>nsim</code> times. From the simulations 3 different types of p-values are calculated—all of which have their potential flaws. So be <em>extra judicious</em> with using p-values to make conclusions.</p><ul><li><p><code>p_ci</code>: utilizes the sample mean and standard deviation. The p-value is then calculated using <code><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">pnorm()</a></code>--assuming a normal distribution which isn't always true.</p></li>
 <li><p><code>p_ci_sim</code>: uses the rank of the observed statistic.</p></li>
 <li><p><code>p_folded_sim</code>: follows the pysal implementation where p-values are in the range of [0, 0.5]. This excludes 1/2 of all p-values and should be used with caution.</p></li>
 </ul></div>
@@ -126,22 +141,22 @@ Inference for the Local Geary is based on a permutation approach which compares 
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Projected CRS: NTF (Paris) / Lambert zone II</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 85 × 13</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    nb      wt        ci cluster  e_ci var_ci   z_ci   p_ci p_ci_sim p_folded_sim</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 1.09  Positi…  1.77  0.419 -<span style="color: #BB0000;">1.06</span>  0.291     0.252        0.126</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.557 Positi…  1.58  0.227 -<span style="color: #BB0000;">2.16</span>  0.030<span style="text-decoration: underline;">9</span>    0.016        0.008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.571 Positi…  2.65  0.790 -<span style="color: #BB0000;">2.34</span>  0.019<span style="text-decoration: underline;">5</span>    0.004        0.002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.525 Positi…  1.59  0.515 -<span style="color: #BB0000;">1.48</span>  0.140     0.056        0.028</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 1.69  Positi…  2.50  1.00  -<span style="color: #BB0000;">0.811</span> 0.417     0.5          0.25 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.803 Positi…  2.32  0.534 -<span style="color: #BB0000;">2.08</span>  0.037<span style="text-decoration: underline;">6</span>    0.008        0.004</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 1.99  Positi…  4.61  2.16  -<span style="color: #BB0000;">1.79</span>  0.074<span style="text-decoration: underline;">2</span>    0.056        0.028</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 1.09  Positi…  3.56  2.13  -<span style="color: #BB0000;">1.69</span>  0.091<span style="text-decoration: underline;">5</span>    0.04         0.02 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.547 Positi…  1.71  0.342 -<span style="color: #BB0000;">2.00</span>  0.045<span style="text-decoration: underline;">9</span>    0.016        0.008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.557 Positi…  1.23  0.251 -<span style="color: #BB0000;">1.35</span>  0.177     0.18         0.09 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 1.09  Positi…  1.79  0.508 -<span style="color: #BB0000;">0.989</span> 0.323     0.328        0.164</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.557 Positi…  1.57  0.208 -<span style="color: #BB0000;">2.23</span>  0.025<span style="text-decoration: underline;">6</span>    0.024        0.012</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.571 Positi…  2.56  0.629 -<span style="color: #BB0000;">2.51</span>  0.012<span style="text-decoration: underline;">0</span>    0.004        0.002</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.525 Positi…  1.54  0.479 -<span style="color: #BB0000;">1.46</span>  0.143     0.076        0.038</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 1.69  Positi…  2.49  1.11  -<span style="color: #BB0000;">0.762</span> 0.446     0.472        0.236</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.803 Positi…  2.23  0.513 -<span style="color: #BB0000;">1.99</span>  0.046<span style="text-decoration: underline;">4</span>    0.024        0.012</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 1.99  Positi…  4.56  1.88  -<span style="color: #BB0000;">1.87</span>  0.061<span style="text-decoration: underline;">3</span>    0.056        0.028</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 1.09  Positi…  3.59  2.25  -<span style="color: #BB0000;">1.67</span>  0.095<span style="text-decoration: underline;">8</span>    0.028        0.014</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.547 Positi…  1.65  0.335 -<span style="color: #BB0000;">1.90</span>  0.057<span style="text-decoration: underline;">0</span>    0.024        0.012</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;int [</span>… <span style="color: #949494;">&lt;dbl </span>… 0.557 Positi…  1.24  0.266 -<span style="color: #BB0000;">1.32</span>  0.186     0.18         0.09 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 75 more rows, and 3 more variables: skewness &lt;dbl&gt;, kurtosis &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   geometry &lt;MULTIPOLYGON [m]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   geometry &lt;MULTIPOLYGON&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

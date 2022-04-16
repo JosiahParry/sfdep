@@ -1,5 +1,9 @@
 #' Identify polygon neighbors
 #'
+#' Given an sf geometry of type `POLYGON` or `MULTIPOLYGON` identify contiguity based neighbors.
+#'
+#' @details
+#' Utilizes [`spdep::poly2nb()`]
 #' @param x an sf or sfc object.
 #' @param queen default `TRUE`. For more see `?spdep::poly2nb`
 #' @param ... additional arguments passed to [spdep::poly2nb()]
@@ -14,6 +18,7 @@
 #' # in a pipe
 #' guerry %>%
 #'   dplyr::mutate(nb = st_contiguity(geometry), .before = 1)
+#' @returns a list of class `nb`
 st_contiguity <- function(x, queen = TRUE, ...) {
   nb <- spdep::poly2nb(x, queen = queen, ...)
   class_modify(nb)
@@ -38,6 +43,7 @@ st_contiguity <- function(x, queen = TRUE, ...) {
 #' @export
 #' @examples
 #' st_knn(sf::st_geometry(guerry), k = 8)
+#' @returns a list of class `nb`
 st_knn <- function(x, k = 1, symmetric = FALSE, ...) {
 
   # polygon_check <- any(class(x) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))
@@ -60,18 +66,21 @@ st_knn <- function(x, k = 1, symmetric = FALSE, ...) {
 
 #' Neighbors from a distance band
 #'
-#' Creates neighbors based on a distance band.
+#' Creates neighbors based on a distance band. By default, creates a distance band with the maximum distance of k-nearest neighbors where k = 1 (the critical threshold) to ensure that there are no regions that are missing neighbors.
 #'
-#' @param x An sf or sfc object.
+#' @param geometry An sf or sfc object.
 #' @param lower The lower threshold of the distance band. It is recommended to keep this as 0.
-#' @param upper The upper threshold of the distance band.
+#' @param upper The upper threshold of the distance band. By default is set to a critical threshold using [`critical_threshold()`] ensuring that each region has a minimum of one neighbor.
 #' @param ... Passed to `spdep::dnearneigh()`.
 #' @family neighbors
 #' @export
 #' @examples
-#' st_dist_band(sf::st_geometry(guerry), upper = 97000)
-st_dist_band <- function(x, lower = 0, upper = .01, ...) {
-  x <- check_polygon(x)
+#' geo <- sf::st_geometry(guerry)
+#' st_dist_band(geo, upper = critical_threshold(geo))
+#' @returns a list of class `nb`
+st_dist_band <- function(geometry, lower = 0,
+                         upper = critical_threshold(geometry), ...) {
+  x <- check_polygon(geometry)
   class_modify(spdep::dnearneigh(x, lower, upper, ...))
 }
 
@@ -80,6 +89,8 @@ st_dist_band <- function(x, lower = 0, upper = .01, ...) {
 #'
 #' Identify higher order neighbors from a neighbor list. `order` must be greater than 1. When order equals 2 then the neighbors of the neighbors list is returned and so forth. See [Anselin's slides](https://spatial.uchicago.edu/sites/spatial.uchicago.edu/files/1_introandreview_reducedsize.pdf) for an example.
 #'
+#' @details
+#' Utilizes [`spdep::nblag()`]
 #' @param nb A neighbor list object as created by `st_contiguity()`.
 #' @param order The order of neighbors.
 #' @importFrom spdep nblag
@@ -88,6 +99,7 @@ st_dist_band <- function(x, lower = 0, upper = .01, ...) {
 #' @examples
 #' nb <- st_contiguity(sf::st_geometry(guerry))
 #' st_nb_lag(nb, 3)
+#' @returns a list of class `nb`
 st_nb_lag <- function(nb, order) {
   class_modify(nblag(nb, order)[[order]])
 }
@@ -99,6 +111,8 @@ st_nb_lag <- function(nb, order) {
 #' For example, if the order is 2 the result contains both 1st
 #' and 2nd order neighbors.
 #'
+#' @details
+#' Utilizes [`spdep::nblag_cumul()`]
 #' @inheritParams st_nb_lag
 #' @importFrom spdep nblag_cumul nblag
 #' @family other
@@ -106,6 +120,7 @@ st_nb_lag <- function(nb, order) {
 #' @examples
 #' nb <- st_contiguity(sf::st_geometry(guerry))
 #' st_nb_lag_cumul(nb, 3)
+#' @returns a list of class `nb`
 st_nb_lag_cumul <- function(nb, order) {
   class_modify(nblag_cumul(nblag(nb, order)))
 }
@@ -113,7 +128,7 @@ st_nb_lag_cumul <- function(nb, order) {
 
 #' Checks geometry for polygons.
 #'
-#' If the provided geometry is a polygon, the centroids of the polygons will be return using [sf::st_centroid()]
+#' If the provided geometry is a polygon, a point will be generated using [`sf::st_point_on_surface()`]. If a centroid is preferred, a new column can be created that contains the output of [`sf::st_centroid()`].
 #' @param x an sfc object
 #' @keywords internal
 check_polygon <- function(x) {
@@ -122,8 +137,8 @@ check_polygon <- function(x) {
 
   if (polygon_check) {
 
-    cli::cli_alert_warning("Polygon provided. Using centroid.")
-    return(sf::st_centroid(x))
+    cli::cli_alert_warning("Polygon provided. Using point on surface.")
+    return(sf::st_point_on_surface(x))
   }
   x
 }

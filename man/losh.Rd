@@ -22,6 +22,17 @@ losh_perm(x, nb, wt, a = 2, nsim = 499, ...)
 
 \item{nsim}{number of simulations to run}
 }
+\value{
+a \code{data.frame} with columns
+\itemize{
+\item \code{hi}: the observed statistic
+\item \code{e_hi}: the sample average
+\item \code{var_hi}: the sample variance
+\item \code{z_hi} the approximately Chi-square distributed test statistic
+\item \code{x_bar_i}: the local spatially weight mean for observation \code{i}
+\item \code{ei}: residuals
+}
+}
 \description{
 Local spatial heteroscedacity
 }

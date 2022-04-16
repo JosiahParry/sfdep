@@ -11,8 +11,14 @@ st_nb_lag(nb, order)
 
 \item{order}{The order of neighbors.}
 }
+\value{
+a list of class \code{nb}
+}
 \description{
 Identify higher order neighbors from a neighbor list. \code{order} must be greater than 1. When order equals 2 then the neighbors of the neighbors list is returned and so forth. See \href{https://spatial.uchicago.edu/sites/spatial.uchicago.edu/files/1_introandreview_reducedsize.pdf}{Anselin's slides} for an example.
+}
+\details{
+Utilizes \code{\link[spdep:nblag]{spdep::nblag()}}
 }
 \examples{
 nb <- st_contiguity(sf::st_geometry(guerry))

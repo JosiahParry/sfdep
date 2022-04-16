@@ -19,6 +19,9 @@ global_moran_perm(x, nb, wt, alternative = "two.sided", nsim = 499, ...)
 
 \item{...}{additional arguments passed to \code{\link[spdep:moran.mc]{spdep::moran.mc()}}}
 }
+\value{
+an object of classes \code{htest}, and \code{mc.sim}.
+}
 \description{
 Global Moran Permutation Test
 }

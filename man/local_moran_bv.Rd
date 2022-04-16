@@ -17,6 +17,9 @@ local_moran_bv(x, y, nb, wt, nsim = 499)
 
 \item{nsim}{the number of simulations to run.}
 }
+\value{
+a \code{data.frame} containing two columns \code{Ib} and \code{p_sim} containing the local bivariate Moran's I and simulated p-values respectively.
+}
 \description{
 Given two continuous numeric variables, calculate the bivariate Local Moran's I.
 }

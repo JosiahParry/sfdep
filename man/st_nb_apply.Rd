@@ -24,11 +24,28 @@ If any of these three function arguments are omitted from \code{.f}, dots (\code
 
 \item{suffix}{The \code{map} variant to use. Options are "dbl", "int", "lgl", "chr", "list".}
 
-\item{...}{See \code{?spdep::lag.listw} for more.}
+\item{...}{arguments to pass to \code{.f}}
+}
+\value{
+a vector or list of with same length as \code{x}.
 }
 \description{
 Sometimes one may want to create custom lag variables or create some other neighborhood level metric that may not be defined yet. This \code{st_nb_apply()} enables you to apply a function to each observation's (xi) neighbors (xij).
 }
+\details{
+The below example calculates the spatial lag using \code{\link[=st_nb_apply]{st_nb_apply()}} and \code{\link[=st_lag]{st_lag()}} to illustrate how we can apply functions to neighbors.
+
+Currently questioning the use case. \code{\link[=find_xj]{find_xj()}} is now exported and may negate the need for this function.
+}
 \examples{
-#TODO make acs_nb object and make examples
+guerry \%>\%
+  dplyr::transmute(
+    nb = st_contiguity(geometry),
+    wt = st_weights(nb),
+    lag_apply = st_nb_apply(
+      crime_pers, nb, wt,
+      .f = function(.xij, .wt, ...) sum(.xij *.wt)
+    ),
+    lag = st_lag(crime_pers, nb, wt)
+  )
 }

@@ -26,6 +26,9 @@ global_moran_test(
 
 \item{...}{additional arguments passed to \code{\link[spdep:moran.mc]{spdep::moran.mc()}}}
 }
+\value{
+an object of class \code{htest}
+}
 \description{
 Global Moran Test
 }

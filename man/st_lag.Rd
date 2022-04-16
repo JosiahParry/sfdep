@@ -19,6 +19,9 @@ st_lag(x, nb, wt, na_ok = FALSE, allow_zero = NULL, ...)
 
 \item{...}{See \code{?spdep::lag.listw} for more.}
 }
+\value{
+a numeric vector with same length as \code{x}
+}
 \description{
 Calculates the spatial lag of a numeric variable given a neighbor and weights list.
 }
@@ -31,7 +34,6 @@ st_lag(guerry$crime_pers, nb, wt)
 }
 \seealso{
 Other stats: 
-\code{\link{local_moran}()},
-\code{\link{st_nb_dists}()}
+\code{\link{local_moran}()}
 }
 \concept{stats}

@@ -11,6 +11,9 @@ cond_permute_nb(nb, seed = NULL)
 
 \item{seed}{default null. A value to pass to \code{set.seed()} for reproducibility.}
 }
+\value{
+A list of class \code{nb} where each element contains a random sample of neighbors excluding the observed regioin.
+}
 \description{
 Creates a conditional permutation of neighbors list holding i fixed and shuffling it's neighbors.
 }
@@ -20,5 +23,4 @@ nb[1:5]
 # conditionally permute neighbors
 perm_nb <- cond_permute_nb(nb)
 perm_nb[1:5]
-# get permuted neighbor weight
 }

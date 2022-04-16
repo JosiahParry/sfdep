@@ -19,6 +19,9 @@ local_moran(x, nb, wt, alternative = "two.sided", nsim = 499, ...)
 
 \item{...}{See \code{?spdep::localmoran_perm()} for more options.}
 }
+\value{
+a \code{data.frame} containing the columns \code{ii}, \code{eii}, \code{var_ii}, \code{z_ii}, \code{p_ii}, \code{p_ii_sim}, and \code{p_folded_sim}. For more details please see \code{\link[spdep:localmoran]{spdep::localmoran_perm()}}.
+}
 \description{
 Moran's I is calculated for each polygon based on the neighbor and weight lists.
 }
@@ -26,10 +29,8 @@ Moran's I is calculated for each polygon based on the neighbor and weight lists.
 \code{\link[=local_moran]{local_moran()}} calls \code{\link[spdep:localmoran]{spdep::localmoran_perm()}} and calculates the Moran I for each polygon. As well as provide simulated p-values.
 }
 \examples{
-library(dplyr)
-
 lisa <- guerry \%>\%
-  mutate(nb = st_contiguity(geometry),
+  dplyr::mutate(nb = st_contiguity(geometry),
          wt = st_weights(nb),
          moran = local_moran(crime_pers, nb, wt))
 
@@ -38,7 +39,6 @@ tidyr::unnest(lisa, moran)
 }
 \seealso{
 Other stats: 
-\code{\link{st_lag}()},
-\code{\link{st_nb_dists}()}
+\code{\link{st_lag}()}
 }
 \concept{stats}

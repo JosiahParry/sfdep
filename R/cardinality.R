@@ -8,6 +8,7 @@
 #' @examples
 #' nb <- st_contiguity(sf::st_geometry(guerry))
 #' st_cardinalties(nb)
+#' @returns an integer vector with the same length as `nb`.
 st_cardinalties <- function(nb) {
 
   if (any(class(nb) == "nb")) {

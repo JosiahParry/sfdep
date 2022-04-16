@@ -15,6 +15,9 @@ st_knn(x, k = 1, symmetric = FALSE, ...)
 
 \item{...}{additional arguments to be passed to \code{knearneigh()}.}
 }
+\value{
+a list of class \code{nb}
+}
 \description{
 Identifies the \code{k} nearest neighbors for given point geometry. If polygon geometry is provided, the centroids of the polygon will be used and a warning will be emitted.
 }

@@ -17,6 +17,9 @@ st_as_nodes(x, nb)
 
 \item{nb}{a neighbor list. If \code{x} is class \code{sf}, the unquote named of the column. If \code{x} is class \code{sfc}, an object of class \code{nb} as created from \code{st_contiguity()}.}
 }
+\value{
+An object of class \code{sf} with \code{POINT} geometry.
+}
 \description{
 Given geometry and a neighbor list, creates an \code{sf} object to be used as nodes in an \code{\link[sfnetworks:sfnetwork]{sfnetworks::sfnetwork()}}. If the provided geometry is a polygon, \code{\link[sf:geos_unary]{sf::st_point_on_surface()}} will be used to create the node point.
 }

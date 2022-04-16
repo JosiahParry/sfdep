@@ -35,7 +35,6 @@
 #'   dplyr::mutate(nb = st_contiguity(geometry),
 #'          wt = st_weights(nb)) %>%
 #'   st_as_edges(nb, wt)
-
 st_as_edges <- function(x, nb, wt) {
   UseMethod("st_as_edges")
 }
@@ -102,6 +101,8 @@ st_as_edges.sfc <- function(x, nb, wt) {
 #' guerry %>%
 #'   dplyr::transmute(nb = st_contiguity(geometry)) %>%
 #'   st_as_nodes(nb)
+#' @return
+#' An object of class `sf` with `POINT` geometry.
 st_as_nodes <- function(x, nb) {
   UseMethod("st_as_nodes")
 }

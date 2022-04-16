@@ -13,6 +13,9 @@ st_nb_dists(x, nb, longlat = NULL)
 
 \item{longlat}{\code{TRUE} if point coordinates are longitude-latitude decimal degrees, in which case distances are measured in kilometers. See \code{?spdep::nbdists()} for more.}
 }
+\value{
+a list where each element is a numeric vector.
+}
 \description{
 From an nb list and point geometry, return a list of distances for each observation's neighbors list.
 }
@@ -27,8 +30,9 @@ dists <- st_nb_dists(geo, nb)
 head(dists)
 }
 \seealso{
-Other stats: 
-\code{\link{local_moran}()},
-\code{\link{st_lag}()}
+Other weights: 
+\code{\link{st_inverse_distance}()},
+\code{\link{st_kernel_weights}()},
+\code{\link{st_weights}()}
 }
-\concept{stats}
+\concept{weights}

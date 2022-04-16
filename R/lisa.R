@@ -15,15 +15,15 @@
 #' @family stats
 #' @export
 #' @examples
-#' library(dplyr)
-#'
 #' lisa <- guerry %>%
-#'   mutate(nb = st_contiguity(geometry),
+#'   dplyr::mutate(nb = st_contiguity(geometry),
 #'          wt = st_weights(nb),
 #'          moran = local_moran(crime_pers, nb, wt))
 #'
 #' # unnest the dataframe column
 #' tidyr::unnest(lisa, moran)
+#' @returns a `data.frame` containing the columns `ii`, `eii`, `var_ii`, `z_ii`, `p_ii`, `p_ii_sim`, and `p_folded_sim`. For more details please see [spdep::localmoran_perm()].
+#'
 local_moran <- function(x, nb, wt, alternative = "two.sided",
                         nsim = 499, ...) {
 

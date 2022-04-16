@@ -7,7 +7,7 @@
 #' @param longlat	`TRUE` if point coordinates are longitude-latitude decimal degrees, in which case distances are measured in kilometers. See `?spdep::nbdists()` for more.
 #'
 #' @details Utilizes `spdep::nbdists()` for distance calculation.
-#' @family stats
+#' @family weights
 #' @export
 #' @examples
 #' geo <- sf::st_geometry(guerry)
@@ -15,6 +15,7 @@
 #' dists <- st_nb_dists(geo, nb)
 #'
 #' head(dists)
+#' @returns a list where each element is a numeric vector.
 st_nb_dists <- function(x, nb, longlat = NULL) {
   x <- check_polygon(x)
   class_modify(spdep::nbdists(nb, x, longlat))

@@ -22,6 +22,20 @@ local_c_perm(x, nb, wt, nsim = 499, alternative = "two.sided", ...)
 
 \item{alternative}{A character defining the alternative hypothesis. Must be one of "two.sided", "less" or "greater".}
 }
+\value{
+a \code{data.frame} with columns
+\itemize{
+\item \code{ci}: Local Geary statistic
+\item \code{e_ci}: expected value of the Local Geary based on permutations
+\item \code{z_ci}: standard deviation based on permutations
+\item \code{var_ci}: variance based on permutations
+\item \code{p_ci}: p-value based on permutation sample standard deviation and means
+\item \code{p_ci_sim}: p-value based on rank of observed statistic
+\item \code{p_folded_sim}: p-value based on the implementation of Pysal which always assumes a two-sided test taking the minimum possible p-value
+\item \code{skewness}: sample skewness
+\item \code{kurtosis}: sample kurtosis
+}
+}
 \description{
 The Local Geary is a local adaptation of Geary's C statistic of spatial autocorrelation. The Local Geary uses squared differences to measure dissimilarity unlike the Local Moran. Low values of the Local Geary indicate positive spatial autocorrelation and large refers to negative spatial autocorrelation.
 Inference for the Local Geary is based on a permutation approach which compares the observed value to the reference distribution under spatial randomness. The Local Geary creates a pseudo p-value. This is not an analytical p-value and is based on the number of permutations and as such should be used with care.

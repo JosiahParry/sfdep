@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +28,9 @@
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -76,6 +79,16 @@
 <dt>nsim</dt>
 <dd><p>The number of simulations to run.</p></dd>
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>a <code>data.frame</code> with columns:</p><ul><li><p><code>gi</code>: the observed statistic</p></li>
+<li><p><code>e_gi</code>: the permutation sample mean</p></li>
+<li><p><code>var_gi</code>: the permutation sample variance</p></li>
+<li><p><code>p_value</code>: the p-value using sample mean and standard deviation</p></li>
+<li><p><code>p_folded_sim</code>: p-value based on the implementation of Pysal which always assumes a two-sided test taking the minimum possible p-value</p></li>
+<li><p><code>skewness</code>: sample skewness</p></li>
+<li><p><code>kurtosis</code>: sample kurtosis</p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -86,20 +99,20 @@
 <span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_g_perm</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            gi       e_gi       var_gi    p_value p_sim p_folded_sim    skewness</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.013819020 0.01189845 4.875926e-06 0.38442995 0.368        0.184  0.18231076</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.016115180 0.01187698 3.312941e-06 0.01988598 0.016        0.008  0.02348175</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.015686557 0.01193405 3.345066e-06 0.04019622 0.048        0.024  0.15512266</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.008553106 0.01189602 4.813960e-06 0.12760598 0.120        0.060  0.23064385</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.008955895 0.01176065 6.075227e-06 0.25515161 0.288        0.144  0.19009152</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.009334367 0.01186456 2.732582e-06 0.12586397 0.136        0.068 -0.02339022</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      kurtosis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.37351308</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.37618560</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.42093300</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.09391877</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.25019679</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.35633820</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            gi       e_gi       var_gi     p_value p_sim p_folded_sim</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.013819020 0.01193076 4.807409e-06 0.389126127 0.408        0.204</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 0.016115180 0.01185261 2.704456e-06 0.009542469 0.016        0.008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 0.015686557 0.01198919 3.375966e-06 0.044188022 0.044        0.022</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 0.008553106 0.01190088 4.579391e-06 0.117720252 0.120        0.060</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 0.008955895 0.01191454 6.321734e-06 0.239305716 0.268        0.134</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 0.009334367 0.01195431 2.374351e-06 0.089079281 0.084        0.042</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      skewness    kurtosis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.22184042 -0.39414094</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.19421444 -0.06753868</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.00241231 -0.33767274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.12774870 -0.16660400</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.10959652 -0.38106342</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.15354779 -0.37426231</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

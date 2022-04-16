@@ -23,6 +23,9 @@ local_jc_uni(
 
 \item{alternative}{default \code{"greater"}. One of \code{"less"} or \code{"greater"}.}
 }
+\value{
+a \code{data.frame} with two columns \code{join_count} and \code{p_sim} and number of rows equal to the length of arguments \code{x}, \code{nb}, and \code{wt}.
+}
 \description{
 The univariate local join count statistic is used to identify clusters of rarely occurring binary variables. The binary variable of interest should occur less
 than half of the time.

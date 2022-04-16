@@ -32,6 +32,16 @@ nb_match_test(
 
 \item{.p}{default 2. The power of Minkowski distance passed to the \code{p} argument in \code{\link[stats:dist]{stats::dist()}}.}
 }
+\value{
+a \code{data.frame} with columns
+\itemize{
+\item \code{n_shared} (integer): the number of shared neighbors between geographic and attribute space
+\item \code{nb_matches} (list): matched neighbor indexes. Each element is an iteger vector of same length as the ith observation of \code{n_shared}
+\item \code{knn_nb} (list): the neighbors in attribute space
+\item \code{probability} (numeric): the geometric probability of observing the number of matches
+\item \code{p_sim} (numeric): a folded simulated p-value
+}
+}
 \description{
 Implements the Local Neighbor Match Test as described in \emph{Tobler's Law in a Multivariate World} (Anselin and Li, 2020).
 }

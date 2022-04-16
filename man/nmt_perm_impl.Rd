@@ -2,7 +2,8 @@
 % Please edit documentation in R/nb-match-test-impl.R
 \name{nmt_perm_impl}
 \alias{nmt_perm_impl}
-\title{Find conditionally permuted neighbor matches}
+\title{Find conditionally permuted neighbor matches
+Given a kNN attribute neighbor list and a listw object, find the number of matches given a conditional permutation.}
 \usage{
 nmt_perm_impl(knn_nb, listw)
 }
@@ -12,6 +13,7 @@ nmt_perm_impl(knn_nb, listw)
 \item{listw}{a listw object likely created by \link{recreate_listw}.}
 }
 \description{
+Find conditionally permuted neighbor matches
 Given a kNN attribute neighbor list and a listw object, find the number of matches given a conditional permutation.
 }
 \keyword{internal}
