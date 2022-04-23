@@ -4,6 +4,4 @@
 
 * This is a new release.
 
-`DESCRIPTION` file modified to address requests from Uwe. 
-Changes are removing `LICENSE` file and "+ file LICENSE", putting software packages 
-in single quotes.
+All exported functions now have a \value per request from Gregor Seyer.

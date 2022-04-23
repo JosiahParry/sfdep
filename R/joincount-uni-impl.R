@@ -96,7 +96,7 @@ jc_uni_impl <- function(x, listw, nsim, alternative) {
 #' @param listw must be binary
 #' @param index to subset
 #' @keywords internal
-jc_uni_perm_impl <- function (x, listw, index) {
+jc_uni_perm_impl <- function(x, listw, index) {
   p_listw <- permute_listw(listw)
   wt <- p_listw[["weights"]][index]
   nb <- p_listw[["neighbours"]][index]
