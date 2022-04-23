@@ -67,6 +67,15 @@
     <loc>/reference/global_c_test.html</loc>
   </url>
   <url>
+    <loc>/reference/global_colocation.html</loc>
+  </url>
+  <url>
+    <loc>/reference/global_colocation_calc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/global_colocation_perm_impl.html</loc>
+  </url>
+  <url>
     <loc>/reference/global_g_test.html</loc>
   </url>
   <url>
@@ -121,6 +130,15 @@
     <loc>/reference/local_c.html</loc>
   </url>
   <url>
+    <loc>/reference/local_colocation.html</loc>
+  </url>
+  <url>
+    <loc>/reference/local_colocation_calc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/local_colocation_impl.html</loc>
+  </url>
+  <url>
     <loc>/reference/local_g.html</loc>
   </url>
   <url>
@@ -170,6 +188,15 @@
   </url>
   <url>
     <loc>/reference/nmt_perm_impl.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pairwise_colocation.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pairwise_colocation_calc.html</loc>
+  </url>
+  <url>
+    <loc>/reference/pairwise_colocation_perm_impl.html</loc>
   </url>
   <url>
     <loc>/reference/permute_listw.html</loc>

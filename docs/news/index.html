@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,12 +53,26 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.1.0" id="sfdep-010">sfdep 0.1.0<a class="anchor" aria-label="anchor" href="#sfdep-010"></a></h2>
-<div class="section level4">
-<h4 id="2022-0-1-0">2022-04-12<a class="anchor" aria-label="anchor" href="#2022-0-1-0"></a></h4>
-<ul><li>Sending in for initial CRAN release</li>
+<h2 class="pkg-version" data-toc-text="development version" id="sfdep-development-version">sfdep (development version)<a class="anchor" aria-label="anchor" href="#sfdep-development-version"></a></h2>
+<ul><li>adds colocation quotient (CLQ) measures:
+<ul><li>
+<code><a href="../reference/global_colocation.html">global_colocation()</a></code> for global colocation of one categorical variable</li>
+<li>
+<code><a href="../reference/pairwise_colocation.html">pairwise_colocation()</a></code> for asymmetric colocation of subcategories of one or two categories</li>
+<li>
+<code><a href="../reference/local_colocation.html">local_colocation()</a></code> for local CLQ measure</li>
+<li>these functions are not fast! PRs welcomed to improve computation speed.</li>
+</ul></li>
+<li>
+<code><a href="../reference/st_kernel_weights.html">st_kernel_weights()</a></code> now returns an attribute <code>kernel</code> which is set to the value of the kernel argument</li>
+<li>
+<code><a href="../reference/cond_permute_nb.html">cond_permute_nb()</a></code> specifies <code>SIMPLIFY = FALSE</code> in internal <code><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply()</a></code> call which was causing errors in creating conditionally permuted neighbor lists</li>
 </ul></div>
-</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.0" id="sfdep-010">sfdep 0.1.0<a class="anchor" aria-label="anchor" href="#sfdep-010"></a></h2><p class="text-muted">CRAN release: 2022-04-20</p>
+<ul><li>Released on CRAN!</li>
+<li>Sending in for initial CRAN release</li>
+</ul></div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

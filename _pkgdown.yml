@@ -50,6 +50,7 @@ reference:
 - title: Global Measure of Spatial Autocorrelation
   contents:
   - starts_with("global")
+  - pairwise_colocation
 
 - title: Data
   contents:

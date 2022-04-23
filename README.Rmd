@@ -16,14 +16,20 @@ knitr::opts_chunk$set(
 # sfdep
 
 <!-- badges: start -->
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/sfdep)](https://CRAN.R-project.org/package=sfdep)
 [![R-CMD-check](https://github.com/JosiahParry/sfdep/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JosiahParry/sfdep/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 <!-- badges: end -->
 
 sfdep builds on the great shoulders of spdep package for spatial dependence. sfdep creates an sf and tidyverse friendly interface to the package as well as introduces new functionality that is not present in spdep. sfdep utilizes list columns extensively to make this interface possible. 
 
 ## Installation
+
+Install the released version from CRAN 
+
+```r
+install.packages("sfdep")
+```
 
 You can install the development version of sfdep like so:
 
