@@ -78,7 +78,7 @@ cond_permute_nb <- function(nb, seed = NULL) {
   if (!is.null(seed)) set.seed(seed)
   n <- length(nb)
   cards <- lengths(nb)
-  res <- mapply(shuffle_nbs, 1:n, n, cards)
+  res <- mapply(shuffle_nbs, 1:n, n, cards, SIMPLIFY = FALSE)
   class_modify(res, "nb")
 }
 
