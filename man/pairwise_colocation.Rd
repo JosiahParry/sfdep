@@ -24,7 +24,7 @@ Calculate the pairwise colocation quotient (CLQ) for two categorical variables u
 \details{
 \subsection{Intuition}{
 
-The pairwise CLQ is used to test if there is a spatial directional association between subcategories of two vectors \code{A} and \code{B}. Compared to the cross-K metric and the join count statistic, the pairwise CLQ and elucidate the presence of an asymmetric relationship between subcategories of A and B. A and B can either be separate categorical vectors or the same categorical vector.
+The pairwise CLQ is used to test if there is a spatial directional association between subcategories of two vectors \code{A} and \code{B}. Compared to the cross-K metric and the join count statistic, the pairwise CLQ can elucidate the presence of an asymmetric relationship between subcategories of A and B. A and B can either be separate categorical vectors or the same categorical vector.
 
 "The null hypothesis for a CLQ-based analysis is 'given the clustering of the joint population, there is no spatial association between pairs of categorical subsets.'"
 }
