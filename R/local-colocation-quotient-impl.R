@@ -1,23 +1,33 @@
-#' Local Colocation Quotient
+#' Local indicator of Colocation Quotient
 #'
-#' The Local Colocation Quotient requires guassian weights.
-#' Guassian weights help by adding a _decay_ to the relationship between points
-#' Take point xi as the focal point and xij1 and xij2 as neighbors. xij1 is 10 units  and xij2 is 15 units away respectively. The influence of xij1 is greater than xij2 due to their proximity.
+#' @description
 #'
-#' Uses an adaptive bandwidth
+#' The local indicator of the colocation quotient (LCLQ) is a Local Indicator of Spatial Association (LISA) that evaluates if a given observation's subcategory in A is colocated with subcategories in B. Like the CLQ, the LCLQ provides insight into the asymmetric relationships between subcategories of A and B (where B can also equal A) but at the local level.
 #'
-#' Could use network distance. Less efficient in calculation than euclidian but more intuitive or informative
+#' The LCLQ is defined using Gaussian kernel weights and an adaptive bandwidth (see [`st_kernel_weights()`]). However, any type of weights list can be used. Kernel weights are used to introduce a decay into the calculation of the CLQ. This ensures that points nearer to the focal point have more influence than those that are more distant.
+#'
+#' @details
+#'
+#' The LCLQ is defined as \eqn{LCLQ_{A_i \to B} = \frac{N_{A_i \to B}}{N_B / (N - 1)}} where \eqn{N_{A_i \to B} = \sum_{j = 1(j \ne i)}^{N}(\frac{w_{ij}f_{ij}}{\sum_{j = 1(j \ne i)}^{N}w_{ij}})}. And the weights matrix, wij, uses adaptive bandwidth Gaussian kernel weights.
+#'
+#' LCLQ is only calculated for those subcategories which are present in the neighbor list. If a subcategory is not present, then the resultant LCLQ and simulated p-value will be `NA`.
+#'
+#' @references
+#' {Fahui Wang, Yujie Hu, Shuai Wang & Xiaojuan Li (2017) Local Indicator of Colocation Quotient with a Statistical Significance Test: Examining Spatial Association of Crime and Facilities, The Professional Geographer, 69:1, 22-31, \doi{10.1080/00330124.2016.1157498}}
+#'
 #' @export
 #' @inheritParams pairwise_colocation
-#' @returns a data frame with as many rows as observations in A and two times as many columns as unique values in B.
+#' @param wt a weights list. Recommended that it is a Gaussian kernel weights list using an adaptive bandwidth e.g. created by `st_kernel_weights(nb, geometry, "gaussian", addaptive = TRUE)` that does not include the self.
+#' @returns a data frame with as many rows as observations in A and two times as many columns as unique values in B. Columns contain each unique value of B as well as the simulated p-value for each value of B.
+#'
 #' @examples
 #' A <- guerry$main_city
 #' B <- guerry$region
 #' geo <- sf::st_geometry(guerry)
 #' nb <- st_knn(geo, 5)
-#' wt <- st_kernel_weights(nb, geo, "gaussian")
+#' wt <- st_kernel_weights(nb, geo, "gaussian", adaptive = TRUE)
 #' res <- local_colocation(A, B, nb, wt, 49)
-#' head(res)
+#' tail(res)
 local_colocation <- function(A, B, nb, wt, nsim) {
   listw <- recreate_listw(nb, wt)
   local_colocation_impl(A, B, listw, nsim)
@@ -53,7 +63,7 @@ local_colocation_calc <- function(A, B, listw) {
 
   lclq <- Map(function(.xj, .wt) {
     if (any(is.na(c(.xj, .wt)))) return(NA)
-    res <- aggregate(. ~ .xj, data.frame(.xj, .wt),
+    res <- stats::aggregate(. ~ .xj, data.frame(.xj, .wt),
                      sum,
                      na.rm = TRUE)
     res[["prop"]] <- res[[".wt"]] / sum(.wt, na.rm = TRUE)

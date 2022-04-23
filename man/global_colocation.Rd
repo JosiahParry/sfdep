@@ -6,15 +6,25 @@
 \usage{
 global_colocation(A, nb, nsim = 99)
 }
+\arguments{
+\item{A}{a character or factor vector.}
+
+\item{nb}{a neighbors list e.g. created by \code{\link[=st_knn]{st_knn()}} or \code{\link[=st_contiguity]{st_contiguity()}}}
+
+\item{nsim}{default \code{99}. An integer representing how many simulations to run for calculating the simulated p-values.}
+}
 \value{
 A list of two elements \code{CLQ} and \code{p_sim} containing the observed colocation quotient and the simulated p-value respectively.
 }
 \description{
-\subsection{Definition}{
-}
+Calculate the Global Colocation Quotient (CLQ) for a categorical variable using simulation based significance testing.
 }
 \details{
-The Global Colocation Quotient (CLQ) is defined as \eqn{CLQ_{Global} = \frac{\sum_{A \in X} C_{A \to A}}{\sum_{A \in X} N_A ({\frac{N_A - 1}{N-1})}}}. The numerator identifies the observed proportion of same-category neighbors while the denominator contains the \emph{expected} proportion of same-category neighbors under the assumption of no spatial association. Thus the CLQ is just a ratio of observed to expected.
+\subsection{Definition}{
+
+The CLQ is defined as \eqn{CLQ_{Global} = \frac{\sum_{A \in X} C_{A \to A}}{\sum_{A \in X} N_A ({\frac{N_A - 1}{N-1})}}}. The numerator identifies the observed proportion of same-category neighbors while the denominator contains the \emph{expected} proportion of same-category neighbors under the assumption of no spatial association. Thus the CLQ is just a ratio of observed to expected.
+}
+
 \subsection{Inference}{
 
 Inference is done using conditional permutation as suggested by Anselin 1995 where a number of replicates are created. The observed values are compared to the replicates and a the simulated p-value is the proportion of cases where the observed is more extreme as compared to replicate. The simulated p-value returns the lower p-value of either tail.

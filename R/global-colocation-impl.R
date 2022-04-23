@@ -1,8 +1,14 @@
 #' Global Colocation Quotient
 #'
+#' @description
+#'
+#' Calculate the Global Colocation Quotient (CLQ) for a categorical variable using simulation based significance testing.
+#'
+#' @details
+#'
 #' ## Definition
 #'
-#' The Global Colocation Quotient (CLQ) is defined as \eqn{CLQ_{Global} = \frac{\sum_{A \in X} C_{A \to A}}{\sum_{A \in X} N_A ({\frac{N_A - 1}{N-1})}}}. The numerator identifies the observed proportion of same-category neighbors while the denominator contains the _expected_ proportion of same-category neighbors under the assumption of no spatial association. Thus the CLQ is just a ratio of observed to expected.
+#' The CLQ is defined as \eqn{CLQ_{Global} = \frac{\sum_{A \in X} C_{A \to A}}{\sum_{A \in X} N_A ({\frac{N_A - 1}{N-1})}}}. The numerator identifies the observed proportion of same-category neighbors while the denominator contains the _expected_ proportion of same-category neighbors under the assumption of no spatial association. Thus the CLQ is just a ratio of observed to expected.
 #'
 #' ## Inference
 #'
@@ -11,6 +17,7 @@
 #' ## Interpretation
 #'
 #' Given that the CLQ is a ratio of the observed to expected, we interpret values larger than one to mean that there is more colocation than to be expected under the null hypothesis of no spatial association. When the value is smaller than 0, we interpret it to mean that there is less colocation than expected under the null.
+#'
 #' @export
 #' @returns
 #' A list of two elements `CLQ` and `p_sim` containing the observed colocation quotient and the simulated p-value respectively.
@@ -20,6 +27,7 @@
 #' global_colocation(A, nb, 49)
 #' @references
 #' {Leslie, T.F. and Kronenfeld, B.J. (2011), The Colocation Quotient: A New Measure of Spatial Association Between Categorical Subsets of Points. Geographical Analysis, 43: 306-326. \doi{https://doi.org/10.1111/j.1538-4632.2011.00821.x}}
+#' @inheritParams pairwise_colocation
 global_colocation <- function(A, nb, nsim = 99) {
   global_colocation_perm_impl(A, nb, nsim)
 }
