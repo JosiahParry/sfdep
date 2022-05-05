@@ -1,3 +1,38 @@
+#' Two separate cases:
+#'
+#' 1. Spacetime
+#' 2. Spacetime cube
+#'
+#' Built on the idea of a relational representation of data and geometry.
+#' Geometry is always stored in an sf object with non-repeating geometries and
+#' data is always stored in a data frame. Data and geometry and linked through
+#' a unique identifier—e.g. census tract IDs or other identifiers— refered to
+#' as `.loc_col`. In addition, to keep track of time, a time column is required,
+#' `.time_col`. The time column does not have to be explicitly a time related
+#' column. Panel data, for example, is often represented through other types of
+#' value such as integer of character data.
+#'
+#' Spacetime data can contain any representation of data and geometry as long
+#' as there are valid `.loc_col` and `.time_col`s. The supposition is that the user
+#' will be actively manipulating `.data` and preparing it for further analysis.
+#'
+#' In the case of space-time trend analysis, a completed and regular time-series
+#' is necessary. Time must be separated by intervals of equal units. Additionally,
+#' every location must have a complete time-series. When each location is a
+#' regular time-series, we can call this a _"space-time cube."_ Space-time cubes
+#' are necessary for emerging hot-spot analysis (spatial trend analysis).
+#'
+#'
+#' TODO / note: if `.time_col` is not a date, numeric, or otherwise order-able
+#'    object should it be an ordered factor?
+#' TODO set_wts and set_nbs can only be used on regular space-time objects
+#'    create `is_regular()` fx to determine regularity (don't set attribute)
+#'    as attribute could be set and then observations filtered.
+#' TODO create function to set columns from `.geometry` to `.data`
+#' TODO spatial interpolation for missing values in space-time cube
+#' TODO time-series interpolation for missing values
+
+
 # spacetime S3 Class implementation
 # According to https://adv-r.hadley.nz/s3.html
 # S3 classes need a constructor, validator, and helper
@@ -119,6 +154,7 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
     )
   }
 
+  # ensure that
   .data_locs <- sort(unique(.data[[.loc_col]]))
   .geo_locs <- sort(unique(.geometry[[.loc_col]]))
 
@@ -148,7 +184,17 @@ validate_spacetime(.data, .geometry, .loc_col, .time_col)
 
 # Functionality for completing a space-time-series if the present one is incomplete
 
+times <- unique(.data[[.time_col]])
+locs <- .geometry[[.loc_col]]
 
+complete_spts <- expand.grid(locs = locs, times = times)
+names(complete_spts) <- c(.loc_col, .time_col)
+
+.data_class <- class(.data)
+
+res <- merge(complete_spts, .data, by = names(complete_spts))
+class(res) <- .data_class
+res
 
 # Casting functions -------------------------------------------------------
 repeating_geo <- left_join(x, geometry) |>
