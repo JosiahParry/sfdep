@@ -33,6 +33,8 @@ recreate_listw <- function(nb, wt) {
 
   possible_styles <- c("W", "B", "C", "U", "minmax", "S")
 
+  if (!inherits(nb, "nb")) nb <- class_modify(nb, "nb")
+
   listw <- list(style = possible_styles[!is.na(which_style)],
                 neighbours = nb,
                 weights = wt)
