@@ -8,8 +8,8 @@
 #   - probably set as an attribute
 #   - additional attributions containing location_id column name
 # NOTE: there needs to be a way to make the dataset complete timeseries
-geometry <- select(x, CT_ID_10)
-x <- guns
+.geometry <- select(x, CT_ID_10)
+.data <- guns
 
 #' We can switch between activating the data and the geometry.
 #' One may want to activate the geometry for calculating spatial neighbors
@@ -23,7 +23,9 @@ x <- guns
 
 # Class constructors ------------------------------------------------------
 # TODO check for unique repeating geometries in "geometry".
-# Fail if repeating geometries
+# TODO Fail if repeating geometries
+# TODO create ID column in geometry
+
 
 new_spacetime <- function(.data, .geometry, .loc_col, .time_col, active = "data") {
   match.arg(active, c("data", "geometry"))
@@ -59,6 +61,94 @@ new_spacetime_data <- function(.data, .geometry, .loc_col, .time_col) {
 }
 
 
+# Validate spacetime cube -------------------------------------------------
+
+#' Time-series' must be complete. This means that for every time period, every
+#' location must have an observation. n = (n time periods) * (n locations)
+#' Check for incomplete space-time series
+#' Check for # missing bins
+#' Check that every location in geometry is in data
+#' # time-intervals
+#' # bins
+spt <- new_spacetime(guns, select(x, CT_ID_10),
+              .loc_col = "CT_ID_10",
+              .time_col = "year")
+
+
+
+
+
+validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
+
+  if (!inherits(.geometry, "sf")) {
+    cli::cli_abort("{.var .geometry} must be an `sf` object.")
+  }
+
+  # ensure that there is no missing data in .time_col and .loc_col
+  n_miss_loc_data <- sum(is.na(.data[[.loc_col]]))
+  if (n_miss_loc_data > 0) cli::cli_abort("Missing locations in .data.")
+
+  n_miss_time_data <- sum(is.na(.data[[.time_col]]))
+  if (n_miss_time_data > 0) cli::cli_abort("Missing time periods in .data.")
+
+  # verify no missingness in geometry locations
+  n_miss_loc_geo <- sum(is.na(.geometry[[.loc_col]]))
+
+  if (n_miss_loc_geo > 0) {
+    cli::cli_abort("Missing location IDs, `.loc_id`, in .geometry.")
+  }
+
+  # verify no duplicate geometry
+  n_unique_loc_geo <- length(unique(sf::st_geometry(.geometry)))
+
+  if (n_unique_loc_geo < nrow(.geometry)) {
+    cli::cli_abort("Duplicate geometries present.")
+  }
+
+
+  # Compare regions
+  #  check types:
+  .data_loc_class <- class(.data[[.loc_col]])
+  .geo_loc_class <- class(.geometry[[.loc_col]])
+
+  if (!identical(.data_loc_class, .geo_loc_class)) {
+    cli::cli_abort(
+      c("Differing class types for {.var .loc_col}.",
+        i = "{.var .data}:       {.cls {.data_loc_class}}",
+        "i" = "{.var .geometry}: {.cls {.geo_loc_class}}.")
+    )
+  }
+
+  .data_locs <- sort(unique(.data[[.loc_col]]))
+  .geo_locs <- sort(unique(.geometry[[.loc_col]]))
+
+  if (!identical(.data_locs, .geo_locs)) {
+    cli::cli_abort(c("Locations differ between .geometry and .data.",
+                     i = "There {?is/are} "))
+  }
+
+  # check missingness in each column in .data that isn't necessary
+  addtl_colnames <- setdiff(colnames(.data), c(.loc_col, .time_col))
+
+  n_missing <- unlist(lapply(addtl_colnames, function(.x) sum(is.na(.data[[.x]]))))
+  names(n_missing) <- addtl_colnames
+  to_report <- n_missing[n_missing > 0]
+
+  if (any(to_report > 0)) {
+    cli::cli_alert_warning("Vars(s) {.var {names(to_report)}} {?is/are} missing {to_report} value(s).")
+  }
+
+}
+
+
+validate_spacetime(.data, .geometry, .loc_col, .time_col)
+
+
+# Complete time-series ----------------------------------------------------
+
+# Functionality for completing a space-time-series if the present one is incomplete
+
+
 
 # Casting functions -------------------------------------------------------
 repeating_geo <- left_join(x, geometry) |>
@@ -77,7 +167,7 @@ as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
                      .loc_col, .time_col)
 }
 
-as_spacetime(repeating_geo, .loc_col = "CT_ID_10", "year")
+spt <- as_spacetime(repeating_geo, .loc_col = "CT_ID_10", "year")
 
 
 # Activation --------------------------------------------------------------
@@ -137,10 +227,14 @@ st_as_sf.spacetime <- function(x, ...) {
   x <- NextMethod()
 }
 
+`[[.spacetime` <- function(x, ...) {
+  NextMethod()
+}
+
 
 # Setting Neighbors -------------------------------------------------------
 
-#'vTo give the end user control over creating their own neighbors and weights
+#' To give the end user control over creating their own neighbors and weights
 #' matrixes, it is important that neighbors are created on the activated
 #' geometry sf object.
 #' Then, it is the role of sfdep to propagate those neighbor values to `data`.
@@ -199,27 +293,29 @@ x <- filt_spt
 filt_spt |>
   count(CT_ID_10, year) |>
   filter(n > 1)
+#
+# if (active(x) == "geometry") cli::cli_abort("`data` must be active.")
+#
+# n_times <- length(attr(x, "time"))
+#
+# if (any(table(x[[attr(x, "loc_col")]]) != n_times))
+#   cli::cli_abort("Locations don't have observations for each time period.")
+#
+# # Order based on time period and location column
+# regions <- current_locations(x)
+# geo_index <- setNames(seq_len(length(regions)), regions)
+# new_index <- unlist(purrr::map(1:n_times, ~geo_index * .x))
+# # extract nb list
+# nb <- attr(x, "geometry")[["nb"]]
+# # reorder appropriately
+# res <- x[new_index,]
+#
+# # add nb list
+# res[["nb"]] <- rep(nb, n_times)
+# res
 
-if (active(x) == "geometry") cli::cli_abort("`data` must be active.")
 
-n_times <- length(attr(x, "time"))
-
-if (any(table(x[[attr(x, "loc_col")]]) != n_times))
-  cli::cli_abort("Locations don't have observations for each time period.")
-
-# Order based on time period and location column
-regions <- current_locations(x)
-geo_index <- setNames(seq_len(length(regions)), regions)
-new_index <- unlist(purrr::map(1:n_times, ~geo_index * .x))
-# extract nb list
-nb <- attr(x, "geometry")[["nb"]]
-# reorder appropriately
-res <- x[new_index,]
-
-# add nb list
-res[["nb"]] <- rep(nb, n_times)
-res
-
+# Set nb from geometry ----------------------------------------------------
 
 # Function for retrieving neighbors and weights from geometry
 # PRESERVING ORDER IS VERY VERY IMPORTANT HERE!!!!!
@@ -236,45 +332,99 @@ set_nbs <- function(x, .nb_col = "nb") {
   nb <- attr(x, "geometry")[[.nb_col]]
   if (is.null(nb)) cli::cli_abort("`.nb_col` is missing from `geometry`.")
 
-  # Order based on time period and location column
-  regions <- current_locations(x)
-  geo_index <- setNames(seq_len(length(regions)), regions)
-  new_index <- unlist(purrr::map(1:n_times, ~geo_index * .x))
+  # determine row ordering to match regions
+  .loc_col = attr(x, "loc_col")
+  geo_locs <- attr(x, "geometry")[[.loc_col]]
+  region_index <- setNames(seq_along(geo_locs), geo_locs)
+  data_loc_id <- region_index[x[[.loc_col]]]
 
-  # reorder appropriately
-  res <- x[new_index,]
+  # reorder x appropriately by regions and time
+  x <- x[order(x[[.loc_col]], data_loc_id),]
+  # repeat nb object n_times to fill. Order is correct based on above
+  # ordering
+  x[[.nb_col]] <- rep(nb, n_times)
+  x
+}
 
-  # add nb list
-  res[[.nb_col]] <- rep(nb, n_times)
-  res
+#
+# .loc_col = attr(x, "loc_col")
+# geo_locs <- attr(x, "geometry")[[.loc_col]]
+# region_index <- setNames(seq_along(geo_locs), geo_locs)
+# data_loc_id <- region_index[x[[.loc_col]]]
+#
+# x <- x[order(x[[.loc_col]], data_loc_id),]
+# x[[.nb_col]] <- rep(nb, n_times)
+
+
+# Set wt from geometry ----------------------------------------------------
+
+set_wts <- function(x, .wt_col = "wt") {
+  if (active(x) == "geometry") cli::cli_abort("`data` must be active.")
+
+
+  n_times <- length(attr(x, "time"))
+
+  if (any(table(x[[attr(x, "loc_col")]]) != n_times)) {
+    cli::cli_abort("Locations don't have observations for each time period.")
+  }
+
+  # extract wt list
+  wt <- attr(x, "geometry")[[.wt_col]]
+  if (is.null(nb)) cli::cli_abort("`.wt_col` is missing from `geometry`.")
+
+  # determine row ordering to match regions
+  .loc_col = attr(x, "loc_col")
+  geo_locs <- attr(x, "geometry")[[.loc_col]]
+  region_index <- setNames(seq_along(geo_locs), geo_locs)
+  data_loc_id <- region_index[x[[.loc_col]]]
+
+  # reorder x appropriately by regions and time
+  x <- x[order(x[[.loc_col]], data_loc_id),]
+  # repeat nb object n_times to fill. Order is correct based on above
+  # ordering
+  x[[.wt_col]] <- rep(wt, n_times)
+  x
 
 }
 
 
+# Spacetime Trend Test ----------------------------------------------------
+
 
 filt_spt |>
-  set_nbs("nb")
-
-# if (active(x) == "data")
-nb <- attr(xx, "geometry")[[.nb_col]]
-nb <- setNames(nb, attr(nb, "region.id"))
-
-xx$nb <- nb[xx[[attr(xx, "loc_col")]]]
-
-# Order based on time period and location column
-n_periods <- length(attr(xx, "time"))
-ind <- setNames(1:nrow(geometry), attr(xx, "geometry")[["CT_ID_10"]])
-xx[order(xx$year, rep(ind, length(attr(xx, "time")))),]
-
-xx$nb <- sfdep:::class_modify(rep(nb, n_periods), "nb")
-xx |>
-  group_by(CT_ID_10) |>
-  mutate(wt = st_weights(nb),
-         value = zoo::na.spline(value)) |>
-  ungroup() |>
-  pull(value)
+  set_nbs() |>
+  set_wts() |>
   group_by(year) |>
-  summarise(g = local_g(value, nb, wt))
+  mutate(g = local_g(value, nb, wt)) |>
+  ungroup()
+
+sptc |>
+  group_by(CT_ID_10) |>
+  arrange(year) |>
+  summarise(res = data.frame(unclass(Kendall::MannKendall(g)))) |>
+  tidyr::unnest(res)
+
+lisa = sptc[["g"]]
+loc_col = sptc[["CT_ID_10"]]
+time_col = sptc[["year"]]
+emerging_hotspot <- function(lisa, loc_col, time_col) {
+  df <- data.frame(lisa = class_modify(lisa,
+                                       class(unclass(lisa))),
+                   loc = loc_col,
+                   time = time_col)
+
+  split(df, loc_col)
+
+}
+do.call(rbind,
+        lapply(split(do.call(rbind, all_gis),
+                     complete_obs[[".region_id"]]), function(.x) {
+                       data.frame(
+                         unclass(Kendall::MannKendall(.x[["gi_star"]]))
+                       )
+                     }))
+
+
 
 # xts imputation ----------------------------------------------------------
 
