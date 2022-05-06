@@ -96,7 +96,7 @@ new_spacetime_data <- function(.data, .geometry, .loc_col, .time_col) {
 }
 
 
-# Validate spacetime cube -------------------------------------------------
+# Validate spacetime ------------------------------------------------------
 
 #' Time-series' must be complete. This means that for every time period, every
 #' location must have an observation. n = (n time periods) * (n locations)
@@ -105,12 +105,9 @@ new_spacetime_data <- function(.data, .geometry, .loc_col, .time_col) {
 #' Check that every location in geometry is in data
 #' # time-intervals
 #' # bins
-spt <- new_spacetime(guns, select(x, CT_ID_10),
-              .loc_col = "CT_ID_10",
-              .time_col = "year")
-
-
-
+# spt <- new_spacetime(guns, select(x, CT_ID_10),
+#               .loc_col = "CT_ID_10",
+#               .time_col = "year")
 
 
 validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
@@ -119,12 +116,18 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
     cli::cli_abort("{.var .geometry} must be an `sf` object.")
   }
 
-  # ensure that there is no missing data in .time_col and .loc_col
-  n_miss_loc_data <- sum(is.na(.data[[.loc_col]]))
-  if (n_miss_loc_data > 0) cli::cli_abort("Missing locations in .data.")
+  # TODO check if .time_col can be coerced to numeric:
+  #  valid types: date, factor, ordered, int, dbl
 
-  n_miss_time_data <- sum(is.na(.data[[.time_col]]))
-  if (n_miss_time_data > 0) cli::cli_abort("Missing time periods in .data.")
+  # ------
+  # THIS SHOULD ONLY BE TRUE FOR SPACETIME CUBE
+  # # ensure that there is no missing data in .time_col and .loc_col
+  # n_miss_loc_data <- sum(is.na(.data[[.loc_col]]))
+  # if (n_miss_loc_data > 0) cli::cli_abort("Missing locations in .data.")
+  #
+  # n_miss_time_data <- sum(is.na(.data[[.time_col]]))
+  # if (n_miss_time_data > 0) cli::cli_abort("Missing time periods in .data.")
+  # ----
 
   # verify no missingness in geometry locations
   n_miss_loc_geo <- sum(is.na(.geometry[[.loc_col]]))
@@ -133,9 +136,8 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
     cli::cli_abort("Missing location IDs, `.loc_id`, in .geometry.")
   }
 
-  # verify no duplicate geometry
+  # verify no duplicate geometry in .geometry
   n_unique_loc_geo <- length(unique(sf::st_geometry(.geometry)))
-
   if (n_unique_loc_geo < nrow(.geometry)) {
     cli::cli_abort("Duplicate geometries present.")
   }
@@ -154,14 +156,6 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
     )
   }
 
-  # ensure that
-  .data_locs <- sort(unique(.data[[.loc_col]]))
-  .geo_locs <- sort(unique(.geometry[[.loc_col]]))
-
-  if (!identical(.data_locs, .geo_locs)) {
-    cli::cli_abort(c("Locations differ between .geometry and .data.",
-                     i = "There {?is/are} "))
-  }
 
   # check missingness in each column in .data that isn't necessary
   addtl_colnames <- setdiff(colnames(.data), c(.loc_col, .time_col))
@@ -173,32 +167,121 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
   if (any(to_report > 0)) {
     cli::cli_alert_warning("Vars(s) {.var {names(to_report)}} {?is/are} missing {to_report} value(s).")
   }
-
 }
 
 
-validate_spacetime(.data, .geometry, .loc_col, .time_col)
+# Check spacetime class ---------------------------------------------------
+
+is_spacetime <- function(x, ...) {
+  inherits(x, "spacetime")
+}
+
+is.spacetime <- function(x, ...) {
+  is_spacetime(x, ...)
+}
+
+# Validate spacetime cube -------------------------------------------------
+
+#'  Determine if a spacetime object is a spacetime cube
+#'
+#'
+#' @param x a spacetime object
+#' @param ... unused.
+is_spacetime_cube <- function(x, ...) {
+
+  check_pkg_suggests("zoo")
+  # check if spacetime
+  if (!inherits(x, "spacetime")) {
+    cli::cli_abort("Object is not of class {.cls spacetime}.")
+  }
+
+  # ensure that data is active
+  if (active(x) == "geometry") x <- activate(x, "data")
+
+  .time_col <- attr(x, "time_col")
+  .loc_col <- attr(x, "loc_col")
+
+  times <- sort(unique(x[[.time_col]]))
+  n_times <- length(times)
+  n_locs <- length(attr(x, "geometry")[[.loc_col]])
+
+  # check if it is a complete spacetime object
+  # meaning every location has 1 obs for each time period
+  # check if every time-period and location have one obs
+  # check number of rows = n_times * n_locs
+  if (!nrow(x) ==  (n_times * n_locs)) {
+    cli::cli_alert_warning(
+      "Number of rows does not equal `n time-periods x n locations`"
+      )
+    return(FALSE)
+  }
+
+  # Check that all locations have n_time obs
+  if (!all(table(x[[.loc_col]]) == n_times)) {
+    cli::cli_alert_warning(
+      "Not every location has an observation for each time period."
+      )
+
+    return(FALSE)
+  }
+
+  # check that all times have n_locs obs
+  if (!all(table(x[[.time_col]]) == n_locs)) {
+    cli::cli_alert_warning(
+      "Not every time period has an observation for each location."
+    )
+
+    return(FALSE)
+  }
+
+  # check that each loc <> time is only 1 observation
+  if (!all(table(x[[.loc_col]], x[[.time_col]]) == 1)) {
+    cli::cli_alert_warning(
+      "Not every location-time combination has exactly 1 value."
+    )
+    return(FALSE)
+  }
+
+  # checks if time series is regular
+  # uses zoo here
+  is_reg <- zoo::is.regular(zoo::zoo(seq_along(times), times))
+
+  if (!is_reg) cli::cli_alert_warning("Be careful: time-series is not regular.")
+
+  TRUE
+}
 
 
-# Complete time-series ----------------------------------------------------
+# Complete a time-series ---------------------------------------------------
 
 # Functionality for completing a space-time-series if the present one is incomplete
+complete_spacetime_cube <- function(x, ...) {
+  # if already spacetime cube return x
+  if (is_spacetime_cube(x)) return(x)
 
-times <- unique(.data[[.time_col]])
-locs <- .geometry[[.loc_col]]
+  # activate data if not already
+  if (active(x) == "geometry") x <- activate(x, "data")
 
-complete_spts <- expand.grid(locs = locs, times = times)
-names(complete_spts) <- c(.loc_col, .time_col)
+  .time_col <- attr(x, "time_col")
+  .loc_col <- attr(x, "loc_col")
 
-.data_class <- class(.data)
+  times <- unique(x[[.time_col]])
+  locs <- attr(x, "geometry")[[.loc_col]]
 
-res <- merge(complete_spts, .data, by = names(complete_spts))
-class(res) <- .data_class
-res
+  complete_spts <- expand.grid(locs = locs, times = times)
+  names(complete_spts) <- c(.loc_col, .time_col)
+
+  .data_class <- class(x)
+
+  res <- merge(complete_spts, x, by = names(complete_spts), all.x = TRUE)
+  class(res) <- .data_class
+  res
+}
+
 
 # Casting functions -------------------------------------------------------
-repeating_geo <- left_join(x, geometry) |>
-  st_as_sf()
+# repeating_geo <- left_join(x, geometry) |>
+#   st_as_sf()
 
 
 as_spacetime <- function(x, ...) {
@@ -213,7 +296,7 @@ as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
                      .loc_col, .time_col)
 }
 
-spt <- as_spacetime(repeating_geo, .loc_col = "CT_ID_10", "year")
+# spt <- as_spacetime(repeating_geo, .loc_col = "CT_ID_10", "year")
 
 
 # Activation --------------------------------------------------------------
@@ -309,6 +392,9 @@ current_locations <- function(x, ...) {
   res
 }
 
+.geometry = x[,"CT_ID_10"]
+spt <- new_spacetime(guns, .geometry, "CT_ID_10", "year")
+
 missing_locs <- spt |>
   group_by(CT_ID_10) |>
   summarise(missing_pct = sum(is.na(value)) / n()) |>
@@ -324,7 +410,7 @@ filt_spt <- spt |>
   activate("data") %>%
   filter(!CT_ID_10 %in% missing_locs)
 
-
+x <- filt_spt
 #
 # spt |>
 #   activate("geometry") |>
