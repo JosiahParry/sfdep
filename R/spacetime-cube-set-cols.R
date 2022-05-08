@@ -1,5 +1,9 @@
 # Set wt from geometry ----------------------------------------------------
 
+#' Set columns from `geometry` to `data`
+#'
+#' @export
+#' @rdname set_col
 set_wts <- function(x, .wt_col = "wt") {
 
   if (!is_spacetime_cube(x)) cli::cli_abort(
@@ -36,6 +40,7 @@ set_wts <- function(x, .wt_col = "wt") {
 
 # Set nb from geometry ----------------------------------------------------
 
+#' @export
 set_nbs <- function(x, .nb_col = "nb") {
 
   if (!is_spacetime_cube(x)) cli::cli_abort(
@@ -70,6 +75,7 @@ set_nbs <- function(x, .nb_col = "nb") {
 
 # Set arbitrary column ----------------------------------------------------
 
+#' @export
 set_col <- function(x, .from_geo, .to_data = .from_geo) {
 
   if (!is_spacetime_cube(x)) cli::cli_abort(

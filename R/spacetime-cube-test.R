@@ -1,6 +1,31 @@
 #' Test if a spacetime object is a spacetime cube
 #'
 #' Given an object with class `spacetime`, determine if it is a _spacetime cube_.
+#' If the time-series is is irregular a warning is emitted
+#' (see [`validate_spacetime()`] for more on the restrictions on the time column.
+#'
+#'
+#' @details
+#'
+#' A spacetime object is a spacetime cube when it contains a regular time-series
+#' representation of each geometry. That is, only one observation for at each
+#' time period per geography is present.
+#'
+#' The number of rows in a spacetime cube is the number of geographies multiplied
+#' by the number of time periods. For example if there are 10 locations and 20
+#' time periods, the number of rows must be 200.
+#'
+#' @section Validation:
+#'
+#' `is_spacetime_cube()` runs a number of checks that to ensure that the provided
+#' object is in fact a spacetime cube. It checks that:
+#'
+#' - the number of rows is equal to the number of locations multiplied by the number
+#'   of time periods
+#' - each time period has an equal number of observations
+#' - each location has an equal number of observations
+#' - each combination of time period and location has only one observation
+#' - that the time-series is regular
 #'
 #' @param x a spacetime object
 #' @param ... unused

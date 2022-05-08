@@ -3,8 +3,13 @@
 
 #' Construct a `spacetime` object
 #'
+#' A spacetime object is a collection of a linked data frame and an sf objects.
+#' It can be thought of as geography linked to a table that represents those
+#' geographies over one or more time periods.
+#'
 #' Create a spacetime representation of vector data from a `data.frame` and an
-#' `sf` object.
+#' `sf` object with `spacetime()`
+#'
 #'
 #' @param .data an object with base class `data.frame` containing location and time
 #'   identifiers `.loc_col` and `.time_col` respectively.
@@ -20,6 +25,12 @@
 #' `double` or `integer`—the case in dates or factors respectively. An edge case
 #' exists with `POSIXlt` class objects as these can be sorted appropriately but
 #' have a base type of `list`.
+#'
+#' [`spacetime()`] is a wrapper around [`new_spacetime()`]. Spacetimes are
+#' validated before creation with [`validate_spacetime()`].
+#'
+#' Check if an object is a spacetime object with [`is_spacetime()`] or
+#' [`is.spacetime()`].
 #'
 #' @section Validation:
 #'
@@ -152,11 +163,14 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
 
 
 # Class test --------------------------------------------------------------
-
+#' @rdname spacetime
+#' @export
 is_spacetime <- function(x, ...) {
   inherits(x, "spacetime")
 }
 
+#' @export
+#' @rdname spacetime
 is.spacetime <- function(x, ...) {
   is_spacetime(x, ...)
 }

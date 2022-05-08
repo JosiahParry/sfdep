@@ -4,6 +4,8 @@
 \alias{spacetime}
 \alias{new_spacetime}
 \alias{validate_spacetime}
+\alias{is_spacetime}
+\alias{is.spacetime}
 \title{Construct a \code{spacetime} object}
 \usage{
 spacetime(.data, .geometry, .loc_col, .time_col, active = "data")
@@ -11,6 +13,10 @@ spacetime(.data, .geometry, .loc_col, .time_col, active = "data")
 new_spacetime(.data, .geometry, .loc_col, .time_col, active = "data")
 
 validate_spacetime(.data, .geometry, .loc_col, .time_col)
+
+is_spacetime(x, ...)
+
+is.spacetime(x, ...)
 }
 \arguments{
 \item{.data}{an object with base class \code{data.frame} containing location and time
@@ -25,15 +31,25 @@ identifiers \code{.loc_col} and \code{.time_col} respectively.}
 \item{.active}{default \code{data}. The object to make active. See \code{\link[=activate]{activate()}} for more.}
 }
 \description{
-Create a spacetime representation of vector data from a \code{data.frame} and an
-\code{sf} object.
+A spacetime object is a collection of a linked data frame and an sf objects.
+It can be thought of as geography linked to a table that represents those
+geographies over one or more time periods.
 }
 \details{
+Create a spacetime representation of vector data from a \code{data.frame} and an
+\code{sf} object with \code{spacetime()}
+
 \code{.time_col} must be able to be sorted. As such, \code{.time_col}
 cannot be a character vector. It must have a base type of (\code{typeof()}) either
 \code{double} or \code{integer}—the case in dates or factors respectively. An edge case
 exists with \code{POSIXlt} class objects as these can be sorted appropriately but
 have a base type of \code{list}.
+
+\code{\link[=spacetime]{spacetime()}} is a wrapper around \code{\link[=new_spacetime]{new_spacetime()}}. Spacetimes are
+validated before creation with \code{\link[=validate_spacetime]{validate_spacetime()}}.
+
+Check if an object is a spacetime object with \code{\link[=is_spacetime]{is_spacetime()}} or
+\code{\link[=is.spacetime]{is.spacetime()}}.
 }
 \section{Validation}{
 
