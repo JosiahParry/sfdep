@@ -1,11 +1,11 @@
 # Object created in lines 1-47 of emerging-dev.R
-
 xnb <- x |>
   activate("geometry") |>
   mutate(nb = st_contiguity(geometry),
          wt = st_weights(nb)) |>
   # ensure order is correct
-  set_nbs()
+  set_nbs() |>
+  activate("geometry")
 
 
 .loc_col <- attr(xnb, "loc_col")
@@ -15,77 +15,97 @@ n_times <- length(attr(xnb, "times"))
 nb <- xnb[["nb"]]
 wt <- xnb[["wt"]]
 
+
+# Parameters
+k = 1
+
 # identify nb position based on given time index
-nb_time_index <- function(time_index, n_locs, nb) {
-  lapply(nb, \(x) x + n_locs * (time_index - 1))
-}
-
-# get neighbor for positions and time order from a neighbor list
-nbt <- unlist(lapply(1:n_times, nb_time_index, n_locs, nb), recursive = FALSE)
-
 # to get time lag = 1 subtract n_locs * lag
 # if the lag is 2, need to get union of these two.
 # if lagged nb ID is < 1, NA
 # specify lag
-k = 1
+# If k = 1 then all nbs for the lag at t = 1 are missing
+# Then all nbs at t = 2 are those from t = 1
 
+# Get original time index for a single observation
+nb_time_index_obs <- function(time_index, n_locs, nb) {
+  lapply(nb, function(x) x + n_locs * (time_index - 1))
+}
+
+# Get original time index for all observations
+nb_time_index <- function(n_times, n_locs, nb) {
+  unlist(
+    lapply(1:n_times, nb_time_index_obs, n_locs, nb),
+    recursive = FALSE
+    )
+}
+
+nbt0 <- nb_time_index(n_times, n_locs, nb)
+
+
+# Given the original time-index, identify the lagged time
 # TODO: do this for more than one lag period
-nbt_k <- lapply(nbt, \(.nb) {
-  res <- .nb - (k * n_locs)
-  na.omit(ifelse(res < 1, NA, res))
-} )
+nb_time_index_lag <- function(nbt, n_locs, k) {
+    lapply(nbt, function(.nb) {
+    res <- .nb - (k * n_locs)
+    na.omit(ifelse(res < 1, NA, res))
+  })
+}
 
-# check that this application was correct. And INDEED
-all(unlist(lapply(1:1680, \(.i) nbt[[.i]] - nbt_k[[.i]])) == 168)
+# identify time lag for k
+nbt1 <- nb_time_index_lag(nbt, n_locs, k)
+
+#   function(time_index, n_locs, nb, k) {
+#   lapply(nb, function(x) {
+#     res <- x + n_locs * (time_index - 1)
+#     res <- res - (k * n_locs)
+#     na.omit(ifelse(res < 1, NA, res))
+#   })
+# }
+
+# these are the original neighbors for t =  we then need to combine
+# with original nbs (t = 0). For the first obs (1:n_locs) they will
+# be missing.
+# card for time-lagged neighbors = card * k
+
+nb_tlag <- Map(c, rep(nb, n_times), nbt)
+
+# create list for spatial weights
+# must filter out wherever card(nbt) == card(nb)
+wt_tlag <- Map(c, rep(wt, n_times), rep(wt, n_times))
+
+wtk <- replicate(k + 1, rep(wt, n_times), simplify = FALSE)
+
+# combine all lists rowwise
+zip_lists = function (lists) {
+  do.call('Map', c(`c`, lists))
+}
+
+# combine wts lists
+zip_lists(wtk)
+
+# TODO: remove weights elements from 1:n_loc*k for each time-lag
+
+
+# this will filter out where there was no available lag
+index <- (lengths(nbt0) != lengths(nb_tlag))
+
+# These are the values that we'll use to calculate local Gi*
+all_nbs <- nb_tlag[index]
+all_wts <- wt_tlag[index]
+xvar <- xnb[[.var]][index]
+time_index <- xnb[[.time_col]][index]
 
 # Find xj for x and time-lagged xj
-xj <- find_xj(xnb$value, nbt)
-xtkj <- find_xj(xnb$value, nbt_k)
+xj <- find_xj(xvar, all_nbs)
 
-# union all xjs including time lagged as these are considered neighbors
-# must do the samee for weights
-all_xjs <- mapply(function(.xj, .xtkj) c(.xj, .xtkj),
-                  .xj = xj, .xtkj = xtkj,
-                  SIMPLIFY = FALSE)
+# Calculate local G on splits
+# local G params
+n <- n_locs
 
-# duplicate wt as many time periods there are
-# we're not going to worry about width at the moment
-wtt <- rep(wt, n_times)
-wttk <- wtt
-
-wtt[1:n_locs] <- vector("list", n_locs)
-
-# get all weights, however, i think they need to be divided by k + 1
-# because now the weights will equal k + 1 rather than 1 except when there hasn't
-# been lagged so t=1
-all_wts <- mapply(function(x, y) {
-  res <- c(x, y)
-  if (length(x) == 0) return(res)
-  res / 2
-}, x = wtt, y = wttk,
-SIMPLIFY = FALSE)
-
-
-# Calculate local G
-# observed x
-ind <- 1:168
-x <- xnb[["value"]][ind]
-xj <- all_xjs[ind]
-wj <- all_wts[ind]
-
-
-# In contrast,
-# the G∗i statistic includes the value xi in both numerator and denominator:
-# G∗i=∑j wijxj / ∑jxj.
-# Note that in this case, the denominator is constant across all observations and simply consists of the total sum of all values in the data set.
-# in the case of time-lagged, what do we include in the denominator?
-# for this case, i am only going to use the x values in our given time slice
-# even though we are including values from other time periods
-
-
-denom <- sum(x)
-numerator <- mapply(xj, wj, FUN = function(x, y) sum(x * y))
-
+x <- xvar[1:168]
+wj <- all_wts[1:168]
+xj <- xj[1:168]
 
 # adapted from the body of spdep::localG
 n <- length(wj)
@@ -98,17 +118,12 @@ EG <- Wi * xibar
 res <- (lx - EG)
 VG <- si2 * ((n * S1i - Wi^2)/(n - 1))
 res <- res/sqrt(VG)
-
+res
 # Notes -------------------------------------------------------------------
 
-
-
-# function to append list elements together into vector
-c_list <- function(x, y) {
-  mapply(function(x, y) c(x, y),
-         x, y,
-         SIMPLIFY = FALSE)
-}
+# nb_time_index <- function(time_index, n_locs, nb) {
+#   lapply(nb, function(x) x + n_locs * (time_index - 1))
+# }
 
 
 # include time lagged nbs
