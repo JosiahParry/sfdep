@@ -1,6 +1,5 @@
 # Hotspot clssification ---------------------------------------------------
 # https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/learnmoreemerging.htm#GUID-09587AFC-F5EC-4AEB-BE8F-0E0A26AB9230
-# all definitions appended at end
 
 new_hotspot <- function(gs, sigs, n, ...) {
   (sum(sigs) == 1) && sigs[n] && gs[n] > 0
@@ -10,7 +9,7 @@ consecutive_hotspot <- function(gs, sigs, n, ...) {
   if (!(sigs[n] && gs[n] > 0)) return(FALSE)
 
   n_final_run <- which(diff(cumsum(c(rev(sigs), FALSE))) == 0)[1]
-  run_index <- seq(n-n_final_run + 1, n, by = 1)
+  run_index <- seq(n - n_final_run + 1, n, by = 1)
 
   all(!sigs[-run_index]) &&
     all(sigs[run_index]) &&
@@ -156,3 +155,5 @@ classify_hotspot <- function(.x, threshold) {
         )
 
 }
+
+

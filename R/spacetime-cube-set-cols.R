@@ -108,3 +108,41 @@ set_col <- function(x, .from_geo, .to_data = .from_geo) {
   x
 
 }
+
+
+# Ordering function -------------------------------------------------------
+
+#' Order a spacetime cube
+#'
+#' When performing analysis on a spacetime cube, the order is of the utmost
+#' importance. This function ensures that a spacetime cube is ordered
+#' appropriately.
+#'
+#' @param x a spacetime cube object.
+#'
+#' @keywords internal
+spt_order <- function(x) {
+  if (!is_spacetime_cube(x)) cli::cli_abort(
+    c("`x` must be a valid spacetime cube.",
+      i = "see `?is_spacetime_cube()`.")
+  )
+
+  if (active(x) == "geometry") x <- activate(x, "data")
+  # determine number of time periods
+  n_times <- length(attr(x, "time"))
+
+  # determine row ordering to match regions
+  .loc_col = attr(x, "loc_col")
+  .time_col = attr(x, "time_col")
+  geo_locs <- attr(x, "geometry")[[.loc_col]]
+  region_index <- setNames(seq_along(geo_locs), geo_locs)
+  data_loc_id <- region_index[x[[.loc_col]]]
+
+  # reorder x appropriately by regions and time
+  # order by time then data loc id
+  x[order(x[[.time_col]], data_loc_id),]
+
+}
+
+
+

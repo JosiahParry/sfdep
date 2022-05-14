@@ -11,7 +11,7 @@
 #' @param n_sim the number of simulations to run for calculating `p_sim`
 #'
 #' @keywords internal
-local_g_spt <- function(x, times, nb, wt, n_locs, n_sim) {
+local_g_spt <- function(x, times, nb, wt, n_locs, nsim) {
   # identify observed local g values
   obs <- local_g_spt_impl(x, times, nb, wt, n_locs)
   # calculate replicates
@@ -20,7 +20,7 @@ local_g_spt <- function(x, times, nb, wt, n_locs, n_sim) {
     reps[,i] <- local_g_spt_impl(x, times, cond_permute_nb(nb), wt, n_locs)
   }
 
-  # identify simulated p-values for both tailes
+  # identify simulated p-values for both tails
   l <- (rowSums(obs >= reps)  + 1)/ (nsim + 1)
   g <- (rowSums(obs <= reps) + 1) / (nsim + 1)
 
