@@ -21,4 +21,6 @@ an sf object.}
 }
 \description{
 Cast between \code{spacetime} and \code{sf} classes
+
+Convert sf object to spacetime
 }

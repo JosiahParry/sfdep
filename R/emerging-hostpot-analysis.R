@@ -122,7 +122,7 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
     attr(res_ehs, "gi_star") <- all_gis
   }
 
-  rownames(res) <- NULL
+  rownames(res_ehs) <- NULL
 
   res_ehs
 

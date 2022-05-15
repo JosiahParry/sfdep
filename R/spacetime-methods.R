@@ -2,7 +2,7 @@
 # Selection ---------------------------------------------------------------
 
 # Selection method
-#' TODO update `times` attribute when subset and data is active
+# TODO update `times` attribute when subset and data is active
 `[.spacetime` <- function(x, ...) {
   x <- NextMethod()
 }
@@ -33,6 +33,9 @@ st_as_sf.spacetime <- function(x, ...) {
 
 # From sf -----------------------------------------------------------------
 
+#' Convert sf object to spacetime
+#'
+#'
 #' @param .loc_col the quoted name of the column containing unique location identifiers.
 #' @param .time_col the quoted name of the column containing time periods.
 #' @export
@@ -42,7 +45,7 @@ as_spacetime <- function(x, .loc_col, .time_col, ...) {
 
 
 as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
-  geometry <- sf:::distinct.sf(x, !!rlang::sym(.loc_col),
+  geometry <- getFromNamespace("distinct.sf", "sf")(x, !!rlang::sym(.loc_col),
                                !!rlang::sym(attr(x, "sf_column")))
 
   new_spacetime_data(st_drop_geometry(x), geometry,

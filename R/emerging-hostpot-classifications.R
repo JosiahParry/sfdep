@@ -132,7 +132,6 @@ fxs <- list(
 #' Classify Hot Spot results
 #'
 #' Given the Gi* time-series and Mann Kendall scores classify the hotspot values
-#'
 classify_hotspot <- function(.x, threshold) {
   gs = .x[["gi_star"]]
   sigs = .x[["p_sim"]] <= threshold

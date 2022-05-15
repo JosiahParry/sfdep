@@ -52,6 +52,21 @@ reference:
   - starts_with("global")
   - pairwise_colocation
 
+- title: Spacetime
+  contents:
+  - spacetime
+  - new_spacetime
+  - validate_spacetime
+  - is_spacetime
+  - is.spacetime
+  - activate
+  - is_spacetime_cube
+  - complete_spacetime_cube
+  - emerging_hotspot_analysis
+  - set_col
+  - as_spacetime
+  - st_as_sf
+
 - title: Data
   contents:
   - starts_with("guerry")

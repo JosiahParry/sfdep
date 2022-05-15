@@ -34,6 +34,12 @@
     <loc>/news/index.html</loc>
   </url>
   <url>
+    <loc>/reference/activate.html</loc>
+  </url>
+  <url>
+    <loc>/reference/as_spacetime.html</loc>
+  </url>
+  <url>
     <loc>/reference/check_pkg_suggests.html</loc>
   </url>
   <url>
@@ -43,6 +49,12 @@
     <loc>/reference/class_modify.html</loc>
   </url>
   <url>
+    <loc>/reference/classify_hotspot.html</loc>
+  </url>
+  <url>
+    <loc>/reference/complete_spacetime_cube.html</loc>
+  </url>
+  <url>
     <loc>/reference/cond_permute.html</loc>
   </url>
   <url>
@@ -50,6 +62,9 @@
   </url>
   <url>
     <loc>/reference/critical_threshold.html</loc>
+  </url>
+  <url>
+    <loc>/reference/emerging_hotspot_analysis.html</loc>
   </url>
   <url>
     <loc>/reference/find_xj.html</loc>
@@ -106,6 +121,9 @@
     <loc>/reference/inverse_dist_calc.html</loc>
   </url>
   <url>
+    <loc>/reference/is_spacetime_cube.html</loc>
+  </url>
+  <url>
     <loc>/reference/jc_bjc_calc.html</loc>
   </url>
   <url>
@@ -140,6 +158,9 @@
   </url>
   <url>
     <loc>/reference/local_g.html</loc>
+  </url>
+  <url>
+    <loc>/reference/local_g_spt.html</loc>
   </url>
   <url>
     <loc>/reference/local_gstar.html</loc>
@@ -208,7 +229,22 @@
     <loc>/reference/recreate_listw.html</loc>
   </url>
   <url>
+    <loc>/reference/set_col.html</loc>
+  </url>
+  <url>
     <loc>/reference/shuffle_nbs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/spacetime.html</loc>
+  </url>
+  <url>
+    <loc>/reference/spt_nb.html</loc>
+  </url>
+  <url>
+    <loc>/reference/spt_order.html</loc>
+  </url>
+  <url>
+    <loc>/reference/spt_wt.html</loc>
   </url>
   <url>
     <loc>/reference/st_as_edges.html</loc>
@@ -263,5 +299,8 @@
   </url>
   <url>
     <loc>/reference/st_weights.html</loc>
+  </url>
+  <url>
+    <loc>/reference/sub-.spacetime.html</loc>
   </url>
 </urlset>
