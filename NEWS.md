@@ -1,5 +1,7 @@
 # sfdep (development version)
 
+- implement emerging hotspot analysis with spacetime objects
+- implements a new s3 class spacetime to link geometry with time
 - adds colocation quotient (CLQ) measures:
   - `global_colocation()` for global colocation of one categorical variable
   - `pairwise_colocation()` for asymmetric colocation of subcategories of one or two categories
