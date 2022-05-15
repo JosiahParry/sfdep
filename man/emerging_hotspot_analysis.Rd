@@ -44,6 +44,9 @@ simulated p-value for the local Gi*.}
 
 time-step intervals to include in the analysis neighborhood.}
 }
+\value{
+
+}
 \description{
 Emerging Hot Spot Analysis identifies trends in spatial clustering over a
 period of time. Emerging hot spot analysis combines the Getis-Ord Gi* statistic

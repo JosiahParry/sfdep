@@ -62,6 +62,11 @@
 #'
 #' @seealso
 #' [How Emerging Hot Spot Analysis works](https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/learnmoreemerging.htm), [Emerging Hot Spot Analysis (Space Time Pattern Mining)](https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/emerginghotspots.htm), and the video [Spatial Data Mining II: A Deep Dive into Space-Time Analysis](https://www.youtube.com/watch?v=0aV6HHwJuo4&t=3848s&ab_channel=EsriEvents) by ESRI.
+#'
+#' @returns
+#'
+#'
+#'
 #' @export
 emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
                                       nb_col = NULL, wt_col = NULL,

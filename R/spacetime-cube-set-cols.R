@@ -1,9 +1,69 @@
-# Set wt from geometry ----------------------------------------------------
+# Set arbitrary column ----------------------------------------------------
 
 #' Set columns from `geometry` to `data`
 #'
+#' Set a column from the `geometry` context of a spacetime object to the `data`
+#' context.
+#'
+#' @param x a spacetime object
+#' @param .from_geo the name of the column in the `geometry` context
+#' @param .to_data the name of the new variable to create in the `data` context
+#' @param .nb_col the name of neighbor column in the `geometry` context
+#' @param .wt_col the name of the weights column in the `geometry` context
+#'
+#' @details
+#'
+#' These functions will reorder the spacetime object to ensure that it is ordered
+#' correctly based on the location time columns in the `geometry` context defined
+#' by the `loc_col` and `time_col` attributes respectively.
+#'
+#' [set_wts()] and [set_nbs()] create a new column in the data context with the
+#' same name as the column in the geometry context. If a different name is desired
+#' use [`set_cols()`]
+#'
+#' @returns
+#'
+#' A spacetime object with an active data context and a new column from the geometry
+#' context.
+#'
 #' @export
+set_col <- function(x, .from_geo, .to_data = .from_geo) {
+
+  if (!is_spacetime_cube(x)) cli::cli_abort(
+    c("`x` must be a valid spacetime cube.",
+      i = "see `?is_spacetime_cube()`.")
+  )
+
+  if (active(x) == "geometry") x <- activate(x, "data")
+
+  # determine number of time periods
+  n_times <- length(attr(x, "time"))
+
+  # extract var
+  geo_col <- attr(x, "geometry")[[.from_geo]]
+  if (is.null(geo_col)) cli::cli_abort("`.from_geo` is missing from `geometry`.")
+
+  # determine row ordering to match regions
+  .loc_col = attr(x, "loc_col")
+  .time_col = attr(x, "time_col")
+  geo_locs <- attr(x, "geometry")[[.loc_col]]
+  region_index <- setNames(seq_along(geo_locs), geo_locs)
+  data_loc_id <- region_index[x[[.loc_col]]]
+
+  # reorder x appropriately by regions and time
+  # order by time then data loc id
+  x <- x[order(x[[.time_col]], data_loc_id),]
+  # repeat wt object n_times to fill. Order is correct based on above
+  # ordering
+  x[[.to_data]] <- rep(geo_col, n_times)
+  x
+
+}
+
+# Set wt from geometry ----------------------------------------------------
+
 #' @rdname set_col
+#' @export
 set_wts <- function(x, .wt_col = "wt") {
 
   if (!is_spacetime_cube(x)) cli::cli_abort(
@@ -40,6 +100,7 @@ set_wts <- function(x, .wt_col = "wt") {
 
 # Set nb from geometry ----------------------------------------------------
 
+#' @rdname set_col
 #' @export
 set_nbs <- function(x, .nb_col = "nb") {
 
@@ -73,41 +134,6 @@ set_nbs <- function(x, .nb_col = "nb") {
 }
 
 
-# Set arbitrary column ----------------------------------------------------
-
-#' @export
-set_col <- function(x, .from_geo, .to_data = .from_geo) {
-
-  if (!is_spacetime_cube(x)) cli::cli_abort(
-    c("`x` must be a valid spacetime cube.",
-      i = "see `?is_spacetime_cube()`.")
-  )
-
-  if (active(x) == "geometry") x <- activate(x, "data")
-
-  # determine number of time periods
-  n_times <- length(attr(x, "time"))
-
-  # extract var
-  geo_col <- attr(x, "geometry")[[.from_geo]]
-  if (is.null(geo_col)) cli::cli_abort("`.from_geo` is missing from `geometry`.")
-
-  # determine row ordering to match regions
-  .loc_col = attr(x, "loc_col")
-  .time_col = attr(x, "time_col")
-  geo_locs <- attr(x, "geometry")[[.loc_col]]
-  region_index <- setNames(seq_along(geo_locs), geo_locs)
-  data_loc_id <- region_index[x[[.loc_col]]]
-
-  # reorder x appropriately by regions and time
-  # order by time then data loc id
-  x <- x[order(x[[.time_col]], data_loc_id),]
-  # repeat wt object n_times to fill. Order is correct based on above
-  # ordering
-  x[[.to_data]] <- rep(geo_col, n_times)
-  x
-
-}
 
 
 # Ordering function -------------------------------------------------------
