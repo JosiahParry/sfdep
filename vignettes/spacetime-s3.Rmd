@@ -1,0 +1,64 @@
+---
+title: "The spacetime s3 class"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The spacetime s3 class}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(sfdep)
+```
+
+-   The spacetime s3 class is a representation of time-series data with geospatial component
+-   This representation of spacetime data is informed greatly by the {spacetime} package by Edzer Pebesma. The interface of the s3 class is inspired by the design of tidygraph
+
+## spacetime (Pebesma et al)
+
+Traditionally "spatio-temporal data often come in the form of single tables" that can typically be considered "time-wide", "space-wide", or "long formats". In long formats, often referred to as "tidy", a row identifies a unique location and time observation represented by a column dedicated to time and another to locations.
+
+-   space-wide has locations across columns
+
+-   time-wide has time across columns
+
+These flat formats are not linked to geometry in a meaningful way. To represent spatial data in a temporal context Pebesma, 2012 identifies 3 different representations
+
+Types of spacetime representation:
+
+-   spatio-temporal full grid:
+
+    -   a complete time-series for each location
+
+-   spatio-temporal sparse grids
+
+    -   only recorded values having incomplete time-series
+
+-   spatio-temporal irregular data
+
+    -   each location and time is unique with no locations have multiple observations
+
+## spacetime s3 class in sfdep
+
+-   Inspired by the design of tidygraph and sfnetworks: it is two linked data sets
+
+    -   a data frame and an sf object linked by a shared location column
+    -   these are described as contexts
+    -   the data context and the geometry context
+
+-   The spacetime class follows a long format as described in Pebesma, 2012
+
+-   The spacetime cube as made popular by ESRI is a spatio-temporal full grid (Pebesma, 2012)
+
+    -   when setting columns from geometry context to data context follows this advice "for each moment in time, the same set of spatial entities is sampled." (Pebesma, 2012)
+
+-   "Unsampled combinations of (space, time) are stored in this class, but are assigned a missing value NA." (Pebesma, 2012)
+
+    -   If data is represented in a "spatio-temporal sparse grid" it can be made into a full grid using `complete_spacetime_cube()`
