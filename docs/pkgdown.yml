@@ -4,6 +4,7 @@ pkgdown_sha: ~
 articles:
   basics-of-sfdep: basics-of-sfdep.html
   conditional-permutation: conditional-permutation.html
+  spacetime-s3: spacetime-s3.html
   spdep-and-pysal: spdep-and-pysal.html
-last_built: 2022-05-15T15:33Z
+last_built: 2022-05-17T12:51Z
 

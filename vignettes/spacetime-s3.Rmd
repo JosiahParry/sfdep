@@ -16,44 +16,78 @@ knitr::opts_chunk$set(
 
 ```{r setup}
 library(sfdep)
+library(dplyr)
 ```
 
--   The spacetime s3 class is a representation of time-series data with geospatial component
--   This representation of spacetime data is informed greatly by the {spacetime} package by Edzer Pebesma. The interface of the s3 class is inspired by the design of tidygraph
+sfdep introduces a new s3 class to represent spatio-temporal data. The `spacetime` class links a flat data set containing spatio-temporal information with the related geometry. The spacetime class is informed by the `{spacetime}` package by Edzer Pebesma (2012), and the interface is inspired by the design of `{tidygraph}`.
 
-## spacetime (Pebesma et al)
+## Spatio-temporal data
 
-Traditionally "spatio-temporal data often come in the form of single tables" that can typically be considered "time-wide", "space-wide", or "long formats". In long formats, often referred to as "tidy", a row identifies a unique location and time observation represented by a column dedicated to time and another to locations.
+Traditionally "spatio-temporal data often come in the form of single tables" that can typically be categorized as "time-wide", "space-wide", or "long formats." In long formats, often referred to as "tidy", a row identifies a unique location and time observation represented by a column dedicated to time and another to locations. This is the typical presentation of panel data.
 
--   space-wide has locations across columns
+Space-wide data present each time period across each row and locational information in each column. Whereas a time-wide representation has location data down the rows and each time period is represented as a new column.
 
--   time-wide has time across columns
+These flat formats are not linked to the geographies that they represent in any meaningful way. These flat files typically contain only an identifier of the location, but the spatial representation.
 
-These flat formats are not linked to geometry in a meaningful way. To represent spatial data in a temporal context Pebesma, 2012 identifies 3 different representations
+The `spacetime` class is developed with particular focus to lattice data. That is, to create a representation of spatio-temoral data for a set of regions over a number of different time-periods e.g. population densities in census tracts for each year.
 
-Types of spacetime representation:
+To represent spatial data in a temporal context Pebesma, 2012 identifies a number of spatio-temporal layouts, two of which are of particular interest. These are the spatio-temporal full grid and sparse grids.
 
--   spatio-temporal full grid:
+Given a number of spatial features $n$, and time periods $m$, a *spatio-temporal full grid* contains $n \times m$ rows. Each location has a recorded observation for each of the time periods in $m$. For example, if there are 10 locations and 20 time periods, there are 20 observations per location meaning there are $10 \times 20 = 200$ observations. This is efficient only when are there are complete time-series for each location.
 
-    -   a complete time-series for each location
-
--   spatio-temporal sparse grids
-
-    -   only recorded values having incomplete time-series
-
--   spatio-temporal irregular data
-
-    -   each location and time is unique with no locations have multiple observations
+When there are missing observations for some locations or time periods and they are entirely omitted from the data set, that is a *spatio-temporal sparse grid*. In this case $N \lt m \times n$
 
 ## spacetime s3 class in sfdep
 
--   Inspired by the design of tidygraph and sfnetworks: it is two linked data sets
+Inspired by the design of the tidygraph package, the spacetime class links a data frame and an sf object based on a shared location identifier column. These are referred to as the *data context* and the *geometry context*. The spacetime class allows you switch between different contexts and work with them individually as you see fit.
 
-    -   a data frame and an sf object linked by a shared location column
-    -   these are described as contexts
-    -   the data context and the geometry context
+Typically, if one wants to represent location data over multiple time periods containing information about the geography, an sf object is used which duplicates the geometry at each location for each time period which can be computationally expensive. By linking sf objects to a data frame based on their location ID, we are able to avoid this problem
 
--   The spacetime class follows a long format as described in Pebesma, 2012
+There are four important aspects to the spacetime class:
+
+-   the data: a `data.frame` object
+-   the geometry: an `sf` object
+-   the location identifiers
+-   the time column
+
+### Creating a spacetime object
+
+There are two ways to create spacetime objects: 1) with `as_spacetime()` and 2) `spacetime()` or `new_spacetime()`. The former takes an sf object that contains the location IDs, times, and geometry and converts it into a spacetime object. Whereas the constructor functions require a data frame and a separate sf object containing the geometry.
+
+Let's create a sample data set using the `guerry`
+
+```{r}
+# replicate the guerry dataset 10 times
+x <- purrr::map_dfr(1:10, ~guerry) |> 
+  select(code_dept, crime_pers) |> 
+         # create an indicator for time period
+  mutate(time_period = sort(rep(1:85, 10)), 
+         # add some noise 
+         crime_pers = crime_pers * runif(850, max = 2))
+
+x
+```
+
+This representation, where there are duplicate geometries for each location, should be cast into a spacetime object using `as_spacetime()`.
+
+```{r}
+spt <- as_spacetime(x, "code_dept", "time_period")
+```
+
+## Spacetime Contexts
+
+The **data context**
+
+```{r}
+activate(spt, "data")
+```
+
+The **geometry** context
+
+```{r}
+spt |> 
+  activate("geometry") 
+```
 
 -   The spacetime cube as made popular by ESRI is a spatio-temporal full grid (Pebesma, 2012)
 
@@ -62,3 +96,5 @@ Types of spacetime representation:
 -   "Unsampled combinations of (space, time) are stored in this class, but are assigned a missing value NA." (Pebesma, 2012)
 
     -   If data is represented in a "spatio-temporal sparse grid" it can be made into a full grid using `complete_spacetime_cube()`
+
+‚

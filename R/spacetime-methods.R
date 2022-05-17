@@ -43,11 +43,12 @@ as_spacetime <- function(x, .loc_col, .time_col, ...) {
   UseMethod("as_spacetime")
 }
 
-
+#' @rdname as_spacetime
+#' @export
 as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
   geometry <- getFromNamespace("distinct.sf", "sf")(x, !!rlang::sym(.loc_col),
                                !!rlang::sym(attr(x, "sf_column")))
 
-  new_spacetime_data(st_drop_geometry(x), geometry,
+  new_spacetime_data(sf::st_drop_geometry(x), geometry,
                      .loc_col, .time_col)
 }

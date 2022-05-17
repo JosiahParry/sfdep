@@ -3,11 +3,14 @@
 \name{st_as_sf.spacetime}
 \alias{st_as_sf.spacetime}
 \alias{as_spacetime}
+\alias{as_spacetime.sf}
 \title{Cast between \code{spacetime} and \code{sf} classes}
 \usage{
 \method{st_as_sf}{spacetime}(x, ...)
 
 as_spacetime(x, .loc_col, .time_col, ...)
+
+\method{as_spacetime}{sf}(x, .loc_col, .time_col, ...)
 }
 \arguments{
 \item{x}{for \code{\link[=st_as_sf]{st_as_sf()}} a spacetime object. For \code{\link[=as_spacetime]{as_spacetime()}}
