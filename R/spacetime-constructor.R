@@ -68,12 +68,15 @@ new_spacetime <- function(.data, .geometry, .loc_col,
 #' @keywords internal
 new_spacetime_geo <- function(.data, .geometry, .loc_col, .time_col) {
   times <- sort(unique(.data[[.time_col]]))
+  n_times <- length(times)
+  n_locs <- length(.geometry[[.loc_col]])
   structure(.geometry,
             active = "geometry",
             data = .data,
             loc_col = .loc_col,
+            n_locs = n_locs,
             time_col = .time_col,
-            times = times,
+            n_times = n_times,
             class = c("spacetime", class(.geometry)))
 }
 
@@ -81,12 +84,15 @@ new_spacetime_geo <- function(.data, .geometry, .loc_col, .time_col) {
 new_spacetime_data <- function(.data, .geometry, .loc_col, .time_col) {
 
   times <- sort(unique(.data[[.time_col]]))
+  n_times <- length(times)
+  n_locs <- length(.geometry[[.loc_col]])
 
   structure(.data,
             geometry = .geometry,
             loc_col = .loc_col,
+            n_locs = n_locs,
             time_col = .time_col,
-            time = times,
+            n_times = n_times,
             class = c("spacetime", class(.data)),
             active = "data")
 

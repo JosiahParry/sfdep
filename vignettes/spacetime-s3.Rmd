@@ -61,7 +61,7 @@ Let's create a sample data set using the `guerry`
 x <- purrr::map_dfr(1:10, ~guerry) |> 
   select(code_dept, crime_pers) |> 
          # create an indicator for time period
-  mutate(time_period = sort(rep(1:85, 10)), 
+  mutate(time_period = sort(rep(1:10, 85)), 
          # add some noise 
          crime_pers = crime_pers * runif(850, max = 2))
 
@@ -73,6 +73,10 @@ This representation, where there are duplicate geometries for each location, sho
 ```{r}
 spt <- as_spacetime(x, "code_dept", "time_period")
 ```
+
+Alternatively, we have the other scenario, 
+
+
 
 ## Spacetime Contexts
 

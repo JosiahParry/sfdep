@@ -5,6 +5,24 @@
 # TODO update `times` attribute when subset and data is active
 `[.spacetime` <- function(x, ...) {
   x <- NextMethod()
+  context <- active(x)
+  .loc_col <- attr(x, "loc_col")
+  .time_col <- attr(x, "time_col")
+
+  if (context == "data") {
+    times <- sort(unique(x[[.time_col]]))
+    n_times <- length(times)
+    n_locs <- length(attr(x, "geometry")[[.loc_col]])
+  }
+
+  if (context == "geometry") {
+    times <- sort(unique(attr(x, "data")[[.time_col]]))
+    n_times <- length(times)
+    n_locs <- length(x[[.loc_col]])
+  }
+  attr(x, "n_times") <- n_times
+  attr(x, "n_locs") <- n_locs
+  x
 }
 
 `[[.spacetime` <- function(x, ...) {
@@ -21,9 +39,8 @@
 #' @param ... unused
 #' @export
 #' @rdname as_spacetime
-#' @importFrom sf st_as_sf
-st_as_sf.spacetime <- function(x, ...) {
-  if (active(x) == "geometry") x < activate(x, "data")
+as_sf <- function(x, ...) {
+  if (active(x) == "geometry") x <- activate(x, "data")
 
   merge(attr(x, "geometry"), x,
         by = attr(x, "loc_col"))
@@ -52,3 +69,22 @@ as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
   new_spacetime_data(sf::st_drop_geometry(x), geometry,
                      .loc_col, .time_col)
 }
+
+
+# Print -------------------------------------------------------------------
+print.spacetime <- function(x, ...) {
+  context <- active(x)
+  n_locs <- attr(x, "n_locs")
+  n_times <- attr(x, "n_times")
+  cli::cli_div(theme = list(rule = list(color = "grey")))
+  cli::cli_text(cli::style_bold(cli::style_italic("spacetime ───")))
+  cli::cli_text(cli::col_grey("Context:", cli::style_italic("{.var {context}}")))
+  cli::cli_text(cli::col_grey("{.emph {n_locs}} locations {.var {attr(x, 'loc_col')}}"))
+  cli::cli_text(
+    cli::col_grey("{.emph {n_times}} time periods {.var {attr(x, 'time_col')}}")
+    )
+  cli::cli_rule(cli::col_grey(cli::style_italic("{context} context")))
+  NextMethod()
+  cli::cli_end()
+}
+#

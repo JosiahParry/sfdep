@@ -146,8 +146,7 @@ st_as_nodes.sfc <- function(x, nb) {
       else stop("Point-conforming geometries required")
     }
   }
-  sf::st_as_sf(x) %>%
-    dplyr::mutate(i = attr(nb, "region.id"), .before = 1)
+    dplyr::mutate(sf::st_as_sf(x), i = attr(nb, "region.id"), .before = 1)
 
 }
 
