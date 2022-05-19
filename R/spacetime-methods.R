@@ -4,7 +4,27 @@
 # Selection method
 # TODO update `times` attribute when subset and data is active
 `[.spacetime` <- function(x, ...) {
-  x <- NextMethod()
+  NextMethod()
+}
+
+`[[.spacetime` <- function(x, ...) {
+  NextMethod()
+}
+
+
+
+#' Update spacetime attributes
+#'
+#' Update's a spacetime object's number of locations and time periods.
+#' A spacetime object's attributes are sticky and will not change if subsetted
+#' for example by using [`dplyr::filter()`] or [`dplyr::slice()`]. Update the
+#' locations and times of a spacetime object.
+#'
+#' @param x a spacetime object
+#' @param ... unused
+#' @export
+spt_update <- function(x, ...) {
+  stopifnot(is_spacetime(x))
   context <- active(x)
   .loc_col <- attr(x, "loc_col")
   .time_col <- attr(x, "time_col")
@@ -12,21 +32,21 @@
   if (context == "data") {
     times <- sort(unique(x[[.time_col]]))
     n_times <- length(times)
-    n_locs <- length(attr(x, "geometry")[[.loc_col]])
+    locs <- attr(x, "geometry")[[.loc_col]]
+    n_locs <- length(locs)
   }
 
   if (context == "geometry") {
     times <- sort(unique(attr(x, "data")[[.time_col]]))
     n_times <- length(times)
-    n_locs <- length(x[[.loc_col]])
+    locs <- x[[.loc_col]]
+    n_locs <- length(locs)
   }
+  attr(x, "locs") <- locs
+  attr(x, "times") <- times
   attr(x, "n_times") <- n_times
   attr(x, "n_locs") <- n_locs
   x
-}
-
-`[[.spacetime` <- function(x, ...) {
-  NextMethod()
 }
 
 
@@ -72,6 +92,7 @@ as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
 
 
 # Print -------------------------------------------------------------------
+#' @export
 print.spacetime <- function(x, ...) {
   context <- active(x)
   n_locs <- attr(x, "n_locs")
@@ -85,6 +106,5 @@ print.spacetime <- function(x, ...) {
     )
   cli::cli_rule(cli::col_grey(cli::style_italic("{context} context")))
   NextMethod()
-  cli::cli_end()
 }
-#
+
