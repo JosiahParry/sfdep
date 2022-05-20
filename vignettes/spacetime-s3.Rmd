@@ -1,8 +1,8 @@
 ---
-title: "The spacetime s3 class"
+title: "spacetime and spacetime cubes"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The spacetime s3 class}
+  %\VignetteIndexEntry{spacetime and spacetime cubes}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message = FALSE}
 library(sfdep)
 library(dplyr)
 ```
@@ -68,30 +68,123 @@ x <- purrr::map_dfr(1:10, ~guerry) |>
 x
 ```
 
-This representation, where there are duplicate geometries for each location, should be cast into a spacetime object using `as_spacetime()`.
+This representation, where there are duplicate geometries for each location, should be cast into a spacetime object using `as_spacetime()`. 
 
 ```{r}
 spt <- as_spacetime(x, "code_dept", "time_period")
 ```
 
-Alternatively, we have the other scenario, 
+Alternatively, we have the other scenario, where we have the geometry and the data as two separate objects. In this case we can use the `spacetime()` constructor. It's required arguments are `.data`, .`geometry`, `.loc_col`, `.time_col`. `.data` must be a data frame and `.geometry` must be a tibble.
 
+Here we create a data frame `df` which contains columns for the location identifier, the time period, and any other variables of interest in this case `crime_pers`.
+
+```{r}
+df <- sf::st_drop_geometry(x)
+geo <- select(guerry, code_dept)
+
+head(df)
+```
+
+Note that the location identifier column is the same between the two objects—this is a requirement. 
+
+```{r}
+spt <- spacetime(.data = df, 
+          .geometry = geo, 
+          .loc_col = "code_dept", 
+          .time_col = "time_period") 
+
+spt
+```
+
+> As an aside, I'd note that `as_spacetime()` uses the sf distinct method which can be a bit computationally intense depending on your geometries. As such I'd recommend using `spacetime()` constructor always. 
+
+With the spacetime objects, we can also cast them back into sf objects using `as_sf(x)`.
 
 
 ## Spacetime Contexts
 
-The **data context**
+Spacetime objects have two contexts: the data and geometry contexts. 
+
+The **data context** consists of a data frame object. It can be manipulated just like any other data frame. You switch between contexts using `activate()`. To switch to the data context activate "data."
 
 ```{r}
 activate(spt, "data")
 ```
 
-The **geometry** context
+The **geometry context** is an sf object that too can be used like any other sf object and is activated with `activate(x, "geometry")`.
 
 ```{r}
 spt |> 
   activate("geometry") 
 ```
+
+## Spatio-temporal grids and spacetime 
+
+Unlike `{spacetime}`, sfdep does not make explicit distinctions between spatio-temporal full and sparse grids. Rather, the approach is more laissez faire. The design of the spacetime interface is very flexible and is designed to let the user clean their data with whatever tools are familiar and to their own specification. 
+
+The distinction between sparse and full grids is important when it comes to analyzing data. For example emerging hot spot analysis requires a spatio-temporal full-grid. sfdep utilizes the phrase _"spacetime cube"_ as popularized by ESRI to refer to a spatio-temporal full grid. 
+
+
+### Spacetime Cubes
+
+A spacetime object is a spacetime cube if every location has a value for every time index. Another way of saying this is that each location contains a regular time-series. 
+
+In ESRI terminology, the basic unit of a spacetime cube is a _bin_. A bin is the unique combination of a location and time index. For each time index, the collection of every location is called a _time slice_. In every location, the collection of every bin at each time index is referred to as a a _bin time-series_.
+
+```{r, echo=FALSE}
+knitr::include_graphics("https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/GUID-0FEECE1A-6B54-44B4-AE49-05E7EA849A8B-web.png")
+```
+
+
+We can test if an object is a spacetime cube with `is_spacetime_cube()`
+
+```{r}
+is_spacetime_cube(spt)
+```
+
+Here we take a sample of 800 of the 850 rows of `spt` which makes this a sparse grid. 
+
+```{r}
+sparse_spt <- dplyr::slice_sample(spt, n = 800)
+
+is_spacetime_cube(sparse_spt)
+```
+
+If an object is a spare spatio-temporal grid we can make it a full one using `complete_spacetime_cube()`. This works similarly to [`tidyr::complete()`]. `complete_spacetime_cube()` ensures that there is a row for each combination of location and time. New rows will contain missing values
+
+```{r}
+spt_complete <- complete_spacetime_cube(sparse_spt)
+
+is_spacetime_cube(spt_complete)
+```
+
+One of the conditions of being a spactime cube is that the _time-series must be regular_ (only one observation for each time index). Here we can create a sample of our data with replacement to create an irregular time-series at multiple locations.
+
+```{r, error = TRUE}
+set.seed(0)
+sparse_spt <- dplyr::slice_sample(spt, n = 800, replace = TRUE)
+
+complete_spacetime_cube(sparse_spt)
+```
+
+This error is informative. We do not have unique bins in our spacetime data. We can check this. 
+
+```{r}
+dplyr::count(sparse_spt, time_period, code_dept)
+```
+
+Spacetime cubes are used for emerging hot spot analysis as below. 
+
+```{r}
+emerging_hotspot_analysis(spt, "crime_pers", threshold = 0.05)
+
+```
+
+
+
+
+
+<!--
 
 -   The spacetime cube as made popular by ESRI is a spatio-temporal full grid (Pebesma, 2012)
 
@@ -102,3 +195,4 @@ spt |>
     -   If data is represented in a "spatio-temporal sparse grid" it can be made into a full grid using `complete_spacetime_cube()`
 
 ‚
+-->

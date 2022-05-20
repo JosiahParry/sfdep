@@ -35,7 +35,7 @@ a \code{data.frame} with columns:
 }
 }
 \description{
-Local G*
+Calculate the local Gi* statistic.
 }
 \examples{
 nb <- st_contiguity(guerry)

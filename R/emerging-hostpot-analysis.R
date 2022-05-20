@@ -22,7 +22,6 @@
 #' @param threshold default `0.01`. The significance threshold to use.
 #' @param ... unused.
 #'
-#'  time-step intervals to include in the analysis neighborhood.
 #'
 #' @details
 #'
@@ -35,7 +34,7 @@
 #'  Additionally, each location is classified into one of seventeen categories based
 #'  on [ESRI's emerging hot spot classification criteria](https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/learnmoreemerging.htm).
 #'
-#'  The Mann-Kendall trned test is done using [`Kendall::MannKendall()`]. `Kendall`
+#'  The Mann-Kendall trend test is done using [`Kendall::MannKendall()`]. `Kendall`
 #'  is not installed with sfdep and should be installed prior to use.
 #'
 #'  ## Using your own neighbors and weights
@@ -74,6 +73,9 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
 
   check_pkg_suggests("Kendall")
 
+  # activate data if not already
+  if (active(x) == "geometry") x <- activate(x, "data")
+
   x <- spt_order(x)
 
   geo_class <- sf::st_geometry_type(attr(x, "geometry"), by_geometry = FALSE)
@@ -82,7 +84,6 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
   .time_col <- attr(x, "time_col")
   times <- x[[.time_col]]
   # identify number of lcoations and times
-  # TODO these should be automatically stored in attributes and updated with [.spacetime method
   n_locs <- length(unique(x[[.loc_col]]))
   n_times <- length(unique(times))
 
@@ -123,6 +124,14 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
   }
 
   rownames(res_ehs) <- NULL
+
+
+  res_ehs <- setNames(
+    res_ehs[, c("location", "tau", "sl", "classification")],
+    c("location", "tau", "p_value", "classification")
+    )
+
+  class(res_ehs) <- setdiff(class(x), "spacetime")
 
   res_ehs
 

@@ -9,3 +9,4 @@ classify_hotspot(.x, threshold)
 \description{
 Given the Gi* time-series and Mann Kendall scores classify the hotspot values
 }
+\keyword{internal}

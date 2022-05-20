@@ -32,7 +32,7 @@ associated with local clustering of hot and cold spots."><!-- mathjax --><script
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/basics-of-sfdep.html">The Basics of sfdep</a>
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
-    <a class="dropdown-item" href="../articles/spacetime-s3.html">The spacetime s3 class</a>
+    <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
 </li>
@@ -108,8 +108,7 @@ simulated p-value for the local Gi*.</p></dd>
 <dt>threshold</dt>
 <dd><p>default <code>0.01</code>. The significance threshold to use.</p></dd>
 <dt>...</dt>
-<dd><p>unused.</p>
-<p>time-step intervals to include in the analysis neighborhood.</p></dd>
+<dd><p>unused.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -128,7 +127,7 @@ Next, for each location across all time-periods, the Mann-Kendall trend test
 is done to identify any temporal trend in Gi* values over all time periods.
 Additionally, each location is classified into one of seventeen categories based
 on <a href="https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/learnmoreemerging.htm" class="external-link">ESRI's emerging hot spot classification criteria</a>.</p>
-<p>The Mann-Kendall trned test is done using <code><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">Kendall::MannKendall()</a></code>. <code>Kendall</code>
+<p>The Mann-Kendall trend test is done using <code><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">Kendall::MannKendall()</a></code>. <code>Kendall</code>
 is not installed with sfdep and should be installed prior to use.</p>
 </div>
 

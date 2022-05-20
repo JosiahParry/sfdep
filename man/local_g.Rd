@@ -35,7 +35,7 @@ a \code{data.frame} with columns:
 }
 }
 \description{
-Local G
+Calculate the local Geary statistic for a given variable.
 }
 \examples{
 x <- guerry$crime_pers

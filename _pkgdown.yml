@@ -65,7 +65,8 @@ reference:
   - emerging_hotspot_analysis
   - set_col
   - as_spacetime
-  - st_as_sf
+  - as_sf
+  - spt_update
 
 - title: Data
   contents:

@@ -40,9 +40,7 @@ simulated p-value for the local Gi*.}
 
 \item{threshold}{default \code{0.01}. The significance threshold to use.}
 
-\item{...}{unused.
-
-time-step intervals to include in the analysis neighborhood.}
+\item{...}{unused.}
 }
 \value{
 
@@ -63,7 +61,7 @@ is done to identify any temporal trend in Gi* values over all time periods.
 Additionally, each location is classified into one of seventeen categories based
 on \href{https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/learnmoreemerging.htm}{ESRI's emerging hot spot classification criteria}.
 
-The Mann-Kendall trned test is done using \code{\link[Kendall:MannKendall]{Kendall::MannKendall()}}. \code{Kendall}
+The Mann-Kendall trend test is done using \code{\link[Kendall:MannKendall]{Kendall::MannKendall()}}. \code{Kendall}
 is not installed with sfdep and should be installed prior to use.
 }
 

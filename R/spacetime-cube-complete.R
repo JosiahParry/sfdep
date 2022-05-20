@@ -23,11 +23,10 @@ complete_spacetime_cube <- function(x, ...) {
   # activate data if not already
   if (active(x) == "geometry") x <- activate(x, "data")
 
-  .time_col <- attr(x, "time_col")
   .loc_col <- attr(x, "loc_col")
-
-  times <- unique(x[[.time_col]])
-  locs <- attr(x, "geometry")[[.loc_col]]
+  .time_col <- attr(x, "time_col")
+  locs <- attr(x, "locs")
+  times <- attr(x, "times")
 
   # if there are more than 1 observation per-time period
   # exit as it cannot be regular
@@ -41,7 +40,7 @@ complete_spacetime_cube <- function(x, ...) {
   complete_spts <- expand.grid(locs = locs, times = times)
   names(complete_spts) <- c(.loc_col, .time_col)
 
-  .data_class <- class(x)
+  .data_class <- setdiff(class(x), "spacetime")
 
   res <- merge(complete_spts, x, by = names(complete_spts), all.x = TRUE)
   class(res) <- .data_class

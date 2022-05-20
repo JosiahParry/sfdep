@@ -28,7 +28,7 @@ Global Join Count Test"><!-- mathjax --><script src="https://cdnjs.cloudflare.co
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/basics-of-sfdep.html">The Basics of sfdep</a>
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
-    <a class="dropdown-item" href="../articles/spacetime-s3.html">The spacetime s3 class</a>
+    <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
     <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
   </div>
 </li>
@@ -118,7 +118,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               8.008016               5.562185 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               8.144289               6.031348 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
@@ -132,7 +132,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               7.807615               6.219942 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               8.060120               6.124892 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
@@ -146,7 +146,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               7.955912               6.632590 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               7.883768               6.476423 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
@@ -160,7 +160,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               8.018036               6.612124 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               8.148297               6.239008 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
@@ -174,7 +174,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               7.959920               6.114856 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               7.963928               5.950503 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geo</span><span class="op">)</span></span>
@@ -254,7 +254,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               8.134269               5.831333 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               8.104208               7.057392 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
@@ -268,7 +268,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               7.979960               6.023694 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               8.094188               6.519223 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
@@ -282,7 +282,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               7.679359               6.262445 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               7.973948               6.021408 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
@@ -296,7 +296,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               8.102204               6.276682 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               7.565130               6.037416 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 	Monte-Carlo simulation of join-count statistic</span>
@@ -310,7 +310,7 @@ an object of class <code>jclist</code> which is a list where each element is of 
 <span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> sample estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mean of simulation variance of simulation </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               7.909820               6.118357 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               7.989980               6.592269 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 </code></pre></div>
     </div>

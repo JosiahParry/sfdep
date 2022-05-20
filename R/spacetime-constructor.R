@@ -94,13 +94,14 @@ new_spacetime_data <- function(.data, .geometry, .loc_col, .time_col) {
   structure(.data,
             active = "data",
             data = .data,
+            geometry = .geometry,
             loc_col = .loc_col,
             locs = locs,
             n_locs = n_locs,
             time_col = .time_col,
             times = times,
             n_times = n_times,
-            class = c("spacetime", class(.geometry)))
+            class = c("spacetime", class(.data)))
 }
 
 
