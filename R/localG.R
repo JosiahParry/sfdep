@@ -1,5 +1,7 @@
 #' Local G
 #'
+#' Calculate the local Geary statistic for a given variable.
+#'
 #' @export
 #' @inheritParams local_moran
 #' @inheritParams recreate_listw
@@ -41,7 +43,11 @@ local_g_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", ...) 
   localg_names <- c("gi", "e_gi", "var_gi", "p_value",
                     "p_sim", "p_folded_sim", "skewness", "kurtosis")
 
-  stats::setNames(as.data.frame(attr(res, "internals")), localg_names)
+  gi <- as.numeric(res)
+  stats::setNames(
+    cbind("gi" = gi, as.data.frame(attr(res, "internals")[, 2:8])),
+    localg_names
+    )
 }
 
 

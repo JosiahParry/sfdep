@@ -1,5 +1,7 @@
 #' Local G*
 #'
+#' Calculate the local Gi* statistic.
+#'
 #' @inheritParams local_g
 #' @export
 #' @examples
@@ -42,7 +44,10 @@ local_gstar_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", .
   }
 
   suppressWarnings({
-    local_g_perm(x, nb, wt, nsim = nsim, alternative = alternative, ...)
+    res <- local_g_perm(x, nb, wt, nsim = nsim, alternative = alternative, ...)
   })
 
+  colnames(res)[1] <- "gi_star"
+
+  res
 }
