@@ -22,16 +22,22 @@
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">The Basics of sfdep</a>
-    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-vignettes">Vignettes</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
+    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">Basics of sfdep</a>
     <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
-    <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
+    <a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a>
+    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a>
   </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-releases">
+    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.1.1</a>
+  </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -100,23 +106,22 @@
 <span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_gstar_perm</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> attr `self.include` is `TRUE`. Reporting Gi*.</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     gi_star       e_gi       var_gi    p_value p_sim p_folded_sim     skewness</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.120916 0.01201799 4.037218e-06 0.26232380 0.272        0.136  0.068504884</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.251150 0.01209240 2.723797e-06 0.02437602 0.036        0.018  0.310717676</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.096285 0.01189876 2.927852e-06 0.03605692 0.068        0.034  0.377812580</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.838666 0.01186091 3.719079e-06 0.06596429 0.068        0.034  0.036819903</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.202953 0.01177451 4.493561e-06 0.22899469 0.224        0.112  0.131888029</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -2.126029 0.01190666 2.107926e-06 0.03350081 0.052        0.026 -0.004368201</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       kurtosis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.307120636</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.003103406</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.037338156</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.388221595</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.250595034</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.010699369</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     gi_star       e_gi       var_gi    p_value p_sim p_folded_sim    skewness</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.214517 0.01185675 3.948894e-06 0.22455032 0.236        0.118  0.01932868</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.526893 0.01188778 2.406439e-06 0.01150765 0.020        0.010  0.04065067</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.062783 0.01191193 3.001560e-06 0.03913324 0.052        0.026 -0.01439675</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.777359 0.01179448 3.832324e-06 0.07550914 0.056        0.028  0.14038163</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.257101 0.01191962 4.596441e-06 0.20871715 0.204        0.102  0.03480132</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -2.148633 0.01194333 2.113135e-06 0.03166354 0.040        0.020  0.06233996</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      kurtosis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.36933964</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.16184004</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.02015052</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.41928430</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.29948580</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.21395248</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_gstar</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> attr `self.include` is `TRUE`. Reporting Gi*.</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1.342359  2.595578  2.388872 -1.848187 -1.209736 -2.034142</span>
 </code></pre></div>

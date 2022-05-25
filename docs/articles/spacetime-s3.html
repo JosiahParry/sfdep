@@ -42,16 +42,22 @@
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">The Basics of sfdep</a>
-    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-vignettes">Vignettes</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
+    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">Basics of sfdep</a>
     <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
-    <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
+    <a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a>
+    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a>
   </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-releases">
+    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.1.1</a>
+  </div>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -136,16 +142,16 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 850 × 4</span></span>
 <span class="co">#&gt;    code_dept crime_pers                                     geometry time_period</span>
 <span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 01            <span style="text-decoration: underline;">50</span>650. (((801150 2092615, 800669 2093190, 800688 2…           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 02             <span style="text-decoration: underline;">3</span>511. (((729326 2521619, 729320 2521230, 729280 2…           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 03             <span style="text-decoration: underline;">4</span>737. (((710830 2137350, 711746 2136617, 712430 2…           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04             <span style="text-decoration: underline;">7</span>109. (((882701 1920024, 882408 1920733, 881778 1…           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 05            <span style="text-decoration: underline;">19</span>593. (((886504 1922890, 885733 1922978, 885479 1…           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 07            <span style="text-decoration: underline;">12</span>922. (((747008 1925789, 746630 1925762, 745723 1…           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08            <span style="text-decoration: underline;">19</span>869. (((818893 2514767, 818614 2514515, 817900 2…           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 09             <span style="text-decoration: underline;">5</span>943. (((509103 1747787, 508820 1747513, 508154 1…           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 10            <span style="text-decoration: underline;">14</span>340. (((775400 2345600, 775068 2345397, 773587 2…           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 11             <span style="text-decoration: underline;">9</span>656. (((626230 1810121, 626269 1810496, 627494 1…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 01            <span style="text-decoration: underline;">46</span>818. (((801150 2092615, 800669 2093190, 800688 2…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 02            <span style="text-decoration: underline;">45</span>852. (((729326 2521619, 729320 2521230, 729280 2…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 03            <span style="text-decoration: underline;">46</span>118. (((710830 2137350, 711746 2136617, 712430 2…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04             <span style="text-decoration: underline;">2</span>579. (((882701 1920024, 882408 1920733, 881778 1…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 05             <span style="text-decoration: underline;">3</span>489. (((886504 1922890, 885733 1922978, 885479 1…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 07            <span style="text-decoration: underline;">16</span>389. (((747008 1925789, 746630 1925762, 745723 1…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08            <span style="text-decoration: underline;">15</span>631. (((818893 2514767, 818614 2514515, 817900 2…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 09             <span style="text-decoration: underline;">8</span>446. (((509103 1747787, 508820 1747513, 508154 1…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 10            <span style="text-decoration: underline;">30</span>232. (((775400 2345600, 775068 2345397, 773587 2…           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 11             <span style="text-decoration: underline;">6</span>652. (((626230 1810121, 626269 1810496, 627494 1…           1</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 840 more rows</span></span></code></pre></div>
 <p>This representation, where there are duplicate geometries for each location, should be cast into a spacetime object using <code><a href="../reference/as_spacetime.html">as_spacetime()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -160,12 +166,12 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span>
 <span class="co">#&gt;   code_dept crime_pers time_period</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 01            <span style="text-decoration: underline;">50</span>650.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 02             <span style="text-decoration: underline;">3</span>511.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 03             <span style="text-decoration: underline;">4</span>737.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 04             <span style="text-decoration: underline;">7</span>109.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 05            <span style="text-decoration: underline;">19</span>593.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 07            <span style="text-decoration: underline;">12</span>922.           1</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 01            <span style="text-decoration: underline;">46</span>818.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 02            <span style="text-decoration: underline;">45</span>852.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 03            <span style="text-decoration: underline;">46</span>118.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 04             <span style="text-decoration: underline;">2</span>579.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 05             <span style="text-decoration: underline;">3</span>489.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 07            <span style="text-decoration: underline;">16</span>389.           1</span></code></pre></div>
 <p>Note that the location identifier column is the same between the two objects—this is a requirement.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">spt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spacetime.html">spacetime</a></span><span class="op">(</span>.data <span class="op">=</span> <span class="va">df</span>, 
@@ -182,16 +188,16 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 850 × 3</span></span>
 <span class="co">#&gt;    code_dept crime_pers time_period</span>
 <span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 01            <span style="text-decoration: underline;">50</span>650.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 02             <span style="text-decoration: underline;">3</span>511.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 03             <span style="text-decoration: underline;">4</span>737.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04             <span style="text-decoration: underline;">7</span>109.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 05            <span style="text-decoration: underline;">19</span>593.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 07            <span style="text-decoration: underline;">12</span>922.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08            <span style="text-decoration: underline;">19</span>869.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 09             <span style="text-decoration: underline;">5</span>943.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 10            <span style="text-decoration: underline;">14</span>340.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 11             <span style="text-decoration: underline;">9</span>656.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 01            <span style="text-decoration: underline;">46</span>818.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 02            <span style="text-decoration: underline;">45</span>852.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 03            <span style="text-decoration: underline;">46</span>118.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04             <span style="text-decoration: underline;">2</span>579.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 05             <span style="text-decoration: underline;">3</span>489.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 07            <span style="text-decoration: underline;">16</span>389.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08            <span style="text-decoration: underline;">15</span>631.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 09             <span style="text-decoration: underline;">8</span>446.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 10            <span style="text-decoration: underline;">30</span>232.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 11             <span style="text-decoration: underline;">6</span>652.           1</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 840 more rows</span></span></code></pre></div>
 <blockquote>
 <p>As an aside, I’d note that <code><a href="../reference/as_spacetime.html">as_spacetime()</a></code> uses the sf distinct method which can be a bit computationally intense depending on your geometries. As such I’d recommend using <code><a href="../reference/spacetime.html">spacetime()</a></code> constructor always.</p>
@@ -214,16 +220,16 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 850 × 3</span></span>
 <span class="co">#&gt;    code_dept crime_pers time_period</span>
 <span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 01            <span style="text-decoration: underline;">50</span>650.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 02             <span style="text-decoration: underline;">3</span>511.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 03             <span style="text-decoration: underline;">4</span>737.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04             <span style="text-decoration: underline;">7</span>109.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 05            <span style="text-decoration: underline;">19</span>593.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 07            <span style="text-decoration: underline;">12</span>922.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08            <span style="text-decoration: underline;">19</span>869.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 09             <span style="text-decoration: underline;">5</span>943.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 10            <span style="text-decoration: underline;">14</span>340.           1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 11             <span style="text-decoration: underline;">9</span>656.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 01            <span style="text-decoration: underline;">46</span>818.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 02            <span style="text-decoration: underline;">45</span>852.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 03            <span style="text-decoration: underline;">46</span>118.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04             <span style="text-decoration: underline;">2</span>579.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 05             <span style="text-decoration: underline;">3</span>489.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 07            <span style="text-decoration: underline;">16</span>389.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08            <span style="text-decoration: underline;">15</span>631.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 09             <span style="text-decoration: underline;">8</span>446.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 10            <span style="text-decoration: underline;">30</span>232.           1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 11             <span style="text-decoration: underline;">6</span>652.           1</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 840 more rows</span></span></code></pre></div>
 <p>The <strong>geometry context</strong> is an sf object that too can be used like any other sf object and is activated with <code>activate(x, "geometry")</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -320,16 +326,16 @@
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 4</span></span>
 <span class="co">#&gt;    location     tau p_value classification     </span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 01        0.333   0.210  sporadic hotspot   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 02        0.378   0.152  consecutive hotspot</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 03        0.600   0.020<span style="text-decoration: underline;">0</span> sporadic hotspot   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04       -<span style="color: #BB0000;">0.022</span><span style="color: #BB0000; text-decoration: underline;">2</span>  1      sporadic coldspot  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 05        0.111   0.721  sporadic coldspot  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 07       -<span style="color: #BB0000;">0.511</span>   0.049<span style="text-decoration: underline;">1</span> sporadic coldspot  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08        0.422   0.107  no pattern detected</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 09       -<span style="color: #BB0000;">0.244</span>   0.371  sporadic coldspot  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 10        0.333   0.210  sporadic hotspot   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 11       -<span style="color: #BB0000;">0.378</span>   0.152  sporadic coldspot  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 01        0.066<span style="text-decoration: underline;">7</span>  0.858  no pattern detected</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 02        0.333   0.210  sporadic hotspot   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 03       -<span style="color: #BB0000;">0.156</span>   0.592  sporadic hotspot   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 04       -<span style="color: #BB0000;">0.511</span>   0.049<span style="text-decoration: underline;">1</span> sporadic coldspot  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 05        0.066<span style="text-decoration: underline;">7</span>  0.858  sporadic coldspot  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 07       -<span style="color: #BB0000;">0.422</span>   0.107  sporadic coldspot  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 08       -<span style="color: #BB0000;">0.111</span>   0.721  no pattern detected</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 09       -<span style="color: #BB0000;">0.289</span>   0.283  sporadic coldspot  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 10        0.289   0.283  no pattern detected</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 11       -<span style="color: #BB0000;">0.333</span>   0.210  sporadic coldspot  </span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows</span></span></code></pre></div>
 <!--
 

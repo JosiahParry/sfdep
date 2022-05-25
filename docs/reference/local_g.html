@@ -22,16 +22,22 @@
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">The Basics of sfdep</a>
-    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-vignettes">Vignettes</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
+    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">Basics of sfdep</a>
     <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
-    <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
+    <a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a>
+    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a>
   </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-releases">
+    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.1.1</a>
+  </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -101,19 +107,19 @@
 <span class="r-in"></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          gi       e_gi       var_gi    p_value p_sim p_folded_sim    skewness</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.004161 0.01172260 4.358634e-06 0.31530095 0.312        0.156  0.02092677</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.358564 0.01188634 3.214752e-06 0.01834578 0.024        0.012  0.06892949</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.141700 0.01192134 3.090737e-06 0.03221759 0.040        0.020  0.10339346</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.588642 0.01206545 4.888117e-06 0.11214122 0.112        0.056 -0.02605773</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.187712 0.01190776 6.176900e-06 0.23494706 0.244        0.122  0.06679987</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -1.538884 0.01189128 2.760694e-06 0.12383254 0.144        0.072  0.17948307</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.947186 0.01185379 4.304827e-06 0.34354399 0.340        0.170  0.14659115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.573675 0.01183006 2.772161e-06 0.01006246 0.016        0.008  0.10469573</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.109493 0.01186399 3.283630e-06 0.03490203 0.040        0.020  0.04719547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.748496 0.01201800 3.926905e-06 0.08037817 0.080        0.040  0.03502476</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.219280 0.01203111 6.361290e-06 0.22273801 0.256        0.128 -0.03295544</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -1.538911 0.01179506 2.556749e-06 0.12382605 0.128        0.064  0.25895641</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      kurtosis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.26414115</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.19057090</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.24646398</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.04811678</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.23667936</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.04792669</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.10471263</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.01332878</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.17757079</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.29467717</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.33441353</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.07395595</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

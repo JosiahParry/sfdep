@@ -19,6 +19,30 @@ template:
     # navbar-inverse-type: "light"
     # navbar-inverse-bg: "secondary"
 
+navbar:
+  structure:
+    right:  [search, github]
+    left: [reference, articles, news, releases]
+  components:
+    releases:
+      text: Releases
+      menu:
+      - text: Version 0.1.1
+        href: articles/Version-0-1-1.html
+    articles:
+      text: Vignettes
+      menu:
+      - text: Basics of sfdep
+        href: articles/basics-of-sfdep.html
+      - text: spacetime and spacetime cubes
+        href: articles/spacetime-s3.html
+      - text: Colocation Quotients
+        href: articles/colocation-analysis.html
+      - text: Conditional permutation
+        href: articles/conditional-permutation.html
+
+
+
 
 reference:
 

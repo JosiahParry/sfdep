@@ -14,3 +14,4 @@
 ^dev$
 ^R/joincount-bv-dev\.R$
 ^CRAN-RELEASE$
+^vignettes/articles$

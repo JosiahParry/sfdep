@@ -13,7 +13,16 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/articles/Version-0-1-1.html</loc>
+  </url>
+  <url>
+    <loc>/articles/Version-0-1-2.html</loc>
+  </url>
+  <url>
     <loc>/articles/basics-of-sfdep.html</loc>
+  </url>
+  <url>
+    <loc>/articles/colocation-analysis.html</loc>
   </url>
   <url>
     <loc>/articles/conditional-permutation.html</loc>
@@ -26,6 +35,9 @@
   </url>
   <url>
     <loc>/articles/spdep-and-pysal.html</loc>
+  </url>
+  <url>
+    <loc>/articles/understanding-emerging-hotspots.html</loc>
   </url>
   <url>
     <loc>/authors.html</loc>

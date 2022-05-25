@@ -22,16 +22,22 @@
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">The Basics of sfdep</a>
-    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-vignettes">Vignettes</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
+    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">Basics of sfdep</a>
     <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
-    <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
+    <a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a>
+    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a>
   </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-releases">
+    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.1.1</a>
+  </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -85,45 +91,9 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">guerry_nb</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">guerry_nb</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">st_as_graph</span><span class="op">(</span><span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Checking if spatial network structure is valid...</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Spatial network structure is valid</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># A sfnetwork with</span> <span style="color: #555555;">85</span> <span style="color: #555555;">nodes and</span> <span style="color: #555555;">420</span> <span style="color: #555555;">edges</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># CRS: </span> <span style="color: #555555;">NA</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;"># A directed simple graph with 1 component with spatially explicit edges</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Node Data:     85 × 30 (active)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Geometry type: POINT</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Dimension:     XY</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Bounding box:  xmin: 143129.7 ymin: 1735692 xmax: 983300.8 ymax: 2615768</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   i     code_dept count ave_id_geo  dept region department crime_pers crime_prop</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1     01            1         49     1 E      Ain             <span style="text-decoration: underline;">28</span>870      <span style="text-decoration: underline;">15</span>890</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2     02            1        812     2 N      Aisne           <span style="text-decoration: underline;">26</span>226       <span style="text-decoration: underline;">5</span>521</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3     03            1       <span style="text-decoration: underline;">1</span>418     3 C      Allier          <span style="text-decoration: underline;">26</span>747       <span style="text-decoration: underline;">7</span>925</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4     04            1       <span style="text-decoration: underline;">1</span>603     4 E      Basses-Al…      <span style="text-decoration: underline;">12</span>935       <span style="text-decoration: underline;">7</span>289</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5     05            1       <span style="text-decoration: underline;">1</span>802     5 E      Hautes-Al…      <span style="text-decoration: underline;">17</span>488       <span style="text-decoration: underline;">8</span>174</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6     07            1       <span style="text-decoration: underline;">2</span>249     7 S      Ardeche          <span style="text-decoration: underline;">9</span>474      <span style="text-decoration: underline;">10</span>263</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 79 more rows, and 21 more variables: literacy &lt;int&gt;, donations &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   infants &lt;int&gt;, suicides &lt;int&gt;, main_city &lt;ord&gt;, wealth &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   commerce &lt;int&gt;, clergy &lt;int&gt;, crime_parents &lt;int&gt;, infanticide &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   donation_clergy &lt;int&gt;, lottery &lt;int&gt;, desertion &lt;int&gt;, instruction &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   prostitutes &lt;int&gt;, distance &lt;dbl&gt;, area &lt;int&gt;, pop1831 &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   geometry &lt;POINT&gt;, nb &lt;nb&gt;, wt &lt;list&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">#</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Edge Data:     420 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Geometry type: LINESTRING</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Dimension:     XY</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Bounding box:  xmin: 143129.7 ymin: 1735692 xmax: 983300.8 ymax: 2615768</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    from    to i     j        wt                             geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                         <span style="color: #949494; font-style: italic;">&lt;LINESTRING&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     1    36 1     36     0.25   (827911.9 2122906, 855919 2037343)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>     1    37 1     37     0.25 (827911.9 2122906, 862938.6 2202980)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     1    67 1     67     0.25 (827911.9 2122906, 776985.9 2100624)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 417 more rows</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in guerry_nb %&gt;% st_as_graph(nb, wt):</span> could not find function "%&gt;%"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

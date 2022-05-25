@@ -69,15 +69,17 @@ st_as_edges.sf <- function(x, nb, wt) {
 st_as_edges.sfc <- function(x, nb, wt) {
   # if wt is missing use nb2lines
   if (rlang::is_missing(wt)) {
-    res <- spdep::nb2lines(nb, coords = x) %>%
-      dplyr::rename(from = i, to = j, i = i_ID, j = j_ID)
+    res <-
+      dplyr::rename(spdep::nb2lines(nb, coords = x),
+                    from = i, to = j, i = i_ID, j = j_ID)
 
     return(res)
   }
 
   listw <- recreate_listw(nb, wt)
-  spdep::listw2lines(listw, x) %>%
-    dplyr::rename(from = i, to = j, i = i_ID, j = j_ID)
+
+  dplyr::rename(spdep::listw2lines(listw, x),
+                from = i, to = j, i = i_ID, j = j_ID)
 
 }
 

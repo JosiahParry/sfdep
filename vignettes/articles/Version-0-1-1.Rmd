@@ -1,0 +1,67 @@
+---
+title: "Version 0.1.1"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(sfdep)
+```
+
+
+While not too far from the initial CRAN release of sfdep, this release represents some rather sizeable additions to the package. This version consists of two sizeable additions relating to spatio-temporal analysis and colocation analysis as well as bug fixes and improvements.
+
+
+## Colocation Analysis
+
+This release includes functionality to compute colocation quotients. This is extremely exciting as this is the first open source implementation of Colocation Quotients that I am aware of. There are three types of colocation quotient (CLQ) in this release: the global CLQ, pairwise CLQ, and local CLQ.
+
+See the [colocation vignette](/articles/colocation-analysis.html) for a more detailed write up. 
+
+There are three new functions for calculating CLQs:
+
+- `global_colocation()`
+- `pairwise_colocation()`
+- `local_colocation()`
+
+
+## Spacetime 
+
+And probably most notable, is the introduction of a new spacetime class. This class was created as a byproduct of creating functionality for emerging hot spot analysis. For a more detailed write up see the [spacetime vignette](/articles/spacetime-s3.html).
+
+The new functions that are available are:
+
+- `spacetime()`, `new_spacetime()`, `validate_spacetime()`:
+  - Creating spacetime objects
+- `activate()`, `active()`:
+  - changing spacetime context and determining active context
+- `as_sf()`, `as_spacetime()`:
+  - casting between spacetime and sf objects
+- `is_spacetime()`: 
+  - determine if an object is a spacetime object
+- `is_spacetime_cube()`:
+   - determine if a spacetime object is a spatio-temporal full grid aka spacetime cube
+- `complete_spacetime_cube()`:
+  - if a spatio-temporal sparse grid, add rows to make a spatio-temporal full grid (spacetime cube)
+- `set_col()`, `set_nbs()`, `set_wts()`:
+  - add columns from geometry contexst to data context
+- `emerging_hotspot_analysis()`:
+  - conduct emerging hotspot analysis
+- `spt_update()`:
+  - update times and locations attributes of a spacetime object
+
+
+## General
+
+- `include_self()`
+- `remove_self()`
+- Fixes a bug in `local_g_perm()` and `local_gstar_perm()` which would return the G value before being converted into a z-score 
+
+
+
+

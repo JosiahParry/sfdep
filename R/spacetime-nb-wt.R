@@ -98,8 +98,10 @@ spt_wt <- function(wt, nbt, n_times, n_locs, k) {
   lag_cards <- lengths(nbt)[1:n_omit]
 
   # iterate through those observations to subset for weights
-  for (i in 1:n_omit) {
-    wt_tlag[[i]] <- wt_tlag[[i]][1:(lag_cards[i])]
+  if (n_omit > 0) {
+    for (i in 1:n_omit) {
+      wt_tlag[[i]] <- wt_tlag[[i]][1:(lag_cards[i])]
+    }
   }
 
   wt_tlag

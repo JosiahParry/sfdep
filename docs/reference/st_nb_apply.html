@@ -22,16 +22,22 @@
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">The Basics of sfdep</a>
-    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional Permutations with sfdep</a>
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-vignettes">Vignettes</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
+    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">Basics of sfdep</a>
     <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
-    <a class="dropdown-item" href="../articles/spdep-and-pysal.html">Comparison to spdep and pysal</a>
+    <a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a>
+    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a>
   </div>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../news/index.html">Changelog</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-releases">
+    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.1.1</a>
+  </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -93,7 +99,7 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">guerry</span> <span class="op"><a href="pipe.html">%&gt;%</a></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">guerry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute</a></span><span class="op">(</span></span>
 <span class="r-in">    nb <span class="op">=</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span>,</span>
 <span class="r-in">    wt <span class="op">=</span> <span class="fu"><a href="st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span>,</span>
@@ -103,25 +109,7 @@
 <span class="r-in">    <span class="op">)</span>,</span>
 <span class="r-in">    lag <span class="op">=</span> <span class="fu"><a href="st_lag.html">st_lag</a></span><span class="op">(</span><span class="va">crime_pers</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
 <span class="r-in">  <span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 85 features and 4 fields</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 85 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    nb        wt        lag_apply    lag                                 geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span>    <span style="text-decoration: underline;">23</span>048. <span style="text-decoration: underline;">23</span>048. (((801150 2092615, 800669 2093190, 8006…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span>    <span style="text-decoration: underline;">26</span>920. <span style="text-decoration: underline;">26</span>920. (((729326 2521619, 729320 2521230, 7292…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span>    <span style="text-decoration: underline;">26</span>195. <span style="text-decoration: underline;">26</span>195. (((710830 2137350, 711746 2136617, 7124…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span>    <span style="text-decoration: underline;">14</span>401. <span style="text-decoration: underline;">14</span>401. (((882701 1920024, 882408 1920733, 8817…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>    <span style="text-decoration: underline;">15</span>039. <span style="text-decoration: underline;">15</span>039. (((886504 1922890, 885733 1922978, 8854…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;int [7]&gt;</span> <span style="color: #949494;">&lt;dbl [7]&gt;</span>    <span style="text-decoration: underline;">15</span>749  <span style="text-decoration: underline;">15</span>749  (((747008 1925789, 746630 1925762, 7457…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>    <span style="text-decoration: underline;">22</span>112. <span style="text-decoration: underline;">22</span>112. (((818893 2514767, 818614 2514515, 8179…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>    <span style="text-decoration: underline;">13</span>672. <span style="text-decoration: underline;">13</span>672. (((509103 1747787, 508820 1747513, 5081…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span>    <span style="text-decoration: underline;">22</span>859. <span style="text-decoration: underline;">22</span>859. (((775400 2345600, 775068 2345397, 7735…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span>    <span style="text-decoration: underline;">11</span>475. <span style="text-decoration: underline;">11</span>475. (((626230 1810121, 626269 1810496, 6274…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 75 more rows</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in guerry %&gt;% dplyr::transmute(nb = st_contiguity(geometry), wt = st_weights(nb),     lag_apply = st_nb_apply(crime_pers, nb, wt, .f = function(.xij,         .wt, ...) sum(.xij * .wt)), lag = st_lag(crime_pers,         nb, wt)):</span> could not find function "%&gt;%"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

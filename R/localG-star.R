@@ -28,7 +28,7 @@ local_gstar <- function(x, nb, wt, alternative = "two.sided", ...) {
     nb <- spdep::include.self(nb)
     wt <- st_weights(nb)
   }
-  suppressWarnings({
+  suppressMessages({
     local_g(x, nb, wt, alternative = alternative, ...)
   })
 

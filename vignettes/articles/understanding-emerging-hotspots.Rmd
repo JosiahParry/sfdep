@@ -1,0 +1,50 @@
+---
+title: "understanding-emerging-hotspots"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(sfdep)
+library(dplyr)
+
+
+# replicate the guerry dataset 10 times
+x <- purrr::map_dfr(1:10, ~guerry) |> 
+  select(code_dept, crime_pers) |> 
+         # create an indicator for time period
+  mutate(time_period = sort(rep(1:10, 85)), 
+         # add some noise 
+         crime_pers = crime_pers * runif(850, max = 2))
+```
+
+Here we calculate emerging hot spots manually. However, here we cannot include time lags.
+
+```{r}
+x |> 
+  group_by(time_period) |> 
+  arrange(time_period, code_dept) |> 
+  mutate(nb = include_self(st_contiguity(geometry)),
+         wt = st_weights(nb),
+         gi_star = local_gstar(crime_pers, nb, wt)) |> 
+  group_by(code_dept) |> 
+  summarise(trend = broom::tidy(Kendall::MannKendall(gi_star))) |> 
+  tidyr::unnest(trend) |> 
+  arrange(p.value)
+```
+Here we use emerging hot spot analysis function from sfdep using no time lag
+
+```{r}
+spt <- x |> 
+  as_spacetime("code_dept", "time_period")
+
+emerging_hotspot_analysis(spt, "crime_pers", k = 0) |> 
+  arrange(p_value)
+```
+
+

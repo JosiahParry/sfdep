@@ -1,0 +1,97 @@
+---
+title: "Colocation Quotients CLQs"
+subtitle: Understanding Global, Pairwise, and Local CLQs
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message = FALSE}
+library(sfdep)
+library(dplyr)
+```
+
+The colocation quotient evaluates if there is a spatial association between two categorical vectors $A$ and $B$. It is similar to the join count and cross-K metric. It's unique, however, in the way that the CLQ can measure asymmetric relationships. 
+
+The CLQ is a ratio of the observed proportion of a categorical variable to the expected proportion. Values larger than 1 mean that there is more colocation than to be expected under the null hypothesis of no spatial association. When the value is smaller than 0, we interpret it to mean that there is less colocation than expected under the null.
+
+> Note that the CLQ's intended use is with point data. 
+
+### Global Colocation
+
+The `global_colocation()` quotient is used to identify if there is _any_ colocation in a single categorical vector $A$. 
+
+```{r}
+A <- guerry[["main_city"]]
+nb <- st_contiguity(sf::st_geometry(guerry))
+global_colocation(A, nb, 299)
+```
+
+The result of the global CLQ is approximately 0 and insignificant. We can interpret this to mean that there is no significant colocation of "Main Cities." 
+
+
+### Pairwise Colocation
+
+The pairwise CLQ evaluates colocation between values of categorical variables $A$ and $B$ at a global level. The results are one-directional with $A \to B$. 
+
+We provide the 2 vectors to the `pairwise_colocation()` function and the results is a matrix with unique values of $A$ as column headers and unique values of $B$ as row names. There are additional columns to indicate the simulated p-values of the colocation quotients. 
+
+```{r}
+A <- guerry$main_city
+B <- guerry$region
+nb <- st_knn(sf::st_geometry(guerry), 5)
+pairwise_colocation(B, A, nb, 199)
+```
+
+If we look at the first row, we see that the colocation of $C \to 3{:}Lg$ is very significant with a value of ~ $0.20$. We can interpret this to mean that there is systematically less colocation of region C near large main cities. 
+
+
+### Local Colocation 
+
+The local CLQ is rather similar to the pairwise CLQ. The key difference is the weights list that is used in calculating the CLQ. In its introductory paper, Wang et al. (2017) emphasize that adaptive gaussian kernel weights be used. This introduces a distance decay where closer values have more heft than distant onces in calculating the local CLQ.
+
+The result of the local CLQ returns a CLQ and a simulated p-value for each unique value of B that falls in the neighborhood. 
+
+
+```{r}
+# Identify A & B variables
+A <- guerry$main_city
+B <- guerry$region
+geo <- sf::st_geometry(guerry)
+nb <- st_knn(geo, 5)
+wt <- st_kernel_weights(nb, geo, "gaussian", adaptive = TRUE)
+
+res <- local_colocation(A, B, nb, wt, 49)
+
+head(res)
+
+```
+
+Note that for the first observation we only have a CLQ for `C` and `E`. This is because the neighborhood of the first observatino consists of only C and E values. We can verify this like so. 
+
+```{r}
+# view first row
+res[1,]
+
+# find xj values for the B column based on neighbors
+# take first observations neighbors
+sfdep::find_xj(B, nb)[[1]] 
+```
+
+It's also worth noting that we can create the local CLQ in a dplyr pipe like so
+
+```{r}
+
+res_tidy <- guerry |> 
+  select(main_city, region) |> 
+  mutate(nb = st_knn(geometry, 5),
+         wt = st_kernel_weights(nb, geometry, "gaussian", adaptive = TRUE),
+         lclq = local_colocation(main_city, region, nb, wt, 99)) |> 
+  tidyr::unnest(lclq)
+```
+
+
