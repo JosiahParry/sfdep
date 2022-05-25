@@ -6,7 +6,8 @@ subtitle: Understanding Global, Pairwise, and Local CLQs
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  warning = FALSE
 )
 ```
 
@@ -92,6 +93,8 @@ res_tidy <- guerry |>
          wt = st_kernel_weights(nb, geometry, "gaussian", adaptive = TRUE),
          lclq = local_colocation(main_city, region, nb, wt, 99)) |> 
   tidyr::unnest(lclq)
+
+slice(res_tidy, 1:5)
 ```
 
 
