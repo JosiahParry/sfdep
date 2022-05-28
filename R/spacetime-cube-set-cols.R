@@ -37,7 +37,7 @@ set_col <- function(x, .from_geo, .to_data = .from_geo) {
   if (active(x) == "geometry") x <- activate(x, "data")
 
   # determine number of time periods
-  n_times <- length(attr(x, "time"))
+  n_times <- length(attr(x, "times"))
 
   # extract var
   geo_col <- attr(x, "geometry")[[.from_geo]]
@@ -74,7 +74,7 @@ set_wts <- function(x, .wt_col = "wt") {
   if (active(x) == "geometry") x <- activate(x, "data")
 
   # determine number of time periods
-  n_times <- length(attr(x, "time"))
+  n_times <- length(attr(x, "times"))
 
   # extract wt list
   wt <- attr(x, "geometry")[[.wt_col]]
@@ -112,7 +112,7 @@ set_nbs <- function(x, .nb_col = "nb") {
   if (active(x) == "geometry") x <- activate(x, "data")
 
   # determine number of time periods
-  n_times <- length(attr(x, "time"))
+  n_times <- length(attr(x, "times"))
 
   # extract nb list
   nb <- attr(x, "geometry")[[.nb_col]]
@@ -129,7 +129,7 @@ set_nbs <- function(x, .nb_col = "nb") {
   x <- x[order(x[[.time_col]], data_loc_id),]
   # repeat nb object n_times to fill. Order is correct based on above
   # ordering
-  x[[.nb_col]] <- rep(nb, n_times)
+  x[[.nb_col]] <- class_modify(rep(nb, n_times), "nb")
   x
 }
 

@@ -40,6 +40,8 @@ navbar:
         href: articles/colocation-analysis.html
       - text: Conditional permutation
         href: articles/conditional-permutation.html
+      - text: Emerging Hot Spot Analysis
+        href: articles/understanding-emerging-hotspots.html
 
 
 

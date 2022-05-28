@@ -1,5 +1,5 @@
 ---
-title: "understanding-emerging-hotspots"
+title: "WIP: Understanding Emerging Hot Spots"
 ---
 
 ```{r, include = FALSE}
@@ -8,6 +8,111 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
+
+
+Emerging hot spot Analysis (EHSA) is a technique that falls under exploratory spatial data analysis (ESDA). It combines the traditional ESDA technique of hot spot analysis using the Getis-Ord Gi* statistic with the traditional time-series Mann-Kendall test for monotonic trends. 
+
+The goal of EHSA is to evaluate how hot and cold spots are changing over time. It helps us answer the questions: are they becoming increasingly hotter, Are they cooling down, or are they staying the same? 
+
+In brief, EHSA works by calculating the Gi* for each time period. The Gi* at each location is treated as a time-series and evaluated for a trend using the Mann-Kendall statistic. In this vignette we walk through the Gettis-Ord Gi\*, the Mann-Kendall, and how the two work together to in EHSA. The Gi\* and the Mann-Kendall are compared together to create 17 unique classifications to help better understand how the locations have changed over time. 
+
+## Gettis-Ord Gi*
+
+The Gettis-Ord Gi and Gi* (pronounced gee-eye-star) are one of the earliest LISAs.
+The Gi and Gi* measures are typically reported as a Z-score where high values indicate
+a high-high cluster and negative Z-scores indicate a low-low cluster. There are no 
+high-low and low-high classifications like the local Moran.
+
+"The Gi statistic consist of a ratio of the weighted average of the values in the neighboring locations, to the sum of all values, not including the value at the location ($x_i$)" ([Local Spatial Autocorrelation (2), GeoDa Center](https://geodacenter.github.io/workbook/6b_local_adv/lab6b.html#getis-ord-statistics)). 
+
+$$
+G_i = \frac{\sum_{j \ne i}W_{ij}X_j}
+          {\sum_{j \ne i}X_j}
+$$
+
+The Gi* statistic includes the focal (or self, or ith) observation in the neighborhood.
+
+$$
+G_i* = \frac{\sum_{j}W_{ij}X_j}
+          {\sum_{j}X_j}
+$$
+
+### Implementing the local Gi*
+
+To calculate the local Gi* using sfdep, we have to be especially aware of the neighbors
+list when we create it. By default, when we create a neighbors list, we exclude the
+self from the observation. However, if we want to calculate the local Gi*, we must 
+be sure to explicitly add it using `include_self()`
+
+Here, we follow the example laid out by the GeoDa center documentation to calculate and plot the local Gi* statistic for donations using the Guerry dataset. 
+
+Here we create a neighbor list and include self and create weights from the neighbors. 
+
+```{r message = FALSE}
+library(sfdep)
+library(dplyr)
+
+guerry_nb <- guerry |> 
+  mutate(nb = include_self(st_contiguity(geometry)),
+         wt = st_weights(nb)
+  ) 
+```
+
+Following, we calculate the local Gi* using `local_gstar_perm()` on the `donations` column which creates a new data frame column called `gistar`. We then unnest it using `tidyr::unnest()`
+
+```{r}
+donat_gistar <- guerry_nb |> 
+  transmute(gistar = local_gstar_perm(donations, nb, wt, nsim = 999)) |> 
+  tidyr::unnest(gistar)
+
+donat_gistar
+```
+
+Lastly, we classify the clusters using a combination of `mutate()` and `case_when()` 
+which is then piped into a ggplot map. While not a perfect recreation of the GeoDa map, it is very close—likely due to conditional permutation (see [conditional permutation vignette](/articles/conditional-permutation.html) for more on significance calculation).
+
+```{r}
+library(ggplot2)
+
+donat_gistar |> 
+  mutate(cluster = case_when(
+    p_folded_sim > 0.05 ~ "Not Significant",
+    p_folded_sim <= 0.05 & gi_star < 0 ~ "Low",
+    p_folded_sim <= 0.05 & gi_star > 0 ~ "High"
+  )) |> 
+  ggplot(aes(fill = cluster)) +
+  geom_sf(lwd = 0.2, color = "black") +
+  scale_fill_manual(values = c("High" = "red",
+                               "Low" = "Blue", 
+                               "Not Significant" = "white")) +
+  theme_void()
+```
+
+In EHSA, we calculate this statistic for each location and every time period in our dataset. 
+
+## Mann-Kendall Test
+
+- tests if there is a monotonic trend either in a positive or negative direction
+- if you dont remember what monotonic means, a monotonic series is one that is always increasing and never decreasing or vice versa. 
+- so a monotonic trend consistently increases (or decreases) through time. And, importantly the trend doesn't have to be linear. 
+
+Below is an example of a monotonic upward trend which isnt linear
+
+```{r}
+series <- c(0, 1, 1.4, 1.5, 1.6, 5, 5, 5.5, 20, seq(20, 21, length.out = 5))
+
+plot(series, type = "l")
+```
+
+
+- null hypothesis: no trend
+
+https://www.real-statistics.com/time-series-analysis/time-series-miscellaneous/mann-kendall-test/
+
+
+
+## Emerging Hot Spot Analysis by Hand
 
 ```{r setup}
 library(sfdep)
@@ -21,9 +126,59 @@ x <- purrr::map_dfr(1:10, ~guerry) |>
   mutate(time_period = sort(rep(1:10, 85)), 
          # add some noise 
          crime_pers = crime_pers * runif(850, max = 2))
+
+spt <- as_spacetime(x, .loc_col = "code_dept", "time_period")
 ```
 
-Here we calculate emerging hot spots manually. However, here we cannot include time lags.
+Here we calculate emerging hot spots manually. However, here we cannot include time lag because there's no outside of the box functionality to do so.
+
+
+This chunk:
+
+- activates the geometry context and:
+  - creates neighbors
+  - weights
+- activates the data context
+- sets the neighbor column from the geometry context
+- sets the weights column from the geometry context
+- groups by `time_period`
+- calculates the local Gi* for each time period
+
+```{r}
+gistars <- spt |> 
+  activate("geometry") |> 
+    mutate(nb = include_self(st_contiguity(geometry)),
+         wt = st_weights(nb)) |> 
+  activate("data") |> 
+  set_nbs("nb") |> 
+  set_wts("wt") |> 
+  group_by(time_period) |> 
+  mutate(gi_star = local_gstar_perm(crime_pers, nb, wt))
+
+```
+
+here we see the Gi* for one location for all time periods. 
+
+```{r}
+
+dept_01_trend <- gistars |> 
+  tidyr::unnest(gi_star) |> 
+  filter(code_dept == "01") |> 
+  select(gi_star, time_period, p_sim)
+
+dept_01_trend
+```
+
+Then we calculate the Mann-kendall statistic for it
+
+```{r}
+Kendall::MannKendall(dept_01_trend[["gi_star"]])
+```
+
+Here we have an insignificant positive trend
+
+next we 
+
 
 ```{r}
 x |> 
@@ -46,5 +201,11 @@ spt <- x |>
 emerging_hotspot_analysis(spt, "crime_pers", k = 0) |> 
   arrange(p_value)
 ```
+
+
+#### Sources
+
+- GeoDa center: https://geodacenter.github.io/workbook/6b_local_adv/lab6b.html#getis-ord-statistics
+
 
 

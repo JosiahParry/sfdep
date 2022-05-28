@@ -28,6 +28,7 @@
     <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
     <a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a>
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a>
+    <a class="dropdown-item" href="../articles/understanding-emerging-hotspots.html">Emerging Hot Spot Analysis</a>
   </div>
 </li>
 <li class="nav-item">
@@ -104,22 +105,21 @@
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">crime_pers</span></span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_gstar_perm</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> attr `self.include` is `TRUE`. Reporting Gi*.</span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     gi_star       e_gi       var_gi    p_value p_sim p_folded_sim    skewness</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.214517 0.01185675 3.948894e-06 0.22455032 0.236        0.118  0.01932868</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.526893 0.01188778 2.406439e-06 0.01150765 0.020        0.010  0.04065067</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.062783 0.01191193 3.001560e-06 0.03913324 0.052        0.026 -0.01439675</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.777359 0.01179448 3.832324e-06 0.07550914 0.056        0.028  0.14038163</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.257101 0.01191962 4.596441e-06 0.20871715 0.204        0.102  0.03480132</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -2.148633 0.01194333 2.113135e-06 0.03166354 0.040        0.020  0.06233996</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.235257 0.01189965 3.682915e-06 0.21673499 0.192        0.096 0.009524684</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.238277 0.01191084 3.031073e-06 0.02520302 0.044        0.022 0.093729045</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.086026 0.01205022 2.712291e-06 0.03697626 0.036        0.018 0.014148069</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.900055 0.01184083 3.443300e-06 0.05742591 0.052        0.026 0.038518887</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.307801 0.01199832 4.498593e-06 0.19094065 0.164        0.082 0.198197558</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -2.016756 0.01191415 2.353921e-06 0.04372096 0.036        0.018 0.190669527</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      kurtosis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 -0.36933964</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.16184004</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.02015052</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.41928430</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.29948580</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.21395248</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.09513524</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 -0.15969525</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 -0.12771138</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  0.08398568</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -0.09212366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -0.10605595</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_gstar</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>

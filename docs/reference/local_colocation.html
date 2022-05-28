@@ -30,6 +30,7 @@ The LCLQ is defined using Gaussian kernel weights and an adaptive bandwidth (see
     <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
     <a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a>
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a>
+    <a class="dropdown-item" href="../articles/understanding-emerging-hotspots.html">Emerging Hot Spot Analysis</a>
   </div>
 </li>
 <li class="nav-item">
@@ -113,17 +114,17 @@ The LCLQ is defined using Gaussian kernel weights and an adaptive bandwidth (see
 <span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_colocation</span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="va">nb</span>, <span class="va">wt</span>, <span class="fl">49</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           C        E         N        S        W p_sim_C p_sim_E p_sim_N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80       NA 1.938342        NA 3.002835       NA      NA    0.14      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80       NA 1.938342        NA 3.002835       NA      NA    0.20      NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 81       NA       NA        NA       NA 4.941176      NA      NA      NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 82 2.986279       NA        NA       NA 1.954897    0.06      NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83 2.175460       NA        NA       NA 2.765717    0.14      NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83 2.175460       NA        NA       NA 2.765717    0.10      NA      NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 84       NA 4.065541 0.8756359       NA       NA      NA    0.02    0.10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85 1.925264 2.094012 0.9219004       NA       NA    0.10    0.20    0.16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85 1.925264 2.094012 0.9219004       NA       NA    0.14    0.08    0.32</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    p_sim_S p_sim_W</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 80    0.04      NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 81      NA    0.02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82      NA    0.12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83      NA    0.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82      NA    0.22</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83      NA    0.08</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 84      NA      NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 85      NA      NA</span>
 </code></pre></div>

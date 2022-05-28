@@ -28,6 +28,7 @@
     <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
     <a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a>
     <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a>
+    <a class="dropdown-item" href="../articles/understanding-emerging-hotspots.html">Emerging Hot Spot Analysis</a>
   </div>
 </li>
 <li class="active nav-item">
@@ -61,17 +62,18 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="sfdep-development-version">sfdep (development version)<a class="anchor" aria-label="anchor" href="#sfdep-development-version"></a></h2>
-<ul><li>implements <code><a href="https://r-spatial.github.io/spdep/reference/include.self.html" class="external-link">spdep::include.self()</a></code> function and a new <code><a href="../reference/include_self.html">remove_self()</a></code> which is available separately in spdep due to <a href="https://github.com/r-spatial/spdep/issues/83" class="external-link">issue 83</a> as <code>spdep::remove.self()</code>.</li>
+<ul><li>two new functions <code><a href="../reference/include_self.html">include_self()</a></code> based on <code><a href="https://r-spatial.github.io/spdep/reference/include.self.html" class="external-link">spdep::include.self()</a></code> and new <code><a href="../reference/include_self.html">remove_self()</a></code> which is available separately in spdep due to <a href="https://github.com/r-spatial/spdep/issues/83" class="external-link">issue 83</a> as <code>spdep::remove.self()</code>.</li>
 <li>
 <code><a href="../reference/local_g.html">local_g_perm()</a></code> returns correct G statistic. Previously returned only the internal measure.<br></li>
 <li>
 <code><a href="../reference/local_gstar.html">local_gstar()</a></code> and <code><a href="../reference/local_gstar.html">local_gstar_perm()</a></code> do not warn when <code>self.included = TRUE</code>
 </li>
-<li>implement emerging hotspot analysis with spacetime objects</li>
-<li>implements a new s3 class spacetime to link geometry with time
+<li>
+<code><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis()</a></code> implements emerging hotspot analysis with spacetime objects</li>
+<li>a new <code>spacetime</code> class for linking spatio-temporal data and geometry
 <ul><li>see the <a href="/articles/spacetime-s3.html">spacetime vignette</a>.</li>
 </ul></li>
-<li>adds colocation quotient (CLQ) measures See the <a href="/articles/colocation-analysis.html">colocation vignette</a>:
+<li>Implemented colocation quotient (CLQ) measures See the <a href="/articles/colocation-analysis.html">colocation vignette</a>:
 <ul><li>
 <code><a href="../reference/global_colocation.html">global_colocation()</a></code> for global colocation of one categorical variable</li>
 <li>

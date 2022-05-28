@@ -43,7 +43,7 @@ local_gstar_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", .
     wt <- st_weights(nb)
   }
 
-  suppressWarnings({
+  suppressMessages({
     res <- local_g_perm(x, nb, wt, nsim = nsim, alternative = alternative, ...)
   })
 
