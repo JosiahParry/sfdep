@@ -1,5 +1,5 @@
 ---
-title: "WIP: Understanding Emerging Hot Spots"
+title: "Emerging Hot Spot Analysis"
 ---
 
 ```{r, include = FALSE}
@@ -93,119 +93,179 @@ In EHSA, we calculate this statistic for each location and every time period in 
 
 ## Mann-Kendall Test
 
-- tests if there is a monotonic trend either in a positive or negative direction
-- if you dont remember what monotonic means, a monotonic series is one that is always increasing and never decreasing or vice versa. 
-- so a monotonic trend consistently increases (or decreases) through time. And, importantly the trend doesn't have to be linear. 
+The incorporation of time-series analysis is done through the use of the Mann-Kendall (MK) Trend test. The MK test is a nonparametric test that checks for monotonic trends. 
 
-Below is an example of a monotonic upward trend which isnt linear
+If you don't recall monotonic series from your calculus class, that's okay. A monotonic series is one that consistently increases (or decreases) and never changes direction. A monotonic trend is one that consistently increases or decreases through time. And since it is nonparametric test, the trend does not have to be linear. 
+
+The MK test does not check if a time-series is strictly monotonic—e.g. every subsequent unit is increasing or decreasing—but if the overall series is increasing or decreasing. 
+Below is an example of a monotonic upward trend which is not linear.
 
 ```{r}
-series <- c(0, 1, 1.4, 1.5, 1.6, 5, 5, 5.5, 20, seq(20, 21, length.out = 5))
+series <- c(0, 1, 1.4, 1.5, 1.6, 5, 5, 5.5, 8, seq(8, 8.5, length.out = 5))
 
 plot(series, type = "l")
 ```
 
-
-- null hypothesis: no trend
-
-https://www.real-statistics.com/time-series-analysis/time-series-miscellaneous/mann-kendall-test/
-
-
-
-## Emerging Hot Spot Analysis by Hand
-
-```{r setup}
-library(sfdep)
-library(dplyr)
-
-
-# replicate the guerry dataset 10 times
-x <- purrr::map_dfr(1:10, ~guerry) |> 
-  select(code_dept, crime_pers) |> 
-         # create an indicator for time period
-  mutate(time_period = sort(rep(1:10, 85)), 
-         # add some noise 
-         crime_pers = crime_pers * runif(850, max = 2))
-
-spt <- as_spacetime(x, .loc_col = "code_dept", "time_period")
-```
-
-Here we calculate emerging hot spots manually. However, here we cannot include time lag because there's no outside of the box functionality to do so.
-
-
-This chunk:
-
-- activates the geometry context and:
-  - creates neighbors
-  - weights
-- activates the data context
-- sets the neighbor column from the geometry context
-- sets the weights column from the geometry context
-- groups by `time_period`
-- calculates the local Gi* for each time period
+For a more realistic example, let's take a look a the `economics` dataset from `ggplot2` which contains data from FRED. We'll use the `psavert` variable which contains data about personal savings rates in the United States.  
 
 ```{r}
-gistars <- spt |> 
+econ <- ggplot2::economics
+
+ggplot(econ, aes(date, psavert)) +
+  geom_line() +
+  theme_light()
+```
+
+
+From a visual inspection, we can tell that overall the trend is decreasing. The MK test can confirm this. We use `Kendall::MannKendall()` to test if the trend is significantly decreasing. 
+
+```{r}
+Kendall::MannKendall(econ$psavert)
+```
+
+The above results show up the `tau` and p-value. Tau ranges between -1 and 1 where -1 is a perfectly decreasing series and 1 is a perfectly increasing series. The p-value is extremely small indicating that the null-hypothesis (that there is no trend) can be rejected. 
+
+
+
+## The whole game
+
+We've gone over briefly the local Gi* and the Mann-Kendall Test. EHSA combines the both of these to evaluate if there are trends in hot or cold spots over time.
+
+EHSA utilizes a spacetime cube, or spatio-temporal full grid. Please see [spacetime vignette](/articles/spacetime-s3.html) for more on spacetime representations. In short, a spacetime cube contains a regular time-series for each location in a dataset—i.e. there are $n \times m$ observations where n is the number of locations and m is the number of times. 
+
+For each time-slice (i.e. the complete set of geometries for a given time) the local Gi* is calculated. Say we have 10 times, we will have for each i $G_{i,t=1}^*, \ldots, G_{i,t=10}^*$.
+
+Then, given each location's time-series of Gi*, they are assessed using the MK test. 
+
+
+## A hands on example
+
+We can compute the EHSA manually using sfsdep and spacetime classes. In this example we utilize [Ecometric](https://ui.josiahparry.com/ecometrics.html#ecometrics) Data from the Boston Area Research Initiative ([data and documentation)](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XTEJRE). These data are generated from 911 calls in Boston from 2010 - 2020 and aggregated to the Census Block Group (CBG) level. The column `value` indicates the calculated prevalence which is derived from Exploratory Factor Analysis and population projections.
+
+### Data
+
+The data are stored in the internal data file `bos-ecometric.csv` and `bos-ecometric.geojson`. We will read these in to `df` and `geo` and will create a new spacetime object called `bos` with them.
+
+```{r echo=TRUE, warning=FALSE, paged.print=FALSE}
+# Create objects to store file paths 
+df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+
+# read in data 
+df <- readr::read_csv(df_fp, col_types = "ccidD")
+geo <- sf::read_sf(geo_fp)
+
+
+# Create spacetime object called `bos`
+bos <- spacetime(df, geo, 
+                 .loc_col = ".region_id",
+                 .time_col = "time_period")
+
+bos
+```
+
+
+### Local Gi*
+
+The first step in EHSA is to calculate the local Gi* for each time period. but that, however, requires a couple of preceding steps. Before we calculate Gi* we need to identify neighbors and weights. 
+
+To do this, we activate the geometry context and create two new columns `nb` and `wt`. Then we will activate the data context again and copy over the nb and wt columns to each time-slice using `set_nbs()` and `set_wts()`—**row order is very important** so rearrange the observations after using `set_nbs()` or `set_wts()`.  
+
+
+```{r}
+bos_nb <- bos |> 
   activate("geometry") |> 
-    mutate(nb = include_self(st_contiguity(geometry)),
-         wt = st_weights(nb)) |> 
-  activate("data") |> 
+  mutate(
+    nb = include_self(st_contiguity(geometry)),
+    wt = st_weights(nb)
+  ) |> 
   set_nbs("nb") |> 
-  set_wts("wt") |> 
+  set_wts("wt")
+
+head(bos_nb)
+```
+
+This dataset now has neigbors and weights for each time-slice. We can use thse new columns to manually calculate the local Gi* for each location. We can do this by grouping by `time_period` and using `local_gstar_perm()`. After which, we unnest the new data frame column `gi_star`.
+
+
+```{r}
+gi_stars <- bos_nb |> 
   group_by(time_period) |> 
-  mutate(gi_star = local_gstar_perm(crime_pers, nb, wt))
+  mutate(gi_star = local_gstar_perm(value, nb, wt)) |> 
+  tidyr::unnest(gi_star)
 
+
+gi_stars |> 
+  select(.region_id, time_period, gi_star, p_folded_sim)
 ```
 
-here we see the Gi* for one location for all time periods. 
+With these Gi* measures we can then evaluate each location for a trend using the Mann-Kendall test. 
 
-```{r}
 
-dept_01_trend <- gistars |> 
-  tidyr::unnest(gi_star) |> 
-  filter(code_dept == "01") |> 
-  select(gi_star, time_period, p_sim)
+### Mann-Kendall Test
 
-dept_01_trend
-```
+Let's first take only a single location, `25025010403`, and evaluate the Mann-Kendall statistic for it by hand. Then we can extend this to each location
 
-Then we calculate the Mann-kendall statistic for it
 
-```{r}
-Kendall::MannKendall(dept_01_trend[["gi_star"]])
-```
-
-Here we have an insignificant positive trend
-
-next we 
+> Note that there is a bit of finagling the MK test to make it work nicely in a dplyr::summarise() call.
 
 
 ```{r}
-x |> 
-  group_by(time_period) |> 
-  arrange(time_period, code_dept) |> 
-  mutate(nb = include_self(st_contiguity(geometry)),
-         wt = st_weights(nb),
-         gi_star = local_gstar(crime_pers, nb, wt)) |> 
-  group_by(code_dept) |> 
-  summarise(trend = broom::tidy(Kendall::MannKendall(gi_star))) |> 
-  tidyr::unnest(trend) |> 
-  arrange(p.value)
+cbg <- gi_stars |> 
+  ungroup() |> 
+  filter(.region_id == "25025010403") |> 
+  select(.region_id, time_period, year, gi_star)
+
+# visualize trend
+ggplot(cbg, aes(time_period, gi_star)) +
+  geom_line() +
+  theme_light()
 ```
-Here we use emerging hot spot analysis function from sfdep using no time lag
+
 
 ```{r}
-spt <- x |> 
-  as_spacetime("code_dept", "time_period")
-
-emerging_hotspot_analysis(spt, "crime_pers", k = 0) |> 
-  arrange(p_value)
+cbg |> 
+  summarise(mk = list(unclass(Kendall::MannKendall(gi_star)))) |> 
+  tidyr::unnest_wider(mk)
 ```
+In the above result, `sl` is the p-value. This result tells us that there is a slight upward but insignificant trend.  
+
+We can replicate this for each location by using `group_by()`.
+
+```{r}
+ehsa_manual <- gi_stars |> 
+  group_by(.region_id) |> 
+  summarise(mk = list(unclass(Kendall::MannKendall(gi_star)))) |> 
+  tidyr::unnest_wider(mk)
+
+# arrange to show significant emerging hot/cold spots
+emerging <- ehsa_manual |> 
+  arrange(sl, abs(tau)) |> 
+  slice(1:5)
+
+# show top 5 locations
+emerging
+```
+Here we can see there are a few locations that are becoming significantly colder and others that are becoming significantly warmer. 
 
 
-#### Sources
+## Using `emerging_hotspot_analysis()`
 
-- GeoDa center: https://geodacenter.github.io/workbook/6b_local_adv/lab6b.html#getis-ord-statistics
+While we can do the above, this is limited in two ways. Primarily that in the above example we only used spatial neighbors only. Whereas in EHSA we can, and likely should, incorporate the time-lag of our spatial neighbors. Secondly, there are classifications proposed by ESRI which help us understand how each location is changing over time. Both of these are handled by the `emerging_hotspot_analysis()` function.
+
+This `emerging_hotspot_analysis()` takes a spacetime object `.x`, the quoted name of the variable of interested in `.var` at minimum. We can specify the number of time lags using the argument `k` which is set to 1 by default. 
+
+
+```{r}
+# conduct EHSA
+ehsa <- emerging_hotspot_analysis(bos, "value", k = 1, nsim = 99)
+
+# preview some values 
+head(ehsa)
+
+# evaluate the classifications of our hotspots
+count(ehsa, classification)
+```
 
 
 

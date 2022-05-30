@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="sfdep">
-<title>WIP: Understanding Emerging Hot Spots • sfdep</title>
+<title>Emerging Hot Spot Analysis • sfdep</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Noto%20Sans%20Display-0.4.0/font.css" rel="stylesheet">
@@ -14,7 +14,7 @@
 <link href="../deps/_Merriweather-0.4.0/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="WIP: Understanding Emerging Hot Spots">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Emerging Hot Spot Analysis">
 <meta property="og:description" content="sfdep">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -84,7 +84,7 @@
 
 <div class="row">
   <main id="main"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>WIP: Understanding Emerging Hot Spots</h1>
+      <img src="" class="logo" alt=""><h1>Emerging Hot Spot Analysis</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/josiahparry/sfdep/blob/HEAD/vignettes/articles/understanding-emerging-hotspots.Rmd" class="external-link"><code>vignettes/articles/understanding-emerging-hotspots.Rmd</code></a></small>
@@ -139,16 +139,16 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 9</span></span>
 <span class="co">#&gt;    gi_star   e_gi     var_gi p_value p_sim p_folded_sim skewness kurtosis</span>
 <span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">1.46</span>  0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">014</span>9   0.143  0.072        0.036    0.749    0.444</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">0.460</span> 0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">009</span>47  0.646  0.752        0.376    0.745    0.562</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   0.515 0.012<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">010</span>5   0.606  0.546        0.273    0.625    0.470</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">1.64</span>  0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">014</span>1   0.100  0.034        0.017    0.675    0.514</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  -<span style="color: #BB0000;">1.04</span>  0.011<span style="text-decoration: underline;">6</span> 0.000<span style="text-decoration: underline;">017</span>6   0.300  0.288        0.144    0.949    1.41 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  -<span style="color: #BB0000;">2.26</span>  0.012<span style="text-decoration: underline;">0</span> 0.000<span style="text-decoration: underline;">009</span>66  0.023<span style="text-decoration: underline;">9</span> 0.002        0.001    0.841    1.41 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  -<span style="color: #BB0000;">0.381</span> 0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">018</span>3   0.704  0.764        0.382    0.853    0.744</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  -<span style="color: #BB0000;">0.724</span> 0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">019</span>0   0.469  0.508        0.254    0.939    0.899</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  -<span style="color: #BB0000;">1.43</span>  0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">011</span>4   0.152  0.086        0.043    0.672    0.353</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">1.28</span>  0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">011</span>6   0.199  0.15         0.075    0.731    0.531</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">1.44</span>  0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">014</span>9   0.149  0.07         0.035    0.793    0.577</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">0.454</span> 0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">009</span>82  0.650  0.7          0.35     0.713    0.564</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   0.602 0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">010</span>0   0.547  0.504        0.252    0.705    0.903</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">1.72</span>  0.012<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">014</span>0   0.085<span style="text-decoration: underline;">2</span> 0.022        0.011    0.745    0.631</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  -<span style="color: #BB0000;">1.10</span>  0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">017</span>1   0.273  0.252        0.126    0.917    1.06 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  -<span style="color: #BB0000;">2.28</span>  0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">009</span>11  0.022<span style="text-decoration: underline;">6</span> 0.002        0.001    0.690    0.660</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  -<span style="color: #BB0000;">0.341</span> 0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">018</span>2   0.733  0.838        0.419    1.02     1.39 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  -<span style="color: #BB0000;">0.783</span> 0.012<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">018</span>1   0.434  0.46         0.23     0.880    1.01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  -<span style="color: #BB0000;">1.39</span>  0.012<span style="text-decoration: underline;">0</span> 0.000<span style="text-decoration: underline;">013</span>4   0.164  0.112        0.056    0.857    1.15 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">1.27</span>  0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">012</span>3   0.206  0.146        0.073    0.811    0.655</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows, and 1 more variable: geometry &lt;MULTIPOLYGON&gt;</span></span></code></pre></div>
 <p>Lastly, we classify the clusters using a combination of <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when()</a></code> which is then piped into a ggplot map. While not a perfect recreation of the GeoDa map, it is very close—likely due to conditional permutation (see <a href="/articles/conditional-permutation.html">conditional permutation vignette</a> for more on significance calculation).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -173,153 +173,223 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <div class="section level2">
 <h2 id="mann-kendall-test">Mann-Kendall Test<a class="anchor" aria-label="anchor" href="#mann-kendall-test"></a>
 </h2>
-<ul>
-<li>tests if there is a monotonic trend either in a positive or negative direction</li>
-<li>if you dont remember what monotonic means, a monotonic series is one that is always increasing and never decreasing or vice versa.</li>
-<li>so a monotonic trend consistently increases (or decreases) through time. And, importantly the trend doesn’t have to be linear.</li>
-</ul>
-<p>Below is an example of a monotonic upward trend which isnt linear</p>
+<p>The incorporation of time-series analysis is done through the use of the Mann-Kendall (MK) Trend test. The MK test is a nonparametric test that checks for monotonic trends.</p>
+<p>If you don’t recall monotonic series from your calculus class, that’s okay. A monotonic series is one that consistently increases (or decreases) and never changes direction. A monotonic trend is one that consistently increases or decreases through time. And since it is nonparametric test, the trend does not have to be linear.</p>
+<p>The MK test does not check if a time-series is strictly monotonic—e.g. every subsequent unit is increasing or decreasing—but if the overall series is increasing or decreasing. Below is an example of a monotonic upward trend which is not linear.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1.4</span>, <span class="fl">1.5</span>, <span class="fl">1.6</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5.5</span>, <span class="fl">20</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">21</span>, length.out <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1.4</span>, <span class="fl">1.5</span>, <span class="fl">1.6</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5.5</span>, <span class="fl">8</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">8.5</span>, length.out <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">series</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></code></pre></div>
 <p><img src="understanding-emerging-hotspots_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<ul>
-<li>null hypothesis: no trend</li>
-</ul>
-<p><a href="https://www.real-statistics.com/time-series-analysis/time-series-miscellaneous/mann-kendall-test/" class="external-link uri">https://www.real-statistics.com/time-series-analysis/time-series-miscellaneous/mann-kendall-test/</a></p>
+<p>For a more realistic example, let’s take a look a the <code>economics</code> dataset from <code>ggplot2</code> which contains data from FRED. We’ll use the <code>psavert</code> variable which contains data about personal savings rates in the United States.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">econ</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/economics.html" class="external-link">economics</a></span>
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">econ</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">date</span>, <span class="va">psavert</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="understanding-emerging-hotspots_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p>From a visual inspection, we can tell that overall the trend is decreasing. The MK test can confirm this. We use <code><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">Kendall::MannKendall()</a></code> to test if the trend is significantly decreasing.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">Kendall</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">MannKendall</a></span><span class="op">(</span><span class="va">econ</span><span class="op">$</span><span class="va">psavert</span><span class="op">)</span>
+<span class="co">#&gt; tau = -0.644, 2-sided pvalue =&lt; 2.22e-16</span></code></pre></div>
+<p>The above results show up the <code>tau</code> and p-value. Tau ranges between -1 and 1 where -1 is a perfectly decreasing series and 1 is a perfectly increasing series. The p-value is extremely small indicating that the null-hypothesis (that there is no trend) can be rejected.</p>
 </div>
 <div class="section level2">
-<h2 id="emerging-hot-spot-analysis-by-hand">Emerging Hot Spot Analysis by Hand<a class="anchor" aria-label="anchor" href="#emerging-hot-spot-analysis-by-hand"></a>
+<h2 id="the-whole-game">The whole game<a class="anchor" aria-label="anchor" href="#the-whole-game"></a>
 </h2>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sfdep.josiahparry.com" class="external-link">sfdep</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
-
-
-<span class="co"># replicate the guerry dataset 10 times</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="op">~</span><span class="va">guerry</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">code_dept</span>, <span class="va">crime_pers</span><span class="op">)</span> |&gt; 
-         <span class="co"># create an indicator for time period</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>time_period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">85</span><span class="op">)</span><span class="op">)</span>, 
-         <span class="co"># add some noise </span>
-         crime_pers <span class="op">=</span> <span class="va">crime_pers</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">850</span>, max <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
-
-<span class="va">spt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as_spacetime.html">as_spacetime</a></span><span class="op">(</span><span class="va">x</span>, .loc_col <span class="op">=</span> <span class="st">"code_dept"</span>, <span class="st">"time_period"</span><span class="op">)</span></code></pre></div>
-<p>Here we calculate emerging hot spots manually. However, here we cannot include time lag because there’s no outside of the box functionality to do so.</p>
-<p>This chunk:</p>
-<ul>
-<li>activates the geometry context and:
-<ul>
-<li>creates neighbors</li>
-<li>weights</li>
-</ul>
-</li>
-<li>activates the data context</li>
-<li>sets the neighbor column from the geometry context</li>
-<li>sets the weights column from the geometry context</li>
-<li>groups by <code>time_period</code>
-</li>
-<li>calculates the local Gi* for each time period</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">gistars</span> <span class="op">&lt;-</span> <span class="va">spt</span> |&gt; 
-  <span class="fu"><a href="../reference/activate.html">activate</a></span><span class="op">(</span><span class="st">"geometry"</span><span class="op">)</span> |&gt; 
-    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fu"><a href="../reference/include_self.html">include_self</a></span><span class="op">(</span><span class="fu"><a href="../reference/st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span>,
-         wt <span class="op">=</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="../reference/activate.html">activate</a></span><span class="op">(</span><span class="st">"data"</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="../reference/set_col.html">set_nbs</a></span><span class="op">(</span><span class="st">"nb"</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="../reference/set_col.html">set_wts</a></span><span class="op">(</span><span class="st">"wt"</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">time_period</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>gi_star <span class="op">=</span> <span class="fu"><a href="../reference/local_gstar.html">local_gstar_perm</a></span><span class="op">(</span><span class="va">crime_pers</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>here we see the Gi* for one location for all time periods.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">dept_01_trend</span> <span class="op">&lt;-</span> <span class="va">gistars</span> |&gt; 
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">gi_star</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">code_dept</span> <span class="op">==</span> <span class="st">"01"</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">gi_star</span>, <span class="va">time_period</span>, <span class="va">p_sim</span><span class="op">)</span>
-
-<span class="va">dept_01_trend</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 3</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># Groups:   time_period [10]</span></span>
-<span class="co">#&gt;    gi_star time_period p_sim</span>
-<span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   0.309           1 0.716</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">1.11</span>            2 0.256</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   2.19            3 0.052</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">0.217</span>           4 0.892</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   0.563           5 0.504</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   2.24            6 0.04 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  -<span style="color: #BB0000;">0.898</span>           7 0.376</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  -<span style="color: #BB0000;">0.976</span>           8 0.376</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   2.60            9 0.012</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   0.825          10 0.42</span></code></pre></div>
-<p>Then we calculate the Mann-kendall statistic for it</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">Kendall</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">MannKendall</a></span><span class="op">(</span><span class="va">dept_01_trend</span><span class="op">[[</span><span class="st">"gi_star"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
-<span class="co">#&gt; tau = 0.2, 2-sided pvalue =0.47427</span></code></pre></div>
-<p>Here we have an insignificant positive trend</p>
-<p>next we</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">x</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">time_period</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">time_period</span>, <span class="va">code_dept</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fu"><a href="../reference/include_self.html">include_self</a></span><span class="op">(</span><span class="fu"><a href="../reference/st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span>,
-         wt <span class="op">=</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span>,
-         gi_star <span class="op">=</span> <span class="fu"><a href="../reference/local_gstar.html">local_gstar</a></span><span class="op">(</span><span class="va">crime_pers</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">code_dept</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>trend <span class="op">=</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="fu">Kendall</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">MannKendall</a></span><span class="op">(</span><span class="va">gi_star</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> |&gt; 
-  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">trend</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">p.value</span><span class="op">)</span>
-<span class="co">#&gt; Simple feature collection with 85 features and 6 fields</span>
-<span class="co">#&gt; Geometry type: MULTIPOLYGON</span>
-<span class="co">#&gt; Dimension:     XY</span>
-<span class="co">#&gt; Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span>
-<span class="co">#&gt; CRS:           NA</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 7</span></span>
-<span class="co">#&gt;    code_dept statistic p.value kendall_score denominator var_kendall_score</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 41           -<span style="color: #BB0000;">0.600</span>  0.020<span style="text-decoration: underline;">0</span>           -<span style="color: #BB0000;">27</span>          45               125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 44           -<span style="color: #BB0000;">0.556</span>  0.031<span style="text-decoration: underline;">8</span>           -<span style="color: #BB0000;">25</span>          45               125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 49           -<span style="color: #BB0000;">0.556</span>  0.031<span style="text-decoration: underline;">8</span>           -<span style="color: #BB0000;">25</span>          45               125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 60            0.556  0.031<span style="text-decoration: underline;">8</span>            25          45               125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 02            0.511  0.049<span style="text-decoration: underline;">1</span>            23          45               125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 56           -<span style="color: #BB0000;">0.467</span>  0.073<span style="text-decoration: underline;">6</span>           -<span style="color: #BB0000;">21</span>          45               125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 51            0.467  0.073<span style="text-decoration: underline;">6</span>            21          45               125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 35           -<span style="color: #BB0000;">0.422</span>  0.107            -<span style="color: #BB0000;">19</span>          45               125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 46           -<span style="color: #BB0000;">0.422</span>  0.107            -<span style="color: #BB0000;">19</span>          45               125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 77            0.422  0.107             19          45               125</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows, and 1 more variable: geometry &lt;MULTIPOLYGON&gt;</span></span></code></pre></div>
-<p>Here we use emerging hot spot analysis function from sfdep using no time lag</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">spt</span> <span class="op">&lt;-</span> <span class="va">x</span> |&gt; 
-  <span class="fu"><a href="../reference/as_spacetime.html">as_spacetime</a></span><span class="op">(</span><span class="st">"code_dept"</span>, <span class="st">"time_period"</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis</a></span><span class="op">(</span><span class="va">spt</span>, <span class="st">"crime_pers"</span>, k <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> |&gt; 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">p_value</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 4</span></span>
-<span class="co">#&gt;    location    tau p_value classification     </span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 41       -<span style="color: #BB0000;">0.600</span>  0.020<span style="text-decoration: underline;">0</span> no pattern detected</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 44       -<span style="color: #BB0000;">0.556</span>  0.031<span style="text-decoration: underline;">8</span> no pattern detected</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 49       -<span style="color: #BB0000;">0.556</span>  0.031<span style="text-decoration: underline;">8</span> no pattern detected</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 60        0.556  0.031<span style="text-decoration: underline;">8</span> no pattern detected</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 02        0.511  0.049<span style="text-decoration: underline;">1</span> sporadic hotspot   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 56       -<span style="color: #BB0000;">0.467</span>  0.073<span style="text-decoration: underline;">6</span> no pattern detected</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 51        0.467  0.073<span style="text-decoration: underline;">6</span> no pattern detected</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 35       -<span style="color: #BB0000;">0.422</span>  0.107  sporadic hotspot   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 46       -<span style="color: #BB0000;">0.422</span>  0.107  no pattern detected</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 77        0.422  0.107  no pattern detected</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows</span></span></code></pre></div>
-<div class="section level4">
-<h4 id="sources">Sources<a class="anchor" aria-label="anchor" href="#sources"></a>
-</h4>
-<ul>
-<li>GeoDa center: <a href="https://geodacenter.github.io/workbook/6b_local_adv/lab6b.html#getis-ord-statistics" class="external-link uri">https://geodacenter.github.io/workbook/6b_local_adv/lab6b.html#getis-ord-statistics</a>
-</li>
-</ul>
+<p>We’ve gone over briefly the local Gi* and the Mann-Kendall Test. EHSA combines the both of these to evaluate if there are trends in hot or cold spots over time.</p>
+<p>EHSA utilizes a spacetime cube, or spatio-temporal full grid. Please see <a href="/articles/spacetime-s3.html">spacetime vignette</a> for more on spacetime representations. In short, a spacetime cube contains a regular time-series for each location in a dataset—i.e. there are <span class="math inline">\(n \times m\)</span> observations where n is the number of locations and m is the number of times.</p>
+<p>For each time-slice (i.e. the complete set of geometries for a given time) the local Gi* is calculated. Say we have 10 times, we will have for each i <span class="math inline">\(G_{i,t=1}^*, \ldots, G_{i,t=10}^*\)</span>.</p>
+<p>Then, given each location’s time-series of Gi*, they are assessed using the MK test.</p>
 </div>
+<div class="section level2">
+<h2 id="a-hands-on-example">A hands on example<a class="anchor" aria-label="anchor" href="#a-hands-on-example"></a>
+</h2>
+<p>We can compute the EHSA manually using sfsdep and spacetime classes. In this example we utilize <a href="https://ui.josiahparry.com/ecometrics.html#ecometrics" class="external-link">Ecometric</a> Data from the Boston Area Research Initiative (<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XTEJRE" class="external-link">data and documentation)</a>. These data are generated from 911 calls in Boston from 2010 - 2020 and aggregated to the Census Block Group (CBG) level. The column <code>value</code> indicates the calculated prevalence which is derived from Exploratory Factor Analysis and population projections.</p>
+<div class="section level3">
+<h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h3>
+<p>The data are stored in the internal data file <code>bos-ecometric.csv</code> and <code>bos-ecometric.geojson</code>. We will read these in to <code>df</code> and <code>geo</code> and will create a new spacetime object called <code>bos</code> with them.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Create objects to store file paths </span>
+<span class="va">df_fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"bos-ecometric.csv"</span>, package <span class="op">=</span> <span class="st">"sfdep"</span><span class="op">)</span>
+<span class="va">geo_fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"bos-ecometric.geojson"</span>, package <span class="op">=</span> <span class="st">"sfdep"</span><span class="op">)</span>
+
+<span class="co"># read in data </span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">df_fp</span>, col_types <span class="op">=</span> <span class="st">"ccidD"</span><span class="op">)</span>
+<span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="va">geo_fp</span><span class="op">)</span>
+
+
+<span class="co"># Create spacetime object called `bos`</span>
+<span class="va">bos</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spacetime.html">spacetime</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">geo</span>, 
+                 .loc_col <span class="op">=</span> <span class="st">".region_id"</span>,
+                 .time_col <span class="op">=</span> <span class="st">"time_period"</span><span class="op">)</span>
+
+<span class="va">bos</span>
+<span class="co">#&gt; <span style="font-weight: bold; font-style: italic;">spacetime ───</span></span>
+<span class="co">#&gt; <span style="color: #555555;">Context:</span><span style="color: #555555; font-style: italic;">`data`</span></span>
+<span class="co">#&gt; <span style="color: #555555; font-style: italic;">168</span><span style="color: #555555;"> locations `.region_id`</span></span>
+<span class="co">#&gt; <span style="color: #555555; font-style: italic;">10</span><span style="color: #555555;"> time periods `time_period`</span></span>
+<span class="co">#&gt; <span style="color: #B2B2B2;">── </span><span style="color: #555555; font-style: italic;">data context</span><span style="color: #B2B2B2;"> ────────────────────────────────────────────────────────────────</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,680 × 5</span></span>
+<span class="co">#&gt;    .region_id  ecometric  year value time_period</span>
+<span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>010  0.35 2010-01-01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>011  0.89 2011-01-01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>012  1.2  2012-01-01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>013  0.84 2013-01-01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>014  1.5  2014-01-01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>015  1.15 2015-01-01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>016  1.48 2016-01-01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>017  1.64 2017-01-01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>018  0.49 2018-01-01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>019  0.17 2019-01-01 </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 1,670 more rows</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="local-gi">Local Gi*<a class="anchor" aria-label="anchor" href="#local-gi"></a>
+</h3>
+<p>The first step in EHSA is to calculate the local Gi* for each time period. but that, however, requires a couple of preceding steps. Before we calculate Gi* we need to identify neighbors and weights.</p>
+<p>To do this, we activate the geometry context and create two new columns <code>nb</code> and <code>wt</code>. Then we will activate the data context again and copy over the nb and wt columns to each time-slice using <code><a href="../reference/set_col.html">set_nbs()</a></code> and <code><a href="../reference/set_col.html">set_wts()</a></code>—<strong>row order is very important</strong> so rearrange the observations after using <code><a href="../reference/set_col.html">set_nbs()</a></code> or <code><a href="../reference/set_col.html">set_wts()</a></code>.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">bos_nb</span> <span class="op">&lt;-</span> <span class="va">bos</span> |&gt; 
+  <span class="fu"><a href="../reference/activate.html">activate</a></span><span class="op">(</span><span class="st">"geometry"</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>
+    nb <span class="op">=</span> <span class="fu"><a href="../reference/include_self.html">include_self</a></span><span class="op">(</span><span class="fu"><a href="../reference/st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span>,
+    wt <span class="op">=</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span>
+  <span class="op">)</span> |&gt; 
+  <span class="fu"><a href="../reference/set_col.html">set_nbs</a></span><span class="op">(</span><span class="st">"nb"</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="../reference/set_col.html">set_wts</a></span><span class="op">(</span><span class="st">"wt"</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">bos_nb</span><span class="op">)</span>
+<span class="co">#&gt; <span style="font-weight: bold; font-style: italic;">spacetime ───</span></span>
+<span class="co">#&gt; <span style="color: #555555;">Context:</span><span style="color: #555555; font-style: italic;">`data`</span></span>
+<span class="co">#&gt; <span style="color: #555555; font-style: italic;">168</span><span style="color: #555555;"> locations `.region_id`</span></span>
+<span class="co">#&gt; <span style="color: #555555; font-style: italic;">10</span><span style="color: #555555;"> time periods `time_period`</span></span>
+<span class="co">#&gt; <span style="color: #B2B2B2;">── </span><span style="color: #555555; font-style: italic;">data context</span><span style="color: #B2B2B2;"> ────────────────────────────────────────────────────────────────</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span>
+<span class="co">#&gt;   .region_id  ecometric  year value time_period nb        wt       </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>010  0.35 2010-01-01  <span style="color: #949494;">&lt;int [9]&gt;</span> <span style="color: #949494;">&lt;dbl [9]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 25025010404 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 25025010801 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 25025010702 Guns       <span style="text-decoration: underline;">2</span>010  0.46 2010-01-01  <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 25025010204 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 25025010802 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span></span></code></pre></div>
+<p>This dataset now has neigbors and weights for each time-slice. We can use thse new columns to manually calculate the local Gi* for each location. We can do this by grouping by <code>time_period</code> and using <code><a href="../reference/local_gstar.html">local_gstar_perm()</a></code>. After which, we unnest the new data frame column <code>gi_star</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">gi_stars</span> <span class="op">&lt;-</span> <span class="va">bos_nb</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">time_period</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>gi_star <span class="op">=</span> <span class="fu"><a href="../reference/local_gstar.html">local_gstar_perm</a></span><span class="op">(</span><span class="va">value</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">gi_star</span><span class="op">)</span>
+
+
+<span class="va">gi_stars</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.region_id</span>, <span class="va">time_period</span>, <span class="va">gi_star</span>, <span class="va">p_folded_sim</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,680 × 4</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># Groups:   time_period [10]</span></span>
+<span class="co">#&gt;    .region_id  time_period gi_star p_folded_sim</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 25025010405 2010-01-01   -<span style="color: #BB0000;">0.982</span>        0.166</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 25025010404 2010-01-01   -<span style="color: #BB0000;">1.40</span>         0.038</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 25025010801 2010-01-01   -<span style="color: #BB0000;">1.45</span>         0.034</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 25025010702 2010-01-01   -<span style="color: #BB0000;">0.899</span>        0.182</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 25025010204 2010-01-01   -<span style="color: #BB0000;">1.26</span>         0.05 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 25025010802 2010-01-01   -<span style="color: #BB0000;">1.40</span>         0.024</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 25025010104 2010-01-01   -<span style="color: #BB0000;">1.62</span>         0.028</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 25025000703 2010-01-01   -<span style="color: #BB0000;">1.44</span>         0.022</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 25025000504 2010-01-01   -<span style="color: #BB0000;">1.31</span>         0.04 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 25025000704 2010-01-01   -<span style="color: #BB0000;">1.57</span>         0.024</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 1,670 more rows</span></span></code></pre></div>
+<p>With these Gi* measures we can then evaluate each location for a trend using the Mann-Kendall test.</p>
+</div>
+<div class="section level3">
+<h3 id="mann-kendall-test-1">Mann-Kendall Test<a class="anchor" aria-label="anchor" href="#mann-kendall-test-1"></a>
+</h3>
+<p>Let’s first take only a single location, <code>25025010403</code>, and evaluate the Mann-Kendall statistic for it by hand. Then we can extend this to each location</p>
+<blockquote>
+<p>Note that there is a bit of finagling the MK test to make it work nicely in a dplyr::summarise() call.</p>
+</blockquote>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cbg</span> <span class="op">&lt;-</span> <span class="va">gi_stars</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">.region_id</span> <span class="op">==</span> <span class="st">"25025010403"</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">.region_id</span>, <span class="va">time_period</span>, <span class="va">year</span>, <span class="va">gi_star</span><span class="op">)</span>
+
+<span class="co"># visualize trend</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">cbg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">time_period</span>, <span class="va">gi_star</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p><img src="understanding-emerging-hotspots_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">cbg</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>mk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="fu">Kendall</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">MannKendall</a></span><span class="op">(</span><span class="va">gi_star</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">unnest_wider</a></span><span class="op">(</span><span class="va">mk</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span>
+<span class="co">#&gt;     tau    sl     S     D  varS</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 0.333 0.210    15    45   125</span></code></pre></div>
+<p>In the above result, <code>sl</code> is the p-value. This result tells us that there is a slight upward but insignificant trend.</p>
+<p>We can replicate this for each location by using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ehsa_manual</span> <span class="op">&lt;-</span> <span class="va">gi_stars</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">.region_id</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>mk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">unclass</a></span><span class="op">(</span><span class="fu">Kendall</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">MannKendall</a></span><span class="op">(</span><span class="va">gi_star</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">unnest_wider</a></span><span class="op">(</span><span class="va">mk</span><span class="op">)</span>
+
+<span class="co"># arrange to show significant emerging hot/cold spots</span>
+<span class="va">emerging</span> <span class="op">&lt;-</span> <span class="va">ehsa_manual</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">sl</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">abs</a></span><span class="op">(</span><span class="va">tau</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span>
+
+<span class="co"># show top 5 locations</span>
+<span class="va">emerging</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 6</span></span>
+<span class="co">#&gt;   .region_id     tau        sl     S     D  varS</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 25025120201 -<span style="color: #BB0000;">1</span>     0.000<span style="text-decoration: underline;">083</span>0   -<span style="color: #BB0000;">45</span>    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 25025090700  0.778 0.002<span style="text-decoration: underline;">36</span>      35    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 25025030200  0.733 0.004<span style="text-decoration: underline;">21</span>      33    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 25025060600  0.733 0.004<span style="text-decoration: underline;">21</span>      33    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 25025081100  0.733 0.004<span style="text-decoration: underline;">21</span>      33    45   125</span></code></pre></div>
+<p>Here we can see there are a few locations that are becoming significantly colder and others that are becoming significantly warmer.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="using-emerging_hotspot_analysis">Using <code>emerging_hotspot_analysis()</code><a class="anchor" aria-label="anchor" href="#using-emerging_hotspot_analysis"></a>
+</h2>
+<p>While we can do the above, this is limited in two ways. Primarily that in the above example we only used spatial neighbors only. Whereas in EHSA we can, and likely should, incorporate the time-lag of our spatial neighbors. Secondly, there are classifications proposed by ESRI which help us understand how each location is changing over time. Both of these are handled by the <code><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis()</a></code> function.</p>
+<p>This <code><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis()</a></code> takes a spacetime object <code>.x</code>, the quoted name of the variable of interested in <code>.var</code> at minimum. We can specify the number of time lags using the argument <code>k</code> which is set to 1 by default.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># conduct EHSA</span>
+<span class="va">ehsa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis</a></span><span class="op">(</span><span class="va">bos</span>, <span class="st">"value"</span>, k <span class="op">=</span> <span class="fl">1</span>, nsim <span class="op">=</span> <span class="fl">99</span><span class="op">)</span>
+
+<span class="co"># preview some values </span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ehsa</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 4</span></span>
+<span class="co">#&gt;   location       tau p_value classification   </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 25025010405  0.111  0.721  sporadic coldspot</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 25025010404 -<span style="color: #BB0000;">0.333</span>  0.210  sporadic coldspot</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 25025010801 -<span style="color: #BB0000;">0.200</span>  0.474  sporadic coldspot</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 25025010702 -<span style="color: #BB0000;">0.600</span>  0.020<span style="text-decoration: underline;">0</span> sporadic coldspot</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 25025010204 -<span style="color: #BB0000;">0.467</span>  0.073<span style="text-decoration: underline;">6</span> sporadic coldspot</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 25025010802 -<span style="color: #BB0000;">0.333</span>  0.210  sporadic coldspot</span>
+
+<span class="co"># evaluate the classifications of our hotspots</span>
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">ehsa</span>, <span class="va">classification</span><span class="op">)</span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 2</span></span>
+<span class="co">#&gt;   classification           n</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> consecutive hotspot     16</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> intensifying hotspot     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> no pattern detected     15</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> oscilating hotspot       2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> persistent coldspot     10</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> persistent hotspot       7</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> sporadic coldspot       88</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> sporadic hotspot        29</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
