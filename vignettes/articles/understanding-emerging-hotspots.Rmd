@@ -13,9 +13,11 @@ knitr::opts_chunk$set(
 
 Emerging hot spot Analysis (EHSA) is a technique that falls under exploratory spatial data analysis (ESDA). It combines the traditional ESDA technique of hot spot analysis using the Getis-Ord Gi* statistic with the traditional time-series Mann-Kendall test for monotonic trends. 
 
-The goal of EHSA is to evaluate how hot and cold spots are changing over time. It helps us answer the questions: are they becoming increasingly hotter, Are they cooling down, or are they staying the same? 
+The goal of EHSA is to evaluate how hot and cold spots are changing over time. It helps us answer the questions: are they becoming increasingly hotter, are they cooling down, or are they staying the same? 
 
-In brief, EHSA works by calculating the Gi* for each time period. The Gi* at each location is treated as a time-series and evaluated for a trend using the Mann-Kendall statistic. In this vignette we walk through the Gettis-Ord Gi\*, the Mann-Kendall, and how the two work together to in EHSA. The Gi\* and the Mann-Kendall are compared together to create 17 unique classifications to help better understand how the locations have changed over time. 
+In brief, EHSA works by calculating the Gi* for each time period. The series of Gi* at each location is treated as a time-series and evaluated for a trend using the Mann-Kendall statistic. The Gi\* and the Mann-Kendall are compared together to create 17 unique classifications to help better understand how the locations have changed over time. 
+
+In this vignette we walk through the Gettis-Ord Gi\*, the Mann-Kendall, and how the two work together to in EHSA. 
 
 ## Gettis-Ord Gi*
 
@@ -31,46 +33,47 @@ G_i = \frac{\sum_{j \ne i}W_{ij}X_j}
           {\sum_{j \ne i}X_j}
 $$
 
-The Gi* statistic includes the focal (or self, or ith) observation in the neighborhood.
+The Gi* statistic includes the focal (or self, or i<sup>th</sup>) observation in the neighborhood.
 
 $$
 G_i* = \frac{\sum_{j}W_{ij}X_j}
           {\sum_{j}X_j}
 $$
 
-### Implementing the local Gi*
+### Calculating the local Gi*
 
 To calculate the local Gi* using sfdep, we have to be especially aware of the neighbors
 list when we create it. By default, when we create a neighbors list, we exclude the
-self from the observation. However, if we want to calculate the local Gi*, we must 
+self from the neighbors list because it seems a little silly to say "I am my own neighbor." However, if we want to calculate the local Gi*, we must 
 be sure to explicitly add it using `include_self()`
 
 Here, we follow the example laid out by the GeoDa center documentation to calculate and plot the local Gi* statistic for donations using the Guerry dataset. 
 
-Here we create a neighbor list and include self and create weights from the neighbors. 
+First we create a neighbor list ensuring that the self is included and then create the weights list from the new neighbors list. 
 
 ```{r message = FALSE}
 library(sfdep)
 library(dplyr)
 
 guerry_nb <- guerry |> 
-  mutate(nb = include_self(st_contiguity(geometry)),
+  mutate(
+    nb = include_self(st_contiguity(geometry)),
          wt = st_weights(nb)
-  ) 
+    ) 
 ```
 
-Following, we calculate the local Gi* using `local_gstar_perm()` on the `donations` column which creates a new data frame column called `gistar`. We then unnest it using `tidyr::unnest()`
+Following, we calculate the local Gi* using `local_gstar_perm()` on the `donations` column which creates a new data frame column called `gi_star`. We then unnest it using `tidyr::unnest()`.
 
 ```{r}
 donat_gistar <- guerry_nb |> 
-  transmute(gistar = local_gstar_perm(donations, nb, wt, nsim = 999)) |> 
-  tidyr::unnest(gistar)
+  transmute(gi_star = local_gstar_perm(donations, nb, wt, nsim = 199)) |> 
+  tidyr::unnest(gi_star)
 
 donat_gistar
 ```
 
 Lastly, we classify the clusters using a combination of `mutate()` and `case_when()` 
-which is then piped into a ggplot map. While not a perfect recreation of the GeoDa map, it is very close—likely due to conditional permutation (see [conditional permutation vignette](/articles/conditional-permutation.html) for more on significance calculation).
+which is then piped into a ggplot map. While not a perfect recreation of the GeoDa map, it is very close—the differences likely due to conditional permutation (see [conditional permutation vignette](/articles/conditional-permutation.html) for more on significance calculation).
 
 ```{r}
 library(ggplot2)
@@ -89,15 +92,16 @@ donat_gistar |>
   theme_void()
 ```
 
-In EHSA, we calculate this statistic for each location and every time period in our dataset. 
+In EHSA, we calculate this statistic for each time period.
 
 ## Mann-Kendall Test
 
-The incorporation of time-series analysis is done through the use of the Mann-Kendall (MK) Trend test. The MK test is a nonparametric test that checks for monotonic trends. 
+With the calculations of the local Gi* for each unit of time for every geography, we can evaluate how the hotspots change over time. We incorporate time-series analysis through the use of the Mann-Kendall (MK) Trend test. The MK test is a nonparametric test that checks for monotonic trends. 
 
-If you don't recall monotonic series from your calculus class, that's okay. A monotonic series is one that consistently increases (or decreases) and never changes direction. A monotonic trend is one that consistently increases or decreases through time. And since it is nonparametric test, the trend does not have to be linear. 
+If you don't recall the term monotonic from your calculus class, that's okay. A monotonic series or function is one that only increases (or decreases) and never changes direction. So long as the function either stays flat or continues to increase, it is monotonic. 
 
-The MK test does not check if a time-series is strictly monotonic—e.g. every subsequent unit is increasing or decreasing—but if the overall series is increasing or decreasing. 
+The benefit of the test being nonparametric is that the trend can be non-linear. And further, the MK test does not check if a time-series is strictly monotonic—e.g. every subsequent unit is increasing or decreasing—but if the overall series is increasing or decreasing. 
+
 Below is an example of a monotonic upward trend which is not linear.
 
 ```{r}
@@ -116,15 +120,13 @@ ggplot(econ, aes(date, psavert)) +
   theme_light()
 ```
 
-
 From a visual inspection, we can tell that overall the trend is decreasing. The MK test can confirm this. We use `Kendall::MannKendall()` to test if the trend is significantly decreasing. 
 
 ```{r}
 Kendall::MannKendall(econ$psavert)
 ```
 
-The above results show up the `tau` and p-value. Tau ranges between -1 and 1 where -1 is a perfectly decreasing series and 1 is a perfectly increasing series. The p-value is extremely small indicating that the null-hypothesis (that there is no trend) can be rejected. 
-
+The above results show the `tau` and p-value. Tau ranges between -1 and 1 where -1 is a perfectly decreasing series and 1 is a perfectly increasing series. The p-value is extremely small indicating that the null-hypothesis (that there is no trend) can be rejected. The tau is -0.64 which indicates a moder4ate downward trend. 
 
 
 ## The whole game
@@ -145,6 +147,8 @@ We can compute the EHSA manually using sfsdep and spacetime classes. In this exa
 ### Data
 
 The data are stored in the internal data file `bos-ecometric.csv` and `bos-ecometric.geojson`. We will read these in to `df` and `geo` and will create a new spacetime object called `bos` with them.
+
+> Note: 2022-05-31 this data is avaiable only in the development version, so please install with `remotes::install_github("josiahparry/sfdep")`.
 
 ```{r echo=TRUE, warning=FALSE, paged.print=FALSE}
 # Create objects to store file paths 
@@ -167,7 +171,7 @@ bos
 
 ### Local Gi*
 
-The first step in EHSA is to calculate the local Gi* for each time period. but that, however, requires a couple of preceding steps. Before we calculate Gi* we need to identify neighbors and weights. 
+The first step in EHSA is to calculate the local Gi* for each time period. But that, however, requires a couple of preceding steps. Before we calculate Gi* we need to identify neighbors and weights. 
 
 To do this, we activate the geometry context and create two new columns `nb` and `wt`. Then we will activate the data context again and copy over the nb and wt columns to each time-slice using `set_nbs()` and `set_wts()`—**row order is very important** so rearrange the observations after using `set_nbs()` or `set_wts()`.  
 
@@ -185,7 +189,7 @@ bos_nb <- bos |>
 head(bos_nb)
 ```
 
-This dataset now has neigbors and weights for each time-slice. We can use thse new columns to manually calculate the local Gi* for each location. We can do this by grouping by `time_period` and using `local_gstar_perm()`. After which, we unnest the new data frame column `gi_star`.
+This dataset now has neighbors and weights for each time-slice. We can use these new columns to manually calculate the local Gi* for each location. We can do this by grouping by `time_period` and using `local_gstar_perm()`. After which, we unnest the new data frame column `gi_star`.
 
 
 ```{r}
@@ -204,7 +208,7 @@ With these Gi* measures we can then evaluate each location for a trend using the
 
 ### Mann-Kendall Test
 
-Let's first take only a single location, `25025010403`, and evaluate the Mann-Kendall statistic for it by hand. Then we can extend this to each location
+Let's first take only a single location, `25025010403`, and evaluate the Mann-Kendall statistic for it by hand. Then we can extend this to each location.
 
 
 > Note that there is a bit of finagling the MK test to make it work nicely in a dplyr::summarise() call.
@@ -215,7 +219,11 @@ cbg <- gi_stars |>
   ungroup() |> 
   filter(.region_id == "25025010403") |> 
   select(.region_id, time_period, year, gi_star)
+```
 
+We can also visualized this trend. 
+
+```{r}
 # visualize trend
 ggplot(cbg, aes(time_period, gi_star)) +
   geom_line() +
@@ -228,6 +236,7 @@ cbg |>
   summarise(mk = list(unclass(Kendall::MannKendall(gi_star)))) |> 
   tidyr::unnest_wider(mk)
 ```
+
 In the above result, `sl` is the p-value. This result tells us that there is a slight upward but insignificant trend.  
 
 We can replicate this for each location by using `group_by()`.
@@ -248,17 +257,21 @@ emerging
 ```
 Here we can see there are a few locations that are becoming significantly colder and others that are becoming significantly warmer. 
 
-
 ## Using `emerging_hotspot_analysis()`
 
-While we can do the above, this is limited in two ways. Primarily that in the above example we only used spatial neighbors only. Whereas in EHSA we can, and likely should, incorporate the time-lag of our spatial neighbors. Secondly, there are classifications proposed by ESRI which help us understand how each location is changing over time. Both of these are handled by the `emerging_hotspot_analysis()` function.
+While we can do the calculations manually as above, this is limited in two ways. Primarily that in the above example we used spatial neighbors only. Whereas in EHSA we can—and likely should—incorporate the time-lag of our spatial neighbors. Secondly, there are classifications proposed by ESRI which help us understand how each location is changing over time. Both of these are handled by the `emerging_hotspot_analysis()` function.
 
-This `emerging_hotspot_analysis()` takes a spacetime object `.x`, the quoted name of the variable of interested in `.var` at minimum. We can specify the number of time lags using the argument `k` which is set to 1 by default. 
+This `emerging_hotspot_analysis()` takes a spacetime object `x`, and the quoted name of the variable of interested in `.var` at minimum. We can specify the number of time lags using the argument `k` which is set to 1 by default. 
 
 
 ```{r}
 # conduct EHSA
-ehsa <- emerging_hotspot_analysis(bos, "value", k = 1, nsim = 99)
+ehsa <- emerging_hotspot_analysis(
+  x = bos, 
+  .var = "value", 
+  k = 1, 
+  nsim = 99
+)
 
 # preview some values 
 head(ehsa)
