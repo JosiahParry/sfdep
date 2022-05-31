@@ -173,7 +173,7 @@ bos
 
 The first step in EHSA is to calculate the local Gi* for each time period. But that, however, requires a couple of preceding steps. Before we calculate Gi* we need to identify neighbors and weights. 
 
-To do this, we activate the geometry context and create two new columns `nb` and `wt`. Then we will activate the data context again and copy over the nb and wt columns to each time-slice using `set_nbs()` and `set_wts()`—**row order is very important** so rearrange the observations after using `set_nbs()` or `set_wts()`.  
+To do this, we activate the geometry context and create two new columns `nb` and `wt`. Then we will activate the data context again and copy over the nb and wt columns to each time-slice using `set_nbs()` and `set_wts()`—**row order is very important** so do not rearrange the observations after using `set_nbs()` or `set_wts()`.  
 
 
 ```{r}
