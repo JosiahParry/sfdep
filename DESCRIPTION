@@ -16,6 +16,7 @@ Suggests:
     dplyr,
     ggplot2,
     knitr,
+    magrittr,
     patchwork,
     purrr,
     rmarkdown,

@@ -33,7 +33,8 @@ Returns an \code{sf} object with edges represented as a \code{LINESTRING}.
 Given geometry and neighbor and weights lists, create an edge list \code{sf} object.
 }
 \details{
-Creating an edge list creates a column for each \code{i} position and \code{j} between an observation and their neighbors. You can recreate these values by expanding the \code{nb} and \code{wt} list columns.\if{html}{\out{<div class="sourceCode r">}}\preformatted{guerry_nb \%>\%
+Creating an edge list creates a column for each \code{i} position and \code{j} between an observation and their neighbors. You can recreate these values by expanding the \code{nb} and \code{wt} list columns.\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(magrittr)
+guerry_nb \%>\%
   tibble::as_tibble() \%>\%
   dplyr::select(nb, wt) \%>\%
   dplyr::mutate(i = dplyr::row_number(), .before = 1) \%>\%

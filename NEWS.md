@@ -1,5 +1,6 @@
 # sfdep (development version)
 
+- `nb_as_matrix()` and `wt_as_matrix()` convert neighbor and weights lists to matrices
 - two new functions `include_self()` based on `spdep::include.self()` and new `remove_self()` which is available separately in spdep due to [issue 83](https://github.com/r-spatial/spdep/issues/83) as `spdep::remove.self()`. 
 - `local_g_perm()` returns correct G statistic. Previously returned only the internal measure.  
 - `local_gstar()` and `local_gstar_perm()` do not warn when `self.included = TRUE`

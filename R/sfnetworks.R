@@ -23,6 +23,7 @@
 #' Creating an edge list creates a column for each `i` position and `j` between an observation and their neighbors. You can recreate these values by expanding the `nb` and `wt` list columns.
 #'
 #' ```{r}
+#' library(magrittr)
 #' guerry_nb %>%
 #'   tibble::as_tibble() %>%
 #'   dplyr::select(nb, wt) %>%
@@ -52,16 +53,19 @@ st_as_edges.sf <- function(x, nb, wt) {
   # If not providing wt, then use nb2lines
   # Early exit in this case.
   if (is.null(wt)) {
-    res <- spdep::nb2lines(nb, coords = st_geometry(x)) %>%
-      dplyr::rename(from = i, to = j, i = i_ID, j = j_ID)
+    res <- spdep::nb2lines(nb, coords = st_geometry(x))
+    res <- dplyr::rename(res, from = i, to = j, i = i_ID, j = j_ID)
 
     return(res)
   }
 
   listw <- recreate_listw(nb, wt)
 
-  spdep::listw2lines(listw, st_geometry(x)) %>%
-    dplyr::rename(from = i, to = j, i = i_ID, j = j_ID)
+
+  dplyr::rename(
+    spdep::listw2lines(listw, st_geometry(x)),
+    from = i, to = j, i = i_ID, j = j_ID)
+
 }
 
 #' @rdname st_as_edges
