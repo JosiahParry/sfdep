@@ -15,7 +15,7 @@
 #' regime <- guerry$region
 #' st_block_nb(id, regime)
 #' @export
-st_block_nb <- function(id, regime, diag = FALSE) {
+st_block_nb <- function(regime, id = 1:length(regime), diag = FALSE) {
   id <- as.character(id)
   regime <- as.character(regime)
 

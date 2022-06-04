@@ -1,23 +1,41 @@
-nb <- st_contiguity(guerry$geometry)
-nb_knn <- st_knn(guerry$geometry, k = 3)
-nb_setdiff(nb, nb_knn)
-nb_union(nb, nb_knn)
-nb_intersect(nb, nb_knn)
-
-
+#' Set Operations
+#'
+#' Perform set operations element-wise on two lists of equal length.
+#'
+#' @details
+#'
+#' - `nb_union()` returns the union of elements in each element of x and y
+#' - `nb_intersect()` returns the intersection of elements in each element of x and y
+#' - `nb_setdiff()` returns the intersection of elements in each element of x and y
+#'
+#' @examples
+#' nb <- st_contiguity(guerry$geometry)
+#' nb_knn <- st_knn(guerry$geometry, k = 3)
+#' nb_setdiff(nb, nb_knn)
+#' nb_union(nb, nb_knn)
+#' nb_intersect(nb, nb_knn)
+#'
+#' @return
+#' A list of class `nb`
+#'
+#' @rdname sets
+#' @export
 nb_union <- function(x, y) {
   res <- mapply(union, x, y, SIMPLIFY = FALSE)
   res <- fill_missing_nb(res)
   class_modify(res, "nb")
 }
 
-
+#' @rdname sets
+#' @export
 nb_intersect <- function(x, y) {
   res <- mapply(intersect, x, y, SIMPLIFY = FALSE)
   res <- fill_missing_nb(res)
   class_modify(res, "nb")
 }
 
+#' @rdname sets
+#' @export
 nb_setdiff <- function(x, y) {
   res <- mapply(setdiff, x, y, SIMPLIFY = FALSE)
   res <- fill_missing_nb(res)

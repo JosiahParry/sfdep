@@ -1,5 +1,6 @@
 # sfdep (development version)
 
+- `st_complete_nb()` creates a complete graph of neighbors 
 - set operations for neighbor lists `nb_union()`, `nb_intersect()`, `nb_setdiff()`
 - `nb_as_matrix()` and `wt_as_matrix()` to convert neighbor or weights lists to matrix representation
 - `st_block_nb()` is introduced to create neighbor contiguity based on spatial regimes

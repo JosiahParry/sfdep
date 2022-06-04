@@ -4,12 +4,12 @@
 \alias{st_block_nb}
 \title{Create Block Contiguity for Spatial Regimes}
 \usage{
-st_block_nb(id, regime, diag = FALSE)
+st_block_nb(regime, id = 1:length(regime), diag = FALSE)
 }
 \arguments{
-\item{id}{a column identifying unique observations}
-
 \item{regime}{a column identifying which spatial regime each element of \code{id} belongs}
+
+\item{id}{a column identifying unique observations}
 
 \item{diag}{default \code{FALSE}. If \code{TRUE}, includes diagonal element / the self.}
 }

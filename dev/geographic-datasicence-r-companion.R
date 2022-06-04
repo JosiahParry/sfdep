@@ -349,4 +349,131 @@ nb_block[104]
 
 # Using the union of matrices ---------------------------------------------
 
+wk1 <- st_knn(sandiego$geom, k = 1)
+wk_rook <- st_contiguity(sandiego$geom, queen = FALSE)
 
+nb_union(wk_rook, wk1)
+
+
+# Visualizing weight set operations ---------------------------------------
+
+mx <- read_sf("/Users/josiahparry/Downloads/book-master/data/mexico/mexicojoin.shp")
+
+mx_queen <- st_contiguity(mx$geometry)
+mx_knn4 <- st_knn(mx$geometry, k = 4)
+
+mx_bw <- st_block_nb(mx$INEGI2)
+
+mx_union <- nb_union(mx_queen, mx_bw)
+
+ggplot() +
+  geom_sf(data = mx,
+          fill = "#2077B4",
+          color = "black", lwd = 0.25) +
+  geom_sf(data = st_as_edges(mx$geometry, mx_queen, wt = st_weights(mx_queen)),
+          lwd = 0.5, lty = 2, color = "black") +
+  geom_sf(data = st_point_on_surface(mx$geometry))
+
+
+ggplot() +
+  geom_sf(data = mx,
+          fill = "#2077B4",
+          color = "black", lwd = 0.25) +
+  geom_sf(data = st_as_edges(mx$geometry, mx_knn4, wt = st_weights(mx_knn4)),
+          lwd = 0.5, lty = 2, color = "black") +
+  geom_sf(data = st_point_on_surface(mx$geometry))
+
+ggplot() +
+  geom_sf(data = mx,
+          mapping = aes(fill = as.character(INEGI2)),
+          color = "black", lwd = 0.25) +
+  geom_sf(data = st_as_edges(mx$geometry, mx_bw, wt = st_weights(mx_bw)),
+          lwd = 0.4, lty = 2, color = "black") +
+  geom_sf(data = st_point_on_surface(mx$geometry))
+
+
+ggplot() +
+  geom_sf(data = mx,
+          mapping = aes(fill = as.character(INEGI2)),
+          color = "black", lwd = 0.25) +
+  geom_sf(data = st_as_edges(mx$geometry, mx_union, wt = st_weights(mx_union)),
+          lwd = 0.4, lty = 2, color = "black") +
+  geom_sf(data = st_point_on_surface(mx$geometry))
+
+pct_nonzero(mx_bw)
+pct_nonzero(mx_queen)
+
+
+# Use case: Boundary detection --------------------------------------------
+
+ggplot(sandiego, aes(fill = median_hh_income)) +
+  geom_sf(lwd = 0.05, color = "#ffffff50") +
+  scale_fill_viridis_c()
+
+ggplot(sandiego, aes(median_hh_income)) +
+  geom_histogram(bins = 11)
+
+sd_graph <- sandiego |>
+  mutate(nb = st_contiguity(geom, queen = FALSE),
+         wt = st_weights(nb, style = "B")) |>
+  st_as_graph(nb, wt)
+
+adjlist_income <- sd_graph |>
+  sfnetworks::activate("edges") |>
+  as_tibble() |>
+  as_tibble() |>
+  select(-geometry) |>
+  left_join(
+    transmute(as_tibble(sandiego),
+           id = row_number(), median_hh_income),
+    by = c("from" = "id")
+  ) |>
+  left_join(
+    transmute(as_tibble(sandiego),
+              id = row_number(), median_hh_income),
+    by = c("to" = "id"),
+    suffix = c("", "_nb")
+  )
+
+adjlist_income |>
+  mutate(diff = median_hh_income - median_hh_income_nb)
+
+
+diffs <- sandiego |>
+  transmute(
+    nb = st_contiguity(geom, FALSE),
+    wt = st_weights(nb, "B"),
+    nb_inc = find_xj(median_hh_income, nb),
+    inc_diff_nb = mapply(
+           function(.x, .xij) .x - .xij,
+           median_hh_income, nb_inc
+           ),
+    non_nb = nb_setdiff(st_complete_nb(n()), nb),
+    non_nb_inc = find_xj(median_hh_income, non_nb),
+    inc_diff_non_nb = mapply(
+      function(.x, .xij) .x - .xij,
+      median_hh_income, non_nb_inc
+    )
+  )
+
+
+nb_diffs <- diffs |>
+  as_tibble() |>
+  select(inc_diff_nb) |>
+  tidyr::unnest(inc_diff_nb)
+
+non_nb_diffs <- diffs |>
+  as_tibble() |>
+  select(inc_diff_non_nb) |>
+  tidyr::unnest(inc_diff_non_nb)
+
+
+
+ggplot() +
+  geom_histogram(data = non_nb_diffs,
+               mapping = aes(inc_diff_non_nb, ..density..)) +
+  geom_histogram(data = nb_diffs,
+                 mapping = aes(x = inc_diff_nb, y = ..density..),
+                 fill = "orange", alpha = 0.5) +
+  theme_light() +
+  scale_x_continuous(labels = scales::dollar)
