@@ -1,5 +1,6 @@
 # sfdep (development version)
 
+- `nb_as_matrix()` and `wt_as_matrix()` to convert neighbor or weights lists to matrix representation
 - `st_block_nb()` is introduced to create neighbor contiguity based on spatial regimes
 - `critical_threshold()` gains argument `k` to identify minimum number of neighbors when calculating threshold
 - `pct_nonzero()` calculates the percent of non-zero neighbors
