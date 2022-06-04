@@ -34,9 +34,9 @@ kernels <- list(
 #' @returns a numeric scalar value.
 #' @examples
 #' critical_threshold(sf::st_geometry(guerry))
-critical_threshold <- function(geometry) {
-  pnts <- check_polygon(geometry)
-  knb <- spdep::knn2nb(spdep::knearneigh(pnts, 1))
+critical_threshold <- function(geometry, k = 1) {
+  pnts <- suppressMessages(check_polygon(geometry))
+  knb <- spdep::knn2nb(spdep::knearneigh(pnts, k))
   max(unlist(spdep::nbdists(knb, pnts)))
 }
 

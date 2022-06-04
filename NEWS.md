@@ -1,5 +1,9 @@
 # sfdep (development version)
 
+- `st_block_nb()` is introduced to create neighbor contiguity based on spatial regimes
+- `critical_threshold()` gains argument `k` to identify minimum number of neighbors when calculating threshold
+- `pct_nonzero()` calculates the percent of non-zero neighbors
+- `szero()` to calculate the global sum of weights
 - `nb_as_matrix()` and `wt_as_matrix()` convert neighbor and weights lists to matrices
 - two new functions `include_self()` based on `spdep::include.self()` and new `remove_self()` which is available separately in spdep due to [issue 83](https://github.com/r-spatial/spdep/issues/83) as `spdep::remove.self()`. 
 - `local_g_perm()` returns correct G statistic. Previously returned only the internal measure.  

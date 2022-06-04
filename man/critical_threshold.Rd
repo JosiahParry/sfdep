@@ -4,7 +4,7 @@
 \alias{critical_threshold}
 \title{Identify critical threshold}
 \usage{
-critical_threshold(geometry)
+critical_threshold(geometry, k = 1)
 }
 \arguments{
 \item{geometry}{an sf geometry column}
