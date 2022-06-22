@@ -55,6 +55,12 @@
     <loc>/reference/as_spacetime.html</loc>
   </url>
   <url>
+    <loc>/reference/center_mean.html</loc>
+  </url>
+  <url>
+    <loc>/reference/center_median.html</loc>
+  </url>
+  <url>
     <loc>/reference/check_pkg_suggests.html</loc>
   </url>
   <url>
@@ -79,7 +85,13 @@
     <loc>/reference/critical_threshold.html</loc>
   </url>
   <url>
+    <loc>/reference/ellipse.html</loc>
+  </url>
+  <url>
     <loc>/reference/emerging_hotspot_analysis.html</loc>
+  </url>
+  <url>
+    <loc>/reference/euclidean_median.html</loc>
   </url>
   <url>
     <loc>/reference/find_xj.html</loc>
@@ -217,6 +229,9 @@
     <loc>/reference/nb_match_test.html</loc>
   </url>
   <url>
+    <loc>/reference/nb_union.html</loc>
+  </url>
+  <url>
     <loc>/reference/nmt_calc.html</loc>
   </url>
   <url>
@@ -235,6 +250,9 @@
     <loc>/reference/pairwise_colocation_perm_impl.html</loc>
   </url>
   <url>
+    <loc>/reference/pct_nonzero.html</loc>
+  </url>
+  <url>
     <loc>/reference/permute_listw.html</loc>
   </url>
   <url>
@@ -251,6 +269,9 @@
   </url>
   <url>
     <loc>/reference/spacetime.html</loc>
+  </url>
+  <url>
+    <loc>/reference/spatial_gini.html</loc>
   </url>
   <url>
     <loc>/reference/spt_nb.html</loc>
@@ -274,7 +295,13 @@
     <loc>/reference/st_as_nodes.html</loc>
   </url>
   <url>
+    <loc>/reference/st_block_nb.html</loc>
+  </url>
+  <url>
     <loc>/reference/st_cardinalties.html</loc>
+  </url>
+  <url>
+    <loc>/reference/st_complete_nb.html</loc>
   </url>
   <url>
     <loc>/reference/st_contiguity.html</loc>
@@ -319,6 +346,18 @@
     <loc>/reference/st_weights.html</loc>
   </url>
   <url>
+    <loc>/reference/std_dev_ellipse.html</loc>
+  </url>
+  <url>
+    <loc>/reference/std_distance.html</loc>
+  </url>
+  <url>
     <loc>/reference/sub-.spacetime.html</loc>
+  </url>
+  <url>
+    <loc>/reference/szero.html</loc>
+  </url>
+  <url>
+    <loc>/reference/wt_as_matrix.html</loc>
   </url>
 </urlset>

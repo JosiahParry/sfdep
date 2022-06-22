@@ -176,26 +176,27 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>moran <span class="op">=</span> <span class="fu"><a href="reference/local_moran.html">local_moran</a></span><span class="op">(</span><span class="va">crime_pers</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">lisa</span>, <span class="va">moran</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 85</span>
 <span class="co">#&gt; Columns: 12</span>
 <span class="co">#&gt; $ ii           &lt;dbl&gt; 0.52226452, 0.82801651, 0.80353997, 0.74188966, 0.2311871…</span>
-<span class="co">#&gt; $ eii          &lt;dbl&gt; -0.0106720706, 0.0100379803, -0.0394349176, -0.0084513898…</span>
-<span class="co">#&gt; $ var_ii       &lt;dbl&gt; 0.405336069, 0.124987091, 0.137583392, 0.246197973, 0.042…</span>
-<span class="co">#&gt; $ z_ii         &lt;dbl&gt; 0.8370818, 2.3137121, 2.2726452, 1.5122252, 1.1343366, 1.…</span>
-<span class="co">#&gt; $ p_ii         &lt;dbl&gt; 0.402546575, 0.020683518, 0.023047572, 0.130476584, 0.256…</span>
-<span class="co">#&gt; $ p_ii_sim     &lt;dbl&gt; 0.428, 0.020, 0.032, 0.140, 0.264, 0.084, 0.612, 0.124, 0…</span>
-<span class="co">#&gt; $ p_folded_sim &lt;dbl&gt; 0.214, 0.010, 0.016, 0.070, 0.132, 0.042, 0.306, 0.062, 0…</span>
-<span class="co">#&gt; $ skewness     &lt;dbl&gt; 0.014467843, 0.053213846, 0.152412902, -0.073860474, -0.0…</span>
-<span class="co">#&gt; $ kurtosis     &lt;dbl&gt; -0.510595407, -0.221248841, -0.059662086, -0.165626033, -…</span>
+<span class="co">#&gt; $ eii          &lt;dbl&gt; -0.014330686, 0.001506889, -0.013014133, -0.007589640, -0…</span>
+<span class="co">#&gt; $ var_ii       &lt;dbl&gt; 0.3555472615, 0.1247372695, 0.1429897413, 0.2234638812, 0…</span>
+<span class="co">#&gt; $ z_ii         &lt;dbl&gt; 0.8999080, 2.3401829, 2.1593972, 1.5854625, 1.2098097, 1.…</span>
+<span class="co">#&gt; $ p_ii         &lt;dbl&gt; 0.368169205, 0.019274300, 0.030819368, 0.112861293, 0.226…</span>
+<span class="co">#&gt; $ p_ii_sim     &lt;dbl&gt; 0.348, 0.016, 0.044, 0.136, 0.252, 0.124, 0.676, 0.084, 0…</span>
+<span class="co">#&gt; $ p_folded_sim &lt;dbl&gt; 0.174, 0.008, 0.022, 0.068, 0.126, 0.062, 0.338, 0.042, 0…</span>
+<span class="co">#&gt; $ skewness     &lt;dbl&gt; -0.03600129, 0.20002748, 0.01765845, 0.03843925, -0.01818…</span>
+<span class="co">#&gt; $ kurtosis     &lt;dbl&gt; -0.15213659, -0.11918435, -0.48935879, -0.32456522, 0.095…</span>
 <span class="co">#&gt; $ mean         &lt;fct&gt; High-High, High-High, High-High, Low-Low, Low-Low, Low-Lo…</span>
 <span class="co">#&gt; $ median       &lt;fct&gt; High-High, High-High, High-High, Low-Low, Low-Low, Low-Lo…</span>
 <span class="co">#&gt; $ pysal        &lt;fct&gt; High-High, High-High, High-High, Low-Low, Low-Low, Low-Lo…</span></code></pre></div>
-<p>Visualize this.</p>
+<p>Visualize this by converting insignificant values to NA. This uses a cutoff of 0.1.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">lisa</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">moran</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">mean</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>pysal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="va">p_folded_sim</span> <span class="op">&lt;=</span> <span class="fl">0.1</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">pysal</span><span class="op">)</span>, <span class="cn">NA</span><span class="op">)</span><span class="op">)</span> |&gt; 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">pysal</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsf.html" class="external-link">geom_sf</a></span><span class="op">(</span>lwd <span class="op">=</span> <span class="fl">0.2</span>, color <span class="op">=</span> <span class="st">"black"</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_void</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>

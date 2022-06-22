@@ -119,7 +119,7 @@
  
  <span class="va">observed</span>
 <span class="co">#&gt; $C</span>
-<span class="co">#&gt; [1] 0.9000639</span>
+<span class="co">#&gt; [1] 1.093211</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $K</span>
 <span class="co">#&gt; [1] 2.400641</span></code></pre></div>
@@ -148,7 +148,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># simulated p-value</span>
 <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">observed</span><span class="op">[[</span><span class="st">"C"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="va">reps</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">199</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.975</span></code></pre></div>
+<span class="co">#&gt; [1] 0.1</span></code></pre></div>
 <p>This is the approach taken by Pysal and by sfdep where other methods do not apply or are not provided by spdep.</p>
 </div>
 </div>

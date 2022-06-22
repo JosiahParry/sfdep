@@ -95,7 +95,8 @@
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>Creating an edge list creates a column for each <code>i</code> position and <code>j</code> between an observation and their neighbors. You can recreate these values by expanding the <code>nb</code> and <code>wt</code> list columns.</p><div class="sourceCode r"><pre><code><span class="va">guerry_nb</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+    <p>Creating an edge list creates a column for each <code>i</code> position and <code>j</code> between an observation and their neighbors. You can recreate these values by expanding the <code>nb</code> and <code>wt</code> list columns.</p><div class="sourceCode r"><pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span>
+<span class="va">guerry_nb</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>i <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span>, .before <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -118,11 +119,29 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">guerry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://magrittr.tidyverse.org" class="external-link">magrittr</a></span><span class="op">)</span></span>
+<span class="r-in"><span class="va">guerry</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nb <span class="op">=</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span>,</span>
 <span class="r-in">         wt <span class="op">=</span> <span class="fu"><a href="st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span class="r-in">  <span class="fu">st_as_edges</span><span class="op">(</span><span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in guerry %&gt;% dplyr::mutate(nb = st_contiguity(geometry), wt = st_weights(nb)) %&gt;%     st_as_edges(nb, wt):</span> could not find function "%&gt;%"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 420 features and 5 fields</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: LINESTRING</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 143129.7 ymin: 1735692 xmax: 983300.8 ymax: 2615768</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> First 10 features:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    from to i  j        wt                       geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1     1 36 1 36 0.2500000 LINESTRING (827911.9 212290...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     1 37 1 37 0.2500000 LINESTRING (827911.9 212290...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     1 67 1 67 0.2500000 LINESTRING (827911.9 212290...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4     1 69 1 69 0.2500000 LINESTRING (827911.9 212290...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5     2  7 2  7 0.1666667 LINESTRING (691725.7 249605...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6     2 49 2 49 0.1666667 LINESTRING (691725.7 249605...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7     2 57 2 57 0.1666667 LINESTRING (691725.7 249605...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8     2 58 2 58 0.1666667 LINESTRING (691725.7 249605...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9     2 73 2 73 0.1666667 LINESTRING (691725.7 249605...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10    2 76 2 76 0.1666667 LINESTRING (691725.7 249605...</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

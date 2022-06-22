@@ -54,6 +54,8 @@ reference:
   - st_knn
   - st_cardinalties
   - st_dist_band
+  - st_block_nb
+  - st_complete_nb
   - st_nb_lag
   - st_nb_lag_cumul
   - cond_permute_nb
@@ -77,6 +79,7 @@ reference:
   contents:
   - starts_with("global")
   - pairwise_colocation
+  - spatial_gini
 
 - title: Spacetime
   contents:
@@ -94,6 +97,16 @@ reference:
   - as_sf
   - spt_update
 
+- title: Point Pattern
+  contents:
+  - center_mean
+  - center_median
+  - euclidean_median
+  - std_distance
+  - std_dev_ellipse
+  - ellipse
+
+
 - title: Data
   contents:
   - starts_with("guerry")
@@ -109,7 +122,11 @@ reference:
   - find_xj
   - include_self
   - remove_self
+  - wt_as_matrix
   - critical_threshold
+  - szero
+  - pct_nonzero
+  - nb_union
   - st_nb_apply
 
 - title: Internal functions
