@@ -3,7 +3,8 @@
 \name{global_jc_perm}
 \alias{global_jc_perm}
 \alias{global_jc_test}
-\title{Global Join Count Permutation Test}
+\alias{tally_jc}
+\title{Global Join Counts}
 \usage{
 global_jc_perm(
   fx,
@@ -16,6 +17,8 @@ global_jc_perm(
 )
 
 global_jc_test(fx, nb, wt, alternative = "greater", allow_zero = NULL, ...)
+
+tally_jc(fx, nb, wt, allow_zero = TRUE, ...)
 }
 \arguments{
 \item{fx}{a factor or character vector of the same length as nb.}
@@ -30,17 +33,20 @@ global_jc_test(fx, nb, wt, alternative = "greater", allow_zero = NULL, ...)
 
 \item{allow_zero}{If \code{TRUE}, assigns zero as lagged value to zone without neighbors.}
 
-\item{...}{additional arguments passed to \code{\link[spdep:joincount.test]{spdep::joincount.test()}}}
+\item{...}{additional arguments passed to methods}
 }
 \value{
 an object of class \code{jclist} which is a list where each element is of class \code{htest} and \code{mc.sim}.
-
-an object of class \code{jclist} which is a list where each element is of class \code{htest} and \code{mc.sim}.
 }
 \description{
-Global Join Count Permutation Test
-
-Global Join Count Test
+Calculate global join count measure for a categorical variable.
+}
+\details{
+\itemize{
+\item \code{global_jc_perm()} implements the monte-carlo based join count using \code{spdep::joincount.mc()}
+\item \code{global_jc_test()} implements the traditional BB join count statistic using \code{spdep::joincount.test()}
+\item \code{tally_jc()} calculated join counts for a variable \code{fx} and returns a data.frame using \code{spdep::joincount.multi()}
+}
 }
 \examples{
 geo <- sf::st_geometry(guerry)
@@ -48,10 +54,8 @@ nb <- st_contiguity(geo)
 wt <- st_weights(nb, style = "B")
 fx <- guerry$region
 global_jc_perm(fx, nb, wt)
-geo <- sf::st_geometry(guerry)
-nb <- st_contiguity(geo)
-wt <- st_weights(nb, style = "B")
-fx <- guerry$region
+
 global_jc_test(fx, nb, wt)
-global_jc_perm(fx, nb, wt)
+
+tally_jc(fx, nb, wt)
 }

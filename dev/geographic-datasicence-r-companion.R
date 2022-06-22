@@ -477,3 +477,38 @@ ggplot() +
                  fill = "orange", alpha = 0.5) +
   theme_light() +
   scale_x_continuous(labels = scales::dollar)
+
+
+# simulation
+# repeat this 1000 times
+
+san_diego <- mutate(sandiego, nb = st_contiguity(geom, FALSE))
+sims <- purrr::map_dfr(
+  1:1000,
+  .id = "sim",
+  .f = ~{
+
+    san_diego |>
+      mutate(nb = cond_permute_nb(nb),
+             nb_inc = find_xj(median_hh_income, nb)) |>
+      as_tibble() |>
+      transmute(inc_diff_nb = mapply(
+        function(.x, .xij) .x - .xij,
+        median_hh_income, nb_inc
+      )) |>
+      tidyr::unnest(inc_diff_nb)
+  })
+
+ggplot() +
+  geom_histogram(
+    data = nb_diffs,
+    mapping = aes(x = inc_diff_nb, y = ..density..),
+    fill = "orange",
+    alpha = 0.5) +
+  geom_freqpoly(
+    data = sims,
+    aes(x = inc_diff_nb, group = sim),
+    stat = "density",
+    alpha = 0.01
+  ) +
+  scale_x_continuous(labels = scales::dollar)

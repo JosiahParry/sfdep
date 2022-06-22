@@ -151,3 +151,20 @@ lm.p_sim
 
 ```
 
+```{python}
+import libpysal as ps
+#from pysal.contrib import shapely_ext
+from libpysal.cg import shapely_ext
+from pointpats import PoissonPointProcess as csr
+import libpysal as ps
+from pointpats import as_window
+#import pysal_examples
+
+# open "vautm17n" polygon shapefile
+va = ps.io.open(ps.examples.get_path("vautm17n.shp"))
+
+# Create the exterior polygons for VA from the union of the county shapes
+polys = [shp for shp in va]
+state = shapely_ext.cascaded_union(polys)
+```
+

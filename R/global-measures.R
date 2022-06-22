@@ -168,13 +168,21 @@ global_g_test <- function(x, nb, wt, alternative = "greater",
 
 
 
-# Join Counts
-#' Global Join Count Permutation Test
+
+#' Global Join Counts
+#'
+#' Calculate global join count measure for a categorical variable.
+#'
+#' @details
+#'
+#' - `global_jc_perm()` implements the monte-carlo based join count using `spdep::joincount.mc()`
+#' - `global_jc_test()` implements the traditional BB join count statistic using `spdep::joincount.test()`
+#' - `tally_jc()` calculated join counts for a variable `fx` and returns a data.frame using `spdep::joincount.multi()`
 #'
 #' @param fx a factor or character vector of the same length as nb.
 #' @inheritParams global_moran_perm
 #' @param allow_zero If `TRUE`, assigns zero as lagged value to zone without neighbors.
-#' @param ... additional arguments passed to [spdep::joincount.mc()].
+#' @param ... additional arguments passed to methods
 #' @export
 #' @examples
 #' geo <- sf::st_geometry(guerry)
@@ -182,6 +190,10 @@ global_g_test <- function(x, nb, wt, alternative = "greater",
 #' wt <- st_weights(nb, style = "B")
 #' fx <- guerry$region
 #' global_jc_perm(fx, nb, wt)
+#'
+#' global_jc_test(fx, nb, wt)
+#'
+#' tally_jc(fx, nb, wt)
 #' @returns an object of class `jclist` which is a list where each element is of class `htest` and `mc.sim`.
 global_jc_perm <- function(fx, nb, wt, alternative = "greater", nsim = 499, allow_zero = FALSE, ...) {
   fx <- as.factor(fx)
@@ -192,20 +204,13 @@ global_jc_perm <- function(fx, nb, wt, alternative = "greater", nsim = 499, allo
   class_modify(res)
 }
 
-#' Global Join Count Test
+
 #' @rdname global_jc_perm
 #' @inheritParams global_jc_perm
 #' @param allow_zero If `TRUE`, assigns zero as lagged value to zone without neighbors.
-#' @param ... additional arguments passed to [spdep::joincount.test()]
+#' @param ... additional arguments passed to methods
 #' @export
-#' @examples
-#' geo <- sf::st_geometry(guerry)
-#' nb <- st_contiguity(geo)
-#' wt <- st_weights(nb, style = "B")
-#' fx <- guerry$region
-#' global_jc_test(fx, nb, wt)
-#' global_jc_perm(fx, nb, wt)
-#' @returns an object of class `jclist` which is a list where each element is of class `htest` and `mc.sim`.
+#'
 global_jc_test <- function(fx, nb, wt, alternative = "greater", allow_zero = NULL, ...) {
   fx <- as.factor(fx)
   # TODO create broom tidy method
@@ -214,4 +219,19 @@ global_jc_test <- function(fx, nb, wt, alternative = "greater", allow_zero = NUL
                         alternative = alternative,
                         zero.policy = allow_zero, ...)
   class_modify(res)
+}
+
+#' @rdname global_jc_perm
+#' @export
+tally_jc <- function(fx, nb, wt, allow_zero = TRUE, ...) {
+  fx <- as.factor(fx)
+  listw <- recreate_listw(nb, wt)
+  res <- spdep::joincount.multi(
+    fx, listw, allow_zero, ...
+  )
+
+  colnames(res) <- tolower(colnames(res))
+  res <- as.data.frame(res)
+  res[["joins"]] <- rownames(res)
+  res
 }
