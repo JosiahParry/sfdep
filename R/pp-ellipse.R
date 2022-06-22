@@ -19,7 +19,7 @@
 #'
 #' [ellipse()] returns a matrix of point locations defining the ellipse. [st_ellipse()] returns an sf object with LINE geography of the ellipse. Increasing n increases the number of points generated to define the ellipse shape.
 #'
-#' [ellipse()] function is taken from [ggVennDiagram].
+#' [ellipse()] function is adapted from `ggVennDiagram`.
 #'
 #' @export
 ellipse <- function (x = 0, y = 0, sx = 2, sy = 1, rotation = 0, n = 100) {

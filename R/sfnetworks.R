@@ -32,6 +32,8 @@
 #' ```
 #' @export
 #' @examples
+#'
+#' library(magrittr)
 #' guerry %>%
 #'   dplyr::mutate(nb = st_contiguity(geometry),
 #'          wt = st_weights(nb)) %>%
@@ -104,6 +106,7 @@ st_as_edges.sfc <- function(x, nb, wt) {
 # @param ... arguments passed to methods.
 #' @export
 #' @examples
+#' library(magrittr)
 #' guerry %>%
 #'   dplyr::transmute(nb = st_contiguity(geometry)) %>%
 #'   st_as_nodes(nb)
@@ -179,6 +182,7 @@ st_as_nodes.sfc <- function(x, nb) {
 #' @seealso [st_as_nodes()] and [st_as_edges()]
 #' @export
 #' @examples
+#' library(magrittr)
 #' guerry_nb %>%
 #'   st_as_graph(nb, wt)
 st_as_graph <- function(x, nb, wt) {

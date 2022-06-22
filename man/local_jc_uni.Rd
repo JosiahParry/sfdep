@@ -36,10 +36,11 @@ The local join count statistic requires a binary weights list which can be gener
 P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see \href{https://geodacenter.github.io/glossary.html#ppvalue}{Geoda Glossary}.
 }
 \examples{
-guerry \%>\%
-  dplyr::transmute(top_crime = crime_prop > 9000,
-                   nb = st_contiguity(geometry),
-                   wt = st_weights(nb, style = "B"),
-                   jc = local_jc_uni(top_crime, nb, wt)) \%>\%
-  tidyr::unnest(jc)
+res <- dplyr::transmute(
+  guerry,
+  top_crime = crime_prop > 9000,
+  nb = st_contiguity(geometry),
+  wt = st_weights(nb, style = "B"),
+  jc = local_jc_uni(top_crime, nb, wt))
+tidyr::unnest(res, jc)
 }

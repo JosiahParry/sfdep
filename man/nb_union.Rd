@@ -12,6 +12,11 @@ nb_intersect(x, y)
 
 nb_setdiff(x, y)
 }
+\arguments{
+\item{x}{list of class \code{nb}}
+
+\item{y}{list of class \code{nb}}
+}
 \value{
 A list of class \code{nb}
 }

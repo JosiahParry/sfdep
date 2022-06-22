@@ -13,12 +13,13 @@
 #' @param wt default `st_weights(nb, style = "B")`. A binary weights list as created by `st_weights(nb, style = "B")`.
 #' @export
 #' @examples
-#' guerry %>%
-#'   dplyr::transmute(top_crime = crime_prop > 9000,
-#'                    nb = st_contiguity(geometry),
-#'                    wt = st_weights(nb, style = "B"),
-#'                    jc = local_jc_uni(top_crime, nb, wt)) %>%
-#'   tidyr::unnest(jc)
+#' res <- dplyr::transmute(
+#'   guerry,
+#'   top_crime = crime_prop > 9000,
+#'   nb = st_contiguity(geometry),
+#'   wt = st_weights(nb, style = "B"),
+#'   jc = local_jc_uni(top_crime, nb, wt))
+#' tidyr::unnest(res, jc)
 #' @returns a `data.frame` with two columns `join_count` and `p_sim` and number of rows equal to the length of arguments `x`, `nb`, and `wt`.
 local_jc_uni <- function(x, nb, wt = st_weights(nb, style = "B"),
                          nsim = 499, alternative = "two.sided") {

@@ -63,14 +63,15 @@ These functions are based on the implementations of the local Geary statistic in
 }
 }
 \examples{
-guerry \%>\%
-  dplyr::transmute(nb = st_contiguity(geometry),
-                   wt = st_weights(nb),
-                   geary = local_c_perm(
-                     x = list(crime_pers, literacy),
-                     nb, wt
-                   )) \%>\%
-  tidyr::unnest(geary)
+g <- dplyr::transmute(guerry,
+                      nb = st_contiguity(geometry),
+                      wt = st_weights(nb),
+                      geary = local_c_perm(
+                        x = list(crime_pers, literacy), nb, wt)
+)
+
+tidyr::unnest(g, geary)
+
 }
 \references{
 {Anselin, L. (1995), Local Indicators of Spatial Association—LISA. Geographical Analysis, 27: 93-115. \doi{10.1111/j.1538-4632.1995.tb00338.x}}

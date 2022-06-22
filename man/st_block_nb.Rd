@@ -24,5 +24,5 @@ Source: \href{https://pysal.org/libpysal/generated/libpysal.weights.block_weight
 \examples{
 id <- guerry$code_dept
 regime <- guerry$region
-st_block_nb(id, regime)
+st_block_nb(regime, id)
 }

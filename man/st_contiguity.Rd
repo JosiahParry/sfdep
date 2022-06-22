@@ -28,6 +28,7 @@ geo <- sf::st_geometry(guerry)
 st_contiguity(geo)
 
 # in a pipe
+library(magrittr)
 guerry \%>\%
   dplyr::mutate(nb = st_contiguity(geometry), .before = 1)
 }

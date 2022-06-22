@@ -16,7 +16,7 @@
 #' @param .geometry an `sf` object with columns `.loc_col` and `.time_col`
 #' @param .loc_col the quoted name of the column containing unique location identifiers. Must be present in both `.data` and `.geometry`.
 #' @param .time_col the quoted name of the column containing time periods must be present `.data`. See details for more
-#' @param .active default `data`. The object to make active. See [`activate()`] for more.
+#' @param active default `"data"`. The object to make active. See [`activate()`] for more.
 #'
 #' @details
 #'
@@ -177,6 +177,8 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
 # Class test --------------------------------------------------------------
 #' @rdname spacetime
 #' @export
+#' @param x an object to test
+#' @param ... unused
 is_spacetime <- function(x, ...) {
   inherits(x, "spacetime")
 }

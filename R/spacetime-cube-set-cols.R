@@ -19,7 +19,7 @@
 #'
 #' [set_wts()] and [set_nbs()] create a new column in the data context with the
 #' same name as the column in the geometry context. If a different name is desired
-#' use [`set_cols()`]
+#' use [`set_col()`]
 #'
 #' @returns
 #'
@@ -47,7 +47,7 @@ set_col <- function(x, .from_geo, .to_data = .from_geo) {
   .loc_col = attr(x, "loc_col")
   .time_col = attr(x, "time_col")
   geo_locs <- attr(x, "geometry")[[.loc_col]]
-  region_index <- setNames(seq_along(geo_locs), geo_locs)
+  region_index <- stats::setNames(seq_along(geo_locs), geo_locs)
   data_loc_id <- region_index[x[[.loc_col]]]
 
   # reorder x appropriately by regions and time
@@ -84,7 +84,7 @@ set_wts <- function(x, .wt_col = "wt") {
   .loc_col = attr(x, "loc_col")
   .time_col = attr(x, "time_col")
   geo_locs <- attr(x, "geometry")[[.loc_col]]
-  region_index <- setNames(seq_along(geo_locs), geo_locs)
+  region_index <- stats::setNames(seq_along(geo_locs), geo_locs)
   data_loc_id <- region_index[x[[.loc_col]]]
 
   # reorder x appropriately by regions and time
@@ -122,7 +122,7 @@ set_nbs <- function(x, .nb_col = "nb") {
   .loc_col = attr(x, "loc_col")
   .time_col = attr(x, "time_col")
   geo_locs <- attr(x, "geometry")[[.loc_col]]
-  region_index <- setNames(seq_along(geo_locs), geo_locs)
+  region_index <- stats::setNames(seq_along(geo_locs), geo_locs)
   data_loc_id <- region_index[x[[.loc_col]]]
 
   # reorder x appropriately by regions and time
@@ -161,7 +161,7 @@ spt_order <- function(x) {
   .loc_col = attr(x, "loc_col")
   .time_col = attr(x, "time_col")
   geo_locs <- attr(x, "geometry")[[.loc_col]]
-  region_index <- setNames(seq_along(geo_locs), geo_locs)
+  region_index <- stats::setNames(seq_along(geo_locs), geo_locs)
   data_loc_id <- region_index[x[[.loc_col]]]
 
   # reorder x appropriately by regions and time

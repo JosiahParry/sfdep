@@ -21,6 +21,7 @@
 #' @returns a vector or list of with same length as `x`.
 #' @export
 #' @examples
+#' library(magrittr)
 #' guerry %>%
 #'   dplyr::transmute(
 #'     nb = st_contiguity(geometry),

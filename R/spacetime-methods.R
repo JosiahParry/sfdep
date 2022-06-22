@@ -1,8 +1,7 @@
 
 # Selection ---------------------------------------------------------------
-
 # Selection method
-# TODO update `times` attribute when subset and data is active
+# to do  update `times` attribute when subset and data is active
 `[.spacetime` <- function(x, ...) {
   NextMethod()
 }
@@ -10,8 +9,6 @@
 `[[.spacetime` <- function(x, ...) {
   NextMethod()
 }
-
-
 
 #' Update spacetime attributes
 #'
@@ -83,11 +80,10 @@ as_spacetime <- function(x, .loc_col, .time_col, ...) {
 #' @rdname as_spacetime
 #' @export
 as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
-  geometry <- getFromNamespace("distinct.sf", "sf")(x, !!rlang::sym(.loc_col),
-                               !!rlang::sym(attr(x, "sf_column")))
+  d <- utils::getFromNamespace("distinct.sf", "sf")
+  geometry <- d(x, !!rlang::sym(.loc_col), !!rlang::sym(attr(x, "sf_column")))
 
-  new_spacetime_data(sf::st_drop_geometry(x), geometry,
-                     .loc_col, .time_col)
+  new_spacetime_data(sf::st_drop_geometry(x), geometry, .loc_col, .time_col)
 }
 
 
@@ -98,7 +94,7 @@ print.spacetime <- function(x, ...) {
   n_locs <- attr(x, "n_locs")
   n_times <- attr(x, "n_times")
   cli::cli_div(theme = list(rule = list(color = "grey")))
-  cli::cli_text(cli::style_bold(cli::style_italic("spacetime ───")))
+  cli::cli_text(cli::style_bold(cli::style_italic("spacetime \u2500\u2500\u2500\u2500")))
   cli::cli_text(cli::col_grey("Context:", cli::style_italic("{.var {context}}")))
   cli::cli_text(cli::col_grey("{.emph {n_locs}} locations {.var {attr(x, 'loc_col')}}"))
   cli::cli_text(

@@ -30,7 +30,7 @@ Generate an ellipse from center coordinates, major and minor axis radii, and ang
 \details{
 \code{\link[=ellipse]{ellipse()}} returns a matrix of point locations defining the ellipse. \code{\link[=st_ellipse]{st_ellipse()}} returns an sf object with LINE geography of the ellipse. Increasing n increases the number of points generated to define the ellipse shape.
 
-\code{\link[=ellipse]{ellipse()}} function is taken from \link{ggVennDiagram}.
+\code{\link[=ellipse]{ellipse()}} function is adapted from \code{ggVennDiagram}.
 }
 \examples{
 ellipse(n = 10)

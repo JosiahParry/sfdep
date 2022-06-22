@@ -30,6 +30,7 @@ kernels <- list(
 #' Identifies the minimum distance in which each observation will have at least one neighbor.
 #'
 #' @param geometry an sf geometry column
+#' @param k the minimum number of neighbors to check for
 #' @export
 #' @returns a numeric scalar value.
 #' @examples

@@ -18,7 +18,8 @@
 #' @return
 #' A list of class `nb`
 #'
-#' @rdname sets
+#' @param x list of class `nb`
+#' @param y list of class `nb`
 #' @export
 nb_union <- function(x, y) {
   res <- mapply(union, x, y, SIMPLIFY = FALSE)
@@ -26,7 +27,8 @@ nb_union <- function(x, y) {
   class_modify(res, "nb")
 }
 
-#' @rdname sets
+
+#' @rdname nb_union
 #' @export
 nb_intersect <- function(x, y) {
   res <- mapply(intersect, x, y, SIMPLIFY = FALSE)
@@ -34,7 +36,7 @@ nb_intersect <- function(x, y) {
   class_modify(res, "nb")
 }
 
-#' @rdname sets
+#' @rdname nb_union
 #' @export
 nb_setdiff <- function(x, y) {
   res <- mapply(setdiff, x, y, SIMPLIFY = FALSE)

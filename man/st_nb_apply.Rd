@@ -38,6 +38,7 @@ The below example calculates the spatial lag using \code{\link[=st_nb_apply]{st_
 Currently questioning the use case. \code{\link[=find_xj]{find_xj()}} is now exported and may negate the need for this function.
 }
 \examples{
+library(magrittr)
 guerry \%>\%
   dplyr::transmute(
     nb = st_contiguity(geometry),

@@ -28,7 +28,11 @@ identifiers \code{.loc_col} and \code{.time_col} respectively.}
 
 \item{.time_col}{the quoted name of the column containing time periods must be present \code{.data}. See details for more}
 
-\item{.active}{default \code{data}. The object to make active. See \code{\link[=activate]{activate()}} for more.}
+\item{active}{default \code{"data"}. The object to make active. See \code{\link[=activate]{activate()}} for more.}
+
+\item{x}{an object to test}
+
+\item{...}{unused}
 }
 \description{
 A spacetime object is a collection of a linked data frame and an sf objects.

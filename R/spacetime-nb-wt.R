@@ -60,7 +60,7 @@ nb_time_index <- function(n_times, n_locs, nb) {
 nb_time_index_lag <- function(nbt, n_locs, k) {
   lapply(nbt, function(.nb) {
     res <- .nb - (k * n_locs)
-    na.omit(ifelse(res < 1, NA, res))
+    stats::na.omit(ifelse(res < 1, NA, res))
   })
 }
 

@@ -5,6 +5,7 @@
 #' @inheritParams recreate_listw
 #' @inheritParams nmt_impl
 #' @examples
+#' library(magrittr)
 #' guerry %>%
 #'   dplyr::transmute(nb = st_knn(geometry, k = 10),
 #'          nmt = nb_match_test(list(crime_pers, literacy, suicides),

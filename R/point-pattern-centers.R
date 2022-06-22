@@ -31,7 +31,7 @@ center_mean <- function(geometry, weights = NULL) {
 center_median <- function(geometry) {
   crs <- sf::st_crs(geometry)
   coords <- sf::st_coordinates(geometry)
-  res <- apply(coords, 2, median)
+  res <- apply(coords, 2, stats::median)
   sf::st_sfc(sf::st_point(res), crs = crs)
 }
 
@@ -42,10 +42,10 @@ center_median <- function(geometry) {
 #' Given an sfc geometry, calculate the Euclidean Median Center.
 #'
 #' @inheritParams center_mean
-#' @param tolerance a tolerance level to terminate the process. This is passed to [`Rfast::spat.med`].
+#' @param tolerance a tolerance level to terminate the process. This is passed to [`pracma::geo_median()`].
 #' @details
 #'
-#' Calculation of the Euclidean median is done using the [Rfast] package. If Rfast is not available, the function will error.
+#' Calculation of the Euclidean median is done using the pracma package. If Rfast is not available, the function will error.
 #' @export
 euclidean_median <- function(geometry, tolerance = 1e-09) {
   check_pkg_suggests("pracma")

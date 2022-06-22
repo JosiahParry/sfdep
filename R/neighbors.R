@@ -16,6 +16,7 @@
 #' st_contiguity(geo)
 #'
 #' # in a pipe
+#' library(magrittr)
 #' guerry %>%
 #'   dplyr::mutate(nb = st_contiguity(geometry), .before = 1)
 #' @returns a list of class `nb`

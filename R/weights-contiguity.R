@@ -14,6 +14,7 @@
 #' @family weights
 #' @export
 #' @examples
+#' library(magrittr)
 #' guerry %>%
 #'  dplyr::mutate(nb = st_contiguity(geometry),
 #'                wt = st_weights(nb),

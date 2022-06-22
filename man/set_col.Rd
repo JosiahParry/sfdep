@@ -38,5 +38,5 @@ by the \code{loc_col} and \code{time_col} attributes respectively.
 
 \code{\link[=set_wts]{set_wts()}} and \code{\link[=set_nbs]{set_nbs()}} create a new column in the data context with the
 same name as the column in the geometry context. If a different name is desired
-use \code{\link[=set_cols]{set_cols()}}
+use \code{\link[=set_col]{set_col()}}
 }

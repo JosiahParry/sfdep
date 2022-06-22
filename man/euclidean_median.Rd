@@ -9,11 +9,11 @@ euclidean_median(geometry, tolerance = 1e-09)
 \arguments{
 \item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:geos_unary]{sf::st_point_on_surface()}}.}
 
-\item{tolerance}{a tolerance level to terminate the process. This is passed to \code{\link[Rfast:spat.med]{Rfast::spat.med}}.}
+\item{tolerance}{a tolerance level to terminate the process. This is passed to \code{\link[pracma:geo_median]{pracma::geo_median()}}.}
 }
 \description{
 Given an sfc geometry, calculate the Euclidean Median Center.
 }
 \details{
-Calculation of the Euclidean median is done using the \link{Rfast} package. If Rfast is not available, the function will error.
+Calculation of the Euclidean median is done using the pracma package. If Rfast is not available, the function will error.
 }

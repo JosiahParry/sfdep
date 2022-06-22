@@ -64,7 +64,7 @@
 #'
 #' @returns
 #'
-#'
+#' Returns a data.fram |> e.
 #'
 #' @export
 emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
@@ -126,7 +126,7 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
   rownames(res_ehs) <- NULL
 
 
-  res_ehs <- setNames(
+  res_ehs <- stats::setNames(
     res_ehs[, c("location", "tau", "sl", "classification")],
     c("location", "tau", "p_value", "classification")
     )

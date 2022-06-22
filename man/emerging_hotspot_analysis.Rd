@@ -43,7 +43,7 @@ simulated p-value for the local Gi*.}
 \item{...}{unused.}
 }
 \value{
-
+Returns a data.fram |> e.
 }
 \description{
 Emerging Hot Spot Analysis identifies trends in spatial clustering over a
