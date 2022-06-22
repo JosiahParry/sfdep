@@ -108,6 +108,7 @@ g %>%
 Most users will be interested in local indicators of spatial association (LISA). Utilize `local_moran()` to do this. `local_moran()` will create a data frame column which contains a number of informative variables. For example the cluster that a polygon falls into based on mean, median, or pysal calculations. This will need to be unnested or certain variables hoisted.
 
 Create the Local Moran data frame column.
+
 ```{r}
 lisa <- g %>% 
   mutate(moran = local_moran(crime_pers, nb, wt))
@@ -116,12 +117,13 @@ pull(lisa, moran) %>%
   glimpse()
 ```
 
-Visualize this.
+Visualize this by converting insignificant values to NA. This uses a cutoff of 0.1.
 
 ```{r}
 lisa %>% 
   tidyr::unnest(moran) %>% 
-  ggplot(aes(fill = mean)) +
+  mutate(pysal = ifelse(p_folded_sim <= 0.1, as.character(pysal), NA)) |> 
+  ggplot(aes(fill = pysal)) +
   geom_sf() +
   geom_sf(lwd = 0.2, color = "black") +
   theme_void() +
