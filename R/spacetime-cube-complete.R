@@ -37,7 +37,10 @@ complete_spacetime_cube <- function(x, ...) {
     ))
   }
 
-  complete_spts <- expand.grid(locs = locs, times = times)
+  complete_spts <- expand.grid(locs = locs,
+                               times = times,
+                               stringsAsFactors = FALSE)
+
   names(complete_spts) <- c(.loc_col, .time_col)
 
   .data_class <- setdiff(class(x), "spacetime")
