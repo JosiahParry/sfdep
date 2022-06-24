@@ -2,20 +2,54 @@
 % Please edit documentation in R/point-pattern-centers.R
 \name{center_mean}
 \alias{center_mean}
+\alias{center_median}
+\alias{euclidean_median}
 \title{Calculate Center Mean Point}
 \usage{
 center_mean(geometry, weights = NULL)
+
+center_median(geometry)
+
+euclidean_median(geometry, tolerance = 1e-09)
 }
 \arguments{
 \item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:geos_unary]{sf::st_point_on_surface()}}.}
 
 \item{weights}{an optional vector of weights to apply to the coordinates before calculation.}
+
+\item{tolerance}{a tolerance level to terminate the process. This is passed to \code{\link[pracma:geo_median]{pracma::geo_median()}}.}
 }
 \description{
-Given an sfc object, calculates the mean center or weighted mean center of the points.
+Given an sfc object containing points, calculate a measure of central tendency.
+}
+\details{
+\itemize{
+\item \code{center_mean()} calculates the mean center of a point pattern
+\item \code{euclidean_median()} calculates the euclidean median center of a point pattnern using the \code{pracma} package
+\item \code{center_median()} calculates the median center it is recommended to use the euclidean median over the this function.
+}
+}
+\examples{
+# Make a grid to sample from
+grd <- sf::st_make_grid(n = c(1, 1), cellsize = c(100, 100), offset = c(0,0))
+
+# sample 100 points
+pnts <- sf::st_sample(grd, 100)
+
+cm <- center_mean(pnts)
+em <- euclidean_median(pnts)
+cmed <- center_median(pnts)
+
+plot(pnts)
+plot(cm, col = "red", add = TRUE)
+plot(em, col = "blue", add = TRUE)
+plot(cmed, col = "green", add = TRUE)
 }
 \seealso{
 Other point-pattern: 
-\code{\link{center_median}()}
+\code{\link{std_distance}()}
+
+Other point-pattern: 
+\code{\link{std_distance}()}
 }
 \concept{point-pattern}

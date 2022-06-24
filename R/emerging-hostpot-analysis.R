@@ -64,7 +64,32 @@
 #'
 #' @returns
 #'
-#' Returns a data.fram |> e.
+#' Returns a data.frame.
+#'
+#' @examples
+#'
+#' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+#' geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+#'
+#' # read in data
+#' df <- readr::read_csv(df_fp, col_types = "ccidD")
+#' geo <- sf::read_sf(geo_fp)
+#'
+#' # Create spacetime object called `bos`
+#' bos <- spacetime(df, geo,
+#'                  .loc_col = ".region_id",
+#'                  .time_col = "time_period")
+#'
+#'
+#' # conduct EHSA
+#' ehsa <- emerging_hotspot_analysis(
+#'   x = bos,
+#'   .var = "value",
+#'   k = 1,
+#'   nsim = 99
+#' )
+#'
+#' ehsa
 #'
 #' @export
 emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
@@ -136,3 +161,5 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
   res_ehs
 
 }
+
+

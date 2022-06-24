@@ -40,3 +40,25 @@ by the \code{loc_col} and \code{time_col} attributes respectively.
 same name as the column in the geometry context. If a different name is desired
 use \code{\link[=set_col]{set_col()}}
 }
+\examples{
+df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+
+# read in data
+df <- readr::read_csv(df_fp, col_types = "ccidD")
+geo <- sf::read_sf(geo_fp)
+
+# Create spacetime object called `bos`
+bos <- spacetime(df, geo,
+                .loc_col = ".region_id",
+                .time_col = "time_period")
+bos <- activate(bos, "geometry")
+bos$nb <- st_contiguity(bos)
+bos$wt <- st_weights(bos$nb)
+bos$card <- st_cardinalties(bos$nb)
+
+set_nbs(bos)
+set_wts(bos)
+set_col(bos, "card")
+set_col(bos, "card", "cardinalities")
+}

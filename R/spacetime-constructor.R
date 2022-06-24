@@ -46,6 +46,17 @@
 #'  - lastly informs of missing values in additional columns in `.data`
 #'
 #' @export
+#' @examples
+#' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+#' geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+#'
+#' # read in data
+#' df <- readr::read_csv(df_fp, col_types = "ccidD")
+#' geo <- sf::read_sf(geo_fp)
+#'
+#' bos <- spacetime(df, geo, ".region_id", "year")
+#' is_spacetime(bos)
+#' bos
 spacetime <- function(.data, .geometry, .loc_col, .time_col, active = "data") {
   new_spacetime(.data, .geometry, .loc_col, .time_col, active = active)
 }

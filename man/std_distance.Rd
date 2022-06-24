@@ -10,5 +10,25 @@ std_distance(geometry)
 \item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:geos_unary]{sf::st_point_on_surface()}}.}
 }
 \description{
-Calculate standard distance
+The standard distance of a point pattern is a measure of central tendency.
+Standard distance measures distance away from the mean center of the point pattern
+similar to standard deviations.
 }
+\examples{
+# Make a grid to sample from
+grd <- sf::st_make_grid(n = c(1, 1), cellsize = c(100, 100), offset = c(0,0))
+
+# sample 100 points
+pnts <- sf::st_sample(grd, 100)
+
+# plot points
+plot(pnts)
+
+# calculate standard distance
+std_distance(pnts)
+}
+\seealso{
+Other point-pattern: 
+\code{\link{center_mean}()}
+}
+\concept{point-pattern}

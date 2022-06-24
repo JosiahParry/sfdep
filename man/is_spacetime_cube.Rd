@@ -40,3 +40,20 @@ of time periods
 }
 }
 
+\examples{
+df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+
+# read in data
+df <- readr::read_csv(df_fp, col_types = "ccidD")
+geo <- sf::read_sf(geo_fp)
+
+# Create spacetime object called `bos`
+bos <- spacetime(df, geo,
+                .loc_col = ".region_id",
+                .time_col = "time_period")
+
+is_spacetime_cube(bos)
+is_spacetime_cube(bos[round(runif(1000, 0, nrow(bos))),])
+is_spacetime_cube(guerry)
+}

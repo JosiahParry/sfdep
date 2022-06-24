@@ -25,3 +25,11 @@ From an sf object containing points, calculate the standard deviational ellipse.
 \details{
 The bulk of this function is derived from the archived CRAN package aspace version 3.2.0.
 }
+\examples{
+#' # Make a grid to sample from
+grd <- sf::st_make_grid(n = c(1, 1), cellsize = c(100, 100), offset = c(0,0))
+
+# sample 100 points
+pnts <- sf::st_sample(grd, 100)
+std_dev_ellipse(pnts)
+}

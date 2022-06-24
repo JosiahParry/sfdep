@@ -19,6 +19,21 @@ active <- function(x) attr(x, "active")
 #' @param what default NULL. Determines which context to activate. Valid argument values
 #'   are `"geometry"` and `"data"`. If left null, returns `x`.
 #' @export
+#' @examples
+#' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+#' geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+#'
+#' # read in data
+#' df <- readr::read_csv(df_fp, col_types = "ccidD")
+#' geo <- sf::read_sf(geo_fp)
+#'
+#' # Create spacetime object called `bos`
+#' bos <- spacetime(df, geo,
+#'                  .loc_col = ".region_id",
+#'                  .time_col = "time_period")
+#'
+#' active(bos)
+#' activate(bos, "geometry")
 activate <- function(x, what = NULL) {
   is_active <- active(x)
   # if missing, set "what" to whatever is presently active

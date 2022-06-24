@@ -16,7 +16,13 @@
 #' - `theta`: degree rotation of the ellipse.
 #'
 #' sf object's geometry is the center mean point.
+#' @examples
+#' #' # Make a grid to sample from
+#' grd <- sf::st_make_grid(n = c(1, 1), cellsize = c(100, 100), offset = c(0,0))
 #'
+#' # sample 100 points
+#' pnts <- sf::st_sample(grd, 100)
+#' std_dev_ellipse(pnts)
 #' @export
 std_dev_ellipse <- function(geometry) {
   crs <- sf::st_crs(geometry)

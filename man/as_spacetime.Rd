@@ -27,3 +27,19 @@ Cast between \code{spacetime} and \code{sf} classes
 
 Convert sf object to spacetime
 }
+\examples{
+df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+
+# read in data
+df <- readr::read_csv(df_fp, col_types = "ccidD")
+geo <- sf::read_sf(geo_fp)
+
+# Create spacetime object called `bos`
+bos <- spacetime(df, geo,
+                 .loc_col = ".region_id",
+                 .time_col = "time_period")
+
+as_sf(bos)
+as_spacetime(as_sf(bos) , ".region_id", "year")
+}

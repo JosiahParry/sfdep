@@ -43,7 +43,7 @@ simulated p-value for the local Gi*.}
 \item{...}{unused.}
 }
 \value{
-Returns a data.fram |> e.
+Returns a data.frame.
 }
 \description{
 Emerging Hot Spot Analysis identifies trends in spatial clustering over a
@@ -89,6 +89,32 @@ Presently, there is no method of missing value handling. If there are missing
 values, the emerging hot spot analysis will fail. Be sure to fill or omit
 time-slices with missing values \emph{prior} to using emerging hot spot analysis.
 }
+}
+\examples{
+
+df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+
+# read in data
+df <- readr::read_csv(df_fp, col_types = "ccidD")
+geo <- sf::read_sf(geo_fp)
+
+# Create spacetime object called `bos`
+bos <- spacetime(df, geo,
+                 .loc_col = ".region_id",
+                 .time_col = "time_period")
+
+
+# conduct EHSA
+ehsa <- emerging_hotspot_analysis(
+  x = bos,
+  .var = "value",
+  k = 1,
+  nsim = 99
+)
+
+ehsa
+
 }
 \seealso{
 \href{https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/learnmoreemerging.htm}{How Emerging Hot Spot Analysis works}, \href{https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/emerginghotspots.htm}{Emerging Hot Spot Analysis (Space Time Pattern Mining)}, and the video \href{https://www.youtube.com/watch?v=0aV6HHwJuo4&t=3848s&ab_channel=EsriEvents}{Spatial Data Mining II: A Deep Dive into Space-Time Analysis} by ESRI.

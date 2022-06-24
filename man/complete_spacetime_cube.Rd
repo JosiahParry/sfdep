@@ -21,3 +21,27 @@ columns will be populated with NAs.
 
 See \code{\link[=is_spacetime_cube]{is_spacetime_cube()}} for more details on spacetime cubes.
 }
+\examples{
+df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+
+# read in data
+df <- readr::read_csv(df_fp, col_types = "ccidD")
+geo <- sf::read_sf(geo_fp)
+
+# Create spacetime object called `bos`
+bos <- spacetime(df, geo,
+                 .loc_col = ".region_id",
+                 .time_col = "time_period")
+
+# create a sample of data
+set.seed(0)
+sample_index <- sample(1:nrow(bos), nrow(bos) * 0.95)
+incomplete_spt <- bos[sample_index,]
+
+# check to see if is spacetime cube
+is_spacetime_cube(incomplete_spt)
+
+# complete it again
+complete_spacetime_cube(incomplete_spt)
+}

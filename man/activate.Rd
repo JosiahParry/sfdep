@@ -24,3 +24,19 @@ A  \code{\link{spacetime}} object contains both a data frame and an sf object. T
 data frame represents geographies over one or more time periods and the sf
 object contains the geographic information for those locations.
 }
+\examples{
+df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+
+# read in data
+df <- readr::read_csv(df_fp, col_types = "ccidD")
+geo <- sf::read_sf(geo_fp)
+
+# Create spacetime object called `bos`
+bos <- spacetime(df, geo,
+                 .loc_col = ".region_id",
+                 .time_col = "time_period")
+
+active(bos)
+activate(bos, "geometry")
+}

@@ -30,12 +30,29 @@
 #' @param x a spacetime object
 #' @param ... unused
 #' @export
+#' @examples
+#' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+#' geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+#'
+#' # read in data
+#' df <- readr::read_csv(df_fp, col_types = "ccidD")
+#' geo <- sf::read_sf(geo_fp)
+#'
+#' # Create spacetime object called `bos`
+#' bos <- spacetime(df, geo,
+#'                 .loc_col = ".region_id",
+#'                 .time_col = "time_period")
+#'
+#' is_spacetime_cube(bos)
+#' is_spacetime_cube(bos[round(runif(1000, 0, nrow(bos))),])
+#' is_spacetime_cube(guerry)
 is_spacetime_cube <- function(x, ...) {
 
   check_pkg_suggests("zoo")
   # check if spacetime
   if (!inherits(x, "spacetime")) {
-    cli::cli_abort("Object is not of class {.cls spacetime}.")
+    # cli::cli_inform("Object is not of class {.cls spacetime}.")
+    return(FALSE)
   }
 
   # ensure that data is active

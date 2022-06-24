@@ -7,6 +7,10 @@
 #' @param wt a weights list—i.e. created by `st_weights()`
 #' @returns a scalar double
 #' @export
+#' @examples
+#' nb <- st_contiguity(guerry)
+#' wt <- st_weights(nb)
+#' szero(wt)
 szero <- function(wt) {
   sum(unlist(wt))
 }
@@ -18,6 +22,9 @@ szero <- function(wt) {
 #' @param nb a neighbor list object
 #' @export
 #' @returns a scalar double
+#' @examples
+#' nb <- st_contiguity(guerry)
+#' pct_nonzero(nb)
 pct_nonzero <- function(nb) {
   (sum(lengths(nb)) / length(nb)^2) * 100
 }
