@@ -12,7 +12,13 @@ spatial_gini(x, nb)
 \item{nb}{a neighbor list, for example created with \code{\link[=st_contiguity]{st_contiguity()}}}
 }
 \value{
-A scalar numeric.
+A data frame with columns:
+\itemize{
+\item \code{G}: the Gini index
+\item \code{NBG}: the neighbor composition of the Gini coefficient
+\item \code{NG}: the non-neighbor composition of the Gini coefficient
+\item \code{SG}: the Spatial Gini which is equal to \eqn{NG * \frac{1}{G}}
+}
 }
 \description{
 Calculates the spatial Gini index for a given numeric vector and neighbor list.

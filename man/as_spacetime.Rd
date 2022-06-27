@@ -16,7 +16,7 @@ as_spacetime(x, .loc_col, .time_col, ...)
 \item{x}{for \code{\link[=st_as_sf]{st_as_sf()}} a spacetime object. For \code{\link[=as_spacetime]{as_spacetime()}}
 an sf object.}
 
-\item{...}{unused}
+\item{...}{arguments passed to merge.}
 
 \item{.loc_col}{the quoted name of the column containing unique location identifiers.}
 

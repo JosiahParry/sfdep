@@ -35,6 +35,7 @@ active <- function(x) attr(x, "active")
 #' active(bos)
 #' activate(bos, "geometry")
 activate <- function(x, what = NULL) {
+  match.arg(what, c("geometry", "data", NULL))
   is_active <- active(x)
   # if missing, set "what" to whatever is presently active
   if (is.null(what)) return(x)
@@ -48,8 +49,9 @@ activate <- function(x, what = NULL) {
 }
 
 activate_geometry <- function(x) {
-  class(x) <- setdiff(class(x), "spacetime")
-  new_spacetime_geo(x, attr(x, "geometry"),
+  # class(x) <- setdiff(class(x), "spacetime")
+  new_spacetime_geo(x,
+                    attr(x, "geometry"),
                     attr(x, "loc_col"),
                     attr(x, "time_col"))
 }

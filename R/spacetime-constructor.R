@@ -91,7 +91,7 @@ new_spacetime_geo <- function(.data, .geometry, .loc_col, .time_col) {
             time_col = .time_col,
             times = times,
             n_times = n_times,
-            class = c("spacetime", class(.geometry)))
+            class = union("spacetime", class(.geometry)))
 }
 
 #' @keywords internal
@@ -112,7 +112,7 @@ new_spacetime_data <- function(.data, .geometry, .loc_col, .time_col) {
             time_col = .time_col,
             times = times,
             n_times = n_times,
-            class = c("spacetime", class(.data)))
+            class = union("spacetime", class(.data)))
 }
 
 

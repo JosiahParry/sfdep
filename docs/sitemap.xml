@@ -268,6 +268,9 @@
     <loc>/reference/shuffle_nbs.html</loc>
   </url>
   <url>
+    <loc>/reference/sin_d.html</loc>
+  </url>
+  <url>
     <loc>/reference/spacetime.html</loc>
   </url>
   <url>
@@ -356,6 +359,9 @@
   </url>
   <url>
     <loc>/reference/szero.html</loc>
+  </url>
+  <url>
+    <loc>/reference/tidyverse.html</loc>
   </url>
   <url>
     <loc>/reference/wt_as_matrix.html</loc>

@@ -20,6 +20,17 @@ guns <- filter(ecometric_tidy, ecometric == "Guns") |>
 
 regions <- select(x, .region_id = CT_ID_10)
 
+left_join(guns, regions, ".region_id") |>
+  mutate(nb = st_knn(geometry, 4, symmetric = TRUE),
+         wt = st_weights(nb))
+         val_lag = st_lag(value, nb, wt,
+                          na_ok = TRUE, allow_zero = TRUE),
+         x = coalesce(value, val_lag)) |>
+  as_tibble() |>
+  summarise(sum(is.na(x)))
+
+
+
 # Identify regions with only missing values -------------------------------
 # Creates objects complete_geo and complete_obs
 # maybe should create a threshold fore completeness? like 75%+ completeness

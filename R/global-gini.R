@@ -19,7 +19,13 @@
 #' spatial_gini(x, nb)
 #'
 #' @returns
-#' A scalar numeric.
+#' A data frame with columns:
+#'
+#' - `G`: the Gini index
+#' - `NBG`: the neighbor composition of the Gini coefficient
+#' - `NG`: the non-neighbor composition of the Gini coefficient
+#' - `SG`: the Spatial Gini which is equal to \eqn{NG * \frac{1}{G}}
+#'
 #' @export
 spatial_gini <- function(x, nb) {
 
@@ -46,5 +52,36 @@ spatial_gini <- function(x, nb) {
   denom <- 2 * (n^2) * xbar
 
   # result
-  (sum(lhs_num) / denom) + (sum(rhs_num) / denom)
+  Gnb <- (sum(lhs_num) / denom)
+  NG <- (sum(rhs_num) / denom)
+  G <- Gnb + NG
+  # SG can be interpreted as the share of overall inequality
+  # that is associated with non-neighbor pair of locations.
+  SG <- NG * (1 / G)
+
+  data.frame(G, NG, NBG = Gnb, SG)
 }
+
+# tracts <- tidycensus::get_acs(
+#   state = "VA",
+#   # county = "Orange",
+#   geography = "tract",
+#   variables = "B19013_001",
+#   geometry = TRUE,
+#   year = 2020
+# )
+#
+# library(sfdep)
+# library(dplyr)
+#
+# tract_clean <- tracts |>
+#   filter(!sf::st_is_empty(geometry),
+#          !is.na(estimate)) |>
+#   mutate(
+#     geometry = sf::st_make_valid(geometry),
+#     nb = st_contiguity(geometry)
+#   )
+#
+#
+# x <- tract_clean$estimate
+# nb <- tract_clean$nb

@@ -52,14 +52,14 @@ spt_update <- function(x, ...) {
 #'
 #' @param x for [sfdep::st_as_sf()] a spacetime object. For [sfdep::as_spacetime()]
 #'   an sf object.
-#' @param ... unused
+#' @param ... arguments passed to merge.
 #' @export
 #' @rdname as_spacetime
 as_sf <- function(x, ...) {
   if (active(x) == "geometry") x <- activate(x, "data")
 
   merge(attr(x, "geometry"), x,
-        by = attr(x, "loc_col"))
+        by = attr(x, "loc_col"), ...)
 }
 
 
@@ -118,3 +118,71 @@ print.spacetime <- function(x, ...) {
   NextMethod()
 }
 
+
+
+# dplyr group_by ----------------------------------------------------------
+
+#' tidyverse methods for spacetime objects
+#'
+#' dplyr methods for spacetime objects.
+#'
+#' @name tidyverse
+group_by.spacetime <- function(.data, ...) {
+  res <- NextMethod(.data, ...)
+  class(res) <- c("spacetime", class(res))
+  res
+}
+
+
+#' @name tidyverse
+mutate.spacetime <- function(.data, ...) {
+
+  if (inherits(.data, "grouped_df")) {
+    res <- NextMethod(.data, ...)
+    .cols <- colnames(res)
+    attributes(res) <- attributes(.data)
+    attr(res, "names") <- .cols
+    return(res)
+  }
+
+  res <- NextMethod(.data, ...)
+  class(res) <- c("spacetime", setdiff(class(res), "spacetime"))
+  res
+
+}
+
+
+
+# from: https://raw.githubusercontent.com/r-spatial/sf/main/R/tidyverse.R
+# 2022-06-27 08:54:11
+register_all_s3_methods = function() {
+
+  register_s3_method("dplyr", "group_by", "spacetime")
+  register_s3_method("dplyr", "mutate", "spacetime")
+}
+
+# from: https://github.com/tidyverse/hms/blob/master/R/zzz.R
+# Thu Apr 19 10:53:24 CEST 2018
+register_s3_method <- function(pkg, generic, class, fun = NULL) {
+  stopifnot(is.character(pkg), length(pkg) == 1)
+  stopifnot(is.character(generic), length(generic) == 1)
+  stopifnot(is.character(class), length(class) == 1)
+
+  if (is.null(fun)) {
+    fun <- get(paste0(generic, ".", class), envir = parent.frame())
+  } else {
+    stopifnot(is.function(fun))
+  }
+
+  if (pkg %in% loadedNamespaces()) {
+    registerS3method(generic, class, fun, envir = asNamespace(pkg))
+  }
+
+  # Always register hook in case package is later unloaded & reloaded
+  setHook(
+    packageEvent(pkg, "onLoad"),
+    function(...) {
+      registerS3method(generic, class, fun, envir = asNamespace(pkg))
+    }
+  )
+}

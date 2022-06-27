@@ -59,8 +59,11 @@ st_knn <- function(x, k = 1, symmetric = FALSE, ...) {
 
   pnts <- check_polygon(x)
 
-  ks <- spdep::knearneigh(pnts, k = k, ...)
-  nb <- spdep::knn2nb(ks, sym = symmetric)
+  suppressWarnings({
+    ks <- spdep::knearneigh(pnts, k = k, ...)
+    nb <- spdep::knn2nb(ks, sym = symmetric)
+  })
+
 
   class_modify(nb)
 }

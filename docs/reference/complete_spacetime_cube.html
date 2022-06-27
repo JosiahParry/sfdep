@@ -39,7 +39,7 @@ ensures that there is a regular time-series for each geometry present."><!-- mat
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-releases">
-    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.1.1</a>
+    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.2.0</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -87,6 +87,54 @@ columns will be populated with NAs.</p>
 <p>See <code><a href="is_spacetime_cube.html">is_spacetime_cube()</a></code> for more details on spacetime cubes.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">df_fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"bos-ecometric.csv"</span>, package <span class="op">=</span> <span class="st">"sfdep"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">geo_fp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"bos-ecometric.geojson"</span>, package <span class="op">=</span> <span class="st">"sfdep"</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># read in data</span></span>
+<span class="r-in"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">df_fp</span>, col_types <span class="op">=</span> <span class="st">"ccidD"</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">read_sf</a></span><span class="op">(</span><span class="va">geo_fp</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># Create spacetime object called `bos`</span></span>
+<span class="r-in"><span class="va">bos</span> <span class="op">&lt;-</span> <span class="fu"><a href="spacetime.html">spacetime</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">geo</span>,</span>
+<span class="r-in">                 .loc_col <span class="op">=</span> <span class="st">".region_id"</span>,</span>
+<span class="r-in">                 .time_col <span class="op">=</span> <span class="st">"time_period"</span><span class="op">)</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># create a sample of data</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">sample_index</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">bos</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">bos</span><span class="op">)</span> <span class="op">*</span> <span class="fl">0.95</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">incomplete_spt</span> <span class="op">&lt;-</span> <span class="va">bos</span><span class="op">[</span><span class="va">sample_index</span>,<span class="op">]</span></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># check to see if is spacetime cube</span></span>
+<span class="r-in"><span class="fu"><a href="is_spacetime_cube.html">is_spacetime_cube</a></span><span class="op">(</span><span class="va">incomplete_spt</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Number of rows does not equal `n time-periods x n locations`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
+<span class="r-in"></span>
+<span class="r-in"><span class="co"># complete it again</span></span>
+<span class="r-in"><span class="fu">complete_spacetime_cube</span><span class="op">(</span><span class="va">incomplete_spt</span><span class="op">)</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Vars(s) `ecometric`, `year`, and `value` are missing 84, 84, and 84 value(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold; font-style: italic;">spacetime ────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Context:</span><span style="color: #555555; font-style: italic;">`data`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">168</span><span style="color: #555555;"> locations `.region_id`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">10</span><span style="color: #555555;"> time periods `time_period`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">── </span><span style="color: #555555; font-style: italic;">data context</span><span style="color: #B2B2B2;"> ────────────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,680 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .region_id  time_period ecometric  year value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 25025000100 2010-01-01  <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 25025000100 2011-01-01  Guns       <span style="text-decoration: underline;">2</span>011  1.54</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 25025000100 2012-01-01  Guns       <span style="text-decoration: underline;">2</span>012  1.84</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 25025000100 2013-01-01  Guns       <span style="text-decoration: underline;">2</span>013  4.36</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 25025000100 2014-01-01  Guns       <span style="text-decoration: underline;">2</span>014  1.91</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 25025000100 2015-01-01  Guns       <span style="text-decoration: underline;">2</span>015  1.93</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 25025000100 2016-01-01  Guns       <span style="text-decoration: underline;">2</span>016  1.5 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 25025000100 2017-01-01  Guns       <span style="text-decoration: underline;">2</span>017  2.14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 25025000100 2018-01-01  Guns       <span style="text-decoration: underline;">2</span>018  2.78</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 25025000100 2019-01-01  Guns       <span style="text-decoration: underline;">2</span>019  1.69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,670 more rows</span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside></div>
 

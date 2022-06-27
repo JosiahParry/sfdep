@@ -1,5 +1,5 @@
 ---
-title: "Version 0.1.1"
+title: "Version 0.2.0"
 ---
 
 ```{r, include = FALSE}
@@ -14,7 +14,7 @@ library(sfdep)
 ```
 
 
-While not too far from the initial CRAN release of sfdep, this release represents some rather sizeable additions to the package. This version consists of two sizeable additions relating to spatio-temporal analysis and colocation analysis as well as bug fixes and improvements.
+While not too far from the initial CRAN release of sfdep, this version consists of two sizeable additions relating to spatio-temporal analysis and colocation analysis as well as bug fixes and improvements. Additional functionality is added regarding point-pattern analysis and neighbor / weight list utilities. Given the breadth of the additions, this represents a minor version release. 
 
 
 ## Colocation Analysis
@@ -49,11 +49,131 @@ The new functions that are available are:
 - `complete_spacetime_cube()`:
   - if a spatio-temporal sparse grid, add rows to make a spatio-temporal full grid (spacetime cube)
 - `set_col()`, `set_nbs()`, `set_wts()`:
-  - add columns from geometry contexst to data context
+  - add columns from geometry context to data context
 - `emerging_hotspot_analysis()`:
   - conduct emerging hotspot analysis
 - `spt_update()`:
   - update times and locations attributes of a spacetime object
+  
+```{r}
+df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+
+# read in data
+df <- readr::read_csv(df_fp, col_types = "ccidD")
+geo <- sf::read_sf(geo_fp)
+
+# create spacetime object
+bos <- spacetime(df, geo, ".region_id", "year")
+
+bos
+```
+
+Spacetime objects have two contexts: data and geometry. Currently the data is activated. We can activate the geometry context like so:
+
+```{r}
+activate(bos, "geometry") 
+```
+This is handy because we can find neighbors in our geometry and link them to our data.
+
+```{r}
+library(dplyr)
+
+bos_nb <- bos |> 
+  activate("geometry") |> 
+  mutate(nb = st_contiguity(geometry),
+         wt = st_weights(nb))
+
+bos_nb
+```
+These can be brought over to our data context for further use.
+
+```{r}
+bos_nb <- bos_nb |> 
+  set_wts() |> 
+  set_nbs()
+
+bos_nb
+```
+
+Then we can group our dataset and calculate metrics based on different years. But this is only possible for data that are spacetime cubes. Read the spacetime vignette for more. We can check if this object meets the conditions to be a spacetime cube.
+  
+```{r}
+is_spacetime_cube(bos)
+```
+
+Since this is a spacetime cube, it is safe to perform statistics on each time slice.
+
+```{r}
+bos_gs <- bos_nb |> 
+  activate("data") |> 
+  filter(ecometric == "Guns") |> 
+  group_by(year) |> 
+  mutate(g = local_g(value, nb, wt))
+
+bos_gs
+```
+Now that the measure has been calculated for each timeslice, we can connect the geometries for each time slice for the purpose of visualization. 
+
+> Note that the spacetime class' objective is to avoid geometry duplication. But it is necessary for visualization with ggplot2. 
+
+We can cast to an sf object with `as_sf()`.
+
+```{r}
+library(ggplot2)
+
+# cast to sf object. Uses merge under the hood
+# so if duplicate columns exist, we can specify suffix names
+as_sf(bos_gs, suffixes = c("_geo", "_data")) |>
+  ggplot(aes(fill = g)) +
+  geom_sf(color = NA) +
+  facet_wrap("year", nrow = 2) +
+  scale_fill_gradient2(
+    high = scales::muted("red"),
+    low = scales::muted("blue")
+    ) + 
+  labs(title = "Gun ecometric hotspots",
+       subtitle = "2010 - 2019") + 
+  theme_void() +
+  theme(legend.position = "bottom")
+```
+
+> Note that the holes are due to missing data in the original dataset. 
+
+## Point Pattern analysis
+
+There were a few additional functions added which pertain to point pattern analysis. Namely regarding finding centers and creating ellipses based on the centers. These functions supplement gaps in other spatial analysis libraries such as spatstat.
+
+```{r}
+library(sf)
+library(sfdep)
+
+pnts <- st_sample(guerry, 250)
+```
+
+We can calculate the euclidean median center and plot it over all the points. 
+
+```{r}
+cent <- euclidean_median(pnts)
+
+plot(pnts)
+plot(cent, col = "red", pch = 17, add = TRUE)
+```
+
+Additionally, we can identify the standard deviational ellipse for our point set. 
+
+```{r}
+ellip_cent <- std_dev_ellipse(pnts)
+
+ellip <- st_ellipse(ellip_cent, 
+           ellip_cent$sx, 
+           ellip_cent$sy, 
+           ellip_cent$theta) 
+
+plot(ellip)
+plot(pnts, add = TRUE)
+```
+
 
 
 ## General

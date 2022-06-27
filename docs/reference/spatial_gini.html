@@ -39,7 +39,7 @@ Based on the formula provided Rey and Smith (2013)."><!-- mathjax --><script src
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-releases">
-    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.1.1</a>
+    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.2.0</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -82,8 +82,11 @@ Based on the formula provided Rey and Smith (2013).</p>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A scalar numeric.</p>
-    </div>
+    <p>A data frame with columns:</p><ul><li><p><code>G</code>: the Gini index</p></li>
+<li><p><code>NBG</code>: the neighbor composition of the Gini coefficient</p></li>
+<li><p><code>NG</code>: the non-neighbor composition of the Gini coefficient</p></li>
+<li><p><code>SG</code>: the Spatial Gini which is equal to \(NG * \frac{1}{G}\)</p></li>
+</ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The Gini index is a global measure of inequality based on the Lorenz curve. It ranges between 0 and 1 where 0 is perfect equality and 1 is perfect inequality.</p>
@@ -99,7 +102,8 @@ Based on the formula provided Rey and Smith (2013).</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">wealth</span></span>
 <span class="r-in"><span class="fu">spatial_gini</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3306568</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           G        NG       NBG        SG</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.3306568 0.3164337 0.0142231 0.9569853</span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
