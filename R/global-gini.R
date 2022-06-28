@@ -39,11 +39,12 @@ spatial_gini <- function(x, nb) {
   # instantiate vectors to fill
   lhs_num <- numeric(n)
   rhs_num <- numeric(n)
-
+  xdiffs <- vector("list", n)
   for (i in 1:n) {
     xi <- x[i]
     wij <- w[i,]
     xdiff <- abs(xi - x)
+    xdiffs[[i]] <- xdiff
     lhs_num[i] <- sum(xdiff * wij)
     rhs_num[i] <- sum(xdiff * (1 - wij))
   }
@@ -85,3 +86,68 @@ spatial_gini <- function(x, nb) {
 #
 # x <- tract_clean$estimate
 # nb <- tract_clean$nb
+
+spatial_gini <- function(x, nb) {
+
+  n <- length(x)
+  m <- matrix(rep(x, n), nrow = n, byrow = T)
+  xdiff <- abs(x - m)
+
+  spatial_gini_calc(x, nb, xdiff)
+}
+
+spatial_gini_calc <- function(x, nb, xdiff) {
+  # cast as a matrix
+  w <- nb_as_matrix(nb)
+  # cast nbs as matrix
+  xj <- find_xj(x, nb)
+  listw <- recreate_listw(nb, xj)
+  xij <- spdep::listw2mat(listw)
+
+  # constants
+  xbar <- mean(x, na.rm = TRUE)
+  n <- length(x)
+  lhs_sum <- rowSums(xdiff * w)
+  rhs_sum <- rowSums(xdiff * (1 - w))
+
+  # calculate denominator
+  denom <- 2 * (n^2) * xbar
+
+  # result
+  Gnb <- (sum(lhs_sum) / denom)
+  NG <- (sum(rhs_sum) / denom)
+  G <- Gnb + NG
+  # SG can be interpreted as the share of overall inequality
+  # that is associated with non-neighbor pair of locations.
+  SG <- NG * (1 / G)
+
+  data.frame(G, NG, NBG = Gnb, SG)
+}
+
+spatial_gini_perm_impl <- function(x, nb, xdiff, nsim) {
+
+  obs <- spatial_gini_calc(x, nb, xdiff)
+  reps <- replicate(
+    nsim,
+    spatial_gini_calc(x, cond_permute_nb(nb), xdiff),
+    simplify = FALSE
+  )
+
+  r <- do.call("rbind", reps)
+  p_value <- pmin((sum(obs$SG >=  r$SG) + 1) / (nsim + 1),
+                  (sum(obs$SG <=  r$SG) + 1) / (nsim + 1))
+
+  cbind(obs, p_value)
+}
+
+
+
+spatial_gini_perm <- function(x, nb, nsim = 49) {
+
+  n <- length(x)
+  m <- matrix(rep(x, n), nrow = n, byrow = TRUE)
+  xdiff <- abs(x - m)
+  spatial_gini_perm_impl(x, nb, xdiff, nsim)
+}
+
+

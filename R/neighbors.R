@@ -47,16 +47,6 @@ st_contiguity <- function(x, queen = TRUE, ...) {
 #' @returns a list of class `nb`
 st_knn <- function(x, k = 1, symmetric = FALSE, ...) {
 
-  # polygon_check <- any(class(x) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))
-  #
-  # if (polygon_check) {
-  #
-  #   cli::cli_alert_warning("Polygon provided. Using centroid.")
-  #   pnts <- st_centroid(x)
-  # } else {
-  #   pnts <- x
-  # }
-
   pnts <- check_polygon(x)
 
   suppressWarnings({

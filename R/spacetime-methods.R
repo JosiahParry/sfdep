@@ -127,6 +127,8 @@ print.spacetime <- function(x, ...) {
 #' dplyr methods for spacetime objects.
 #'
 #' @name tidyverse
+#' @param .data a data frame
+#' @param ... additional arguments
 group_by.spacetime <- function(.data, ...) {
   res <- NextMethod(.data, ...)
   class(res) <- c("spacetime", class(res))

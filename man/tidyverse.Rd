@@ -10,6 +10,11 @@ group_by.spacetime(.data, ...)
 
 mutate.spacetime(.data, ...)
 }
+\arguments{
+\item{.data}{a data frame}
+
+\item{...}{additional arguments}
+}
 \description{
 dplyr methods for spacetime objects.
 }
