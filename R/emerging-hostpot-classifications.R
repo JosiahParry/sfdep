@@ -109,8 +109,8 @@ historical_coldspot <- function(gs, sigs, n, ...) {
 }
 
 fxs <- list(
-  "new_hotspot" = new_hotspot,
-  "new_coldspot" = new_coldspot,
+  "new hotspot" = new_hotspot,
+  "new coldspot" = new_coldspot,
   "consecutive hotspot" = consecutive_hotspot,
   "consecutive coldspot" = consecutive_coldspot,
   "intensifying hotspot" = intensifying_hotspot,

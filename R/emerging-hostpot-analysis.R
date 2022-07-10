@@ -144,10 +144,6 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
     )
   )
 
-  if (include_gi) {
-    attr(res_ehs, "gi_star") <- all_gis
-  }
-
   rownames(res_ehs) <- NULL
 
 
@@ -157,6 +153,10 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
     )
 
   class(res_ehs) <- setdiff(class(x), "spacetime")
+
+  if (include_gi) {
+    attr(res_ehs, "gi_star") <- all_gis
+  }
 
   res_ehs
 
