@@ -1,0 +1,78 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Exploratory Spatial Data Analysis in the tidyverse
+
+## My story
+
+I want to start to by describing my journey through spatial analysis. I was first exposed to geographic information systems (GIS) in college around 2014. I was taught the ESRI ArcGIS suite. For those of who may not be as familiar, ESRI is the Geospatial behemoth that dominates much of private industry and charges hefty fees for licenses.
+
+Soon after, I began learning R and became an open-source software convert. I thought that free is better than not-free. That learning a tool that I can use outside of the classroom is more useful than one that I would not be able to use after my classes. I picked up the open source GIS tool QGIS.
+
+Eventually, I became adept with R and primarily the tidyverse. At one point, I wanted to try and do spatial analysis work in R. At the time, sp was the primary tool for spatial analysis. I couldn't comprehend the s4 structure. It didn't fit within the paradigm that I was I familiar with. So naturally, I gave up and contented myself with QGIS.
+
+## sf changes the game
+
+2018 rolls around and two things happened: I went to graduate school and the sf package became very mature and very stable. {sf} is the most revolutionary spatial R package for programmers of my generation. {sf} is a package for handling simple features (points, lines, and polygons) in R. One of the great successes of sf is its compatibility (much like R in general). sf objects are an extension of a data frame. That means it integrates with tools like dplyr and data.table.
+
+sf made doing basic spatial analysis in R such as spatial joins, cartographic visualization very easy. I was able to do the vast majority of my spatial analysis work with sf, dplyr, and ggplot2.
+
+## In walks exploratory spatial data analysis
+
+In 2019 I took Advanced Spatial Analytics with Geoff Boeing. The course was taught with python, geopandas, pysal, and shapely. In this course I learned the foundations of Exploratory Spatial Data Analysis in Python. I think, at this point, its best to define ESDA.
+
+## What is ESDA?
+
+ESDA is an extension of exploratory spatial data analysis to incorporate space. Rather than comparing single observations to the whole, or groups within the whole, ESDA looks at a given place and how values at that place compare to other values nearby it in space.
+
+ESDA typically seeks to answer questions like:
+
+-   Are things randomly distributed?
+-   Are close things more similar than distant things?
+-   Are there spatial outliers?
+
+These questions can generally be seen as an extension of Tobler's First Law of Geography.
+
+> Everything is related to everything else, but near things are more related than distant things. - Waldo R. Tobler (1970)
+
+The crux to ESDA, from my perspective, is three things: identiying neighbors, determining how much weight they should have, and calculating spatial statistics using the neighbors and weights.
+
+## ESDA in R
+
+In 2021 when I decided to relearn spatial statistics, I discovered the spdep library in R. spdep is an R package for spatial statistics and weighting schemes. It was first released to CRAN in 2002---I was 6. It was built to work with sp objects. It has since matured and now works with sf objects. However, it doesn't work out of the box with dataframes.
+
+I took it upon m
+
+------------------------------------------------------------------------
+
+From my perspective, the crux of ESDA rests on 3 main things: neighbors, weights, and spatial statistics.
+
+### Neighbors
+
+In order to evaluate a spatial relationship, we need a way to measure a spatial relationship. Spatial relationships are determined by their neighbors. These are typically neighbors in space. There are a many ways that we can determine what our neighbors are in physical space. Typically, we consider neighbors those places that are close in physical proximity.
+
+For those familiar, K-Nearest Neighbor is used to identify observations that are close to each other in attribute space by using some type of distance measure. This can also be done in physical space to find nearby locations.
+
+However, a lot of ESDA is tailored towards the lattice, or grid, perspective
+
+## 
+
+-   Exploratory Data Analysis
+
+-   Exploratory *spatial* data (ESDA) is an extension of EDA focused on spatial relationships
+
+-   ESDA focuses on neighbor relationships
+
+-   We need to know who we consider neighbors
+
+-   How much importance those neighbors have in analysis
+
+-   These are referred to as neighbors and weights respectively.
+
+-   In ESDA there are two types of analysis that we typical do:
+
+    -   Global Analyses
+
+    -   Local Analyses

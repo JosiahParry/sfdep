@@ -7,8 +7,7 @@ active <- function(x) attr(x, "active")
 #'
 #' @description
 #'
-#' From a [`spacetime`] object, activate either its data frame or its sf object—
-#' data or geometry contexts. The active object will then become available for manipulation.
+#' From a [`spacetime`] object, activate either the data or geometry contexts. The active object will then become available for manipulation.
 #'
 #' @details
 #' A  [`spacetime`] object contains both a data frame and an sf object. The
