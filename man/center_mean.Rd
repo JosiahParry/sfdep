@@ -25,7 +25,7 @@ Given an sfc object containing points, calculate a measure of central tendency.
 \details{
 \itemize{
 \item \code{center_mean()} calculates the mean center of a point pattern
-\item \code{euclidean_median()} calculates the euclidean median center of a point pattnern using the \code{pracma} package
+\item \code{euclidean_median()} calculates the euclidean median center of a point pattern using the \code{pracma} package
 \item \code{center_median()} calculates the median center it is recommended to use the euclidean median over the this function.
 }
 }

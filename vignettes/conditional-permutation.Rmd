@@ -35,12 +35,12 @@ sfdep exports a function `cond_permute_nb()` to allow users to create conditiona
 
 With spatial data, we always start from the assumption of spatial randomness. Traditional hypothesis testing like t-test often use an assumption of normality. This assumption, however, is often broken in spatial data. So _analytical_ p-values (p-values that come from a reference distribution such as the normal distribution) are often unreliable, or inaccurate measures of significance. For this reason, in ESDA, we often use simulated, or pseudo, p-values. 
 
-Simulated p-values are calculated by creating a reference distribution and comparing our observed statistic to the reference distribution. The reference is created by making _M_ conoditional permutations of our dataset and calculating a test statistic. Then the ratio of times the simulated statistic is greater than the observed statistic (in either direction) to the number of simulations becomes our simulated p-value.
+Simulated p-values are calculated by creating a reference distribution and comparing our observed statistic to the reference distribution. The reference is created by making _M_ conditional permutations of our data set and calculating a test statistic. Then the ratio of times the simulated statistic is greater than the observed statistic (in either direction) to the number of simulations becomes our simulated p-value.
 
 ### Worked Example
 
 
-We can use `cond_permute_nb()` to create a conditional permutation of the neighbors list. From that permutated neighbor list we can then create a new weights list and calculate the global Geary C for each of the permutation.
+We can use `cond_permute_nb()` to create a conditional permutation of the neighbors list. From that permuted neighbor list we can then create a new weights list and calculate the global Geary C for each of the permutation.
 
 ```{r}
  p_nb <- cond_permute_nb(nb)

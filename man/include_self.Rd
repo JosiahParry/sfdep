@@ -16,7 +16,7 @@ remove_self(nb)
 An object of class \code{nb}.
 }
 \description{
-Includes observed region in list of own neighbors. For some neighbor lists, it is important to include the ith observation (or self) in the neighbors list, particulalry for kernel weights.
+Includes observed region in list of own neighbors. For some neighbor lists, it is important to include the ith observation (or self) in the neighbors list, particularly for kernel weights.
 }
 \examples{
 nb <- st_contiguity(guerry)

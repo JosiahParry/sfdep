@@ -130,6 +130,12 @@ lisa %>%
   scale_fill_manual(values = c("#1C4769", "#24975E", "#EACA97", "#B20016"))
 ```
 
+## Other topics: 
+
+* [Emerging Hot Spot Analysis](./articles/understanding-emerging-hotspots.html#using-emerging_hotspot_analysis)
+* [Spatio-Temporal Data](./articles/spacetime-s3.html)
+* [`{sfnetworks}` integration](./reference/index.html#networks)
+
 <!-- ## Neighbor apply function -->
 
 <!-- In the case that you want to create custom local level metrics, you can do so with the function `st_nb_apply()`. This provides a purrr like interface to do calculation on an observation $x_{i}$ using it's neighbors, $x_{ij}$, and their respective weights $w_{ij}$. In the formula syntax utilize `.xij`, `.nb` and `.wt` for these values respectively. We can specify the type of output with the suffix argument. By default this will be `"dbl"`. These can be any purrr sufix. To get the default list output use `"list"`.  -->

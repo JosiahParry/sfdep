@@ -1,5 +1,7 @@
 # sfdep 0.2.0
 
+2022-07-15 sent to CRAN for release.
+
 - `spatial_gini()` is a new global measure
 - `euclidean_median()` is added for identifying the euclidean median of points for point pattern analysis. 
   - Implemented using `pracma::geo_median()`

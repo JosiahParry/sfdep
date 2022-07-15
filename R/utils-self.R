@@ -1,6 +1,6 @@
 #' Includes self in neighbor list
 #'
-#' Includes observed region in list of own neighbors. For some neighbor lists, it is important to include the ith observation (or self) in the neighbors list, particulalry for kernel weights.
+#' Includes observed region in list of own neighbors. For some neighbor lists, it is important to include the ith observation (or self) in the neighbors list, particularly for kernel weights.
 #'
 #' @param nb an object of class `nb` e.g. made by [st_contiguity()]
 #' @examples

@@ -75,7 +75,7 @@ find_xj <- function(x, nb) {
 #' # conditionally permute neighbors
 #' perm_nb <- cond_permute_nb(nb)
 #' perm_nb[1:5]
-#' @returns A list of class `nb` where each element contains a random sample of neighbors excluding the observed regioin.
+#' @returns A list of class `nb` where each element contains a random sample of neighbors excluding the observed region.
 cond_permute_nb <- function(nb, seed = NULL) {
   if (!is.null(seed)) set.seed(seed)
   n <- length(nb)

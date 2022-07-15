@@ -28,7 +28,7 @@ navbar:
       text: Releases
       menu:
       - text: Version 0.2.0
-        href: articles/Version-0-1-1.html
+        href: articles/Version-0-2-0.html
     articles:
       text: Vignettes
       menu:

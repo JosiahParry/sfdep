@@ -16,8 +16,7 @@ activate(x, what = NULL)
 are \code{"geometry"} and \code{"data"}. If left null, returns \code{x}.}
 }
 \description{
-From a \code{\link{spacetime}} object, activate either its data frame or its sf object—
-data or geometry contexts. The active object will then become available for manipulation.
+From a \code{\link{spacetime}} object, activate either the data or geometry contexts. The active object will then become available for manipulation.
 }
 \details{
 A  \code{\link{spacetime}} object contains both a data frame and an sf object. The

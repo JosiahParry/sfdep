@@ -14,7 +14,7 @@ library(sfdep)
 ```
 
 
-While not too far from the initial CRAN release of sfdep, this version consists of two sizeable additions relating to spatio-temporal analysis and colocation analysis as well as bug fixes and improvements. Additional functionality is added regarding point-pattern analysis and neighbor / weight list utilities. Given the breadth of the additions, this represents a minor version release. 
+While not too far from the initial CRAN release of sfdep, this version consists of two sizable additions relating to spatio-temporal analysis and colocation analysis as well as bug fixes and improvements. Additional functionality is added regarding point-pattern analysis and neighbor / weight list utilities. Given the breadth of the additions, this represents a minor version release. 
 
 
 ## Colocation Analysis

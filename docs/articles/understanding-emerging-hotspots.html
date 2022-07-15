@@ -29,7 +29,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-releases">
-    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.2.0</a>
+    <a class="dropdown-item" href="../articles/Version-0-2-0.html">Version 0.2.0</a>
   </div>
 </li>
       </ul>
@@ -96,7 +96,7 @@
 <p>Emerging hot spot Analysis (EHSA) is a technique that falls under exploratory spatial data analysis (ESDA). It combines the traditional ESDA technique of hot spot analysis using the Getis-Ord Gi* statistic with the traditional time-series Mann-Kendall test for monotonic trends.</p>
 <p>The goal of EHSA is to evaluate how hot and cold spots are changing over time. It helps us answer the questions: are they becoming increasingly hotter, are they cooling down, or are they staying the same?</p>
 <p>In brief, EHSA works by calculating the Gi* for each time period. The series of Gi* at each location is treated as a time-series and evaluated for a trend using the Mann-Kendall statistic. The Gi* and the Mann-Kendall are compared together to create 17 unique classifications to help better understand how the locations have changed over time.</p>
-<p>In this vignette we walk through the Gettis-Ord Gi*, the Mann-Kendall, and how the two work together to in EHSA.</p>
+<p>In this vignette we walk through the Getis-Ord Gi*, the Mann-Kendall, and how the two work together to in EHSA.</p>
 <div class="section level2">
 <h2 id="gettis-ord-gi">Gettis-Ord Gi*<a class="anchor" aria-label="anchor" href="#gettis-ord-gi"></a>
 </h2>
@@ -141,16 +141,16 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 9</span></span>
 <span class="co">#&gt;    gi_star   e_gi     var_gi p_value p_sim p_folded_sim skewness kurtosis</span>
 <span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">1.38</span>  0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">016</span>3   0.167   0.08        0.04     1.03     2.16 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">0.438</span> 0.011<span style="text-decoration: underline;">6</span> 0.000<span style="text-decoration: underline;">009</span>48  0.662   0.7         0.35     0.527   -<span style="color: #BB0000;">0.125</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   0.698 0.011<span style="text-decoration: underline;">6</span> 0.000<span style="text-decoration: underline;">009</span>77  0.485   0.49        0.245    0.337   -<span style="color: #BB0000;">0.459</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">1.74</span>  0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">012</span>6   0.081<span style="text-decoration: underline;">3</span>  0.02        0.01     0.420   -<span style="color: #BB0000;">0.469</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  -<span style="color: #BB0000;">0.998</span> 0.012<span style="text-decoration: underline;">3</span> 0.000<span style="text-decoration: underline;">025</span>3   0.318   0.34        0.17     0.878    0.528</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  -<span style="color: #BB0000;">2.46</span>  0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">007</span>73  0.014<span style="text-decoration: underline;">0</span>  0.01        0.005    0.540    0.608</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  -<span style="color: #BB0000;">0.424</span> 0.012<span style="text-decoration: underline;">3</span> 0.000<span style="text-decoration: underline;">024</span>2   0.672   0.8         0.4      1.17     1.56 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  -<span style="color: #BB0000;">0.768</span> 0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">014</span>6   0.443   0.47        0.235    0.626    0.262</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  -<span style="color: #BB0000;">1.41</span>  0.012<span style="text-decoration: underline;">0</span> 0.000<span style="text-decoration: underline;">013</span>1   0.159   0.03        0.015    0.862    0.407</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">1.21</span>  0.012<span style="text-decoration: underline;">3</span> 0.000<span style="text-decoration: underline;">016</span>9   0.228   0.19        0.095    1.07     1.90 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">1.35</span>  0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">016</span>0   0.177   0.07        0.035    0.832   0.418 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">0.559</span> 0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">008</span>77  0.576   0.62        0.31     0.747   0.920 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   0.480 0.012<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">011</span>6   0.631   0.58        0.29     0.643   0.532 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">1.81</span>  0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">011</span>8   0.069<span style="text-decoration: underline;">8</span>  0.05        0.025    0.499  -<span style="color: #BB0000;">0.211</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  -<span style="color: #BB0000;">1.09</span>  0.012<span style="text-decoration: underline;">2</span> 0.000<span style="text-decoration: underline;">021</span>0   0.277   0.2         0.1      0.906   0.300 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  -<span style="color: #BB0000;">2.41</span>  0.011<span style="text-decoration: underline;">5</span> 0.000<span style="text-decoration: underline;">007</span>49  0.015<span style="text-decoration: underline;">9</span>  0.01        0.005    0.526   0.147 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  -<span style="color: #BB0000;">0.365</span> 0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">014</span>7   0.715   0.76        0.38     0.793   0.659 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  -<span style="color: #BB0000;">0.794</span> 0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">015</span>3   0.427   0.5         0.25     0.609  -<span style="color: #BB0000;">0.052</span><span style="color: #BB0000; text-decoration: underline;">1</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  -<span style="color: #BB0000;">1.42</span>  0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">012</span>6   0.157   0.08        0.04     0.830   0.545 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">1.42</span>  0.012<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">011</span>2   0.157   0.11        0.055    0.671   0.397 </span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows, and 1 more variable: geometry &lt;MULTIPOLYGON&gt;</span></span></code></pre></div>
 <p>Lastly, we classify the clusters using a combination of <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when()</a></code> which is then piped into a ggplot map. While not a perfect recreation of the GeoDa map, it is very close—the differences likely due to conditional permutation (see <a href="/articles/conditional-permutation.html">conditional permutation vignette</a> for more on significance calculation).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -196,7 +196,7 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">Kendall</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">MannKendall</a></span><span class="op">(</span><span class="va">econ</span><span class="op">$</span><span class="va">psavert</span><span class="op">)</span>
 <span class="co">#&gt; tau = -0.644, 2-sided pvalue =&lt; 2.22e-16</span></code></pre></div>
-<p>The above results show the <code>tau</code> and p-value. Tau ranges between -1 and 1 where -1 is a perfectly decreasing series and 1 is a perfectly increasing series. The p-value is extremely small indicating that the null-hypothesis (that there is no trend) can be rejected. The tau is -0.64 which indicates a moder4ate downward trend.</p>
+<p>The above results show the <code>tau</code> and p-value. Tau ranges between -1 and 1 where -1 is a perfectly decreasing series and 1 is a perfectly increasing series. The p-value is extremely small indicating that the null-hypothesis (that there is no trend) can be rejected. The tau is -0.64 which indicates a moderate downward trend.</p>
 </div>
 <div class="section level2">
 <h2 id="the-whole-game">The whole game<a class="anchor" aria-label="anchor" href="#the-whole-game"></a>
@@ -209,13 +209,13 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <div class="section level2">
 <h2 id="a-hands-on-example">A hands on example<a class="anchor" aria-label="anchor" href="#a-hands-on-example"></a>
 </h2>
-<p>We can compute the EHSA manually using sfsdep and spacetime classes. In this example we utilize <a href="https://ui.josiahparry.com/ecometrics.html#ecometrics" class="external-link">Ecometric</a> Data from the Boston Area Research Initiative (<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XTEJRE" class="external-link">data and documentation)</a>. These data are generated from 911 calls in Boston from 2010 - 2020 and aggregated to the Census Block Group (CBG) level. The column <code>value</code> indicates the calculated prevalence which is derived from Exploratory Factor Analysis and population projections.</p>
+<p>We can compute the EHSA manually using sfdep and spacetime classes. In this example we utilize <a href="https://ui.josiahparry.com/ecometrics.html#ecometrics" class="external-link">Ecometric</a> Data from the Boston Area Research Initiative (<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XTEJRE" class="external-link">data and documentation)</a>. These data are generated from 911 calls in Boston from 2010 - 2020 and aggregated to the Census Block Group (CBG) level. The column <code>value</code> indicates the calculated prevalence which is derived from Exploratory Factor Analysis and population projections.</p>
 <div class="section level3">
 <h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h3>
 <p>The data are stored in the internal data file <code>bos-ecometric.csv</code> and <code>bos-ecometric.geojson</code>. We will read these in to <code>df</code> and <code>geo</code> and will create a new spacetime object called <code>bos</code> with them.</p>
 <blockquote>
-<p>Note: 2022-05-31 this data is avaiable only in the development version, so please install with <code>remotes::install_github("josiahparry/sfdep")</code>.</p>
+<p>Note: 2022-05-31 this data is available only in the development version, so please install with <code>remotes::install_github("josiahparry/sfdep")</code>.</p>
 </blockquote>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create objects to store file paths </span>
@@ -297,16 +297,16 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co">#&gt; <span style="color: #949494;"># Groups:   time_period [10]</span></span>
 <span class="co">#&gt;    .region_id  time_period gi_star p_folded_sim</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 25025010405 2010-01-01   -<span style="color: #BB0000;">0.985</span>        0.158</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 25025010404 2010-01-01   -<span style="color: #BB0000;">1.44</span>         0.022</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 25025010801 2010-01-01   -<span style="color: #BB0000;">1.45</span>         0.032</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 25025010702 2010-01-01   -<span style="color: #BB0000;">0.892</span>        0.186</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 25025010204 2010-01-01   -<span style="color: #BB0000;">1.36</span>         0.054</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 25025010802 2010-01-01   -<span style="color: #BB0000;">1.44</span>         0.04 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 25025010104 2010-01-01   -<span style="color: #BB0000;">1.61</span>         0.01 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 25025000703 2010-01-01   -<span style="color: #BB0000;">1.37</span>         0.024</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 25025000504 2010-01-01   -<span style="color: #BB0000;">1.35</span>         0.038</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 25025000704 2010-01-01   -<span style="color: #BB0000;">1.52</span>         0.026</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 25025010405 2010-01-01   -<span style="color: #BB0000;">0.928</span>        0.182</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 25025010404 2010-01-01   -<span style="color: #BB0000;">1.37</span>         0.032</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 25025010801 2010-01-01   -<span style="color: #BB0000;">1.48</span>         0.03 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 25025010702 2010-01-01   -<span style="color: #BB0000;">0.799</span>        0.22 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 25025010204 2010-01-01   -<span style="color: #BB0000;">1.28</span>         0.06 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 25025010802 2010-01-01   -<span style="color: #BB0000;">1.42</span>         0.034</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 25025010104 2010-01-01   -<span style="color: #BB0000;">1.77</span>         0.01 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 25025000703 2010-01-01   -<span style="color: #BB0000;">1.46</span>         0.044</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 25025000504 2010-01-01   -<span style="color: #BB0000;">1.40</span>         0.054</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 25025000704 2010-01-01   -<span style="color: #BB0000;">1.56</span>         0.024</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 1,670 more rows</span></span></code></pre></div>
 <p>With these Gi* measures we can then evaluate each location for a trend using the Mann-Kendall test.</p>
 </div>
@@ -336,7 +336,7 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span>
 <span class="co">#&gt;     tau    sl     S     D  varS</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 0.422 0.107    19    45   125</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 0.244 0.371    11    45   125</span></code></pre></div>
 <p>In the above result, <code>sl</code> is the p-value. This result tells us that there is a slight upward but insignificant trend.</p>
 <p>We can replicate this for each location by using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -353,13 +353,13 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co"># show top 5 locations</span>
 <span class="va">emerging</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 6</span></span>
-<span class="co">#&gt;   .region_id     tau        sl     S     D  varS</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 25025120201 -<span style="color: #BB0000;">1</span>     0.000<span style="text-decoration: underline;">083</span>0   -<span style="color: #BB0000;">45</span>    45   125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 25025090700  0.867 0.000<span style="text-decoration: underline;">677</span>     39    45   125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 25025100601 -<span style="color: #BB0000;">0.778</span> 0.002<span style="text-decoration: underline;">36</span>     -<span style="color: #BB0000;">35</span>    45   125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 25025060600  0.733 0.004<span style="text-decoration: underline;">21</span>      33    45   125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 25025081100  0.733 0.004<span style="text-decoration: underline;">21</span>      33    45   125</span></code></pre></div>
+<span class="co">#&gt;   .region_id     tau       sl     S     D  varS</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 25025120201 -<span style="color: #BB0000;">0.956</span> 0.000<span style="text-decoration: underline;">172</span>   -<span style="color: #BB0000;">43</span>    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 25025030200  0.778 0.002<span style="text-decoration: underline;">36</span>     35    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 25025090700  0.778 0.002<span style="text-decoration: underline;">36</span>     35    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 25025100601 -<span style="color: #BB0000;">0.778</span> 0.002<span style="text-decoration: underline;">36</span>    -<span style="color: #BB0000;">35</span>    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 25025060600  0.733 0.004<span style="text-decoration: underline;">21</span>     33    45   125</span></code></pre></div>
 <p>Here we can see there are a few locations that are becoming significantly colder and others that are becoming significantly warmer.</p>
 </div>
 </div>
@@ -391,18 +391,17 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 
 <span class="co"># evaluate the classifications of our hotspots</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">ehsa</span>, <span class="va">classification</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 2</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 2</span></span>
 <span class="co">#&gt;   classification           n</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> consecutive hotspot     19</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> intensifying hotspot     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> no pattern detected     17</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> oscilating coldspot      1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> oscilating hotspot       2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> persistent coldspot     12</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> persistent hotspot       5</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> sporadic coldspot       83</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">9</span> sporadic hotspot        28</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> consecutive hotspot     20</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> intensifying hotspot     2</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> no pattern detected     18</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> oscilating hotspot       1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> persistent coldspot     10</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> persistent hotspot       4</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> sporadic coldspot       85</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> sporadic hotspot        28</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

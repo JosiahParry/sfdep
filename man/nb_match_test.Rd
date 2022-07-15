@@ -36,7 +36,7 @@ nb_match_test(
 a \code{data.frame} with columns
 \itemize{
 \item \code{n_shared} (integer): the number of shared neighbors between geographic and attribute space
-\item \code{nb_matches} (list): matched neighbor indexes. Each element is an iteger vector of same length as the ith observation of \code{n_shared}
+\item \code{nb_matches} (list): matched neighbor indexes. Each element is an integer vector of same length as the ith observation of \code{n_shared}
 \item \code{knn_nb} (list): the neighbors in attribute space
 \item \code{probability} (numeric): the geometric probability of observing the number of matches
 \item \code{p_sim} (numeric): a folded simulated p-value

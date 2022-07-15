@@ -79,7 +79,7 @@ local_colocation_calc <- function(A, B, listw) {
 
 #' spdep implementation of local colocation quotient
 #'
-#' Internal implementation of the local CLQ that is comaptible with spdep.
+#' Internal implementation of the local CLQ that is compatible with spdep.
 #'
 #' @keywords internal
 #' @returns a data frame where the number of rows is the same length as `A` and the number of columns is the same as unique values in `B`.

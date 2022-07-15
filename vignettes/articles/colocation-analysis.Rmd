@@ -53,7 +53,7 @@ If we look at the first row, we see that the colocation of $C \to 3{:}Lg$ is ver
 
 ### Local Colocation 
 
-The local CLQ is rather similar to the pairwise CLQ. The key difference is the weights list that is used in calculating the CLQ. In its introductory paper, Wang et al. (2017) emphasize that adaptive gaussian kernel weights be used. This introduces a distance decay where closer values have more heft than distant onces in calculating the local CLQ.
+The local CLQ is rather similar to the pairwise CLQ. The key difference is the weights list that is used in calculating the CLQ. In its introductory paper, Wang et al. (2017) emphasize that adaptive gaussian kernel weights be used. This introduces a distance decay where closer values have more heft than distant ones in calculating the local CLQ.
 
 The result of the local CLQ returns a CLQ and a simulated p-value for each unique value of B that falls in the neighborhood. 
 
@@ -72,7 +72,7 @@ head(res)
 
 ```
 
-Note that for the first observation we only have a CLQ for `C` and `E`. This is because the neighborhood of the first observatino consists of only C and E values. We can verify this like so. 
+Note that for the first observation we only have a CLQ for `C` and `E`. This is because the neighborhood of the first observation consists of only C and E values. We can verify this like so. 
 
 ```{r}
 # view first row

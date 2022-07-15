@@ -8,7 +8,7 @@
 #' @details
 #'
 #' - `center_mean()` calculates the mean center of a point pattern
-#' - `euclidean_median()` calculates the euclidean median center of a point pattnern using the `pracma` package
+#' - `euclidean_median()` calculates the euclidean median center of a point pattern using the `pracma` package
 #' - `center_median()` calculates the median center it is recommended to use the euclidean median over the this function.
 #'
 #' @export

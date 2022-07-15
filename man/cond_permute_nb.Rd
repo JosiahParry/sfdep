@@ -12,7 +12,7 @@ cond_permute_nb(nb, seed = NULL)
 \item{seed}{default null. A value to pass to \code{set.seed()} for reproducibility.}
 }
 \value{
-A list of class \code{nb} where each element contains a random sample of neighbors excluding the observed regioin.
+A list of class \code{nb} where each element contains a random sample of neighbors excluding the observed region.
 }
 \description{
 Creates a conditional permutation of neighbors list holding i fixed and shuffling it's neighbors.

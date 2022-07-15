@@ -29,7 +29,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,7 +57,7 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-releases">
-    <a class="dropdown-item" href="../articles/Version-0-1-1.html">Version 0.2.0</a>
+    <a class="dropdown-item" href="../articles/Version-0-2-0.html">Version 0.2.0</a>
   </div>
 </li>
       </ul>
@@ -107,11 +107,11 @@
 <h2 id="inference-using-conditional-permutation">Inference using conditional permutation<a class="anchor" aria-label="anchor" href="#inference-using-conditional-permutation"></a>
 </h2>
 <p>With spatial data, we always start from the assumption of spatial randomness. Traditional hypothesis testing like t-test often use an assumption of normality. This assumption, however, is often broken in spatial data. So <em>analytical</em> p-values (p-values that come from a reference distribution such as the normal distribution) are often unreliable, or inaccurate measures of significance. For this reason, in ESDA, we often use simulated, or pseudo, p-values.</p>
-<p>Simulated p-values are calculated by creating a reference distribution and comparing our observed statistic to the reference distribution. The reference is created by making <em>M</em> conoditional permutations of our dataset and calculating a test statistic. Then the ratio of times the simulated statistic is greater than the observed statistic (in either direction) to the number of simulations becomes our simulated p-value.</p>
+<p>Simulated p-values are calculated by creating a reference distribution and comparing our observed statistic to the reference distribution. The reference is created by making <em>M</em> conditional permutations of our data set and calculating a test statistic. Then the ratio of times the simulated statistic is greater than the observed statistic (in either direction) to the number of simulations becomes our simulated p-value.</p>
 <div class="section level3">
 <h3 id="worked-example">Worked Example<a class="anchor" aria-label="anchor" href="#worked-example"></a>
 </h3>
-<p>We can use <code><a href="../reference/cond_permute_nb.html">cond_permute_nb()</a></code> to create a conditional permutation of the neighbors list. From that permutated neighbor list we can then create a new weights list and calculate the global Geary C for each of the permutation.</p>
+<p>We can use <code><a href="../reference/cond_permute_nb.html">cond_permute_nb()</a></code> to create a conditional permutation of the neighbors list. From that permuted neighbor list we can then create a new weights list and calculate the global Geary C for each of the permutation.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"> <span class="va">p_nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cond_permute_nb.html">cond_permute_nb</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span>
  <span class="va">p_wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">p_nb</span><span class="op">)</span>
@@ -119,7 +119,7 @@
  
  <span class="va">observed</span>
 <span class="co">#&gt; $C</span>
-<span class="co">#&gt; [1] 0.9420716</span>
+<span class="co">#&gt; [1] 0.9821733</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $K</span>
 <span class="co">#&gt; [1] 2.400641</span></code></pre></div>
@@ -148,7 +148,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># simulated p-value</span>
 <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">observed</span><span class="op">[[</span><span class="st">"C"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="va">reps</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">199</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.825</span></code></pre></div>
+<span class="co">#&gt; [1] 0.57</span></code></pre></div>
 <p>This is the approach taken by Pysal and by sfdep where other methods do not apply or are not provided by spdep.</p>
 </div>
 </div>

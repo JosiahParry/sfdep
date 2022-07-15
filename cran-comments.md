@@ -1,7 +1,5 @@
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+There were no ERRORs or WARNINGs.
 
-* This is a new release.
-
-All exported functions now have a \value per request from Gregor Seyer.
+This release adds new core functionality to sfdep.

@@ -17,7 +17,7 @@ The goal of EHSA is to evaluate how hot and cold spots are changing over time. I
 
 In brief, EHSA works by calculating the Gi* for each time period. The series of Gi* at each location is treated as a time-series and evaluated for a trend using the Mann-Kendall statistic. The Gi\* and the Mann-Kendall are compared together to create 17 unique classifications to help better understand how the locations have changed over time. 
 
-In this vignette we walk through the Gettis-Ord Gi\*, the Mann-Kendall, and how the two work together to in EHSA. 
+In this vignette we walk through the Getis-Ord Gi\*, the Mann-Kendall, and how the two work together to in EHSA. 
 
 ## Gettis-Ord Gi*
 
@@ -126,7 +126,7 @@ From a visual inspection, we can tell that overall the trend is decreasing. The 
 Kendall::MannKendall(econ$psavert)
 ```
 
-The above results show the `tau` and p-value. Tau ranges between -1 and 1 where -1 is a perfectly decreasing series and 1 is a perfectly increasing series. The p-value is extremely small indicating that the null-hypothesis (that there is no trend) can be rejected. The tau is -0.64 which indicates a moder4ate downward trend. 
+The above results show the `tau` and p-value. Tau ranges between -1 and 1 where -1 is a perfectly decreasing series and 1 is a perfectly increasing series. The p-value is extremely small indicating that the null-hypothesis (that there is no trend) can be rejected. The tau is -0.64 which indicates a moderate downward trend. 
 
 
 ## The whole game
@@ -142,13 +142,13 @@ Then, given each location's time-series of Gi*, they are assessed using the MK t
 
 ## A hands on example
 
-We can compute the EHSA manually using sfsdep and spacetime classes. In this example we utilize [Ecometric](https://ui.josiahparry.com/ecometrics.html#ecometrics) Data from the Boston Area Research Initiative ([data and documentation)](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XTEJRE). These data are generated from 911 calls in Boston from 2010 - 2020 and aggregated to the Census Block Group (CBG) level. The column `value` indicates the calculated prevalence which is derived from Exploratory Factor Analysis and population projections.
+We can compute the EHSA manually using sfdep and spacetime classes. In this example we utilize [Ecometric](https://ui.josiahparry.com/ecometrics.html#ecometrics) Data from the Boston Area Research Initiative ([data and documentation)](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XTEJRE). These data are generated from 911 calls in Boston from 2010 - 2020 and aggregated to the Census Block Group (CBG) level. The column `value` indicates the calculated prevalence which is derived from Exploratory Factor Analysis and population projections.
 
 ### Data
 
 The data are stored in the internal data file `bos-ecometric.csv` and `bos-ecometric.geojson`. We will read these in to `df` and `geo` and will create a new spacetime object called `bos` with them.
 
-> Note: 2022-05-31 this data is avaiable only in the development version, so please install with `remotes::install_github("josiahparry/sfdep")`.
+> Note: 2022-05-31 this data is available only in the development version, so please install with `remotes::install_github("josiahparry/sfdep")`.
 
 ```{r echo=TRUE, warning=FALSE, paged.print=FALSE}
 # Create objects to store file paths 

@@ -29,7 +29,7 @@ Space-wide data present each time period across each row and locational informat
 
 These flat formats are not linked to the geographies that they represent in any meaningful way. These flat files typically contain only an identifier of the location, but the spatial representation.
 
-The `spacetime` class is developed with particular focus to lattice data. That is, to create a representation of spatio-temoral data for a set of regions over a number of different time-periods e.g. population densities in census tracts for each year.
+The `spacetime` class is developed with particular focus to lattice data. That is, to create a representation of spatio-temporal data for a set of regions over a number of different time-periods e.g. population densities in census tracts for each year.
 
 To represent spatial data in a temporal context Pebesma, 2012 identifies a number of spatio-temporal layouts, two of which are of particular interest. These are the spatio-temporal full grid and sparse grids.
 
