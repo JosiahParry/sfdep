@@ -21,6 +21,7 @@
 #' @returns a data frame with as many rows as observations in A and two times as many columns as unique values in B. Columns contain each unique value of B as well as the simulated p-value for each value of B.
 #'
 #' @examples
+#' if (FALSE) {
 #' A <- guerry$main_city
 #' B <- guerry$region
 #' geo <- sf::st_geometry(guerry)
@@ -28,6 +29,8 @@
 #' wt <- st_kernel_weights(nb, geo, "gaussian", adaptive = TRUE)
 #' res <- local_colocation(A, B, nb, wt, 49)
 #' tail(res)
+#' }
+
 local_colocation <- function(A, B, nb, wt, nsim) {
   listw <- recreate_listw(nb, wt)
   local_colocation_impl(A, B, listw, nsim)
