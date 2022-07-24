@@ -88,10 +88,12 @@ head(df)
 Note that the location identifier column is the same between the two objects—this is a requirement. 
 
 ```{r}
-spt <- spacetime(.data = df, 
-          .geometry = geo, 
-          .loc_col = "code_dept", 
-          .time_col = "time_period") 
+spt <- spacetime(
+  .data = df, 
+  .geometry = geo, 
+  .loc_col = "code_dept", 
+  .time_col = "time_period"
+  ) 
 
 spt
 ```
