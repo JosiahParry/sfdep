@@ -20,9 +20,13 @@ class_modify <- function(x, class = "list") {
 
 #' Create a listw object from a neighbors and weight list
 #'
+#' Given a neighbor and weight list, create a `listw` object.
+#'
 #' @param nb a neighbor list object for example as created by `st_contiguity()`.
 #' @param wt a weights list as created by `st_weights()`.
-#' @keywords internal
+#' @export
+#' @examples
+#' recreate_listw(guerry_nb$nb, guerry_nb$wt)
 recreate_listw <- function(nb, wt) {
   which_style <- c(attr(wt, "W") %||% NA,
                    attr(wt, "B") %||% NA,
