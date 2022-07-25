@@ -28,6 +28,8 @@ Cast between \code{spacetime} and \code{sf} classes
 Convert sf object to spacetime
 }
 \examples{
+
+if (FALSE) {
 df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
@@ -42,4 +44,7 @@ bos <- spacetime(df, geo,
 
 as_sf(bos)
 as_spacetime(as_sf(bos) , ".region_id", "year")
+
+}
+
 }

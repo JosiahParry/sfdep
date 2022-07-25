@@ -12,6 +12,8 @@ recreate_listw(nb, wt)
 \item{wt}{a weights list as created by \code{st_weights()}.}
 }
 \description{
-Create a listw object from a neighbors and weight list
+Given a neighbor and weight list, create a \code{listw} object.
 }
-\keyword{internal}
+\examples{
+recreate_listw(guerry_nb$nb, guerry_nb$wt)
+}

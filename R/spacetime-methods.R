@@ -73,6 +73,8 @@ as_sf <- function(x, ...) {
 #' @param .time_col the quoted name of the column containing time periods.
 #' @export
 #' @examples
+#'
+#' if (FALSE) {
 #' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 #' geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 #'
@@ -87,6 +89,9 @@ as_sf <- function(x, ...) {
 #'
 #' as_sf(bos)
 #' as_spacetime(as_sf(bos) , ".region_id", "year")
+#'
+#' }
+#'
 as_spacetime <- function(x, .loc_col, .time_col, ...) {
   UseMethod("as_spacetime")
 }

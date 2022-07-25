@@ -88,8 +88,10 @@ LISAs are created from a combination of neighbors and weights and are intended t
 
 ```{r, message = FALSE, warn = FALSE}
 g <- guerry %>% 
-  mutate(nb = st_contiguity(geometry),
-         wt = st_weights(nb))
+  mutate(
+    nb = st_contiguity(geometry),
+    wt = st_weights(nb)
+    )
 ```
 
 Then calculate the spatial lag with `st_lag()`. Given that we've only modified an sf object, we can visualize this with ggplot2.
@@ -132,9 +134,9 @@ lisa %>%
 
 ## Other topics: 
 
-* [Emerging Hot Spot Analysis](./articles/understanding-emerging-hotspots.html#using-emerging_hotspot_analysis)
-* [Spatio-Temporal Data](./articles/spacetime-s3.html)
-* [`{sfnetworks}` integration](./reference/index.html#networks)
+* [Emerging Hot Spot Analysis](https://sfdep.josiahparry.com/articles/understanding-emerging-hotspots.html#using-emerging_hotspot_analysis)
+* [Spatio-Temporal Data](https://sfdep.josiahparry.com/articles/spacetime-s3.html)
+* [`{sfnetworks}` integration](https://sfdep.josiahparry.com/reference/index.html#networks)
 
 <!-- ## Neighbor apply function -->
 

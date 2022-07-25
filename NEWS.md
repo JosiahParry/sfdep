@@ -21,8 +21,8 @@
 - `local_gstar()` and `local_gstar_perm()` do not warn when `self.included = TRUE`
 - `emerging_hotspot_analysis()` implements emerging hotspot analysis with spacetime objects
 - a new `spacetime` class for linking spatio-temporal data and geometry
-  - see the [spacetime vignette](/articles/spacetime-s3.html).
-- Implemented colocation quotient (CLQ) measures See the [colocation vignette](/articles/colocation-analysis.html):
+  - see the [spacetime vignette](https://sfdep.josiahparry.com/articles/spacetime-s3.html).
+- Implemented colocation quotient (CLQ) measures See the [colocation vignette](https://sfdep.josiahparry.com/articles/colocation-analysis.html):
   - `global_colocation()` for global colocation of one categorical variable
   - `pairwise_colocation()` for asymmetric colocation of subcategories of one or two categories
   - `local_colocation()` for local CLQ measure

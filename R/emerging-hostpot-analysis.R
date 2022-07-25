@@ -67,6 +67,7 @@
 #' Returns a data.frame.
 #'
 #' @examples
+#' if (FALSE) {
 #'
 #' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 #' geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
@@ -90,7 +91,7 @@
 #' )
 #'
 #' ehsa
-#'
+#' }
 #' @export
 emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
                                       nb_col = NULL, wt_col = NULL,
