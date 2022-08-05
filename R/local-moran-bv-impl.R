@@ -12,8 +12,9 @@
 #'
 #' @inheritParams moran_bv_calc
 #' @keywords internal
-local_moran_bv_calc <- function(x, yj, wt) {
-  x * mapply(function(wij, yj) sum(wij * yj), wt, yj)
+#' x * st_lag(y, nb, wt)
+local_moran_bv_calc <- function(x, y, nb, wt) {
+  x * st_lag(y, nb, wt)
 }
 
 # local_moran_bv_calc(scale(x), find_xj(y, nb), wt)
@@ -21,7 +22,7 @@ local_moran_bv_calc <- function(x, yj, wt) {
 #' Local Bivariate Moran's I conditional permutation implementation
 #' @inheritParams moran_bv_perm_impl
 #' @keywords internal
-local_moran_bv_perm_impl <- function(x, y, listw) {
+local_moran_bv_perm_impl <- function(x, y, nb, listw) {
   p_listw <- permute_listw(listw)
 
   nb <- p_listw[["neighbours"]]
@@ -36,7 +37,7 @@ local_moran_bv_perm_impl <- function(x, y, listw) {
 #' Local Bivariate Moran's I spdep implementation
 #' @inheritParams moran_bv_impl
 #' @keywords internal
-local_moran_bv_impl <- function(x, y, listw, nsim) {
+local_moran_bv_impl <- function(x, y, nb, listw, nsim) {
 
   x <- as.numeric(scale(x))
   y <- as.numeric(scale(y))
