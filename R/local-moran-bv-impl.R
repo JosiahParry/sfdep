@@ -22,29 +22,29 @@ local_moran_bv_calc <- function(x, y, nb, wt) {
 #' Local Bivariate Moran's I conditional permutation implementation
 #' @inheritParams moran_bv_perm_impl
 #' @keywords internal
-local_moran_bv_perm_impl <- function(x, y, nb, listw) {
+local_moran_bv_perm_impl <- function(x, y, listw) {
   p_listw <- permute_listw(listw)
 
   nb <- p_listw[["neighbours"]]
   wt <- p_listw[["weights"]]
 
-  p_yj <- find_xj(y, nb)
+  
 
-  local_moran_bv_calc(x, p_yj, wt)
+  local_moran_bv_calc(x, y, nb, wt)
 }
 
 # local_moran_bv_perm_impl(x, y, listw)
 #' Local Bivariate Moran's I spdep implementation
 #' @inheritParams moran_bv_impl
 #' @keywords internal
-local_moran_bv_impl <- function(x, y, nb, listw, nsim) {
+local_moran_bv_impl <- function(x, y, listw, nsim) {
 
   x <- as.numeric(scale(x))
   y <- as.numeric(scale(y))
   nb <- listw[["neighbours"]]
   wt <- listw[["weights"]]
 
-  obs <- local_moran_bv_calc(x, find_xj(y, nb),  wt)
+  obs <- local_moran_bv_calc(x, y, nb,  wt)
   reps <- replicate(nsim, local_moran_bv_perm_impl(x, y, listw))
   p_sim <- (rowSums(obs <= reps) + 1 )/ (nsim + 1)
 
