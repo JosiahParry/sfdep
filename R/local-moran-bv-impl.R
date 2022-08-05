@@ -12,8 +12,9 @@
 #'
 #' @inheritParams moran_bv_calc
 #' @keywords internal
-local_moran_bv_calc <- function(x, yj, wt) {
-  x * mapply(function(wij, yj) sum(wij * yj), wt, yj)
+#' x * st_lag(y, nb, wt)
+local_moran_bv_calc <- function(x, y, nb, wt) {
+  x * st_lag(y, nb, wt)
 }
 
 # local_moran_bv_calc(scale(x), find_xj(y, nb), wt)
@@ -27,9 +28,9 @@ local_moran_bv_perm_impl <- function(x, y, listw) {
   nb <- p_listw[["neighbours"]]
   wt <- p_listw[["weights"]]
 
-  p_yj <- find_xj(y, nb)
+  
 
-  local_moran_bv_calc(x, p_yj, wt)
+  local_moran_bv_calc(x, y, nb, wt)
 }
 
 # local_moran_bv_perm_impl(x, y, listw)
@@ -43,7 +44,7 @@ local_moran_bv_impl <- function(x, y, listw, nsim) {
   nb <- listw[["neighbours"]]
   wt <- listw[["weights"]]
 
-  obs <- local_moran_bv_calc(x, find_xj(y, nb),  wt)
+  obs <- local_moran_bv_calc(x, y, nb,  wt)
   reps <- replicate(nsim, local_moran_bv_perm_impl(x, y, listw))
   p_sim <- (rowSums(obs <= reps) + 1 )/ (nsim + 1)
 
