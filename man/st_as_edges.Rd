@@ -33,27 +33,30 @@ Returns an \code{sf} object with edges represented as a \code{LINESTRING}.
 Given geometry and neighbor and weights lists, create an edge list \code{sf} object.
 }
 \details{
-Creating an edge list creates a column for each \code{i} position and \code{j} between an observation and their neighbors. You can recreate these values by expanding the \code{nb} and \code{wt} list columns.\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(magrittr)
+Creating an edge list creates a column for each \code{i} position and \code{j} between an observation and their neighbors. You can recreate these values by expanding the \code{nb} and \code{wt} list columns.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(magrittr)
 guerry_nb \%>\%
   tibble::as_tibble() \%>\%
   dplyr::select(nb, wt) \%>\%
   dplyr::mutate(i = dplyr::row_number(), .before = 1) \%>\%
   tidyr::unnest(c(nb, wt))
-}\if{html}{\out{</div>}}\preformatted{## # A tibble: 420 × 3
-##        i    nb    wt
-##    <int> <int> <dbl>
-##  1     1    36 0.25 
-##  2     1    37 0.25 
-##  3     1    67 0.25 
-##  4     1    69 0.25 
-##  5     2     7 0.167
-##  6     2    49 0.167
-##  7     2    57 0.167
-##  8     2    58 0.167
-##  9     2    73 0.167
-## 10     2    76 0.167
-## # … with 410 more rows
-}
+#> # A tibble: 420 x 3
+#>        i    nb    wt
+#>    <int> <int> <dbl>
+#>  1     1    36 0.25 
+#>  2     1    37 0.25 
+#>  3     1    67 0.25 
+#>  4     1    69 0.25 
+#>  5     2     7 0.167
+#>  6     2    49 0.167
+#>  7     2    57 0.167
+#>  8     2    58 0.167
+#>  9     2    73 0.167
+#> 10     2    76 0.167
+#> # ... with 410 more rows
+#> # i Use `print(n = ...)` to see more rows
+}\if{html}{\out{</div>}}
 }
 \examples{
 

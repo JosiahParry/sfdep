@@ -183,8 +183,10 @@ st_as_nodes.sfc <- function(x, nb) {
 #' @export
 #' @examples
 #' library(magrittr)
+#'
 #' guerry_nb %>%
 #'   st_as_graph(nb, wt)
+#'
 st_as_graph <- function(x, nb, wt) {
   UseMethod("st_as_graph")
 }

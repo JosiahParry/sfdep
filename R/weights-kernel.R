@@ -32,7 +32,7 @@ st_kernel_weights <- function(nb, geometry, kernel = "uniform",
   # if self isnt included elicit warning
   self_included <- !is.null(attr(nb, "self.included"))
   if (!self_included) {
-    cli::cli_alert_info(
+    rlang::warn(
       c("It is recommended to include the ith observation.",
                     " Consider `nb = include_self(nb)`.")
       )

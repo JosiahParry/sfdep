@@ -24,6 +24,9 @@ a \code{data.frame} containing two columns \code{Ib} and \code{p_sim} containing
 Given two continuous numeric variables, calculate the bivariate Local Moran's I.
 }
 \details{
+The Bivariate Local Moran, like its global counterpart, evaluates the value
+of x at observation i with its spatial neighbors' value of y. The value of \deqn{I_i^B} is just xi * Wyi. Or, in simpler words the local bivariate Moran is the result of multiplying x by the spatial lag of y. Formally it is defined as
+
 \eqn{
 I_i^B= cx_i\Sigma_j{w_{ij}y_j}
 }
@@ -34,6 +37,9 @@ y <- guerry_nb$wealth
 nb <- guerry_nb$nb
 wt <- guerry_nb$wt
 local_moran_bv(x, y, nb, wt)
+}
+\references{
+\href{https://geodacenter.github.io/workbook/6c_local_multi/lab6c.html#principle}{Local Spatial Autocorrelation (3): Multivariate Local Spatial Autocorrelation, Luc Anselin}
 }
 \seealso{
 Other global_moran: 

@@ -55,10 +55,16 @@ local_moran_bv_impl <- function(x, y, listw, nsim) {
 #' Compute the Local Bivariate Moran's I Statistic
 #'
 #' Given two continuous numeric variables, calculate the bivariate Local Moran's I.
+#' @details
+#'
+#' The Bivariate Local Moran, like its global counterpart, evaluates the value
+#' of x at observation i with its spatial neighbors' value of y. The value of \deqn{I_i^B} is just xi * Wyi. Or, in simpler words the local bivariate Moran is the result of multiplying x by the spatial lag of y. Formally it is defined as
 #'
 #' \eqn{
 #' I_i^B= cx_i\Sigma_j{w_{ij}y_j}
 #' }
+#'
+#'
 #' @inheritParams global_moran_bv
 #' @family global_moran
 #' @export
@@ -69,6 +75,9 @@ local_moran_bv_impl <- function(x, y, listw, nsim) {
 #' wt <- guerry_nb$wt
 #' local_moran_bv(x, y, nb, wt)
 #' @returns a `data.frame` containing two columns `Ib` and `p_sim` containing the local bivariate Moran's I and simulated p-values respectively.
+#'
+#' @references
+#' [Local Spatial Autocorrelation (3): Multivariate Local Spatial Autocorrelation, Luc Anselin](https://geodacenter.github.io/workbook/6c_local_multi/lab6c.html#principle)
 local_moran_bv <- function(x, y, nb, wt, nsim = 499) {
   listw <- recreate_listw(nb, wt)
   local_moran_bv_impl(x, y, listw, nsim = nsim)
