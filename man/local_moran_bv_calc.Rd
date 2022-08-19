@@ -14,9 +14,4 @@ local_moran_bv_calc(x, y, nb, wt)
 \description{
 Calculate the Local Bivariate Moran Statistic
 }
-\keyword{*}
 \keyword{internal}
-\keyword{nb,}
-\keyword{st_lag(y,}
-\keyword{wt)}
-\keyword{x}

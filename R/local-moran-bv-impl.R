@@ -12,7 +12,6 @@
 #'
 #' @inheritParams moran_bv_calc
 #' @keywords internal
-#' x * st_lag(y, nb, wt)
 local_moran_bv_calc <- function(x, y, nb, wt) {
   x * st_lag(y, nb, wt)
 }
@@ -28,7 +27,7 @@ local_moran_bv_perm_impl <- function(x, y, listw) {
   nb <- p_listw[["neighbours"]]
   wt <- p_listw[["weights"]]
 
-  
+
 
   local_moran_bv_calc(x, y, nb, wt)
 }
