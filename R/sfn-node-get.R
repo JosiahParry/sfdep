@@ -17,7 +17,6 @@
 #'
 #' @examples
 #'
-#'
 #' if (interactive()) {
 #'   net <- sfnetworks::as_sfnetwork(
 #'     sfnetworks::roxel
@@ -34,6 +33,7 @@
 #' @family sfnetworks
 #' @export
 node_get_nbs <- function() {
+  check_pkg_suggests(c("igraph", "tidygraph"))
   lapply(igraph::get.adjlist(tidygraph::.G()), as.integer)
 }
 
@@ -41,6 +41,7 @@ node_get_nbs <- function() {
 #' @family sfnetworks
 #' @export
 node_get_edge_list <- function() {
+  check_pkg_suggests(c("igraph", "tidygraph"))
   lapply(igraph::get.adjedgelist(tidygraph::.G()), as.integer)
 }
 
@@ -50,6 +51,7 @@ node_get_edge_list <- function() {
 #' @param .var the quoted name of a column in the edge context.
 #' @export
 node_get_edge_col <- function(edges, .var) {
+  check_pkg_suggests(c("igraph", "tidygraph"))
   lapply(
     edges,
     function(e) igraph::get.edge.attribute(tidygraph::.G(), .var, e)

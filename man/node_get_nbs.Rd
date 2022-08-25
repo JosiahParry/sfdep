@@ -38,7 +38,6 @@ Given a tidygraph object, create a list column of edge data for each node in the
 }
 \examples{
 
-
 if (interactive()) {
   net <- sfnetworks::as_sfnetwork(
     sfnetworks::roxel
