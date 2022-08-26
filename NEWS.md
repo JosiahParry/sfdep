@@ -1,6 +1,8 @@
-# sfdep 0.2.0
+# sfdep (development version)
 
-2022-07-15 sent to CRAN for release.
+# sfdep 0.2.9000
+
+# sfdep 0.2.0
 
 - `spatial_gini()` is a new global measure
 - `euclidean_median()` is added for identifying the euclidean median of points for point pattern analysis. 
