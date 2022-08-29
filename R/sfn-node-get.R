@@ -10,6 +10,7 @@
 #' - `node_get_edge_list()`: creates an edge list. The edge list contains the row index of the edge relationships in the edge context for each node.
 #'   - Uses `igraph::get.adjedgelist()`.
 #' - `node_get_edge_col()`: creates a list column containing edge attributes as a list column in the node context (much like `find_xj()`).
+#'   - Uses `igraph::get.edge.attribute()`
 #'
 #' @returns
 #'
@@ -34,7 +35,10 @@
 #' @export
 node_get_nbs <- function() {
   check_pkg_suggests(c("igraph", "tidygraph"))
-  lapply(igraph::get.adjlist(tidygraph::.G()), as.integer)
+  nb <- lapply(igraph::get.adjlist(tidygraph::.G()), as.integer)
+  nb <- class_modify(nb, "nb")
+  attr(nb, "self.included") <- FALSE
+  nb
 }
 
 #' @rdname node_get_nbs

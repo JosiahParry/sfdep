@@ -1,6 +1,11 @@
 # sfdep (development version)
 
-# sfdep 0.2.9000
+- `activate()` is now exported as a generic method to no longer conflict with tidygraph
+- `st_as_graph()` now creates undirected graphs by default
+- new functions for sfnetworks
+  - `node_get_nbs()`: converts the node adjacency list to a neighbor list
+  - `node_get_edge_list()`: creates an edge adjacency list used to get edge attribute columns
+  - `node_get_edge_col()`: uses the edge list to get edge attributes and turn them into a weight like list
 
 # sfdep 0.2.0
 
