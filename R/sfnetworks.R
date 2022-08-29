@@ -206,7 +206,7 @@ st_as_graph.sf <- function(x, nb, wt) {
   nodes <- st_as_nodes(x, nb)
   edges <- st_as_edges(x, nb, wt)
 
-  sfnetworks::sfnetwork(nodes, edges)
+  sfnetworks::sfnetwork(nodes, edges, directed = FALSE)
 }
 
 #
@@ -221,7 +221,8 @@ st_as_graph.sfc <- function(x, nb, wt) {
 
   sfnetworks::sfnetwork(
     st_as_nodes(x, nb),
-    st_as_edges(x, nb, wt)
+    st_as_edges(x, nb, wt),
+    directed = FALSE
   )
 }
 

@@ -1,7 +1,7 @@
-#' @param x a spacetime object
+#' @param .data a spacetime object
 #' @export
 #' @rdname activate
-active <- function(x) attr(x, "active")
+active <- function(.data) attr(.data, "active")
 
 #' Activate spacetime context
 #'
@@ -33,17 +33,18 @@ active <- function(x) attr(x, "active")
 #'
 #' active(bos)
 #' activate(bos, "geometry")
-activate <- function(x, what = NULL) {
+activate <- function(.data, what) UseMethod("activate")
+activate.spacetime <- function(.data, what = NULL) {
   match.arg(what, c("geometry", "data", NULL))
-  is_active <- active(x)
+  is_active <- active(.data)
   # if missing, set "what" to whatever is presently active
-  if (is.null(what)) return(x)
+  if (is.null(what)) return(.data)
   # if what is the same as active, return input object
-  if (is_active == what) return(x)
+  if (is_active == what) return(.data)
 
   switch(what,
-         geometry = activate_geometry(x),
-         data = activate_data(x))
+         geometry = activate_geometry(.data),
+         data = activate_data(.data))
 
 }
 
@@ -62,3 +63,6 @@ activate_data <- function(x) {
                      attr(x, "loc_col"),
                      attr(x, "time_col"))
 }
+
+
+

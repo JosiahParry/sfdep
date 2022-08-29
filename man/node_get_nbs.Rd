@@ -34,6 +34,9 @@ Given a tidygraph object, create a list column of edge data for each node in the
 \item Uses \code{igraph::get.adjedgelist()}.
 }
 \item \code{node_get_edge_col()}: creates a list column containing edge attributes as a list column in the node context (much like \code{find_xj()}).
+\itemize{
+\item Uses \code{igraph::get.edge.attribute()}
+}
 }
 }
 \examples{

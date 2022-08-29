@@ -116,6 +116,9 @@ reference:
   - st_as_graph
   - st_as_edges
   - st_as_nodes
+  - node_get_nbs
+  - node_get_edge_list
+  - node_get_edge_col
 
 - title: Utility Functions
   contents:

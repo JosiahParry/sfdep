@@ -7,7 +7,7 @@
 \usage{
 active(x)
 
-activate(x, what = NULL)
+activate(.data, what)
 }
 \arguments{
 \item{x}{a spacetime object}
