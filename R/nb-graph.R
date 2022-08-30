@@ -24,7 +24,7 @@
 #'
 #'
 #' @examples
-#' geometry <- sf::st_geometry(guerry)
+#' geometry <- sf::st_centroid(sf::st_geometry(guerry))
 #' st_nb_delaunay(geometry)
 #' st_nb_gabriel(geometry)
 #' st_nb_relative(geometry)

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,18 +67,20 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">active</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">active</span><span class="op">(</span><span class="va">.data</span><span class="op">)</span>
 
-<span class="fu">activate</span><span class="op">(</span><span class="va">x</span>, what <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+<span class="fu">activate</span><span class="op">(</span><span class="va">.data</span>, <span class="va">what</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>x</dt>
+    <dl><dt>.data</dt>
 <dd><p>a spacetime object</p></dd>
 <dt>what</dt>
 <dd><p>default NULL. Determines which context to activate. Valid argument values
 are <code>"geometry"</code> and <code>"data"</code>. If left null, returns <code>x</code>.</p></dd>
+<dt>x</dt>
+<dd><p>a spacetime object</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -104,30 +106,7 @@ object contains the geographic information for those locations.</p>
 <span class="r-in"><span class="fu">active</span><span class="op">(</span><span class="va">bos</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "data"</span>
 <span class="r-in"><span class="fu">activate</span><span class="op">(</span><span class="va">bos</span>, <span class="st">"geometry"</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold; font-style: italic;">spacetime ────</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Context:</span><span style="color: #555555; font-style: italic;">`geometry`</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">168</span><span style="color: #555555;"> locations `.region_id`</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">10</span><span style="color: #555555;"> time periods `time_period`</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">── </span><span style="color: #555555; font-style: italic;">geometry context</span><span style="color: #B2B2B2;"> ────────────────────────────────────────────────────────────</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 168 features and 1 field</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: POLYGON</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Dimension:     XY</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: -71.19115 ymin: 42.22788 xmax: -70.99445 ymax: 42.3974</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Geodetic CRS:  NAD83</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 168 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .region_id                                                           geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                                           <span style="color: #949494; font-style: italic;">&lt;POLYGON [°]&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 25025010405 ((-71.09009 42.34666, -71.09001 42.34668, -71.08941 42.34685, -7…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 25025010404 ((-71.09066 42.33977, -71.09103 42.33961, -71.09177 42.33989, -7…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 25025010801 ((-71.08159 42.3537, -71.08044 42.35402, -71.07995 42.35415, -71…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 25025010702 ((-71.07066 42.35185, -71.07045 42.35142, -71.07282 42.35075, -7…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 25025010204 ((-71.10683 42.34875, -71.1052 42.34844, -71.10468 42.34834, -71…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 25025010802 ((-71.08159 42.3537, -71.08153 42.35358, -71.08145 42.3534, -71.…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 25025010104 ((-71.08784 42.34746, -71.08805 42.34746, -71.0883 42.34747, -71…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 25025000703 ((-71.12622 42.35041, -71.12685 42.35009, -71.12748 42.35, -71.1…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 25025000504 ((-71.14175 42.3404, -71.14194 42.34001, -71.14234 42.34005, -71…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 25025000704 ((-71.13551 42.34878, -71.13572 42.34904, -71.1358 42.34917, -71…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 158 more rows</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("activate"):</span> no applicable method for 'activate' applied to an object of class "c('spacetime', 'spec_tbl_df', 'tbl_df', 'tbl', 'data.frame')"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -139,7 +118,8 @@ object contains the geographic information for those locations.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
     </footer></div>

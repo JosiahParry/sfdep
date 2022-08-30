@@ -34,6 +34,7 @@ active <- function(.data) attr(.data, "active")
 #' active(bos)
 #' activate(bos, "geometry")
 activate <- function(.data, what) UseMethod("activate")
+#' @export
 activate.spacetime <- function(.data, what = NULL) {
   match.arg(what, c("geometry", "data", NULL))
   is_active <- active(.data)

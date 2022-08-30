@@ -12,7 +12,7 @@ The LCLQ is defined using Gaussian kernel weights and an adaptive bandwidth (see
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -102,30 +102,15 @@ The LCLQ is defined using Gaussian kernel weights and an adaptive bandwidth (see
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">A</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">main_city</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in"><span class="va">A</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">main_city</span></span>
 <span class="r-in"><span class="va">B</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">region</span></span>
 <span class="r-in"><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_knn.html">st_knn</a></span><span class="op">(</span><span class="va">geo</span>, <span class="fl">5</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Polygon provided. Using point on surface.</span>
 <span class="r-in"><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_kernel_weights.html">st_kernel_weights</a></span><span class="op">(</span><span class="va">nb</span>, <span class="va">geo</span>, <span class="st">"gaussian"</span>, adaptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> It is recommended to include the ith observation. Consider `nb = include_self(nb)`.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Polygon provided. Using point on surface.</span>
 <span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_colocation</span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="va">nb</span>, <span class="va">wt</span>, <span class="fl">49</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           C        E         N        S        W p_sim_C p_sim_E p_sim_N</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80       NA 1.938342        NA 3.002835       NA      NA    0.18      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81       NA       NA        NA       NA 4.941176      NA      NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82 2.986279       NA        NA       NA 1.954897    0.04      NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83 2.175460       NA        NA       NA 2.765717    0.08      NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84       NA 4.065541 0.8756359       NA       NA      NA    0.02    0.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85 1.925264 2.094012 0.9219004       NA       NA    0.26    0.16    0.22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    p_sim_S p_sim_W</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80    0.02      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81      NA    0.02</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82      NA    0.12</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83      NA    0.08</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84      NA      NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85      NA      NA</span>
+<span class="r-in"><span class="op">}</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -137,7 +122,8 @@ The LCLQ is defined using Gaussian kernel weights and an adaptive bandwidth (see
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
     </footer></div>

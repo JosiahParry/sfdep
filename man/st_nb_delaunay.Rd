@@ -40,7 +40,7 @@ Note that Delaunay triangulation assumes a plane and thus uses Euclidean distanc
 See \code{\link[spdep:graphneigh]{spdep::gabrielneigh()}} for further descriptions of the graph neighbor implementations.
 }
 \examples{
-geometry <- sf::st_geometry(guerry)
+geometry <- sf::st_centroid(sf::st_geometry(guerry))
 st_nb_delaunay(geometry)
 st_nb_gabriel(geometry)
 st_nb_relative(geometry)

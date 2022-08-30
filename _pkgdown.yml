@@ -52,12 +52,15 @@ reference:
   contents:
   - st_contiguity
   - st_knn
-  - st_cardinalties
   - st_dist_band
   - st_block_nb
+  - st_nb_delaunay
+  - st_nb_gabriel
+  - st_nb_relative
   - st_complete_nb
   - st_nb_lag
   - st_nb_lag_cumul
+  - st_cardinalties
   - cond_permute_nb
 
 - title: Weights
