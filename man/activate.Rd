@@ -5,15 +5,17 @@
 \alias{activate}
 \title{Activate spacetime context}
 \usage{
-active(x)
+active(.data)
 
 activate(.data, what)
 }
 \arguments{
-\item{x}{a spacetime object}
+\item{.data}{a spacetime object}
 
 \item{what}{default NULL. Determines which context to activate. Valid argument values
 are \code{"geometry"} and \code{"data"}. If left null, returns \code{x}.}
+
+\item{x}{a spacetime object}
 }
 \description{
 From a \code{\link{spacetime}} object, activate either the data or geometry contexts. The active object will then become available for manipulation.
