@@ -143,19 +143,11 @@ group_by.spacetime <- function(.data, ...) {
 
 #' @name tidyverse
 mutate.spacetime <- function(.data, ...) {
-
-  if (inherits(.data, "grouped_df")) {
-    res <- NextMethod(.data, ...)
-    .cols <- colnames(res)
-    attributes(res) <- attributes(.data)
-    attr(res, "names") <- .cols
-    return(res)
-  }
-
   res <- NextMethod(.data, ...)
-  class(res) <- c("spacetime", setdiff(class(res), "spacetime"))
+  .cols <- colnames(res)
+  attributes(res) <- attributes(.data)
+  attr(res, "names") <- .cols
   res
-
 }
 
 
