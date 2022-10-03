@@ -152,12 +152,23 @@ mutate.spacetime <- function(.data, ...) {
 
 
 
+#' @name tidyverse
+ungroup.spacetime <- function(.data, ...) {
+  res <- NextMethod(.data, ...)
+  .cols <- colnames(res)
+  attributes(res) <- attributes(.data)
+  attr(res, "names") <- .cols
+  res
+}
+
 # from: https://raw.githubusercontent.com/r-spatial/sf/main/R/tidyverse.R
 # 2022-06-27 08:54:11
 register_all_s3_methods = function() {
 
   register_s3_method("dplyr", "group_by", "spacetime")
+  register_s3_method("dplyr", "ungroup", "spacetime")
   register_s3_method("dplyr", "mutate", "spacetime")
+
 }
 
 # from: https://github.com/tidyverse/hms/blob/master/R/zzz.R
