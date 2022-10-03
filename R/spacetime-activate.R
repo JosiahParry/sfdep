@@ -49,20 +49,20 @@ activate.spacetime <- function(.data, what = NULL) {
 
 }
 
-activate_geometry <- function(x) {
+activate_geometry <- function(.data) {
   # class(x) <- setdiff(class(x), "spacetime")
-  new_spacetime_geo(x,
-                    attr(x, "geometry"),
-                    attr(x, "loc_col"),
-                    attr(x, "time_col"))
+  new_spacetime_geo(.data,
+                    attr(.data, "geometry"),
+                    attr(.data, "loc_col"),
+                    attr(.data, "time_col"))
 }
 
 
-activate_data <- function(x) {
-  new_spacetime_data(attr(x, "data"),
-                     x,
-                     attr(x, "loc_col"),
-                     attr(x, "time_col"))
+activate_data <- function(.data) {
+  new_spacetime_data(attr(.data, "data"),
+                     .data,
+                     attr(.data, "loc_col"),
+                     attr(.data, "time_col"))
 }
 
 
