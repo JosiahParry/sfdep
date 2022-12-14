@@ -244,6 +244,9 @@
     <loc>/reference/nmt_perm_impl.html</loc>
   </url>
   <url>
+    <loc>/reference/node_get_nbs.html</loc>
+  </url>
+  <url>
     <loc>/reference/pairwise_colocation.html</loc>
   </url>
   <url>
@@ -338,6 +341,9 @@
   </url>
   <url>
     <loc>/reference/st_nb_band.html</loc>
+  </url>
+  <url>
+    <loc>/reference/st_nb_delaunay.html</loc>
   </url>
   <url>
     <loc>/reference/st_nb_dists.html</loc>

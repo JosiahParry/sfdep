@@ -12,7 +12,7 @@ than half of the time."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,18 +71,22 @@ than half of the time.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">local_jc_uni</span><span class="op">(</span>
-  <span class="va">x</span>,
+  <span class="va">fx</span>,
+  <span class="va">chosen</span>,
   <span class="va">nb</span>,
   wt <span class="op">=</span> <span class="fu"><a href="st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span>, style <span class="op">=</span> <span class="st">"B"</span><span class="op">)</span>,
   nsim <span class="op">=</span> <span class="fl">499</span>,
-  alternative <span class="op">=</span> <span class="st">"two.sided"</span>
+  alternative <span class="op">=</span> <span class="st">"two.sided"</span>,
+  iseed <span class="op">=</span> <span class="cn">NULL</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>x</dt>
+    <dl><dt>fx</dt>
 <dd><p>a binary variable either numeric or logical</p></dd>
+<dt>chosen</dt>
+<dd><p>a scalar character containing the level of <code>fx</code> that should be considered the observed value (1).</p></dd>
 <dt>nb</dt>
 <dd><p>a neighbors list object.</p></dd>
 <dt>wt</dt>
@@ -91,6 +95,8 @@ than half of the time.</p>
 <dd><p>the number of conditional permutation simulations</p></dd>
 <dt>alternative</dt>
 <dd><p>default <code>"greater"</code>. One of <code>"less"</code> or <code>"greater"</code>.</p></dd>
+<dt>iseed</dt>
+<dd><p>default NULL, used to set the seed for possible parallel RNGs</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -99,17 +105,18 @@ than half of the time.</p>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The local join count statistic requires a binary weights list which can be generated with <code>st_weights(nb, style = "B")</code>. Additionally, ensure that the binary variable of interest is rarely occurring in no more than half of observations.</p>
-<p>P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see <a href="https://geodacenter.github.io/glossary.html#ppvalue" class="external-link">Geoda Glossary</a>.</p>
+<p>P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see <a href="https://geodacenter.github.io/glossary.html#ppvalue" class="external-link">Geoda Glossary</a>.
+Calls <code><a href="https://r-spatial.github.io/spdep/reference/local_joincount_uni.html" class="external-link">spdep::local_joincount_uni()</a></code>.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute</a></span><span class="op">(</span></span>
 <span class="r-in">  <span class="va">guerry</span>,</span>
-<span class="r-in">  top_crime <span class="op">=</span> <span class="va">crime_prop</span> <span class="op">&gt;</span> <span class="fl">9000</span>,</span>
+<span class="r-in">  top_crime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">crime_prop</span> <span class="op">&gt;</span> <span class="fl">9000</span><span class="op">)</span>,</span>
 <span class="r-in">  nb <span class="op">=</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span>,</span>
 <span class="r-in">  wt <span class="op">=</span> <span class="fu"><a href="st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span>, style <span class="op">=</span> <span class="st">"B"</span><span class="op">)</span>,</span>
-<span class="r-in">  jc <span class="op">=</span> <span class="fu">local_jc_uni</span><span class="op">(</span><span class="va">top_crime</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in">  jc <span class="op">=</span> <span class="fu">local_jc_uni</span><span class="op">(</span><span class="va">top_crime</span>, <span class="st">"TRUE"</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">res</span>, <span class="va">jc</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Simple feature collection with 85 features and 5 fields</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Geometry type: MULTIPOLYGON</span>
@@ -117,19 +124,19 @@ than half of the time.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> CRS:           NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 85 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    top_crime nb        wt        join_count  p_sim                      geometry</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> TRUE      <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span>          1  0.252 (((801150 2092615, 800669 20…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> FALSE     <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((729326 2521619, 729320 25…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> FALSE     <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((710830 2137350, 711746 21…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> FALSE     <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((882701 1920024, 882408 19…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> FALSE     <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((886504 1922890, 885733 19…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> TRUE      <span style="color: #949494;">&lt;int [7]&gt;</span> <span style="color: #949494;">&lt;dbl [7]&gt;</span>          2  0.356 (((747008 1925789, 746630 19…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> FALSE     <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((818893 2514767, 818614 25…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> TRUE      <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>          1  0.368 (((509103 1747787, 508820 17…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> FALSE     <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span>          0 <span style="color: #BB0000;">NA</span>     (((775400 2345600, 775068 23…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> TRUE      <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span>          2  0.484 (((626230 1810121, 626269 18…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 75 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    top_crime nb        wt           BB Pr(z != E(BBi…¹                  geometry</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;MULTIPOLYGON&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> TRUE      <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span>     1           0.988 (((801150 2092615, 80066…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> FALSE     <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span>     0          <span style="color: #BB0000;">NA</span>     (((729326 2521619, 72932…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> FALSE     <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span>     0          <span style="color: #BB0000;">NA</span>     (((710830 2137350, 71174…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> FALSE     <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span>     0          <span style="color: #BB0000;">NA</span>     (((882701 1920024, 88240…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> FALSE     <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>     0          <span style="color: #BB0000;">NA</span>     (((886504 1922890, 88573…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> TRUE      <span style="color: #949494;">&lt;int [7]&gt;</span> <span style="color: #949494;">&lt;dbl [7]&gt;</span>     2           0.944 (((747008 1925789, 74663…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> FALSE     <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>     0          <span style="color: #BB0000;">NA</span>     (((818893 2514767, 81861…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> TRUE      <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl [3]&gt;</span>     1           0.864 (((509103 1747787, 50882…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> FALSE     <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span>     0          <span style="color: #BB0000;">NA</span>     (((775400 2345600, 77506…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> TRUE      <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span>     2           0.608 (((626230 1810121, 62626…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 75 more rows, and abbreviated variable name ¹​`Pr(z != E(BBi))`</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 </code></pre></div>
     </div>

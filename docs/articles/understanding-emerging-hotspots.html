@@ -29,7 +29,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,20 +93,40 @@
 
     
     
-<p>Emerging hot spot Analysis (EHSA) is a technique that falls under exploratory spatial data analysis (ESDA). It combines the traditional ESDA technique of hot spot analysis using the Getis-Ord Gi* statistic with the traditional time-series Mann-Kendall test for monotonic trends.</p>
-<p>The goal of EHSA is to evaluate how hot and cold spots are changing over time. It helps us answer the questions: are they becoming increasingly hotter, are they cooling down, or are they staying the same?</p>
-<p>In brief, EHSA works by calculating the Gi* for each time period. The series of Gi* at each location is treated as a time-series and evaluated for a trend using the Mann-Kendall statistic. The Gi* and the Mann-Kendall are compared together to create 17 unique classifications to help better understand how the locations have changed over time.</p>
-<p>In this vignette we walk through the Getis-Ord Gi*, the Mann-Kendall, and how the two work together to in EHSA.</p>
+<p>Emerging hot spot Analysis (EHSA) is a technique that falls under
+exploratory spatial data analysis (ESDA). It combines the traditional
+ESDA technique of hot spot analysis using the Getis-Ord Gi* statistic
+with the traditional time-series Mann-Kendall test for monotonic
+trends.</p>
+<p>The goal of EHSA is to evaluate how hot and cold spots are changing
+over time. It helps us answer the questions: are they becoming
+increasingly hotter, are they cooling down, or are they staying the
+same?</p>
+<p>In brief, EHSA works by calculating the Gi* for each time period. The
+series of Gi* at each location is treated as a time-series and evaluated
+for a trend using the Mann-Kendall statistic. The Gi* and the
+Mann-Kendall are compared together to create 17 unique classifications
+to help better understand how the locations have changed over time.</p>
+<p>In this vignette we walk through the Getis-Ord Gi*, the Mann-Kendall,
+and how the two work together to in EHSA.</p>
 <div class="section level2">
 <h2 id="gettis-ord-gi">Gettis-Ord Gi*<a class="anchor" aria-label="anchor" href="#gettis-ord-gi"></a>
 </h2>
-<p>The Gettis-Ord Gi and Gi* (pronounced gee-eye-star) are one of the earliest LISAs. The Gi and Gi* measures are typically reported as a Z-score where high values indicate a high-high cluster and negative Z-scores indicate a low-low cluster. There are no high-low and low-high classifications like the local Moran.</p>
-<p>“The Gi statistic consist of a ratio of the weighted average of the values in the neighboring locations, to the sum of all values, not including the value at the location (<span class="math inline">\(x_i\)</span>)” (<a href="https://geodacenter.github.io/workbook/6b_local_adv/lab6b.html#getis-ord-statistics" class="external-link">Local Spatial Autocorrelation (2), GeoDa Center</a>).</p>
+<p>The Gettis-Ord Gi and Gi* (pronounced gee-eye-star) are one of the
+earliest LISAs. The Gi and Gi* measures are typically reported as a
+Z-score where high values indicate a high-high cluster and negative
+Z-scores indicate a low-low cluster. There are no high-low and low-high
+classifications like the local Moran.</p>
+<p>“The Gi statistic consist of a ratio of the weighted average of the
+values in the neighboring locations, to the sum of all values, not
+including the value at the location (<span class="math inline">\(x_i\)</span>)” (<a href="https://geodacenter.github.io/workbook/6b_local_adv/lab6b.html#getis-ord-statistics" class="external-link">Local
+Spatial Autocorrelation (2), GeoDa Center</a>).</p>
 <p><span class="math display">\[
 G_i = \frac{\sum_{j \ne i}W_{ij}X_j}
           {\sum_{j \ne i}X_j}
 \]</span></p>
-<p>The Gi* statistic includes the focal (or self, or i<sup>th</sup>) observation in the neighborhood.</p>
+<p>The Gi* statistic includes the focal (or self, or i<sup>th</sup>)
+observation in the neighborhood.</p>
 <p><span class="math display">\[
 G_i* = \frac{\sum_{j}W_{ij}X_j}
           {\sum_{j}X_j}
@@ -114,9 +134,17 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <div class="section level3">
 <h3 id="calculating-the-local-gi">Calculating the local Gi*<a class="anchor" aria-label="anchor" href="#calculating-the-local-gi"></a>
 </h3>
-<p>To calculate the local Gi* using sfdep, we have to be especially aware of the neighbors list when we create it. By default, when we create a neighbors list, we exclude the self from the neighbors list because it seems a little silly to say “I am my own neighbor.” However, if we want to calculate the local Gi*, we must be sure to explicitly add it using <code><a href="../reference/include_self.html">include_self()</a></code></p>
-<p>Here, we follow the example laid out by the GeoDa center documentation to calculate and plot the local Gi* statistic for donations using the Guerry dataset.</p>
-<p>First we create a neighbor list ensuring that the self is included and then create the weights list from the new neighbors list.</p>
+<p>To calculate the local Gi* using sfdep, we have to be especially
+aware of the neighbors list when we create it. By default, when we
+create a neighbors list, we exclude the self from the neighbors list
+because it seems a little silly to say “I am my own neighbor.” However,
+if we want to calculate the local Gi*, we must be sure to explicitly add
+it using <code><a href="../reference/include_self.html">include_self()</a></code></p>
+<p>Here, we follow the example laid out by the GeoDa center
+documentation to calculate and plot the local Gi* statistic for
+donations using the Guerry dataset.</p>
+<p>First we create a neighbor list ensuring that the self is included
+and then create the weights list from the new neighbors list.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sfdep.josiahparry.com" class="external-link">sfdep</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
@@ -126,7 +154,10 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
     nb <span class="op">=</span> <span class="fu"><a href="../reference/include_self.html">include_self</a></span><span class="op">(</span><span class="fu"><a href="../reference/st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span><span class="op">)</span>,
          wt <span class="op">=</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span>
     <span class="op">)</span> </code></pre></div>
-<p>Following, we calculate the local Gi* using <code><a href="../reference/local_gstar.html">local_gstar_perm()</a></code> on the <code>donations</code> column which creates a new data frame column called <code>gi_star</code>. We then unnest it using <code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::unnest()</a></code>.</p>
+<p>Following, we calculate the local Gi* using
+<code><a href="../reference/local_gstar.html">local_gstar_perm()</a></code> on the <code>donations</code> column
+which creates a new data frame column called <code>gi_star</code>. We
+then unnest it using <code><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">tidyr::unnest()</a></code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">donat_gistar</span> <span class="op">&lt;-</span> <span class="va">guerry_nb</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">transmute</a></span><span class="op">(</span>gi_star <span class="op">=</span> <span class="fu"><a href="../reference/local_gstar.html">local_gstar_perm</a></span><span class="op">(</span><span class="va">donations</span>, <span class="va">nb</span>, <span class="va">wt</span>, nsim <span class="op">=</span> <span class="fl">199</span><span class="op">)</span><span class="op">)</span> |&gt; 
@@ -141,18 +172,24 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 9</span></span>
 <span class="co">#&gt;    gi_star   e_gi     var_gi p_value p_sim p_folded_sim skewness kurtosis</span>
 <span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">1.35</span>  0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">016</span>0   0.177   0.07        0.035    0.832   0.418 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">0.559</span> 0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">008</span>77  0.576   0.62        0.31     0.747   0.920 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   0.480 0.012<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">011</span>6   0.631   0.58        0.29     0.643   0.532 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">1.81</span>  0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">011</span>8   0.069<span style="text-decoration: underline;">8</span>  0.05        0.025    0.499  -<span style="color: #BB0000;">0.211</span> </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  -<span style="color: #BB0000;">1.09</span>  0.012<span style="text-decoration: underline;">2</span> 0.000<span style="text-decoration: underline;">021</span>0   0.277   0.2         0.1      0.906   0.300 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  -<span style="color: #BB0000;">2.41</span>  0.011<span style="text-decoration: underline;">5</span> 0.000<span style="text-decoration: underline;">007</span>49  0.015<span style="text-decoration: underline;">9</span>  0.01        0.005    0.526   0.147 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  -<span style="color: #BB0000;">0.365</span> 0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">014</span>7   0.715   0.76        0.38     0.793   0.659 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  -<span style="color: #BB0000;">0.794</span> 0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">015</span>3   0.427   0.5         0.25     0.609  -<span style="color: #BB0000;">0.052</span><span style="color: #BB0000; text-decoration: underline;">1</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  -<span style="color: #BB0000;">1.42</span>  0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">012</span>6   0.157   0.08        0.04     0.830   0.545 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">1.42</span>  0.012<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">011</span>2   0.157   0.11        0.055    0.671   0.397 </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows, and 1 more variable: geometry &lt;MULTIPOLYGON&gt;</span></span></code></pre></div>
-<p>Lastly, we classify the clusters using a combination of <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when()</a></code> which is then piped into a ggplot map. While not a perfect recreation of the GeoDa map, it is very close—the differences likely due to conditional permutation (see <a href="/articles/conditional-permutation.html">conditional permutation vignette</a> for more on significance calculation).</p>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">1.55</span>  0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">012</span>3   0.122   0.06        0.03     0.899   1.06  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">0.543</span> 0.012<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">011</span>0   0.587   0.66        0.33     0.814   0.706 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   0.710 0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">008</span>53  0.478   0.45        0.225    0.448  -<span style="color: #BB0000;">0.044</span><span style="color: #BB0000; text-decoration: underline;">2</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">1.60</span>  0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">014</span>2   0.111   0.05        0.025    0.535  -<span style="color: #BB0000;">0.166</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  -<span style="color: #BB0000;">1.16</span>  0.012<span style="text-decoration: underline;">2</span> 0.000<span style="text-decoration: underline;">018</span>3   0.244   0.23        0.115    0.770   0.222 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  -<span style="color: #BB0000;">2.34</span>  0.011<span style="text-decoration: underline;">4</span> 0.000<span style="text-decoration: underline;">007</span>52  0.019<span style="text-decoration: underline;">2</span>  0.01        0.005    0.364  -<span style="color: #BB0000;">0.484</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  -<span style="color: #BB0000;">0.368</span> 0.012<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">024</span>1   0.713   0.85        0.425    1.19    1.75  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  -<span style="color: #BB0000;">0.565</span> 0.011<span style="text-decoration: underline;">2</span> 0.000<span style="text-decoration: underline;">018</span>5   0.572   0.63        0.315    1.51    3.30  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  -<span style="color: #BB0000;">1.48</span>  0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">010</span>8   0.139   0.1         0.05     0.673   0.578 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">1.31</span>  0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">010</span>9   0.190   0.12        0.06     0.823   1.51  </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows, and 1 more variable: geometry &lt;MULTIPOLYGON&gt;</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></code></pre></div>
+<p>Lastly, we classify the clusters using a combination of
+<code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when()</a></code> which is then piped
+into a ggplot map. While not a perfect recreation of the GeoDa map, it
+is very close—the differences likely due to conditional permutation (see
+<a href="/articles/conditional-permutation.html">conditional permutation
+vignette</a> for more on significance calculation).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 
@@ -175,16 +212,30 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <div class="section level2">
 <h2 id="mann-kendall-test">Mann-Kendall Test<a class="anchor" aria-label="anchor" href="#mann-kendall-test"></a>
 </h2>
-<p>With the calculations of the local Gi* for each unit of time for every geography, we can evaluate how the hotspots change over time. We incorporate time-series analysis through the use of the Mann-Kendall (MK) Trend test. The MK test is a nonparametric test that checks for monotonic trends.</p>
-<p>If you don’t recall the term monotonic from your calculus class, that’s okay. A monotonic series or function is one that only increases (or decreases) and never changes direction. So long as the function either stays flat or continues to increase, it is monotonic.</p>
-<p>The benefit of the test being nonparametric is that the trend can be non-linear. And further, the MK test does not check if a time-series is strictly monotonic—e.g. every subsequent unit is increasing or decreasing—but if the overall series is increasing or decreasing.</p>
-<p>Below is an example of a monotonic upward trend which is not linear.</p>
+<p>With the calculations of the local Gi* for each unit of time for
+every geography, we can evaluate how the hotspots change over time. We
+incorporate time-series analysis through the use of the Mann-Kendall
+(MK) Trend test. The MK test is a nonparametric test that checks for
+monotonic trends.</p>
+<p>If you don’t recall the term monotonic from your calculus class,
+that’s okay. A monotonic series or function is one that only increases
+(or decreases) and never changes direction. So long as the function
+either stays flat or continues to increase, it is monotonic.</p>
+<p>The benefit of the test being nonparametric is that the trend can be
+non-linear. And further, the MK test does not check if a time-series is
+strictly monotonic—e.g. every subsequent unit is increasing or
+decreasing—but if the overall series is increasing or decreasing.</p>
+<p>Below is an example of a monotonic upward trend which is not
+linear.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">series</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1.4</span>, <span class="fl">1.5</span>, <span class="fl">1.6</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">5.5</span>, <span class="fl">8</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">8.5</span>, length.out <span class="op">=</span> <span class="fl">5</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://r-spatial.github.io/sf/reference/plot.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">series</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></code></pre></div>
 <p><img src="understanding-emerging-hotspots_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<p>For a more realistic example, let’s take a look a the <code>economics</code> dataset from <code>ggplot2</code> which contains data from FRED. We’ll use the <code>psavert</code> variable which contains data about personal savings rates in the United States.</p>
+<p>For a more realistic example, let’s take a look a the
+<code>economics</code> dataset from <code>ggplot2</code> which contains
+data from FRED. We’ll use the <code>psavert</code> variable which
+contains data about personal savings rates in the United States.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">econ</span> <span class="op">&lt;-</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="va"><a href="https://ggplot2.tidyverse.org/reference/economics.html" class="external-link">economics</a></span>
 
@@ -192,30 +243,59 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="understanding-emerging-hotspots_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
-<p>From a visual inspection, we can tell that overall the trend is decreasing. The MK test can confirm this. We use <code><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">Kendall::MannKendall()</a></code> to test if the trend is significantly decreasing.</p>
+<p>From a visual inspection, we can tell that overall the trend is
+decreasing. The MK test can confirm this. We use
+<code><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">Kendall::MannKendall()</a></code> to test if the trend is
+significantly decreasing.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">Kendall</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Kendall/man/MannKendall.html" class="external-link">MannKendall</a></span><span class="op">(</span><span class="va">econ</span><span class="op">$</span><span class="va">psavert</span><span class="op">)</span>
 <span class="co">#&gt; tau = -0.644, 2-sided pvalue =&lt; 2.22e-16</span></code></pre></div>
-<p>The above results show the <code>tau</code> and p-value. Tau ranges between -1 and 1 where -1 is a perfectly decreasing series and 1 is a perfectly increasing series. The p-value is extremely small indicating that the null-hypothesis (that there is no trend) can be rejected. The tau is -0.64 which indicates a moderate downward trend.</p>
+<p>The above results show the <code>tau</code> and p-value. Tau ranges
+between -1 and 1 where -1 is a perfectly decreasing series and 1 is a
+perfectly increasing series. The p-value is extremely small indicating
+that the null-hypothesis (that there is no trend) can be rejected. The
+tau is -0.64 which indicates a moderate downward trend.</p>
 </div>
 <div class="section level2">
 <h2 id="the-whole-game">The whole game<a class="anchor" aria-label="anchor" href="#the-whole-game"></a>
 </h2>
-<p>We’ve gone over briefly the local Gi* and the Mann-Kendall Test. EHSA combines the both of these to evaluate if there are trends in hot or cold spots over time.</p>
-<p>EHSA utilizes a spacetime cube, or spatio-temporal full grid. Please see <a href="/articles/spacetime-s3.html">spacetime vignette</a> for more on spacetime representations. In short, a spacetime cube contains a regular time-series for each location in a dataset—i.e. there are <span class="math inline">\(n \times m\)</span> observations where n is the number of locations and m is the number of times.</p>
-<p>For each time-slice (i.e. the complete set of geometries for a given time) the local Gi* is calculated. Say we have 10 times, we will have for each i <span class="math inline">\(G_{i,t=1}^*, \ldots, G_{i,t=10}^*\)</span>.</p>
-<p>Then, given each location’s time-series of Gi*, they are assessed using the MK test.</p>
+<p>We’ve gone over briefly the local Gi* and the Mann-Kendall Test. EHSA
+combines the both of these to evaluate if there are trends in hot or
+cold spots over time.</p>
+<p>EHSA utilizes a spacetime cube, or spatio-temporal full grid. Please
+see <a href="/articles/spacetime-s3.html">spacetime vignette</a> for
+more on spacetime representations. In short, a spacetime cube contains a
+regular time-series for each location in a dataset—i.e. there are <span class="math inline">\(n \times m\)</span> observations where n is the
+number of locations and m is the number of times.</p>
+<p>For each time-slice (i.e. the complete set of geometries for a given
+time) the local Gi* is calculated. Say we have 10 times, we will have
+for each i <span class="math inline">\(G_{i,t=1}^*, \ldots,
+G_{i,t=10}^*\)</span>.</p>
+<p>Then, given each location’s time-series of Gi*, they are assessed
+using the MK test.</p>
 </div>
 <div class="section level2">
 <h2 id="a-hands-on-example">A hands on example<a class="anchor" aria-label="anchor" href="#a-hands-on-example"></a>
 </h2>
-<p>We can compute the EHSA manually using sfdep and spacetime classes. In this example we utilize <a href="https://ui.josiahparry.com/ecometrics.html#ecometrics" class="external-link">Ecometric</a> Data from the Boston Area Research Initiative (<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XTEJRE" class="external-link">data and documentation)</a>. These data are generated from 911 calls in Boston from 2010 - 2020 and aggregated to the Census Block Group (CBG) level. The column <code>value</code> indicates the calculated prevalence which is derived from Exploratory Factor Analysis and population projections.</p>
+<p>We can compute the EHSA manually using sfdep and spacetime classes.
+In this example we utilize <a href="https://ui.josiahparry.com/ecometrics.html#ecometrics" class="external-link">Ecometric</a>
+Data from the Boston Area Research Initiative (<a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/XTEJRE" class="external-link">data
+and documentation)</a>. These data are generated from 911 calls in
+Boston from 2010 - 2020 and aggregated to the Census Block Group (CBG)
+level. The column <code>value</code> indicates the calculated prevalence
+which is derived from Exploratory Factor Analysis and population
+projections.</p>
 <div class="section level3">
 <h3 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
 </h3>
-<p>The data are stored in the internal data file <code>bos-ecometric.csv</code> and <code>bos-ecometric.geojson</code>. We will read these in to <code>df</code> and <code>geo</code> and will create a new spacetime object called <code>bos</code> with them.</p>
+<p>The data are stored in the internal data file
+<code>bos-ecometric.csv</code> and <code>bos-ecometric.geojson</code>.
+We will read these in to <code>df</code> and <code>geo</code> and will
+create a new spacetime object called <code>bos</code> with them.</p>
 <blockquote>
-<p>Note: 2022-05-31 this data is available only in the development version, so please install with <code>remotes::install_github("josiahparry/sfdep")</code>.</p>
+<p>Note: 2022-05-31 this data is available only in the development
+version, so please install with
+<code>remotes::install_github("josiahparry/sfdep")</code>.</p>
 </blockquote>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Create objects to store file paths </span>
@@ -251,13 +331,22 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>017  1.64 2017-01-01 </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>018  0.49 2018-01-01 </span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>019  0.17 2019-01-01 </span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 1,670 more rows</span></span></code></pre></div>
+<span class="co">#&gt; <span style="color: #949494;"># … with 1,670 more rows</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="local-gi">Local Gi*<a class="anchor" aria-label="anchor" href="#local-gi"></a>
 </h3>
-<p>The first step in EHSA is to calculate the local Gi* for each time period. But that, however, requires a couple of preceding steps. Before we calculate Gi* we need to identify neighbors and weights.</p>
-<p>To do this, we activate the geometry context and create two new columns <code>nb</code> and <code>wt</code>. Then we will activate the data context again and copy over the nb and wt columns to each time-slice using <code><a href="../reference/set_col.html">set_nbs()</a></code> and <code><a href="../reference/set_col.html">set_wts()</a></code>—<strong>row order is very important</strong> so do not rearrange the observations after using <code><a href="../reference/set_col.html">set_nbs()</a></code> or <code><a href="../reference/set_col.html">set_wts()</a></code>.</p>
+<p>The first step in EHSA is to calculate the local Gi* for each time
+period. But that, however, requires a couple of preceding steps. Before
+we calculate Gi* we need to identify neighbors and weights.</p>
+<p>To do this, we activate the geometry context and create two new
+columns <code>nb</code> and <code>wt</code>. Then we will activate the
+data context again and copy over the nb and wt columns to each
+time-slice using <code><a href="../reference/set_col.html">set_nbs()</a></code> and
+<code><a href="../reference/set_col.html">set_wts()</a></code>—<strong>row order is very important</strong> so
+do not rearrange the observations after using <code><a href="../reference/set_col.html">set_nbs()</a></code> or
+<code><a href="../reference/set_col.html">set_wts()</a></code>.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">bos_nb</span> <span class="op">&lt;-</span> <span class="va">bos</span> |&gt; 
   <span class="fu"><a href="../reference/activate.html">activate</a></span><span class="op">(</span><span class="st">"geometry"</span><span class="op">)</span> |&gt; 
@@ -283,7 +372,11 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 25025010702 Guns       <span style="text-decoration: underline;">2</span>010  0.46 2010-01-01  <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl [6]&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 25025010204 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl [4]&gt;</span></span>
 <span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 25025010802 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl [5]&gt;</span></span></code></pre></div>
-<p>This dataset now has neighbors and weights for each time-slice. We can use these new columns to manually calculate the local Gi* for each location. We can do this by grouping by <code>time_period</code> and using <code><a href="../reference/local_gstar.html">local_gstar_perm()</a></code>. After which, we unnest the new data frame column <code>gi_star</code>.</p>
+<p>This dataset now has neighbors and weights for each time-slice. We
+can use these new columns to manually calculate the local Gi* for each
+location. We can do this by grouping by <code>time_period</code> and
+using <code><a href="../reference/local_gstar.html">local_gstar_perm()</a></code>. After which, we unnest the new
+data frame column <code>gi_star</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gi_stars</span> <span class="op">&lt;-</span> <span class="va">bos_nb</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">time_period</span><span class="op">)</span> |&gt; 
@@ -297,25 +390,30 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co">#&gt; <span style="color: #949494;"># Groups:   time_period [10]</span></span>
 <span class="co">#&gt;    .region_id  time_period gi_star p_folded_sim</span>
 <span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 25025010405 2010-01-01   -<span style="color: #BB0000;">0.928</span>        0.182</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 25025010404 2010-01-01   -<span style="color: #BB0000;">1.37</span>         0.032</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 25025010801 2010-01-01   -<span style="color: #BB0000;">1.48</span>         0.03 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 25025010702 2010-01-01   -<span style="color: #BB0000;">0.799</span>        0.22 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 25025010204 2010-01-01   -<span style="color: #BB0000;">1.28</span>         0.06 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 25025010802 2010-01-01   -<span style="color: #BB0000;">1.42</span>         0.034</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 25025010104 2010-01-01   -<span style="color: #BB0000;">1.77</span>         0.01 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 25025000703 2010-01-01   -<span style="color: #BB0000;">1.46</span>         0.044</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 25025000504 2010-01-01   -<span style="color: #BB0000;">1.40</span>         0.054</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 25025000704 2010-01-01   -<span style="color: #BB0000;">1.56</span>         0.024</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 1,670 more rows</span></span></code></pre></div>
-<p>With these Gi* measures we can then evaluate each location for a trend using the Mann-Kendall test.</p>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 25025010405 2010-01-01   -<span style="color: #BB0000;">0.962</span>        0.162</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 25025010404 2010-01-01   -<span style="color: #BB0000;">1.43</span>         0.038</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 25025010801 2010-01-01   -<span style="color: #BB0000;">1.50</span>         0.028</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 25025010702 2010-01-01   -<span style="color: #BB0000;">0.875</span>        0.194</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 25025010204 2010-01-01   -<span style="color: #BB0000;">1.31</span>         0.05 </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 25025010802 2010-01-01   -<span style="color: #BB0000;">1.47</span>         0.032</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 25025010104 2010-01-01   -<span style="color: #BB0000;">1.63</span>         0.018</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 25025000703 2010-01-01   -<span style="color: #BB0000;">1.39</span>         0.034</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 25025000504 2010-01-01   -<span style="color: #BB0000;">1.42</span>         0.058</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 25025000704 2010-01-01   -<span style="color: #BB0000;">1.64</span>         0.018</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 1,670 more rows</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></code></pre></div>
+<p>With these Gi* measures we can then evaluate each location for a
+trend using the Mann-Kendall test.</p>
 </div>
 <div class="section level3">
 <h3 id="mann-kendall-test-1">Mann-Kendall Test<a class="anchor" aria-label="anchor" href="#mann-kendall-test-1"></a>
 </h3>
-<p>Let’s first take only a single location, <code>25025010403</code>, and evaluate the Mann-Kendall statistic for it by hand. Then we can extend this to each location.</p>
+<p>Let’s first take only a single location, <code>25025010403</code>,
+and evaluate the Mann-Kendall statistic for it by hand. Then we can
+extend this to each location.</p>
 <blockquote>
-<p>Note that there is a bit of finagling the MK test to make it work nicely in a dplyr::summarise() call.</p>
+<p>Note that there is a bit of finagling the MK test to make it work
+nicely in a dplyr::summarise() call.</p>
 </blockquote>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cbg</span> <span class="op">&lt;-</span> <span class="va">gi_stars</span> |&gt; 
@@ -336,9 +434,11 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 5</span></span>
 <span class="co">#&gt;     tau    sl     S     D  varS</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 0.244 0.371    11    45   125</span></code></pre></div>
-<p>In the above result, <code>sl</code> is the p-value. This result tells us that there is a slight upward but insignificant trend.</p>
-<p>We can replicate this for each location by using <code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>.</p>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 0.378 0.152    17    45   125</span></code></pre></div>
+<p>In the above result, <code>sl</code> is the p-value. This result
+tells us that there is a slight upward but insignificant trend.</p>
+<p>We can replicate this for each location by using
+<code><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by()</a></code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ehsa_manual</span> <span class="op">&lt;-</span> <span class="va">gi_stars</span> |&gt; 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">.region_id</span><span class="op">)</span> |&gt; 
@@ -353,21 +453,32 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 <span class="co"># show top 5 locations</span>
 <span class="va">emerging</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 6</span></span>
-<span class="co">#&gt;   .region_id     tau       sl     S     D  varS</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 25025120201 -<span style="color: #BB0000;">0.956</span> 0.000<span style="text-decoration: underline;">172</span>   -<span style="color: #BB0000;">43</span>    45   125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 25025030200  0.778 0.002<span style="text-decoration: underline;">36</span>     35    45   125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 25025090700  0.778 0.002<span style="text-decoration: underline;">36</span>     35    45   125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 25025100601 -<span style="color: #BB0000;">0.778</span> 0.002<span style="text-decoration: underline;">36</span>    -<span style="color: #BB0000;">35</span>    45   125</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 25025060600  0.733 0.004<span style="text-decoration: underline;">21</span>     33    45   125</span></code></pre></div>
-<p>Here we can see there are a few locations that are becoming significantly colder and others that are becoming significantly warmer.</p>
+<span class="co">#&gt;   .region_id     tau        sl     S     D  varS</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 25025120201 -<span style="color: #BB0000;">1</span>     0.000<span style="text-decoration: underline;">083</span>0   -<span style="color: #BB0000;">45</span>    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 25025090700  0.822 0.001<span style="text-decoration: underline;">28</span>      37    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 25025100700 -<span style="color: #BB0000;">0.778</span> 0.002<span style="text-decoration: underline;">36</span>     -<span style="color: #BB0000;">35</span>    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 25025030200  0.733 0.004<span style="text-decoration: underline;">21</span>      33    45   125</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 25025060600  0.733 0.004<span style="text-decoration: underline;">21</span>      33    45   125</span></code></pre></div>
+<p>Here we can see there are a few locations that are becoming
+significantly colder and others that are becoming significantly
+warmer.</p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="using-emerging_hotspot_analysis">Using <code>emerging_hotspot_analysis()</code><a class="anchor" aria-label="anchor" href="#using-emerging_hotspot_analysis"></a>
 </h2>
-<p>While we can do the calculations manually as above, this is limited in two ways. Primarily that in the above example we used spatial neighbors only. Whereas in EHSA we can—and likely should—incorporate the time-lag of our spatial neighbors. Secondly, there are classifications proposed by ESRI which help us understand how each location is changing over time. Both of these are handled by the <code><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis()</a></code> function.</p>
-<p>This <code><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis()</a></code> takes a spacetime object <code>x</code>, and the quoted name of the variable of interested in <code>.var</code> at minimum. We can specify the number of time lags using the argument <code>k</code> which is set to 1 by default.</p>
+<p>While we can do the calculations manually as above, this is limited
+in two ways. Primarily that in the above example we used spatial
+neighbors only. Whereas in EHSA we can—and likely should—incorporate the
+time-lag of our spatial neighbors. Secondly, there are classifications
+proposed by ESRI which help us understand how each location is changing
+over time. Both of these are handled by the
+<code><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis()</a></code> function.</p>
+<p>This <code><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis()</a></code> takes a spacetime
+object <code>x</code>, and the quoted name of the variable of interested
+in <code>.var</code> at minimum. We can specify the number of time lags
+using the argument <code>k</code> which is set to 1 by default.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># conduct EHSA</span>
 <span class="va">ehsa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis</a></span><span class="op">(</span>
@@ -391,17 +502,16 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 
 <span class="co"># evaluate the classifications of our hotspots</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">ehsa</span>, <span class="va">classification</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 2</span></span>
+<span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span>
 <span class="co">#&gt;   classification           n</span>
 <span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> consecutive hotspot     20</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> intensifying hotspot     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> no pattern detected     18</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> oscilating hotspot       1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> persistent coldspot     10</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> persistent hotspot       4</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> sporadic coldspot       85</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> sporadic hotspot        28</span></code></pre></div>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> consecutive hotspot     19</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> intensifying hotspot     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> no pattern detected     26</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> persistent coldspot      9</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> persistent hotspot       6</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> sporadic coldspot       84</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> sporadic hotspot        23</span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -416,7 +526,8 @@ G_i* = \frac{\sum_{j}W_{ij}X_j}
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
     </footer>

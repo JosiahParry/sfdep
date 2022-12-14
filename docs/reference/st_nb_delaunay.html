@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,12 +76,12 @@
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>.id</dt>
+    <dl><dt>geometry</dt>
+<dd><p>an object of class sfc. If polygons are used, points are generated using <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">sf::st_point_on_surface()</a></code>.</p></dd>
+<dt>.id</dt>
 <dd><p>default <code>NULL</code>. Passed as <code>spdep::tri2nb(x, row.names = .id)</code> to <code>spdep</code>.</p></dd>
 <dt>.nnmult</dt>
 <dd><p>default 3. Used for memory scalling. See <code><a href="https://r-spatial.github.io/spdep/reference/graphneigh.html" class="external-link">spdep::gabrielneigh()</a></code> for more.</p></dd>
-<dt>geoemtry</dt>
-<dd><p>an object of class sfc. If polygons are used, points are generated using <code><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">sf::st_point_on_surface()</a></code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>

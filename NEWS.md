@@ -1,7 +1,6 @@
 # sfdep 0.2.1
 
-- 
-- Local join count uses spdep now
+- Local join count univariate uses spdep now
 - adds graph based neighbors:
   - st_nb_delaunay() uses spdep::tri2nb()
   - st_nb_gabriel() uses spdep::gabrielneigh() and spdep::graph2nb()

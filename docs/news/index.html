@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,61 +61,114 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="0.2.0" id="sfdep-020">sfdep 0.2.0<a class="anchor" aria-label="anchor" href="#sfdep-020"></a></h2>
+<h2 class="pkg-version" data-toc-text="0.2.1" id="sfdep-021">sfdep 0.2.1<a class="anchor" aria-label="anchor" href="#sfdep-021"></a></h2>
+<ul><li>Local join count univariate uses spdep now</li>
+<li>adds graph based neighbors:
+<ul><li>st_nb_delaunay() uses spdep::tri2nb()</li>
+<li>st_nb_gabriel() uses spdep::gabrielneigh() and
+spdep::graph2nb()</li>
+<li>st_nb_relative() uses spdep::relativeneigh() and
+spdep::graph2nb()</li>
+</ul></li>
+<li>
+<code><a href="../reference/activate.html">activate()</a></code> is now exported as a generic method to no
+longer conflict with tidygraph</li>
+<li>
+<code><a href="../reference/st_as_graph.html">st_as_graph()</a></code> now creates undirected graphs</li>
+<li>new functions for sfnetworks
+<ul><li>
+<code><a href="../reference/node_get_nbs.html">node_get_nbs()</a></code>: converts the node adjacency list to a
+neighbor list</li>
+<li>
+<code><a href="../reference/node_get_nbs.html">node_get_edge_list()</a></code>: creates an edge adjacency list
+used to get edge attribute columns</li>
+<li>
+<code><a href="../reference/node_get_nbs.html">node_get_edge_col()</a></code>: uses the edge list to get edge
+attributes and turn them into a weight like list</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="sfdep-020">sfdep 0.2.0<a class="anchor" aria-label="anchor" href="#sfdep-020"></a></h2><p class="text-muted">CRAN release: 2022-08-15</p>
 <ul><li>
 <code><a href="../reference/spatial_gini.html">spatial_gini()</a></code> is a new global measure</li>
 <li>
-<code><a href="../reference/center_mean.html">euclidean_median()</a></code> is added for identifying the euclidean median of points for point pattern analysis.
+<code><a href="../reference/center_mean.html">euclidean_median()</a></code> is added for identifying the
+euclidean median of points for point pattern analysis.
 <ul><li>Implemented using <code><a href="https://rdrr.io/pkg/pracma/man/geo_median.html" class="external-link">pracma::geo_median()</a></code>
 <ul><li>
 <code>pracma</code> is now added as a suggested package</li>
 </ul></li>
 </ul></li>
 <li>
-<code><a href="../reference/center_mean.html">center_mean()</a></code> and <code><a href="../reference/center_mean.html">center_median()</a></code> are added for point pattern analysis</li>
+<code><a href="../reference/center_mean.html">center_mean()</a></code> and <code><a href="../reference/center_mean.html">center_median()</a></code> are
+added for point pattern analysis</li>
 <li>
-<code><a href="../reference/global_jc_perm.html">tally_jc()</a></code> returns join count matrix via <code><a href="https://r-spatial.github.io/spdep/reference/joincount.multi.html" class="external-link">spdep::joincount.multi()</a></code> as a data.frame object</li>
+<code><a href="../reference/global_jc_perm.html">tally_jc()</a></code> returns join count matrix via
+<code><a href="https://r-spatial.github.io/spdep/reference/joincount.multi.html" class="external-link">spdep::joincount.multi()</a></code> as a data.frame object</li>
 <li>
-<code><a href="../reference/st_complete_nb.html">st_complete_nb()</a></code> creates a complete graph of neighbors</li>
-<li>set operations for neighbor lists <code><a href="../reference/nb_union.html">nb_union()</a></code>, <code><a href="../reference/nb_union.html">nb_intersect()</a></code>, <code><a href="../reference/nb_union.html">nb_setdiff()</a></code>
+<code><a href="../reference/st_complete_nb.html">st_complete_nb()</a></code> creates a complete graph of
+neighbors</li>
+<li>set operations for neighbor lists <code><a href="../reference/nb_union.html">nb_union()</a></code>,
+<code><a href="../reference/nb_union.html">nb_intersect()</a></code>, <code><a href="../reference/nb_union.html">nb_setdiff()</a></code>
 </li>
 <li>
-<code><a href="../reference/st_block_nb.html">st_block_nb()</a></code> is introduced to create neighbor contiguity based on spatial regimes
+<code><a href="../reference/st_block_nb.html">st_block_nb()</a></code> is introduced to create neighbor
+contiguity based on spatial regimes
 <ul><li>inspired by <a href="https://pysal.org/libpysal/generated/libpysal.weights.block_weights.html" class="external-link uri">https://pysal.org/libpysal/generated/libpysal.weights.block_weights.html</a>
 </li>
 </ul></li>
 <li>
-<code><a href="../reference/critical_threshold.html">critical_threshold()</a></code> gains argument <code>k</code> to identify minimum number of neighbors when calculating threshold</li>
+<code><a href="../reference/critical_threshold.html">critical_threshold()</a></code> gains argument <code>k</code> to
+identify minimum number of neighbors when calculating threshold</li>
 <li>
-<code><a href="../reference/pct_nonzero.html">pct_nonzero()</a></code> calculates the percent of non-zero neighbors</li>
+<code><a href="../reference/pct_nonzero.html">pct_nonzero()</a></code> calculates the percent of non-zero
+neighbors</li>
 <li>
 <code><a href="../reference/szero.html">szero()</a></code> to calculate the global sum of weights</li>
 <li>
-<code><a href="../reference/wt_as_matrix.html">nb_as_matrix()</a></code> and <code><a href="../reference/wt_as_matrix.html">wt_as_matrix()</a></code> convert neighbor and weights lists to matrices</li>
-<li>two new functions <code><a href="../reference/include_self.html">include_self()</a></code> based on <code><a href="https://r-spatial.github.io/spdep/reference/include.self.html" class="external-link">spdep::include.self()</a></code> and new <code><a href="../reference/include_self.html">remove_self()</a></code> which is available separately in spdep due to <a href="https://github.com/r-spatial/spdep/issues/83" class="external-link">issue 83</a> as <code>spdep::remove.self()</code>.</li>
+<code><a href="../reference/wt_as_matrix.html">nb_as_matrix()</a></code> and <code><a href="../reference/wt_as_matrix.html">wt_as_matrix()</a></code> convert
+neighbor and weights lists to matrices</li>
+<li>two new functions <code><a href="../reference/include_self.html">include_self()</a></code> based on
+<code><a href="https://r-spatial.github.io/spdep/reference/include.self.html" class="external-link">spdep::include.self()</a></code> and new <code><a href="../reference/include_self.html">remove_self()</a></code>
+which is available separately in spdep due to <a href="https://github.com/r-spatial/spdep/issues/83" class="external-link">issue 83</a> as
+<code><a href="https://r-spatial.github.io/spdep/reference/include.self.html" class="external-link">spdep::remove.self()</a></code>.</li>
 <li>
-<code><a href="../reference/local_g.html">local_g_perm()</a></code> returns correct G statistic. Previously returned only the internal measure.<br></li>
+<code><a href="../reference/local_g.html">local_g_perm()</a></code> returns correct G statistic. Previously
+returned only the internal measure.<br></li>
 <li>
-<code><a href="../reference/local_gstar.html">local_gstar()</a></code> and <code><a href="../reference/local_gstar.html">local_gstar_perm()</a></code> do not warn when <code>self.included = TRUE</code>
+<code><a href="../reference/local_gstar.html">local_gstar()</a></code> and <code><a href="../reference/local_gstar.html">local_gstar_perm()</a></code> do
+not warn when <code>self.included = TRUE</code>
 </li>
 <li>
-<code><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis()</a></code> implements emerging hotspot analysis with spacetime objects</li>
-<li>a new <code>spacetime</code> class for linking spatio-temporal data and geometry
-<ul><li>see the <a href="/articles/spacetime-s3.html">spacetime vignette</a>.</li>
+<code><a href="../reference/emerging_hotspot_analysis.html">emerging_hotspot_analysis()</a></code> implements emerging hotspot
+analysis with spacetime objects</li>
+<li>a new <code>spacetime</code> class for linking spatio-temporal data
+and geometry
+<ul><li>see the <a href="https://sfdep.josiahparry.com/articles/spacetime-s3.html" class="external-link">spacetime
+vignette</a>.</li>
 </ul></li>
-<li>Implemented colocation quotient (CLQ) measures See the <a href="/articles/colocation-analysis.html">colocation vignette</a>:
+<li>Implemented colocation quotient (CLQ) measures See the <a href="https://sfdep.josiahparry.com/articles/colocation-analysis.html" class="external-link">colocation
+vignette</a>:
 <ul><li>
-<code><a href="../reference/global_colocation.html">global_colocation()</a></code> for global colocation of one categorical variable</li>
+<code><a href="../reference/global_colocation.html">global_colocation()</a></code> for global colocation of one
+categorical variable</li>
 <li>
-<code><a href="../reference/pairwise_colocation.html">pairwise_colocation()</a></code> for asymmetric colocation of subcategories of one or two categories</li>
+<code><a href="../reference/pairwise_colocation.html">pairwise_colocation()</a></code> for asymmetric colocation of
+subcategories of one or two categories</li>
 <li>
 <code><a href="../reference/local_colocation.html">local_colocation()</a></code> for local CLQ measure</li>
-<li>these functions are not fast! PRs welcomed to improve computation speed.</li>
+<li>these functions are not fast! PRs welcomed to improve computation
+speed.</li>
 </ul></li>
 <li>
-<code><a href="../reference/st_kernel_weights.html">st_kernel_weights()</a></code> now returns an attribute <code>kernel</code> which is set to the value of the kernel argument</li>
+<code><a href="../reference/st_kernel_weights.html">st_kernel_weights()</a></code> now returns an attribute
+<code>kernel</code> which is set to the value of the kernel
+argument</li>
 <li>
-<code><a href="../reference/cond_permute_nb.html">cond_permute_nb()</a></code> specifies <code>SIMPLIFY = FALSE</code> in internal <code><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply()</a></code> call which was causing errors in creating conditionally permuted neighbor lists</li>
+<code><a href="../reference/cond_permute_nb.html">cond_permute_nb()</a></code> specifies
+<code>SIMPLIFY = FALSE</code> in internal <code><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply()</a></code> call
+which was causing errors in creating conditionally permuted neighbor
+lists</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="sfdep-010">sfdep 0.1.0<a class="anchor" aria-label="anchor" href="#sfdep-010"></a></h2><p class="text-muted">CRAN release: 2022-04-20</p>
@@ -131,7 +184,8 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
+2.0.2.</p>
 </div>
 
     </footer></div>

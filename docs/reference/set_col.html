@@ -12,7 +12,7 @@ context."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/ma
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,27 +119,94 @@ use <code>set_col()</code></p>
 <span class="r-in">                .loc_col <span class="op">=</span> <span class="st">".region_id"</span>,</span>
 <span class="r-in">                .time_col <span class="op">=</span> <span class="st">"time_period"</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">bos</span> <span class="op">&lt;-</span> <span class="fu"><a href="activate.html">activate</a></span><span class="op">(</span><span class="va">bos</span>, <span class="st">"geometry"</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in UseMethod("activate"):</span> no applicable method for 'activate' applied to an object of class "c('spacetime', 'spec_tbl_df', 'tbl_df', 'tbl', 'data.frame')"</span>
 <span class="r-in"><span class="va">bos</span><span class="op">$</span><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">bos</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in spdep::poly2nb(x, queen = queen, ...):</span> Not a polygon object</span>
 <span class="r-in"><span class="va">bos</span><span class="op">$</span><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">bos</span><span class="op">$</span><span class="va">nb</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `nb`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in nb2listw(nb, style = style, zero.policy = allow_zero, ...):</span> Not a neighbours list</span>
 <span class="r-in"><span class="va">bos</span><span class="op">$</span><span class="va">card</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_cardinalties.html">st_cardinalties</a></span><span class="op">(</span><span class="va">bos</span><span class="op">$</span><span class="va">nb</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Unknown or uninitialised column: `nb`.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> Assigned data `st_cardinalties(bos$nb)` must be compatible with existing data.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Existing data has 1680 rows.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Assigned data has 0 rows.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">ℹ</span> Only vectors of size 1 are recycled.</span>
 <span class="r-in"></span>
 <span class="r-in"><span class="fu">set_nbs</span><span class="op">(</span><span class="va">bos</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_nbs(bos):</span> `.nb_col` is missing from `geometry`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold; font-style: italic;">spacetime ────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Context:</span><span style="color: #555555; font-style: italic;">`data`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">168</span><span style="color: #555555;"> locations `.region_id`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">10</span><span style="color: #555555;"> time periods `time_period`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">── </span><span style="color: #555555; font-style: italic;">data context</span><span style="color: #B2B2B2;"> ────────────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,680 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .region_id  ecometric  year value time_period nb       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>010  0.35 2010-01-01  <span style="color: #949494;">&lt;int [8]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 25025010404 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 25025010801 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [4]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 25025010702 Guns       <span style="text-decoration: underline;">2</span>010  0.46 2010-01-01  <span style="color: #949494;">&lt;int [5]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 25025010204 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 25025010802 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [4]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 25025010104 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [5]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 25025000703 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 25025000504 Guns       <span style="text-decoration: underline;">2</span>010  0.22 2010-01-01  <span style="color: #949494;">&lt;int [5]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 25025000704 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;int [4]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,670 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-in"><span class="fu">set_wts</span><span class="op">(</span><span class="va">bos</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_wts(bos):</span> `.wt_col` is missing from `geometry`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold; font-style: italic;">spacetime ────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Context:</span><span style="color: #555555; font-style: italic;">`data`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">168</span><span style="color: #555555;"> locations `.region_id`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">10</span><span style="color: #555555;"> time periods `time_period`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">── </span><span style="color: #555555; font-style: italic;">data context</span><span style="color: #B2B2B2;"> ────────────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,680 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .region_id  ecometric  year value time_period wt       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>010  0.35 2010-01-01  <span style="color: #949494;">&lt;dbl [8]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 25025010404 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;dbl [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 25025010801 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;dbl [4]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 25025010702 Guns       <span style="text-decoration: underline;">2</span>010  0.46 2010-01-01  <span style="color: #949494;">&lt;dbl [5]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 25025010204 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;dbl [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 25025010802 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;dbl [4]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 25025010104 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;dbl [5]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 25025000703 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;dbl [3]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 25025000504 Guns       <span style="text-decoration: underline;">2</span>010  0.22 2010-01-01  <span style="color: #949494;">&lt;dbl [5]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 25025000704 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01  <span style="color: #949494;">&lt;dbl [4]&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,670 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-in"><span class="fu">set_col</span><span class="op">(</span><span class="va">bos</span>, <span class="st">"card"</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_col(bos, "card"):</span> `.from_geo` is missing from `geometry`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold; font-style: italic;">spacetime ────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Context:</span><span style="color: #555555; font-style: italic;">`data`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">168</span><span style="color: #555555;"> locations `.region_id`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">10</span><span style="color: #555555;"> time periods `time_period`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">── </span><span style="color: #555555; font-style: italic;">data context</span><span style="color: #B2B2B2;"> ────────────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,680 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .region_id  ecometric  year value time_period  card</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>010  0.35 2010-01-01      8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 25025010404 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 25025010801 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01      4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 25025010702 Guns       <span style="text-decoration: underline;">2</span>010  0.46 2010-01-01      5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 25025010204 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 25025010802 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01      4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 25025010104 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01      5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 25025000703 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01      3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 25025000504 Guns       <span style="text-decoration: underline;">2</span>010  0.22 2010-01-01      5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 25025000704 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01      4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,670 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 <span class="r-in"><span class="fu">set_col</span><span class="op">(</span><span class="va">bos</span>, <span class="st">"card"</span>, <span class="st">"cardinalities"</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in set_col(bos, "card", "cardinalities"):</span> `.from_geo` is missing from `geometry`.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold; font-style: italic;">spacetime ────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555;">Context:</span><span style="color: #555555; font-style: italic;">`data`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">168</span><span style="color: #555555;"> locations `.region_id`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #555555; font-style: italic;">10</span><span style="color: #555555;"> time periods `time_period`</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #B2B2B2;">── </span><span style="color: #555555; font-style: italic;">data context</span><span style="color: #B2B2B2;"> ────────────────────────────────────────────────────────────────</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,680 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    .region_id  ecometric  year value time_period cardinalities</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 25025010405 Guns       <span style="text-decoration: underline;">2</span>010  0.35 2010-01-01              8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 25025010404 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01              3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 25025010801 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01              4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 25025010702 Guns       <span style="text-decoration: underline;">2</span>010  0.46 2010-01-01              5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 25025010204 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01              3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 25025010802 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01              4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 25025010104 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01              5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 25025000703 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01              3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 25025000504 Guns       <span style="text-decoration: underline;">2</span>010  0.22 2010-01-01              5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 25025000704 Guns       <span style="text-decoration: underline;">2</span>010  0    2010-01-01              4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,670 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
