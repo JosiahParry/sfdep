@@ -125,6 +125,8 @@ reference:
 
 - title: Utility Functions
   contents:
+  - tidyverse
+  - recreate_listw
   - find_xj
   - include_self
   - remove_self
