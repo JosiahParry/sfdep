@@ -96,7 +96,7 @@ bos_nb <- bos_nb |>
 bos_nb
 ```
 
-Then we can group our dataset and calculate metrics based on different years. But this is only possible for data that are spacetime cubes. Read the spacetime vignette for more. We can check if this object meets the conditions to be a spacetime cube.
+Then we can group our data set and calculate metrics based on different years. But this is only possible for data that are spacetime cubes. Read the spacetime vignette for more. We can check if this object meets the conditions to be a spacetime cube.
   
 ```{r}
 is_spacetime_cube(bos)
@@ -109,7 +109,7 @@ bos_gs <- bos_nb |>
   activate("data") |> 
   filter(ecometric == "Guns") |> 
   group_by(year) |> 
-  mutate(g = local_g(value, nb, wt))
+  summarise(g = local_g(value, nb, wt))
 
 bos_gs
 ```

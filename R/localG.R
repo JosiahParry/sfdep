@@ -29,10 +29,7 @@ local_g <- function(x, nb, wt, alternative = "two.sided", ...) {
   }
   listw <- recreate_listw(nb, wt)
   res <- spdep::localG(x, listw, alternative = alternative, ...)
-
-  class(res) <- union(class(res), "numeric")
-
-  res
+  unclass(res)
 }
 
 
