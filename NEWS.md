@@ -1,4 +1,4 @@
-# sfdep (development version)
+# sfdep 0.2.1
 
 - 
 - Local join count uses spdep now

@@ -109,7 +109,7 @@ bos_gs <- bos_nb |>
   activate("data") |> 
   filter(ecometric == "Guns") |> 
   group_by(year) |> 
-  summarise(g = local_g(value, nb, wt))
+  mutate(g = local_g(value, nb, wt))
 
 bos_gs
 ```
@@ -173,15 +173,5 @@ ellip <- st_ellipse(ellip_cent,
 plot(ellip)
 plot(pnts, add = TRUE)
 ```
-
-
-
-## General
-
-- `include_self()`
-- `remove_self()`
-- Fixes a bug in `local_g_perm()` and `local_gstar_perm()` which would return the G value before being converted into a z-score 
-
-
 
 
