@@ -134,6 +134,6 @@ check_polygon <- function(geometry) {
     cli::cli_alert_warning("Polygon provided. Using point on surface.")
     return(sf::st_point_on_surface(geometry))
   }
-  x
+  geometry
 }
 
