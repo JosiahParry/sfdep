@@ -1,5 +1,11 @@
 # sfdep (development version)
 
+- 
+- Local join count uses spdep now
+- adds graph based neighbors:
+  - st_nb_delaunay() uses spdep::tri2nb()
+  - st_nb_gabriel() uses spdep::gabrielneigh() and spdep::graph2nb()
+  - st_nb_relative() uses spdep::relativeneigh() and spdep::graph2nb()
 - `activate()` is now exported as a generic method to no longer conflict with tidygraph
 - `st_as_graph()` now creates undirected graphs
 - new functions for sfnetworks

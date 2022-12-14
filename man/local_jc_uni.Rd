@@ -5,15 +5,19 @@
 \title{Compute local univariate join count}
 \usage{
 local_jc_uni(
-  x,
+  fx,
+  chosen,
   nb,
   wt = st_weights(nb, style = "B"),
   nsim = 499,
-  alternative = "two.sided"
+  alternative = "two.sided",
+  iseed = NULL
 )
 }
 \arguments{
-\item{x}{a binary variable either numeric or logical}
+\item{fx}{a binary variable either numeric or logical}
+
+\item{chosen}{a scalar character containing the level of \code{fx} that should be considered the observed value (1).}
 
 \item{nb}{a neighbors list object.}
 
@@ -22,6 +26,8 @@ local_jc_uni(
 \item{nsim}{the number of conditional permutation simulations}
 
 \item{alternative}{default \code{"greater"}. One of \code{"less"} or \code{"greater"}.}
+
+\item{iseed}{default NULL, used to set the seed for possible parallel RNGs}
 }
 \value{
 a \code{data.frame} with two columns \code{join_count} and \code{p_sim} and number of rows equal to the length of arguments \code{x}, \code{nb}, and \code{wt}.
@@ -34,13 +40,14 @@ than half of the time.
 The local join count statistic requires a binary weights list which can be generated with \code{st_weights(nb, style = "B")}. Additionally, ensure that the binary variable of interest is rarely occurring in no more than half of observations.
 
 P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see \href{https://geodacenter.github.io/glossary.html#ppvalue}{Geoda Glossary}.
+Calls \code{spdep::local_joincount_uni()}.
 }
 \examples{
 res <- dplyr::transmute(
   guerry,
-  top_crime = crime_prop > 9000,
+  top_crime = as.factor(crime_prop > 9000),
   nb = st_contiguity(geometry),
   wt = st_weights(nb, style = "B"),
-  jc = local_jc_uni(top_crime, nb, wt))
+  jc = local_jc_uni(top_crime, "TRUE", nb, wt))
 tidyr::unnest(res, jc)
 }

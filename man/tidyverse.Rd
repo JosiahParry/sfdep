@@ -4,11 +4,14 @@
 \alias{tidyverse}
 \alias{group_by.spacetime}
 \alias{mutate.spacetime}
+\alias{ungroup.spacetime}
 \title{tidyverse methods for spacetime objects}
 \usage{
 group_by.spacetime(.data, ...)
 
 mutate.spacetime(.data, ...)
+
+ungroup.spacetime(.data, ...)
 }
 \arguments{
 \item{.data}{a data frame}

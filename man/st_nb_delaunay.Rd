@@ -13,11 +13,11 @@ st_nb_gabriel(geometry, .nnmult = 3)
 st_nb_relative(geometry, .nnmult = 3)
 }
 \arguments{
+\item{geometry}{an object of class sfc. If polygons are used, points are generated using \code{sf::st_point_on_surface()}.}
+
 \item{.id}{default \code{NULL}. Passed as \code{spdep::tri2nb(x, row.names = .id)} to \code{spdep}.}
 
 \item{.nnmult}{default 3. Used for memory scalling. See \code{\link[spdep:graphneigh]{spdep::gabrielneigh()}} for more.}
-
-\item{geoemtry}{an object of class sfc. If polygons are used, points are generated using \code{sf::st_point_on_surface()}.}
 }
 \description{
 Create graph based neighbors on a set of points.

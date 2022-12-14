@@ -10,6 +10,8 @@ dpad <- data.frame(scale(as.data.frame(bh)[,5:8]))
 
 bh.nb <- poly2nb(bh)
 
+nb <- st_contiguity(bh)
+
 ### calculating costs
 lcosts <- nbcosts(bh.nb, dpad)
 
@@ -41,3 +43,45 @@ all.equal(E(g)$weight,unlist(lcosts))
 gmst <- igraph::mst(g)
 
 
+
+
+
+# impl so far -------------------------------------------------------------
+
+.skater <- function(x, nb, k, .method = "euclidean",
+                    .ini = NULL, scale = TRUE, ...) {
+
+  if (inherits(x, "numeric")) x <- list(x)
+  m <- Reduce(cbind.data.frame, x)
+
+  if (scale) m <- scale(m)
+
+  costs <- spdep::nbcosts(nb, m, method = .method)
+
+  listw <- spdep::nb2listw(nb, costs, style = "B")
+
+  tree <- spdep::mstree(listw, ini = .ini)
+
+
+  skater(tree[,1:2], m, ncuts = k - 1 , ...)
+
+}
+#
+res <- .skater(list(bh$HLCI, bh$ELCI), nb, 5)
+
+# The result is still super messy
+plot(st_geometry(bh), col = res$groups)
+
+
+groups <- res$groups
+
+bh |>
+  dplyr::mutate(group = as.factor(groups)) |>
+  ggplot(aes(fill = group)) +
+  geom_sf()
+
+debugonce(.skater)
+
+bh |>
+  dplyr::mutate(y = data.frame(HLCI:ELCI_1)) |>
+  dplyr::pull(y)

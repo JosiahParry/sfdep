@@ -2,7 +2,7 @@
 #'
 #' Create graph based neighbors on a set of points.
 #'
-#' @param geoemtry an object of class sfc. If polygons are used, points are generated using `sf::st_point_on_surface()`.
+#' @param geometry an object of class sfc. If polygons are used, points are generated using `sf::st_point_on_surface()`.
 #' @param .nnmult default 3. Used for memory scalling. See [spdep::gabrielneigh()] for more.
 #' @param .id default `NULL`. Passed as `spdep::tri2nb(x, row.names = .id)` to `spdep`.
 #'
