@@ -28,7 +28,11 @@ local_g <- function(x, nb, wt, alternative = "two.sided", ...) {
     cli::cli_alert_warning("attr `self.include` is `TRUE`. Reporting Gi*.")
   }
   listw <- recreate_listw(nb, wt)
-  spdep::localG(x, listw, alternative = alternative, ...)
+  res <- spdep::localG(x, listw, alternative = alternative, ...)
+
+  class(res) <- union(class(res), "numeric")
+
+  res
 }
 
 
