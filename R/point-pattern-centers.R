@@ -35,7 +35,9 @@ center_mean <- function(geometry, weights = NULL) {
   n <- nrow(coords)
 
   if (!is.null(weights)) {
-    res <- colSums(coords * weights) / n
+    # https://github.com/JosiahParry/sfdep/issues/35
+    # shouts out @JoseLastra
+    res <- colSums(coords * weights) / sum(weights, na.rm = TRUE)
   } else {
     res <- colSums(coords) / n
   }
