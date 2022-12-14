@@ -14,9 +14,9 @@ active <- function(.data) attr(.data, "active")
 #' data frame represents geographies over one or more time periods and the sf
 #' object contains the geographic information for those locations.
 #'
-#' @param x a spacetime object
+#' @param .data a spacetime object
 #' @param what default NULL. Determines which context to activate. Valid argument values
-#'   are `"geometry"` and `"data"`. If left null, returns `x`.
+#'   are `"geometry"` and `"data"`. If left null, returns `.data`.
 #' @export
 #' @examples
 #' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
@@ -34,6 +34,7 @@ active <- function(.data) attr(.data, "active")
 #' active(bos)
 #' activate(bos, "geometry")
 activate <- function(.data, what) UseMethod("activate")
+
 #' @export
 activate.spacetime <- function(.data, what = NULL) {
   match.arg(what, c("geometry", "data", NULL))
