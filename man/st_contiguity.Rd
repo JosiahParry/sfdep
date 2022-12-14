@@ -4,10 +4,10 @@
 \alias{st_contiguity}
 \title{Identify polygon neighbors}
 \usage{
-st_contiguity(x, queen = TRUE, ...)
+st_contiguity(geometry, queen = TRUE, ...)
 }
 \arguments{
-\item{x}{an sf or sfc object.}
+\item{geometry}{an sf or sfc object.}
 
 \item{queen}{default \code{TRUE}. For more see \code{?spdep::poly2nb}}
 

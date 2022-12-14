@@ -4,7 +4,7 @@
 #'
 #' @details
 #' Utilizes [`spdep::poly2nb()`]
-#' @param x an sf or sfc object.
+#' @param geometry an sf or sfc object.
 #' @param queen default `TRUE`. For more see `?spdep::poly2nb`
 #' @param ... additional arguments passed to [spdep::poly2nb()]
 #' @importFrom spdep poly2nb
@@ -20,8 +20,8 @@
 #' guerry %>%
 #'   dplyr::mutate(nb = st_contiguity(geometry), .before = 1)
 #' @returns a list of class `nb`
-st_contiguity <- function(x, queen = TRUE, ...) {
-  nb <- spdep::poly2nb(x, queen = queen, ...)
+st_contiguity <- function(geometry, queen = TRUE, ...) {
+  nb <- spdep::poly2nb(geometry, queen = queen, ...)
   class_modify(nb)
 }
 
@@ -34,7 +34,7 @@ st_contiguity <- function(x, queen = TRUE, ...) {
 #'
 #' This function utilizes [spdep::knearneigh()] and [spdep::knn2nb()].
 #'
-#' @param x an sf or sfc object.
+#' @param geometry an sf or sfc object.
 #' @param k number of nearest neighbours to be returned
 #' @param symmetric default `FALSE`. Whether to force output of neighbours to be symmetric.
 #' @param ... additional arguments to be passed to `knearneigh()`.
@@ -45,9 +45,9 @@ st_contiguity <- function(x, queen = TRUE, ...) {
 #' @examples
 #' st_knn(sf::st_geometry(guerry), k = 8)
 #' @returns a list of class `nb`
-st_knn <- function(x, k = 1, symmetric = FALSE, ...) {
+st_knn <- function(geometry, k = 1, symmetric = FALSE, ...) {
 
-  pnts <- check_polygon(x)
+  pnts <- check_polygon(geometry)
 
   suppressWarnings({
     ks <- spdep::knearneigh(pnts, k = k, ...)
@@ -123,16 +123,16 @@ st_nb_lag_cumul <- function(nb, order) {
 #' Checks geometry for polygons.
 #'
 #' If the provided geometry is a polygon, a point will be generated using [`sf::st_point_on_surface()`]. If a centroid is preferred, a new column can be created that contains the output of [`sf::st_centroid()`].
-#' @param x an sfc object
+#' @param geometry an sfc object
 #' @keywords internal
-check_polygon <- function(x) {
+check_polygon <- function(geometry) {
 
-  polygon_check <- any(class(x) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))
+  polygon_check <- any(class(geometry) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))
 
   if (polygon_check) {
 
     cli::cli_alert_warning("Polygon provided. Using point on surface.")
-    return(sf::st_point_on_surface(x))
+    return(sf::st_point_on_surface(geometry))
   }
   x
 }

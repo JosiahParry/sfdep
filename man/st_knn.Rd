@@ -4,10 +4,10 @@
 \alias{st_knn}
 \title{Calculate K-Nearest Neighbors}
 \usage{
-st_knn(x, k = 1, symmetric = FALSE, ...)
+st_knn(geometry, k = 1, symmetric = FALSE, ...)
 }
 \arguments{
-\item{x}{an sf or sfc object.}
+\item{geometry}{an sf or sfc object.}
 
 \item{k}{number of nearest neighbours to be returned}
 
