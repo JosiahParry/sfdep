@@ -1,0 +1,13 @@
+pandoc: 2.19.2
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  Version-0-2-0: Version-0-2-0.html
+  colocation-analysis: colocation-analysis.html
+  understanding-emerging-hotspots: understanding-emerging-hotspots.html
+  basics-of-sfdep: basics-of-sfdep.html
+  conditional-permutation: conditional-permutation.html
+  spacetime-s3: spacetime-s3.html
+  spdep-and-pysal: spdep-and-pysal.html
+last_built: 2022-12-14T14:16Z
+
