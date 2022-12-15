@@ -113,15 +113,27 @@ The LCLQ is defined using Gaussian kernel weights and an adaptive bandwidth (see
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">main_city</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">main_city</span></span></span>
 <span class="r-in"><span><span class="va">B</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">region</span></span></span>
-<span class="r-in"><span><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_knn.html">st_knn</a></span><span class="op">(</span><span class="va">geo</span>, <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_centroid</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="include_self.html">include_self</a></span><span class="op">(</span><span class="fu"><a href="st_knn.html">st_knn</a></span><span class="op">(</span><span class="va">geo</span>, <span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="st_kernel_weights.html">st_kernel_weights</a></span><span class="op">(</span><span class="va">nb</span>, <span class="va">geo</span>, <span class="st">"gaussian"</span>, adaptive <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_colocation</span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="va">nb</span>, <span class="va">wt</span>, <span class="fl">49</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_colocation</span><span class="op">(</span><span class="va">A</span>, <span class="va">B</span>, <span class="va">nb</span>, <span class="va">wt</span>, <span class="fl">9</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           C        E         N        S        W p_sim_C p_sim_E p_sim_N</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80       NA 1.770957        NA 3.170219       NA      NA     0.2      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81       NA       NA        NA       NA 4.941176      NA      NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82 2.564959       NA        NA       NA 2.376218     0.1      NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83 2.478538       NA        NA       NA 2.462639     0.2      NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84       NA 4.186106 0.7550705       NA       NA      NA     0.1     0.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85 2.321401 1.816223 0.8035523       NA       NA     0.1     0.2     0.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    p_sim_S p_sim_W</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80     0.1      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81      NA     0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82      NA     0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83      NA     0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84      NA      NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85      NA      NA</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
