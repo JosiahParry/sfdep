@@ -67,25 +67,27 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">global_moran_bv</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">nb</span>, <span class="va">wt</span>, nsim <span class="op">=</span> <span class="fl">99</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">global_moran_bv</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">nb</span>, <span class="va">wt</span>, nsim <span class="op">=</span> <span class="fl">99</span>, scale <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
-<dd><p>a numeric vector of same length as <code>nb</code>.</p></dd>
+<dd><p>a numeric vector of same length as <code>y</code>.</p></dd>
 <dt>y</dt>
-<dd><p>a numeric vector of same length as <code>nb</code>.</p></dd>
+<dd><p>a numeric vector of same length as <code>x</code>.</p></dd>
 <dt>nb</dt>
 <dd><p>a neighbor list object for example as created by <code><a href="st_contiguity.html">st_contiguity()</a></code>.</p></dd>
 <dt>wt</dt>
 <dd><p>a weights list as created by <code><a href="st_weights.html">st_weights()</a></code>.</p></dd>
 <dt>nsim</dt>
 <dd><p>the number of simulations to run.</p></dd>
+<dt>scale</dt>
+<dd><p>default <code>TRUE</code>.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a named list with two elements <code>Ib</code> and <code>p_sim</code> containing the bivariate Moran's I and simulated p-value respectively.</p>
+    <p>an object of class boot</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -117,12 +119,18 @@ spatial autocorrelation which may be a product of the inherent correlation of X 
 <span class="r-in"><span class="va">nb</span> <span class="op">&lt;-</span> <span class="va">guerry_nb</span><span class="op">$</span><span class="va">nb</span></span>
 <span class="r-in"><span class="va">wt</span> <span class="op">&lt;-</span> <span class="va">guerry_nb</span><span class="op">$</span><span class="va">wt</span></span>
 <span class="r-in"><span class="fu">global_moran_bv</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $Ib</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -0.1006674</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $p_sim</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> DATA PERMUTATION</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> boot(data = xx, statistic = bvm_boot, R = nsim, sim = "permutation", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     listw = listw, parallel = parallel, ncpus = ncpus, cl = cl)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Bootstrap Statistics :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       original    bias    std. error</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> t1* -0.1006674 0.1024929  0.05090268</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
