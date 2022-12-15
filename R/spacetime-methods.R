@@ -74,7 +74,7 @@ as_sf <- function(x, ...) {
 #' @export
 #' @examples
 #'
-#' if (FALSE) {
+
 #' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 #' geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 #'
@@ -90,8 +90,8 @@ as_sf <- function(x, ...) {
 #' as_sf(bos)
 #' as_spacetime(as_sf(bos) , ".region_id", "year")
 #'
-#' }
-#'
+#' @returns
+#' For `as_spacetime()` returns a spacetime object. For `as_sf()`, an sf object.
 as_spacetime <- function(x, .loc_col, .time_col, ...) {
   UseMethod("as_spacetime")
 }
@@ -108,6 +108,8 @@ as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
 
 # Print -------------------------------------------------------------------
 #' @export
+#' @returns
+#' A spacetime object
 print.spacetime <- function(x, ...) {
   context <- active(x)
   n_locs <- attr(x, "n_locs")
@@ -142,6 +144,7 @@ group_by.spacetime <- function(.data, ...) {
 
 
 #' @name tidyverse
+#' @return a spacetime object
 mutate.spacetime <- function(.data, ...) {
   res <- NextMethod(.data, ...)
   .cols <- colnames(res)
@@ -164,7 +167,6 @@ ungroup.spacetime <- function(.data, ...) {
 # from: https://raw.githubusercontent.com/r-spatial/sf/main/R/tidyverse.R
 # 2022-06-27 08:54:11
 register_all_s3_methods = function() {
-
   register_s3_method("dplyr", "group_by", "spacetime")
   register_s3_method("dplyr", "ungroup", "spacetime")
   register_s3_method("dplyr", "mutate", "spacetime")

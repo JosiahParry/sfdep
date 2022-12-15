@@ -9,6 +9,9 @@ std_distance(geometry)
 \arguments{
 \item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:geos_unary]{sf::st_point_on_surface()}}.}
 }
+\value{
+A numeric scalar.
+}
 \description{
 The standard distance of a point pattern is a measure of central tendency.
 Standard distance measures distance away from the mean center of the point pattern

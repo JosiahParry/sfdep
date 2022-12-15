@@ -19,6 +19,9 @@ st_nb_relative(geometry, .nnmult = 3)
 
 \item{.nnmult}{default 3. Used for memory scalling. See \code{\link[spdep:graphneigh]{spdep::gabrielneigh()}} for more.}
 }
+\value{
+an object of class nb
+}
 \description{
 Create graph based neighbors on a set of points.
 }

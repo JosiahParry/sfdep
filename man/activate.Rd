@@ -15,6 +15,9 @@ activate(.data, what)
 \item{what}{default NULL. Determines which context to activate. Valid argument values
 are \code{"geometry"} and \code{"data"}. If left null, returns \code{.data}.}
 }
+\value{
+For \code{activate()} an object of class spacetime with the specified context activated. \code{active()} returns a scalar character with the active context can be either "goemetry" or "data".
+}
 \description{
 From a \code{\link{spacetime}} object, activate either the data or geometry contexts. The active object will then become available for manipulation.
 }

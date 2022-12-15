@@ -113,6 +113,6 @@ spt_wt <- function(wt, nbt, n_times, n_locs, k) {
 
 
 # combine all lists element-wise
-zip_lists = function (lists) {
+zip_lists <- function (lists) {
   do.call('Map', c(`c`, lists))
 }

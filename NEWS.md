@@ -1,5 +1,6 @@
 # sfdep 0.2.1
 
+- Bivariate Moran uses the new spdep implementation which is faster. It does, however, return an object of class `boot` which needs extra work to calculate the p-value
 - Local join count univariate uses spdep now
 - adds graph based neighbors:
   - st_nb_delaunay() uses spdep::tri2nb()

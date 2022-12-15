@@ -34,6 +34,13 @@ identifiers \code{.loc_col} and \code{.time_col} respectively.}
 
 \item{...}{unused}
 }
+\value{
+\itemize{
+\item \code{spacetime()} and \code{new_spacetime()} construct spacetime clss objects
+\item \code{validate_spacetime()} returns nothing but will elicit a warning or error if the spacetime object is not validly constructed
+\item \code{is_spacetime()} and \code{is.spacetime()} return a logical scalar indicating if an object inherits the spacetime class
+}
+}
 \description{
 A spacetime object is a collection of a linked data frame and an sf objects.
 It can be thought of as geography linked to a table that represents those

@@ -46,6 +46,7 @@ st_nb_gabriel <- function(geometry, .nnmult = 3) {
 
 #' @rdname st_nb_delaunay
 #' @export
+#' @returns an object of class nb
 st_nb_relative <- function(geometry, .nnmult = 3) {
   if (!inherits(geometry, "sfc")) rlang::abort("`geometry` must be class `sfc`.")
   geo <- check_polygon(geometry)

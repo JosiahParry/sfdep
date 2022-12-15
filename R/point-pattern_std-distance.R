@@ -20,6 +20,8 @@
 #'
 #' # calculate standard distance
 #' std_distance(pnts)
+#' @returns
+#' A numeric scalar.
 std_distance <- function(geometry) {
   geometry <- sf::st_geometry(geometry)
   cent <- center_mean(geometry)

@@ -4,21 +4,23 @@
 \alias{global_moran_bv}
 \title{Compute the Global Bivariate Moran's I}
 \usage{
-global_moran_bv(x, y, nb, wt, nsim = 99)
+global_moran_bv(x, y, nb, wt, nsim = 99, scale = TRUE)
 }
 \arguments{
-\item{x}{a numeric vector of same length as \code{nb}.}
+\item{x}{a numeric vector of same length as \code{y}.}
 
-\item{y}{a numeric vector of same length as \code{nb}.}
+\item{y}{a numeric vector of same length as \code{x}.}
 
 \item{nb}{a neighbor list object for example as created by \code{st_contiguity()}.}
 
 \item{wt}{a weights list as created by \code{st_weights()}.}
 
 \item{nsim}{the number of simulations to run.}
+
+\item{scale}{default \code{TRUE}.}
 }
 \value{
-a named list with two elements \code{Ib} and \code{p_sim} containing the bivariate Moran's I and simulated p-value respectively.
+an object of class boot
 }
 \description{
 Given two continuous numeric variables, calculate the bivariate Moran's I. See details for more.

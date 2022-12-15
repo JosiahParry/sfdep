@@ -22,6 +22,9 @@ an sf object.}
 
 \item{.time_col}{the quoted name of the column containing time periods.}
 }
+\value{
+For \code{as_spacetime()} returns a spacetime object. For \code{as_sf()}, an sf object.
+}
 \description{
 Cast between \code{spacetime} and \code{sf} classes
 
@@ -29,7 +32,6 @@ Convert sf object to spacetime
 }
 \examples{
 
-if (FALSE) {
 df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
@@ -44,7 +46,5 @@ bos <- spacetime(df, geo,
 
 as_sf(bos)
 as_spacetime(as_sf(bos) , ".region_id", "year")
-
-}
 
 }

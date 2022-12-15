@@ -7,11 +7,11 @@
 local_moran_bv_impl(x, y, listw, nsim)
 }
 \arguments{
-\item{x}{a numeric vector of same length as \code{nb}.}
+\item{x}{a numeric vector of same length as \code{y}.}
 
-\item{y}{a numeric vector of same length as \code{nb}.}
+\item{y}{a numeric vector of same length as \code{x}.}
 
-\item{listw}{a listw object e.g. as created by \code{\link[=recreate_listw]{recreate_listw()}}.}
+\item{listw}{a listw object for example as created by \code{nb2listw()}.}
 
 \item{nsim}{the number of simulations to run.}
 }

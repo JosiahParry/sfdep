@@ -9,6 +9,9 @@ check_polygon(geometry)
 \arguments{
 \item{geometry}{an sfc object}
 }
+\value{
+Point geometry
+}
 \description{
 If the provided geometry is a polygon, a point will be generated using \code{\link[sf:geos_unary]{sf::st_point_on_surface()}}. If a centroid is preferred, a new column can be created that contains the output of \code{\link[sf:geos_unary]{sf::st_centroid()}}.
 }

@@ -57,6 +57,10 @@
 #' bos <- spacetime(df, geo, ".region_id", "year")
 #' is_spacetime(bos)
 #' bos
+#' @returns
+#' - `spacetime()` and `new_spacetime()` construct spacetime clss objects
+#' - `validate_spacetime()` returns nothing but will elicit a warning or error if the spacetime object is not validly constructed
+#' - `is_spacetime()` and `is.spacetime()` return a logical scalar indicating if an object inherits the spacetime class
 spacetime <- function(.data, .geometry, .loc_col, .time_col, active = "data") {
   new_spacetime(.data, .geometry, .loc_col, .time_col, active = active)
 }

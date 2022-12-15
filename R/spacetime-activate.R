@@ -17,6 +17,8 @@ active <- function(.data) attr(.data, "active")
 #' @param .data a spacetime object
 #' @param what default NULL. Determines which context to activate. Valid argument values
 #'   are `"geometry"` and `"data"`. If left null, returns `.data`.
+#' @returns
+#' For `activate()` an object of class spacetime with the specified context activated. `active()` returns a scalar character with the active context can be either "goemetry" or "data".
 #' @export
 #' @examples
 #' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")

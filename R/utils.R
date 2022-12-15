@@ -5,6 +5,18 @@
   else x
 }
 
+#' Check if a vector of packages are available
+#'
+#' @param x a character vector of package names
+#' @keywords internal
+check_pkg_suggests <- function(x) {
+  missing_pkgs <- !vapply(x, requireNamespace, FUN.VALUE = logical(1), quietly = TRUE)
+
+  if (any(missing_pkgs))
+    cli::cli_abort('Missing packages: {paste("`", x[missing_pkgs], "`", sep = "", collapse = ", ")}')
+}
+
+
 #' Modify object classes
 #'
 #' Appends classes to exist object classes. This is utilized to aid in adding a list class to objects created by spdep. This enables to use of the returned objects within data frames and tibbles.

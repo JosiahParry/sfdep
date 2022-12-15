@@ -7,9 +7,9 @@
 local_moran_bv(x, y, nb, wt, nsim = 499)
 }
 \arguments{
-\item{x}{a numeric vector of same length as \code{nb}.}
+\item{x}{a numeric vector of same length as \code{y}.}
 
-\item{y}{a numeric vector of same length as \code{nb}.}
+\item{y}{a numeric vector of same length as \code{x}.}
 
 \item{nb}{a neighbor list object for example as created by \code{st_contiguity()}.}
 

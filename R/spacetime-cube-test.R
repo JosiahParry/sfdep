@@ -27,6 +27,8 @@
 #' - each combination of time period and location has only one observation
 #' - that the time-series is regular
 #'
+#' @returns
+#' A logical scalar.
 #' @param x a spacetime object
 #' @param ... unused
 #' @export

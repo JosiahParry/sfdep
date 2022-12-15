@@ -19,6 +19,9 @@ euclidean_median(geometry, tolerance = 1e-09)
 
 \item{tolerance}{a tolerance level to terminate the process. This is passed to \code{\link[pracma:geo_median]{pracma::geo_median()}}.}
 }
+\value{
+an sfc POINT object
+}
 \description{
 Given an sfc object containing points, calculate a measure of central tendency.
 }

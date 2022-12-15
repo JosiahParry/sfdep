@@ -5,7 +5,7 @@
 #'
 #' Calculate the global sum of weights
 #' @param wt a weights list—i.e. created by `st_weights()`
-#' @returns a scalar double
+#' @returns a scalar numeric
 #' @export
 #' @examples
 #' nb <- st_contiguity(guerry)

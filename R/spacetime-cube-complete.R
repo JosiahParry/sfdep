@@ -37,6 +37,8 @@
 #'
 #' # complete it again
 #' complete_spacetime_cube(incomplete_spt)
+#' @returns
+#' A spacetime object that meets the criteria of spacetime cube.
 complete_spacetime_cube <- function(x, ...) {
   # if already spacetime cube return x
   suppressMessages({

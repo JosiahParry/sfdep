@@ -6,6 +6,9 @@
 \usage{
 sin_d(theta = 0)
 }
+\value{
+numeric
+}
 \description{
 These functions are wrappers around the base trigonometric functions.
 However these return degree values rather than radians.

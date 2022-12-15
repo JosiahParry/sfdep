@@ -11,6 +11,9 @@ is_spacetime_cube(x, ...)
 
 \item{...}{unused}
 }
+\value{
+A logical scalar.
+}
 \description{
 Given an object with class \code{spacetime}, determine if it is a \emph{spacetime cube}.
 If the time-series is is irregular a warning is emitted

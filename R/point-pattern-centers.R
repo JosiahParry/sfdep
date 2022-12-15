@@ -11,6 +11,7 @@
 #' - `euclidean_median()` calculates the euclidean median center of a point pattern using the `pracma` package
 #' - `center_median()` calculates the median center it is recommended to use the euclidean median over the this function.
 #'
+#' @returns an sfc POINT object
 #' @export
 #' @examples
 #' # Make a grid to sample from
@@ -68,20 +69,3 @@ euclidean_median <- function(geometry, tolerance = 1e-09) {
   res <- pracma::geo_median(coords)
   sf::st_sfc(sf::st_point(res[["p"]]), crs = crs)
 }
-
-
-# Testing data
-# df <- sf::read_sf('/Users/josiahparry/Library/r-miniconda-arm64/envs/geo/lib/python3.8/site-packages/libpysal/examples/virginia/vautm17n_points.shp')
-#
-# geometry <- sf::st_geometry(df)
-# center_mean(geometry)
-# center_median(geometry)
-# euclidean_median(geometry)
-# cent <- euclidean_median(geometry)
-# cent_xy <- sf::st_coordinates(cent)
-#
-# coords <- sf::st_coordinates(geometry)
-#
-# dists <- sf::st_distance(geometry, cent, by_element = TRUE)
-#
-# mean(dists)

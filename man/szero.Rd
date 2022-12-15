@@ -10,7 +10,7 @@ szero(wt)
 \item{wt}{a weights list—i.e. created by \code{st_weights()}}
 }
 \value{
-a scalar double
+a scalar numeric
 }
 \description{
 Calculate the global sum of weights

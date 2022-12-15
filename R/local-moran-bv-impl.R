@@ -10,7 +10,7 @@
 
 #' Calculate the Local Bivariate Moran Statistic
 #'
-#' @inheritParams moran_bv_calc
+#' @inheritParams spdep::moran_bv
 #' @keywords internal
 local_moran_bv_calc <- function(x, y, nb, wt) {
   x * st_lag(y, nb, wt)
@@ -19,7 +19,7 @@ local_moran_bv_calc <- function(x, y, nb, wt) {
 # local_moran_bv_calc(scale(x), find_xj(y, nb), wt)
 
 #' Local Bivariate Moran's I conditional permutation implementation
-#' @inheritParams moran_bv_perm_impl
+#' @inheritParams spdep::moran_bv
 #' @keywords internal
 local_moran_bv_perm_impl <- function(x, y, listw) {
   p_listw <- permute_listw(listw)
@@ -34,7 +34,7 @@ local_moran_bv_perm_impl <- function(x, y, listw) {
 
 # local_moran_bv_perm_impl(x, y, listw)
 #' Local Bivariate Moran's I spdep implementation
-#' @inheritParams moran_bv_impl
+#' @inheritParams spdep::moran_bv
 #' @keywords internal
 local_moran_bv_impl <- function(x, y, listw, nsim) {
 
@@ -63,8 +63,8 @@ local_moran_bv_impl <- function(x, y, listw, nsim) {
 #' I_i^B= cx_i\Sigma_j{w_{ij}y_j}
 #' }
 #'
-#'
-#' @inheritParams global_moran_bv
+#' @inheritParams recreate_listw
+#' @inheritParams spdep::moran_bv
 #' @family global_moran
 #' @export
 #' @examples

@@ -6,6 +6,7 @@
 #' These functions were adopted from the now archived CRAN package `{aspace}`.
 #'
 #' @keywords internal
+#' @returns numeric
 sin_d <- function(theta = 0) {
   sin(theta*pi/180)
 }

@@ -7,9 +7,9 @@
 local_moran_bv_calc(x, y, nb, wt)
 }
 \arguments{
-\item{x}{a numeric vector of same length as \code{nb}.}
+\item{x}{a numeric vector of same length as \code{y}.}
 
-\item{wt}{a weights list as created by \code{st_weights()}.}
+\item{y}{a numeric vector of same length as \code{x}.}
 }
 \description{
 Calculate the Local Bivariate Moran Statistic

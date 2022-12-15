@@ -91,8 +91,6 @@ time-slices with missing values \emph{prior} to using emerging hot spot analysis
 }
 }
 \examples{
-if (FALSE) {
-
 df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
@@ -111,11 +109,10 @@ ehsa <- emerging_hotspot_analysis(
   x = bos,
   .var = "value",
   k = 1,
-  nsim = 99
+  nsim = 9
 )
 
 ehsa
-}
 }
 \seealso{
 \href{https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/learnmoreemerging.htm}{How Emerging Hot Spot Analysis works}, \href{https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/emerginghotspots.htm}{Emerging Hot Spot Analysis (Space Time Pattern Mining)}, and the video \href{https://www.youtube.com/watch?v=0aV6HHwJuo4&t=3848s&ab_channel=EsriEvents}{Spatial Data Mining II: A Deep Dive into Space-Time Analysis} by ESRI.

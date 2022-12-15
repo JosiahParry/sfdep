@@ -1,7 +1,5 @@
 ## R CMD check results
 
-There were no ERRORs or WARNINGs.
+This release addresses recent archival. 
 
-This release adds new core functionality to sfdep and bumps version to 0.2.0.
-
-Additionally, it addresses warnings in existing package release 0.1.0.
+I am uncertain why the package was archived. I received an email while I was travelling that I missed. There was no email when the package was archived. The checks are no longer available so I cannot comment. 

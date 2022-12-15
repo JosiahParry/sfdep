@@ -11,6 +11,9 @@ complete_spacetime_cube(x, ...)
 
 \item{...}{unused}
 }
+\value{
+A spacetime object that meets the criteria of spacetime cube.
+}
 \description{
 Given a spacetime object, convert it to a spacetime cube. A spacetime cube
 ensures that there is a regular time-series for each geometry present.

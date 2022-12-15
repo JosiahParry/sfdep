@@ -31,15 +31,13 @@ The LCLQ is defined as \eqn{LCLQ_{A_i \to B} = \frac{N_{A_i \to B}}{N_B / (N - 1
 LCLQ is only calculated for those subcategories which are present in the neighbor list. If a subcategory is not present, then the resultant LCLQ and simulated p-value will be \code{NA}.
 }
 \examples{
-if (FALSE) {
 A <- guerry$main_city
 B <- guerry$region
-geo <- sf::st_geometry(guerry)
-nb <- st_knn(geo, 5)
+geo <- sf::st_centroid(sf::st_geometry(guerry))
+nb <- include_self(st_knn(geo, 5))
 wt <- st_kernel_weights(nb, geo, "gaussian", adaptive = TRUE)
-res <- local_colocation(A, B, nb, wt, 49)
+res <- local_colocation(A, B, nb, wt, 9)
 tail(res)
-}
 }
 \references{
 {Fahui Wang, Yujie Hu, Shuai Wang & Xiaojuan Li (2017) Local Indicator of Colocation Quotient with a Statistical Significance Test: Examining Spatial Association of Crime and Facilities, The Professional Geographer, 69:1, 22-31, \doi{10.1080/00330124.2016.1157498}}

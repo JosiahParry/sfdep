@@ -150,9 +150,10 @@ classify_hotspot <- function(.x, threshold) {
                 tau_p = tau_p,
                 threshold = threshold
   )
-  cbind(as.data.frame(unclass(mktest)),
-        classification = as.character(names(res[unlist(res)])[1])
-        )
+  cbind(
+    as.data.frame(unclass(mktest)),
+    classification = as.character(names(res[unlist(res)])[1])
+  )
 
 }
 

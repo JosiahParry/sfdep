@@ -18,6 +18,9 @@ ungroup.spacetime(.data, ...)
 
 \item{...}{additional arguments}
 }
+\value{
+a spacetime object
+}
 \description{
 dplyr methods for spacetime objects.
 }
