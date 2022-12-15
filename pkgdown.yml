@@ -1,5 +1,5 @@
 pandoc: 2.19.2
-pkgdown: 2.0.6
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   Version-0-2-0: Version-0-2-0.html
@@ -9,5 +9,5 @@ articles:
   conditional-permutation: conditional-permutation.html
   spacetime-s3: spacetime-s3.html
   spdep-and-pysal: spdep-and-pysal.html
-last_built: 2022-12-15T15:01Z
+last_built: 2022-12-15T15:41Z
 
