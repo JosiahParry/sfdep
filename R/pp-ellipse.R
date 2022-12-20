@@ -51,6 +51,7 @@ ellipse <- function (x = 0, y = 0, sx = 2, sy = 1, rotation = 0, n = 100) {
 #' @examples
 #' ellipse(n = 10)
 #' st_ellipse(sf::st_point(c(0, 0)), sx = 10, sy = 10)
+#' @returns an sf object
 st_ellipse <- function(geometry, sx, sy, rotation = 0, n = 100) {
   crs <- sf::st_crs(geometry)
   cent_xy <- as.numeric(sf::st_coordinates(geometry))

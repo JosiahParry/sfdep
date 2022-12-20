@@ -47,6 +47,7 @@ pairwise_colocation <- function(A, B, nb, nsim = 99) {
 #'
 #' @inheritParams pairwise_colocation
 #' @keywords internal
+#' @returns a matrix where rownames are A values colnames are B values
 pairwise_colocation_calc <- function(A, B, nb) {
   A <- as.factor(A)
   B <- as.factor(B)
@@ -94,6 +95,7 @@ pairwise_colocation_calc <- function(A, B, nb) {
 #'
 #' @inheritParams pairwise_colocation
 #' @keywords internal
+#' @returns a matrix used by pairwise_colocation
 pairwise_colocation_perm_impl <- function(A, B, nb, nsim = 199) {
   obs <- pairwise_colocation_calc(A, B, nb)
   reps <- replicate(nsim,

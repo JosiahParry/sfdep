@@ -25,6 +25,7 @@
 #' @references https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/create-space-time-cube.htm
 #'
 #' @keywords internal
+#' @returns a `nb` list
 spt_nb <- function(nb, n_times, n_locs, k = 1) {
   # if k is negative, exit
   if (k < 0) cli::cli_abort("`k` ({k}) must be a positive integer.")
@@ -89,6 +90,7 @@ nb_time_index_lag <- function(nbt, n_locs, k) {
 #' @seealso [spt_nb()] for creating spacetime neighbors which are inputs into spacetime weights
 #'
 #' @keywords internal
+#' @returns a weight list with same cardinality as `nbt`
 spt_wt <- function(wt, nbt, n_times, n_locs, k) {
   wt_tlag <- zip_lists(replicate(k + 1, rep(wt, n_times), simplify = FALSE))
 

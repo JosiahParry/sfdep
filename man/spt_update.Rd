@@ -11,6 +11,9 @@ spt_update(x, ...)
 
 \item{...}{unused}
 }
+\value{
+an object of class spacetime with updated attributes
+}
 \description{
 Update's a spacetime object's number of locations and time periods.
 A spacetime object's attributes are sticky and will not change if subsetted

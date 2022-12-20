@@ -15,6 +15,9 @@ pairwise_colocation_perm_impl(A, B, nb, nsim = 199)
 
 \item{nsim}{default \code{99}. An integer representing how many simulations to run for calculating the simulated p-values.}
 }
+\value{
+a matrix used by pairwise_colocation
+}
 \description{
 Internal implementation of the pairwise CQL using conditional permutation. Functionally the same as \code{\link[=pairwise_colocation]{pairwise_colocation()}}.
 }

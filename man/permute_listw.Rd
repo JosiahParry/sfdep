@@ -9,6 +9,9 @@ permute_listw(listw)
 \arguments{
 \item{a}{listw object.}
 }
+\value{
+a \code{listw} object
+}
 \description{
 Conditionally permutes a listw object
 }

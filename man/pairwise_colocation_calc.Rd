@@ -13,6 +13,9 @@ pairwise_colocation_calc(A, B, nb)
 
 \item{nb}{a neighbors list e.g. created by \code{\link[=st_knn]{st_knn()}} or \code{\link[=st_contiguity]{st_contiguity()}}}
 }
+\value{
+a matrix where rownames are A values colnames are B values
+}
 \description{
 Internal function to calculate the pairwise CQL.
 }

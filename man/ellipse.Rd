@@ -24,6 +24,9 @@ st_ellipse(geometry, sx, sy, rotation = 0, n = 100)
 
 \item{geometry}{an sf \code{ST_POINT} geometry. Can be \code{sfg}, \code{sfc}, or \code{sf} object}
 }
+\value{
+an sf object
+}
 \description{
 Generate an ellipse from center coordinates, major and minor axis radii, and angle rotation.
 }

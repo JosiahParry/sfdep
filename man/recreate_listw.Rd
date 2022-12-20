@@ -11,6 +11,9 @@ recreate_listw(nb, wt)
 
 \item{wt}{a weights list as created by \code{st_weights()}.}
 }
+\value{
+a \code{listw} object
+}
 \description{
 Given a neighbor and weight list, create a \code{listw} object.
 }

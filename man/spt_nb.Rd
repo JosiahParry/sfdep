@@ -13,6 +13,9 @@ spt_nb(nb, n_times, n_locs, k = 1)
 
 \item{n_locs}{the number of locations}
 }
+\value{
+a \code{nb} list
+}
 \description{
 Given a an spdep neighbor list (or any other list indicating row position)
 of neighbors in a \code{spacetime} object's geometry context, create a neighbor

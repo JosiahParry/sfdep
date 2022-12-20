@@ -187,6 +187,7 @@ st_as_nodes.sfc <- function(x, nb) {
 #' guerry_nb %>%
 #'   st_as_graph(nb, wt)
 #'
+#' @returns an `sfnetwork` object
 st_as_graph <- function(x, nb, wt) {
   UseMethod("st_as_graph")
 }

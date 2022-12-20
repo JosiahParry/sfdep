@@ -19,6 +19,7 @@
 #'
 #' @param x a spacetime object
 #' @param ... unused
+#' @returns an object of class spacetime with updated attributes
 spt_update <- function(x, ...) {
   stopifnot(is_spacetime(x))
   context <- active(x)

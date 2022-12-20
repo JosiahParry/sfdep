@@ -15,6 +15,9 @@ spt_wt(wt, nbt, n_times, n_locs, k)
 
 \item{n_locs}{the number of locations}
 }
+\value{
+a weight list with same cardinality as \code{nbt}
+}
 \description{
 Given a space-time-lagged neighbor list and a weights lists, e.g. made by
 \code{\link[=st_dist_band]{st_dist_band()}} or \code{\link[=st_contiguity]{st_contiguity()}}, create a corresponding weights list.

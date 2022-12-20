@@ -1,27 +1,3 @@
-library(sfdep)
-library(dplyr)
-library(tidygraph)
-library(sfnetworks)
-
-# conflicted::conflict_prefer("activate", "sfnetworks")
-
-# create object with edge list and neighbor list
-net <- as_sfnetwork(roxel, directed = FALSE) |>
-  tidygraph::activate("edges") |>
-  mutate(len = edge_length()) |>
-  tidygraph::activate("nodes") |>
-  mutate(
-    nb = node_get_nbs(),
-    elist = node_get_edge_list(),
-    wt = node_get_edge_col(elist, "len")
-    )
-
-
-node_df <- as_tibble(net)
-
-edge_df <- net %E>%
-  as_tibble()
-
 # to test -----------------------------------------------------------------
 
 # attributes of nb class
@@ -32,9 +8,32 @@ edge_df <- net %E>%
 
 # tests -------------------------------------------------------------------
 
-
-
 test_that("nbs is spdep compliant", {
+
+  skip_on_cran()
+
+  library(sfdep)
+  library(dplyr)
+  library(tidygraph)
+  library(sfnetworks)
+
+  # create object with edge list and neighbor list
+  net <- as_sfnetwork(roxel, directed = FALSE) |>
+    tidygraph::activate("edges") |>
+    mutate(len = edge_length()) |>
+    tidygraph::activate("nodes") |>
+    mutate(
+      nb = node_get_nbs(),
+      elist = node_get_edge_list(),
+      wt = node_get_edge_col(elist, "len")
+    )
+
+
+  node_df <- as_tibble(net)
+
+  edge_df <- net %E>%
+    as_tibble()
+
   nb <- as_tibble(net)[["nb"]]
 
   # test that nb does not include self
@@ -43,13 +42,7 @@ test_that("nbs is spdep compliant", {
   # that nb is a nb class & list class
   expect_s3_class(nb, c("nb", "list"))
 
-})
-
-
-
-test_that("identical adjacency lists", {
-
-  nb <- as_tibble(net)[["nb"]]
+  # expect identical adjacency lists
   ig_adj_list <- igraph::get.adjlist(net)
 
   expect_equal(
@@ -58,28 +51,22 @@ test_that("identical adjacency lists", {
     ignore_attr = TRUE
   )
 
-})
-
-
-test_that("edge list col is identical to igraph", {
+  # edge list column is identical to igraph
   n2 <- mutate(net, edge_list = node_get_edge_list())
   el <- as_tibble(n2)[["edge_list"]]
 
   elig <- lapply(igraph::get.adjedgelist(net), as.integer)
 
   expect_equal(el, elig)
-})
 
-
-test_that("attr edge col has same lengths as nb", {
+  # attr edge col has same lengths as nb
   expect_equal(
     lengths(node_df[["nb"]]),
     lengths(node_df[["wt"]])
-    )
-})
+  )
 
 
-test_that("edge list contains correct neighbor nodes", {
+  # "edge list contains correct neighbor nodes
   nb <- node_df[["nb"]]
   elist <- node_df[["elist"]]
 
@@ -93,10 +80,7 @@ test_that("edge list contains correct neighbor nodes", {
 
   expect_true(all(correct_indexes))
 
-})
-
-
-test_that("edge_get_col retrieves correct indexes", {
+  # "edge_get_col retrieves correct indexes
   # check that edge list correctly matches neighbors
   # the ith observation should all be from i to others
   elist <- node_df[["elist"]]
@@ -113,4 +97,5 @@ test_that("edge_get_col retrieves correct indexes", {
 
   expect_equal(lengths(elist), adj_vec)
 })
+
 

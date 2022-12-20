@@ -12,6 +12,9 @@ nmt_perm_impl(knn_nb, listw)
 
 \item{listw}{a listw object likely created by \link{recreate_listw}.}
 }
+\value{
+an integer vector
+}
 \description{
 Find conditionally permuted neighbor matches
 Given a kNN attribute neighbor list and a listw object, find the number of matches given a conditional permutation.

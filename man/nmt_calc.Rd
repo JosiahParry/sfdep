@@ -11,6 +11,9 @@ nmt_calc(knn_nb, nb)
 
 \item{nb}{a list the same length as knn_nb.}
 }
+\value{
+an integer vector
+}
 \description{
 Identify matches between two neighbor lists
 }

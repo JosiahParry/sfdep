@@ -39,6 +39,7 @@ class_modify <- function(x, class = "list") {
 #' @export
 #' @examples
 #' recreate_listw(guerry_nb$nb, guerry_nb$wt)
+#' @returns a `listw` object
 recreate_listw <- function(nb, wt) {
   which_style <- c(attr(wt, "W") %||% NA,
                    attr(wt, "B") %||% NA,
@@ -109,6 +110,7 @@ cond_permute_nb <- function(nb, seed = NULL) {
 #' @param a listw object.
 #'
 #' @keywords internal
+#' @returns a `listw` object
 permute_listw <- function(listw) {
   n <- length(listw$neighbours)
 
@@ -128,6 +130,7 @@ permute_listw <- function(listw) {
 #'
 #' @param i the index position of observation `i`
 #' @keywords internal
+#' @returns a `nb` class object
 shuffle_nbs <- function(i, n, card) {
   x <- 1:n
   sample(x[-i], size = card)

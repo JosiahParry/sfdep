@@ -19,6 +19,16 @@ nmt_impl(x, k, listw, nsim = 199, scale = TRUE, .method = "euclidian", .p = 2)
 
 \item{.p}{default 2. The power of Minkowski distance passed to the \code{p} argument in \code{\link[stats:dist]{stats::dist()}}.}
 }
+\value{
+a data frame containing columns:
+\itemize{
+\item n_shared
+\item nb_matches
+\item knn_nb
+\item probability
+\item p_sim
+}
+}
 \description{
 Implementation of Neighbor Match Test
 }

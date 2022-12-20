@@ -38,6 +38,7 @@ nb_match_test <- function(x, nb, wt = st_weights(nb),
 #' @param nb a list the same length as knn_nb.
 #'
 #' @keywords internal
+#' @return an integer vector
 nmt_calc <- function(knn_nb, nb) {
   # identify matches
   mapply(base::intersect, knn_nb, nb)
@@ -52,6 +53,7 @@ nmt_calc <- function(knn_nb, nb) {
 #' @param knn_nb a list with numeric elements. For example as made by [`dbscan::adjacencylist()`]
 #' @param listw a listw object likely created by [recreate_listw].
 #' @keywords internal
+#' @return an integer vector
 nmt_perm_impl <- function(knn_nb, listw) {
   p_listw <- permute_listw(listw)
   p_nb <- p_listw[["neighbours"]]
@@ -69,6 +71,12 @@ nmt_perm_impl <- function(knn_nb, listw) {
 #' @param .p default 2. The power of Minkowski distance passed to the `p` argument in [stats::dist()].
 #'
 #' @keywords internal
+#' @returns a data frame containing columns:
+#'   - n_shared
+#'   - nb_matches
+#'   - knn_nb
+#'   - probability
+#'   - p_sim
 nmt_impl <- function(x, k, listw, nsim = 199,
                      scale = TRUE, .method = "euclidian",
                      .p = 2) {

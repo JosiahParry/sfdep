@@ -169,6 +169,7 @@ set_nbs <- function(x, .nb_col = "nb") {
 #' @param x a spacetime cube object.
 #'
 #' @keywords internal
+#' @returns a spacetime object that orders based on time and location
 spt_order <- function(x) {
   if (!is_spacetime_cube(x)) cli::cli_abort(
     c("`x` must be a valid spacetime cube.",
