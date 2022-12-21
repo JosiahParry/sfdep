@@ -1,3 +1,5 @@
+# sfdep 0.2.2
+
 # sfdep 0.2.1
 
 - Bivariate Moran uses the new spdep implementation which is faster. It does, however, return an object of class `boot` which needs extra work to calculate the p-value
