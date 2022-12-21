@@ -29,7 +29,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +125,7 @@ there is <em>any</em> colocation in a single categorical vector <span class="mat
 <span><span class="co">#&gt; [1] 1.02841</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $p_sim</span></span>
-<span><span class="co">#&gt; [1] 0.2</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.2166667</span></span></code></pre></div>
 <p>The result of the global CLQ is approximately 0 and insignificant. We
 can interpret this to mean that there is no significant colocation of
 “Main Cities.”</p>
@@ -148,11 +148,11 @@ quotients.</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Polygon provided. Using point on surface.</span></span>
 <span><span class="fu"><a href="../reference/pairwise_colocation.html">pairwise_colocation</a></span><span class="op">(</span><span class="va">B</span>, <span class="va">A</span>, <span class="va">nb</span>, <span class="fl">199</span><span class="op">)</span></span>
 <span><span class="co">#&gt;        1:Sm     2:Med      3:Lg p_sim_1:Sm p_sim_2:Med p_sim_3:Lg</span></span>
-<span><span class="co">#&gt; C 0.8894118 1.1250679 0.1976471      0.515       0.005      0.000</span></span>
-<span><span class="co">#&gt; E 1.8776471 0.8514027 0.9882353      0.000       0.005      0.585</span></span>
-<span><span class="co">#&gt; N 0.1976471 1.0794570 1.1858824      0.005       0.080      0.260</span></span>
-<span><span class="co">#&gt; S 1.5811765 0.9122172 0.8894118      0.045       0.105      0.470</span></span>
-<span><span class="co">#&gt; W 0.6917647 1.0338462 0.9882353      0.205       0.290      0.535</span></span></code></pre></div>
+<span><span class="co">#&gt; C 0.8894118 1.1250679 0.1976471       0.43       0.020      0.000</span></span>
+<span><span class="co">#&gt; E 1.8776471 0.8514027 0.9882353       0.00       0.010      0.500</span></span>
+<span><span class="co">#&gt; N 0.1976471 1.0794570 1.1858824       0.00       0.115      0.260</span></span>
+<span><span class="co">#&gt; S 1.5811765 0.9122172 0.8894118       0.05       0.145      0.425</span></span>
+<span><span class="co">#&gt; W 0.6917647 1.0338462 0.9882353       0.17       0.265      0.500</span></span></code></pre></div>
 <p>If we look at the first row, we see that the colocation of <span class="math inline">\(C \to 3{:}Lg\)</span> is very significant with a
 value of ~ <span class="math inline">\(0.20\)</span>. We can interpret
 this to mean that there is systematically less colocation of region C
@@ -183,12 +183,12 @@ each unique value of B that falls in the neighborhood.</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
 <span><span class="co">#&gt;           C        E        N        S  W p_sim_C p_sim_E p_sim_N p_sim_S</span></span>
-<span><span class="co">#&gt; 1 0.8461533 4.095023       NA       NA NA    0.10    0.02      NA      NA</span></span>
+<span><span class="co">#&gt; 1 0.8461533 4.095023       NA       NA NA    0.12    0.04      NA      NA</span></span>
 <span><span class="co">#&gt; 2        NA       NA 4.941176       NA NA      NA      NA    0.02      NA</span></span>
 <span><span class="co">#&gt; 3 4.9411765       NA       NA       NA NA    0.02      NA      NA      NA</span></span>
-<span><span class="co">#&gt; 4        NA 2.090837       NA 2.850339 NA      NA    0.18      NA    0.02</span></span>
-<span><span class="co">#&gt; 5        NA 3.268800       NA 1.672377 NA      NA    0.02      NA    0.26</span></span>
-<span><span class="co">#&gt; 6 1.1554807 1.878544       NA 1.907152 NA    0.24    0.26      NA    0.28</span></span>
+<span><span class="co">#&gt; 4        NA 2.090837       NA 2.850339 NA      NA    0.14      NA    0.02</span></span>
+<span><span class="co">#&gt; 5        NA 3.268800       NA 1.672377 NA      NA    0.02      NA    0.38</span></span>
+<span><span class="co">#&gt; 6 1.1554807 1.878544       NA 1.907152 NA    0.34    0.26      NA    0.20</span></span>
 <span><span class="co">#&gt;   p_sim_W</span></span>
 <span><span class="co">#&gt; 1      NA</span></span>
 <span><span class="co">#&gt; 2      NA</span></span>
@@ -204,7 +204,7 @@ this like so.</p>
 <code class="sourceCode R"><span><span class="co"># view first row</span></span>
 <span><span class="va">res</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span></span>
 <span><span class="co">#&gt;           C        E  N  S  W p_sim_C p_sim_E p_sim_N p_sim_S p_sim_W</span></span>
-<span><span class="co">#&gt; 1 0.8461533 4.095023 NA NA NA     0.1    0.02      NA      NA      NA</span></span>
+<span><span class="co">#&gt; 1 0.8461533 4.095023 NA NA NA    0.12    0.04      NA      NA      NA</span></span>
 <span></span>
 <span><span class="co"># find xj values for the B column based on neighbors</span></span>
 <span><span class="co"># take first observations neighbors</span></span>
