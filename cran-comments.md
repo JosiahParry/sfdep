@@ -1,5 +1,5 @@
 ## R CMD check results
 
-This release addresses recent archival. 
+This release addresses `noSuggests` error. 
 
-I am uncertain why the package was archived. I received an email while I was travelling that I missed. There was no email when the package was archived. The checks are no longer available so I cannot comment. 
+Suggested packages were used in testthat suite. This release addresses noSuggests. 
