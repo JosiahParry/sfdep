@@ -1,6 +1,6 @@
 Package: sfdep
 Title: Spatial Dependence for Simple Features
-Version: 0.2.2
+Version: 0.2.2.9000
 Authors@R: 
     person(given = "Josiah",
            family = "Parry",

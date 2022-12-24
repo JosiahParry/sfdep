@@ -1,3 +1,5 @@
+# sfdep (development version)
+
 # sfdep 0.2.2
 
 - no changes from 0.2.1 version bump solely for CRAN
