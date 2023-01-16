@@ -1,5 +1,5 @@
 ## R CMD check results
 
-This release addresses `noSuggests` error. 
+Package was archived yesterday, 2023-01-09, despite efforts to address outstanding issues. 
 
-Suggested packages were used in testthat suite. This release addresses noSuggests. 
+Latest submission failed the recursive `noSuggest` check. An example using an imported package (sf) failed because the imported function (sf::read_sf) used a suggested package (tibble suggested by sf). All instances of `sf::read_sf()` have been changed to `sf::st_read()` which, I believe, does not use any suggested packages. 

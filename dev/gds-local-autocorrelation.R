@@ -5,7 +5,7 @@ library(ggplot2)
 library(classInt)
 library(patchwork)
 
-lads <- read_sf("/Users/josiahparry/Downloads/book-master/data/brexit/local_authority_districts.geojson")
+lads <- st_read("/Users/josiahparry/Downloads/book-master/data/brexit/local_authority_districts.geojson")
 
 ref <- readr::read_csv("/Users/josiahparry/Downloads/book-master/data/brexit/brexit_vote.csv")
 

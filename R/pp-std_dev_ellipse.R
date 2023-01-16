@@ -93,7 +93,7 @@ rename_geometry <- function(g, name){
 }
 
 #
-# df <- sf::read_sf('/Users/josiahparry/Library/r-miniconda-arm64/envs/geo/lib/python3.8/site-packages/libpysal/examples/virginia/vautm17n_points.shp')
+# df <- sf::st_read('/Users/josiahparry/Library/r-miniconda-arm64/envs/geo/lib/python3.8/site-packages/libpysal/examples/virginia/vautm17n_points.shp')
 #
 # geometry <- sf::st_geometry(df)
 #

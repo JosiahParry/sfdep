@@ -79,14 +79,20 @@ the constructed spacetime object meets minimum requirements.:
 }
 
 \examples{
+
 df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
 # read in data
-df <- readr::read_csv(df_fp, col_types = "ccidD")
-geo <- sf::read_sf(geo_fp)
+df <- read.csv(
+  df_fp, colClasses = c("character", "character", "integer", "double", "Date")
+)
+
+geo <- sf::st_read(geo_fp)
 
 bos <- spacetime(df, geo, ".region_id", "year")
 is_spacetime(bos)
 bos
+
+
 }

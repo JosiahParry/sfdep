@@ -3,7 +3,7 @@ library(sfdep)
 library(dplyr)
 library(ggplot2)
 
-mx <- read_sf("/Users/josiahparry/Downloads/book-master/data/mexico/mexicojoin.shp")
+mx <- st_read("/Users/josiahparry/Downloads/book-master/data/mexico/mexicojoin.shp")
 
 mx |>
   select(NAME, PCGDP1940) |>

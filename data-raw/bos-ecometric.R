@@ -5,7 +5,7 @@ library(sfdep)
 library(tidyverse)
 # devtools::load_all()
 # downloaded from BARI ecometrics
-x <- read_sf("/Users/josiahparry/Downloads/911 CT Yearly Ecometrics 2010-2020 Shapefile/911 CT Yearly Ecometrics 2010-2020 Shapefile.shp")
+x <- st_read("/Users/josiahparry/Downloads/911 CT Yearly Ecometrics 2010-2020 Shapefile/911 CT Yearly Ecometrics 2010-2020 Shapefile.shp")
 
 ecometric_tidy <- x |>
   st_drop_geometry() |>

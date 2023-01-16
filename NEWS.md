@@ -1,4 +1,6 @@
-# sfdep (development version)
+# sfdep 0.2.3
+
+- remove readr suggestion to pass `noSuggests` from CRAN. Much minuscule tasks for the overlords.
 
 # sfdep 0.2.2
 

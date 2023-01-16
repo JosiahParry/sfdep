@@ -1,6 +1,6 @@
 library(sf)
 
-countries <- read_sf("https://raw.githubusercontent.com/gdsbook/book/master/data/countries/countries_clean.gpkg")
+countries <- st_read("https://raw.githubusercontent.com/gdsbook/book/master/data/countries/countries_clean.gpkg")
 
 
 head(countries)
@@ -169,7 +169,7 @@ pct_nonzero <- sum(lengths(nb)) / length(nb)^2
 library(dplyr)
 library(ggplot2)
 
-sandiego <- sf::read_sf("https://raw.githubusercontent.com/gdsbook/book/master/data/sandiego/sandiego_tracts.gpkg") |>
+sandiego <- sf::st_read("https://raw.githubusercontent.com/gdsbook/book/master/data/sandiego/sandiego_tracts.gpkg") |>
   mutate(nb = st_contiguity(geom),
          wt = st_weights(nb))
 
@@ -316,7 +316,7 @@ wt_inverse[[5]]
 
 data_path <- "https://raw.githubusercontent.com/gdsbook/book/master/data"
 
-tx <- read_sf("/Users/josiahparry/Downloads/book-master/data/texas/texas.shp")
+tx <- st_read("/Users/josiahparry/Downloads/book-master/data/texas/texas.shp")
 
 # By default sf, spdep, and sfdep use s2. So knn measure _are_ good.
 knn4_good <- tx |>
@@ -357,7 +357,7 @@ nb_union(wk_rook, wk1)
 
 # Visualizing weight set operations ---------------------------------------
 
-mx <- read_sf("/Users/josiahparry/Downloads/book-master/data/mexico/mexicojoin.shp")
+mx <- st_read("/Users/josiahparry/Downloads/book-master/data/mexico/mexicojoin.shp")
 
 mx_queen <- st_contiguity(mx$geometry)
 mx_knn4 <- st_knn(mx$geometry, k = 4)

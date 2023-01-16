@@ -91,12 +91,13 @@ time-slices with missing values \emph{prior} to using emerging hot spot analysis
 }
 }
 \examples{
+
 df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
 # read in data
-df <- readr::read_csv(df_fp, col_types = "ccidD")
-geo <- sf::read_sf(geo_fp)
+df <- read.csv(df_fp, colClasses = c("character", "character", "integer", "double", "Date"))
+geo <- sf::st_read(geo_fp)
 
 # Create spacetime object called `bos`
 bos <- spacetime(df, geo,
@@ -113,6 +114,7 @@ ehsa <- emerging_hotspot_analysis(
 )
 
 ehsa
+
 }
 \seealso{
 \href{https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/learnmoreemerging.htm}{How Emerging Hot Spot Analysis works}, \href{https://pro.arcgis.com/en/pro-app/2.8/tool-reference/space-time-pattern-mining/emerginghotspots.htm}{Emerging Hot Spot Analysis (Space Time Pattern Mining)}, and the video \href{https://www.youtube.com/watch?v=0aV6HHwJuo4&t=3848s&ab_channel=EsriEvents}{Spatial Data Mining II: A Deep Dive into Space-Time Analysis} by ESRI.

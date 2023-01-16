@@ -61,7 +61,7 @@ geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
 # read in data
 df <- readr::read_csv(df_fp, col_types = "ccidD")
-geo <- sf::read_sf(geo_fp)
+geo <- sf::st_read(geo_fp)
 
 # create spacetime object
 bos <- spacetime(df, geo, ".region_id", "year")

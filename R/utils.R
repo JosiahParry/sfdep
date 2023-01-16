@@ -12,8 +12,11 @@
 check_pkg_suggests <- function(x) {
   missing_pkgs <- !vapply(x, requireNamespace, FUN.VALUE = logical(1), quietly = TRUE)
 
-  if (any(missing_pkgs))
-    cli::cli_abort('Missing packages: {paste("`", x[missing_pkgs], "`", sep = "", collapse = ", ")}')
+  if (any(missing_pkgs)) {
+    cli::cli_alert_danger('Missing packages: {paste("`", x[missing_pkgs], "`", sep = "", collapse = ", ")}')
+    return(invisible(NULL))
+  }
+
 }
 
 
