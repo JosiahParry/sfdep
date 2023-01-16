@@ -36,6 +36,11 @@ Given geometry and neighbor and weights lists, create an edge list \code{sf} obj
 Creating an edge list creates a column for each \code{i} position and \code{j} between an observation and their neighbors. You can recreate these values by expanding the \code{nb} and \code{wt} list columns.
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{library(magrittr)
+#> 
+#> Attaching package: 'magrittr'
+#> The following objects are masked from 'package:testthat':
+#> 
+#>     equals, is_less_than, not
 guerry_nb \%>\%
   tibble::as_tibble() \%>\%
   dplyr::select(nb, wt) \%>\%

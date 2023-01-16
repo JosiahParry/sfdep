@@ -32,21 +32,22 @@ Convert sf object to spacetime
 }
 \examples{
 
-df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
-geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
+if (require(dplyr, quietly = TRUE)) {
+  df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
+  geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
-# read in data
-df <- read.csv(
-  df_fp, colClasses = c("character", "character", "integer", "double", "Date")
-)
-geo <- sf::st_read(geo_fp)
+  # read in data
+  df <- read.csv(
+    df_fp, colClasses = c("character", "character", "integer", "double", "Date")
+  )
+  geo <- sf::st_read(geo_fp)
 
-# Create spacetime object called `bos`
-bos <- spacetime(df, geo,
-                 .loc_col = ".region_id",
-                 .time_col = "time_period")
+  # Create spacetime object called `bos`
+  bos <- spacetime(df, geo,
+                   .loc_col = ".region_id",
+                   .time_col = "time_period")
 
-as_sf(bos)
-as_spacetime(as_sf(bos) , ".region_id", "year")
-
+  as_sf(bos)
+  as_spacetime(as_sf(bos) , ".region_id", "year")
+}
 }
