@@ -92,6 +92,7 @@ time-slices with missing values \emph{prior} to using emerging hot spot analysis
 }
 \examples{
 
+if (requireNamespace("Kendall")) {
 df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
@@ -114,6 +115,7 @@ ehsa <- emerging_hotspot_analysis(
 )
 
 ehsa
+}
 
 }
 \seealso{

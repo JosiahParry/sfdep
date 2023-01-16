@@ -33,11 +33,15 @@
 #' @export
 #' @examples
 #'
+#' if (requireNamespace(dplyr, quietly = TRUE)) {
+#'
 #' library(magrittr)
 #' guerry %>%
 #'   dplyr::mutate(nb = st_contiguity(geometry),
 #'          wt = st_weights(nb)) %>%
 #'   st_as_edges(nb, wt)
+#'
+#' }
 st_as_edges <- function(x, nb, wt) {
   UseMethod("st_as_edges")
 }
@@ -106,10 +110,12 @@ st_as_edges.sfc <- function(x, nb, wt) {
 # @param ... arguments passed to methods.
 #' @export
 #' @examples
+#' if (requireNamespace("dplyr", quitly = TRUE)) {
 #' library(magrittr)
 #' guerry %>%
 #'   dplyr::transmute(nb = st_contiguity(geometry)) %>%
 #'   st_as_nodes(nb)
+#'  }
 #' @return
 #' An object of class `sf` with `POINT` geometry.
 st_as_nodes <- function(x, nb) {
@@ -182,11 +188,13 @@ st_as_nodes.sfc <- function(x, nb) {
 #' @seealso [st_as_nodes()] and [st_as_edges()]
 #' @export
 #' @examples
+#'
+#' if (requireNamespace("dplyr", quitly = TRUE)) {
 #' library(magrittr)
 #'
 #' guerry_nb %>%
 #'   st_as_graph(nb, wt)
-#'
+#'}
 #' @returns an `sfnetwork` object
 st_as_graph <- function(x, nb, wt) {
   UseMethod("st_as_graph")

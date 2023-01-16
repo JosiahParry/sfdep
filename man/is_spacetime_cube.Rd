@@ -44,6 +44,8 @@ of time periods
 }
 
 \examples{
+
+if (requireNamespace("zoo", quietly = TRUE)) {
 df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
@@ -61,4 +63,5 @@ bos <- spacetime(df, geo,
 is_spacetime_cube(bos)
 is_spacetime_cube(bos[round(runif(1000, 0, nrow(bos))),])
 is_spacetime_cube(guerry)
+}
 }

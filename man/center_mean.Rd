@@ -33,6 +33,8 @@ Given an sfc object containing points, calculate a measure of central tendency.
 }
 }
 \examples{
+if (requireNamespace("pracma")) {
+
 # Make a grid to sample from
 grd <- sf::st_make_grid(n = c(1, 1), cellsize = c(100, 100), offset = c(0,0))
 
@@ -47,6 +49,7 @@ plot(pnts)
 plot(cm, col = "red", add = TRUE)
 plot(em, col = "blue", add = TRUE)
 plot(cmed, col = "green", add = TRUE)
+}
 }
 \seealso{
 Other point-pattern: 

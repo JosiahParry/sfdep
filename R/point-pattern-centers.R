@@ -14,6 +14,8 @@
 #' @returns an sfc POINT object
 #' @export
 #' @examples
+#' if (requireNamespace("pracma")) {
+#'
 #' # Make a grid to sample from
 #' grd <- sf::st_make_grid(n = c(1, 1), cellsize = c(100, 100), offset = c(0,0))
 #'
@@ -28,6 +30,7 @@
 #' plot(cm, col = "red", add = TRUE)
 #' plot(em, col = "blue", add = TRUE)
 #' plot(cmed, col = "green", add = TRUE)
+#' }
 center_mean <- function(geometry, weights = NULL) {
   geometry <- check_polygon(geometry)
   crs <- sf::st_crs(geometry)
