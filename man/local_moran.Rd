@@ -29,14 +29,7 @@ Moran's I is calculated for each polygon based on the neighbor and weight lists.
 \code{\link[=local_moran]{local_moran()}} calls \code{\link[spdep:localmoran]{spdep::localmoran_perm()}} and calculates the Moran I for each polygon. As well as provide simulated p-values.
 }
 \examples{
-library(magrittr)
-lisa <- guerry \%>\%
-  dplyr::mutate(nb = st_contiguity(geometry),
-         wt = st_weights(nb),
-         moran = local_moran(crime_pers, nb, wt))
-
-# unnest the dataframe column
-tidyr::unnest(lisa, moran)
+local_moran(guerry_nb$crime_pers, guerry_nb$nb, guerry_nb$wt)
 }
 \seealso{
 Other stats: 

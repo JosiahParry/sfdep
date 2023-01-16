@@ -63,14 +63,8 @@ These functions are based on the implementations of the local Geary statistic in
 }
 }
 \examples{
-g <- dplyr::transmute(guerry,
-                      nb = st_contiguity(geometry),
-                      wt = st_weights(nb),
-                      geary = local_c_perm(
-                        x = list(crime_pers, literacy), nb, wt)
-)
 
-tidyr::unnest(g, geary)
+local_c_perm(guerry_nb$crime_pers, guerry_nb$nb, guerry_nb$wt)
 
 }
 \references{

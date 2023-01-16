@@ -14,6 +14,8 @@
 #' @family weights
 #' @export
 #' @examples
+#'
+#' if (requireNamespace("dplyr", quietly = TRUE))
 #' library(magrittr)
 #' guerry %>%
 #'  dplyr::mutate(nb = st_contiguity(geometry),

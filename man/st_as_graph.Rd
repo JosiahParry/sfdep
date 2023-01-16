@@ -27,7 +27,7 @@ Given an \code{sf} or \code{sfc} object and neighbor and weights lists, create a
 }
 \examples{
 
-if (requireNamespace("dplyr", quitly = TRUE)) {
+if (requireNamespace("dplyr", quietly = TRUE)) {
 library(magrittr)
 
 guerry_nb \%>\%

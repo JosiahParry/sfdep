@@ -25,6 +25,8 @@ Calculate polygon spatial weights from a \code{nb} list. See \code{\link[spdep:n
 Under the hood, \code{\link[=st_weights]{st_weights()}} creates a \code{listw} object and then extracts the weights elements from it as the \code{neighbours} element is already--presumably--already existent in the neighbors list you've already created. \code{listw} objects are recreated using \code{\link[=recreate_listw]{recreate_listw()}} when calculating other statistics.
 }
 \examples{
+
+if (requireNamespace("dplyr", quietly = TRUE))
 library(magrittr)
 guerry \%>\%
  dplyr::mutate(nb = st_contiguity(geometry),

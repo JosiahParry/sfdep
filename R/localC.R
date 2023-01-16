@@ -47,14 +47,8 @@ local_c <- function(x, nb, wt, ...) {
 #' @rdname local_c
 #' @export
 #' @examples
-#' g <- dplyr::transmute(guerry,
-#'                       nb = st_contiguity(geometry),
-#'                       wt = st_weights(nb),
-#'                       geary = local_c_perm(
-#'                         x = list(crime_pers, literacy), nb, wt)
-#' )
 #'
-#' tidyr::unnest(g, geary)
+#' local_c_perm(guerry_nb$crime_pers, guerry_nb$nb, guerry_nb$wt)
 #'
 #' @returns a `data.frame` with columns
 #'

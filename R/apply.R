@@ -19,8 +19,8 @@
 #' @param suffix The `map` variant to use. Options are "dbl", "int", "lgl", "chr", "list".
 #' @param ... arguments to pass to `.f`
 #' @returns a vector or list of with same length as `x`.
-#' @export
 #' @examples
+#' if (requireNamespace("dplyr", quietly = TRUE)) {
 #' library(magrittr)
 #' guerry %>%
 #'   dplyr::transmute(
@@ -32,6 +32,7 @@
 #'     ),
 #'     lag = st_lag(crime_pers, nb, wt)
 #'   )
+#' }
 st_nb_apply <- function(x, nb, wt, .f, suffix = "dbl", ...) {
 
   if (!requireNamespace("purrr", quietly = TRUE)) {

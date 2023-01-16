@@ -14,11 +14,12 @@
 #' # on basic polygons
 #' geo <- sf::st_geometry(guerry)
 #' st_contiguity(geo)
-#'
+#' if (requireNamespace("dplyr", quietyl = TRUE)) {
 #' # in a pipe
 #' library(magrittr)
 #' guerry %>%
 #'   dplyr::mutate(nb = st_contiguity(geometry), .before = 1)
+#'  }
 #' @returns a list of class `nb`
 st_contiguity <- function(geometry, queen = TRUE, ...) {
   nb <- spdep::poly2nb(geometry, queen = queen, ...)
