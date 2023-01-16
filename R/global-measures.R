@@ -39,7 +39,7 @@ global_moran <- function(x, nb, wt, na_ok = FALSE, ...) {
 #' wt <- guerry_nb$wt
 #' x <- guerry_nb$crime_pers
 #' moran <- global_moran_perm(x, nb, wt)
-#' broom::tidy(moran)
+#' moran
 #' @returns an object of classes `htest`, and `mc.sim`.
 global_moran_perm <- function(x, nb, wt, alternative = "two.sided",
                               nsim = 499, ...) {

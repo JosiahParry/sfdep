@@ -30,7 +30,7 @@ nb <- guerry_nb$nb
 wt <- guerry_nb$wt
 x <- guerry_nb$crime_pers
 moran <- global_moran_perm(x, nb, wt)
-broom::tidy(moran)
+moran
 }
 \seealso{
 Other global_moran: 
