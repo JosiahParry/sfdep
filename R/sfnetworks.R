@@ -33,7 +33,7 @@
 #' @export
 #' @examples
 #'
-#' if (requireNamespace(dplyr, quietly = TRUE)) {
+#' if (requireNamespace("dplyr", quietly = TRUE)) {
 #'
 #' library(magrittr)
 #' guerry %>%
