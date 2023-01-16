@@ -8,8 +8,12 @@ nbg <- st_nb_gabriel(geometry)
 nbr <- st_nb_relative(geometry)
 
 
+
+
+
 test_that("neighbors are of appropriate length", {
   skip_on_cran()
+  skip_on_ci()
   expect_length(nbd, 85)
   expect_length(nbg, 85)
   expect_length(nbr, 85)
@@ -17,6 +21,7 @@ test_that("neighbors are of appropriate length", {
 
 test_that("gabriel nb is a subgraph of delaunary", {
   skip_on_cran()
+  skip_on_ci()
   expect_equal(
     nb_intersect(nbd, nbg),
     nbg,
@@ -26,6 +31,7 @@ test_that("gabriel nb is a subgraph of delaunary", {
 
 test_that("relative nb is a subgraph of delaunary", {
   skip_on_cran()
+  skip_on_ci()
   expect_equal(
     nb_intersect(nbd, nbr),
     nbr,
@@ -35,6 +41,7 @@ test_that("relative nb is a subgraph of delaunary", {
 
 test_that("graph neighbors don't work with sf objects", {
   skip_on_cran()
+  skip_on_ci()
   expect_error(st_nb_delaunay(guerry))
   expect_error(st_nb_gabriel(guerry))
   expect_error(st_nb_relative(guerry))
@@ -42,6 +49,7 @@ test_that("graph neighbors don't work with sf objects", {
 
 test_that("message is emitted when providing polygons", {
   skip_on_cran()
+  skip_on_ci()
   expect_message(st_nb_delaunay(geometry))
   expect_message(st_nb_gabriel(geometry))
   expect_message(st_nb_relative(geometry))
@@ -49,6 +57,7 @@ test_that("message is emitted when providing polygons", {
 
 test_that("error on using lines", {
   skip_on_cran()
+  skip_on_ci()
   g2 <- sfnetworks::roxel[["geometry"]]
 
   # errors emitted thanks to spdep

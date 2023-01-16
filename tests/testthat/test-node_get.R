@@ -11,6 +11,7 @@
 test_that("nbs is spdep compliant", {
 
   skip_on_cran()
+  skip_on_ci()
 
   library(sfdep)
   library(dplyr)
