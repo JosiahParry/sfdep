@@ -28,6 +28,8 @@
 #'
 #' @export
 #' @examples
+#'
+#' if (interactive()) {
 #' df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 #' geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 #'
@@ -50,6 +52,7 @@
 #' set_wts(bos)
 #' set_col(bos, "card")
 #' set_col(bos, "card", "cardinalities")
+#' }
 
 set_col <- function(x, .from_geo, .to_data = .from_geo) {
 

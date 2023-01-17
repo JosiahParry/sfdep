@@ -41,6 +41,8 @@ same name as the column in the geometry context. If a different name is desired
 use \code{\link[=set_col]{set_col()}}
 }
 \examples{
+
+if (interactive()) {
 df_fp <- system.file("extdata", "bos-ecometric.csv", package = "sfdep")
 geo_fp <- system.file("extdata", "bos-ecometric.geojson", package = "sfdep")
 
@@ -63,4 +65,5 @@ set_nbs(bos)
 set_wts(bos)
 set_col(bos, "card")
 set_col(bos, "card", "cardinalities")
+}
 }

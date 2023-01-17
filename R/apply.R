@@ -33,6 +33,7 @@
 #'     lag = st_lag(crime_pers, nb, wt)
 #'   )
 #' }
+#' @export
 st_nb_apply <- function(x, nb, wt, .f, suffix = "dbl", ...) {
 
   if (!requireNamespace("purrr", quietly = TRUE)) {

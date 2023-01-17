@@ -7,11 +7,11 @@
 \alias{ungroup.spacetime}
 \title{tidyverse methods for spacetime objects}
 \usage{
-\method{group_by}{spacetime}(.data, ...)
+group_by.spacetime(.data, ...)
 
-\method{mutate}{spacetime}(.data, ...)
+mutate.spacetime(.data, ...)
 
-\method{ungroup}{spacetime}(.data, ...)
+ungroup.spacetime(.data, ...)
 }
 \arguments{
 \item{.data}{a data frame}
