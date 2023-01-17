@@ -26,13 +26,14 @@ Under the hood, \code{\link[=st_weights]{st_weights()}} creates a \code{listw} o
 }
 \examples{
 
-if (requireNamespace("dplyr", quietly = TRUE))
+if (requireNamespace("dplyr", quietly = TRUE)) {
 library(magrittr)
 guerry \%>\%
  dplyr::mutate(nb = st_contiguity(geometry),
                wt = st_weights(nb),
                .before = 1)
 
+}
 # using geometry column directly
 nb <- st_contiguity(guerry$geometry)
 wt <- st_weights(nb)

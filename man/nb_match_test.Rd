@@ -46,10 +46,13 @@ a \code{data.frame} with columns
 Implements the Local Neighbor Match Test as described in \emph{Tobler's Law in a Multivariate World} (Anselin and Li, 2020).
 }
 \examples{
+
+if (requireNamespace("dplyr", quietly = TRUE)) {
 library(magrittr)
 guerry \%>\%
   dplyr::transmute(nb = st_knn(geometry, k = 10),
          nmt = nb_match_test(list(crime_pers, literacy, suicides),
                              nb, nsim = 999)) \%>\%
   tidyr::unnest(nmt)
+ }
 }

@@ -5,12 +5,15 @@
 #' @inheritParams recreate_listw
 #' @inheritParams nmt_impl
 #' @examples
+#'
+#' if (requireNamespace("dplyr", quietly = TRUE)) {
 #' library(magrittr)
 #' guerry %>%
 #'   dplyr::transmute(nb = st_knn(geometry, k = 10),
 #'          nmt = nb_match_test(list(crime_pers, literacy, suicides),
 #'                              nb, nsim = 999)) %>%
 #'   tidyr::unnest(nmt)
+#'  }
 #' @export
 #' @returns a `data.frame` with columns
 #'

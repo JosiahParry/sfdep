@@ -43,6 +43,9 @@ P-values are estimated using a conditional permutation approach. This creates a 
 Calls \code{spdep::local_joincount_uni()}.
 }
 \examples{
+
+if (requireNamespace("dplyr", quietly = TRUE)) {
+
 res <- dplyr::transmute(
   guerry,
   top_crime = as.factor(crime_prop > 9000),
@@ -50,4 +53,6 @@ res <- dplyr::transmute(
   wt = st_weights(nb, style = "B"),
   jc = local_jc_uni(top_crime, "TRUE", nb, wt))
 tidyr::unnest(res, jc)
+
+}
 }
