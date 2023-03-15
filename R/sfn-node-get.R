@@ -35,7 +35,7 @@
 #' @export
 node_get_nbs <- function() {
   check_pkg_suggests(c("igraph", "tidygraph"))
-  nb <- lapply(igraph::get.adjlist(tidygraph::.G()), as.integer)
+  nb <- lapply(igraph::get.adjlist(tidygraph::.G()), function(x) unique(as.integer(x)))
   nb[which(lengths(nb) == 0)] <- 0L
   nb <- class_modify(nb, "nb")
   attr(nb, "self.included") <- FALSE
