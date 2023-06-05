@@ -6,7 +6,7 @@
 #'
 #' - `nb_union()` returns the union of elements in each element of x and y
 #' - `nb_intersect()` returns the intersection of elements in each element of x and y
-#' - `nb_setdiff()` returns the intersection of elements in each element of x and y
+#' - `nb_setdiff()` returns the difference of elements in each element of x and y
 #'
 #' @examples
 #' nb <- st_contiguity(guerry$geometry)
