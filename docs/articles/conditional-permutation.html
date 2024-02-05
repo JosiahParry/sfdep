@@ -8,13 +8,13 @@
 <meta name="description" content="sfdep">
 <title>Conditional Permutations with sfdep • sfdep</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Noto%20Sans%20Display-0.4.0/font.css" rel="stylesheet">
-<link href="../deps/_Noto%20Sans%20Mono-0.4.0/font.css" rel="stylesheet">
-<link href="../deps/_Merriweather-0.4.0/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Noto_Sans_Display-0.4.8/font.css" rel="stylesheet">
+<link href="../deps/Noto_Sans_Mono-0.4.8/font.css" rel="stylesheet">
+<link href="../deps/Merriweather-0.4.8/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Conditional Permutations with sfdep">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Conditional Permutations with sfdep">
 <meta property="og:description" content="sfdep">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -29,7 +29,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,11 +83,11 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Conditional Permutations with sfdep</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/josiahparry/sfdep/blob/HEAD/vignettes/conditional-permutation.Rmd" class="external-link"><code>vignettes/conditional-permutation.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/josiahparry/sfdep/blob/HEAD/vignettes/articles/conditional-permutation.Rmd" class="external-link"><code>vignettes/articles/conditional-permutation.Rmd</code></a></small>
       <div class="d-none name"><code>conditional-permutation.Rmd</code></div>
     </div>
 
@@ -102,11 +102,11 @@ statistic be the same?”</p>
 <p>To understand this a bit better, lets first obtain our neighbors and
 weights lists, as well as our numeric variable.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sfdep.josiahparry.com" class="external-link">sfdep</a></span><span class="op">)</span>
-
-<span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span>
-<span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span>
-<span class="va">x</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">crime_pers</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://sfdep.josiahparry.com" class="external-link">sfdep</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/st_contiguity.html">st_contiguity</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span></span>
+<span><span class="va">wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">guerry</span><span class="op">$</span><span class="va">crime_pers</span></span></code></pre></div>
 <p>sfdep exports a function <code><a href="../reference/cond_permute_nb.html">cond_permute_nb()</a></code> to allow
 users to create conditional permutations of their nb lists. This works
 by first identifying the cardinality (number of neighbors) of each
@@ -140,48 +140,48 @@ permutation of the neighbors list. From that permuted neighbor list we
 can then create a new weights list and calculate the global Geary C for
 each of the permutation.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"> <span class="va">p_nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cond_permute_nb.html">cond_permute_nb</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span>
- <span class="va">p_wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">p_nb</span><span class="op">)</span>
- <span class="va">observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/global_c.html">global_c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">p_nb</span>, <span class="va">p_wt</span><span class="op">)</span>
- 
- <span class="va">observed</span>
-<span class="co">#&gt; $C</span>
-<span class="co">#&gt; [1] 0.8857495</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $K</span>
-<span class="co">#&gt; [1] 2.400641</span></code></pre></div>
+<code class="sourceCode R"><span> <span class="va">p_nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cond_permute_nb.html">cond_permute_nb</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span></span>
+<span> <span class="va">p_wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">p_nb</span><span class="op">)</span></span>
+<span> <span class="va">observed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/global_c.html">global_c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">p_nb</span>, <span class="va">p_wt</span><span class="op">)</span></span>
+<span> </span>
+<span> <span class="va">observed</span></span>
+<span><span class="co">#&gt; $C</span></span>
+<span><span class="co">#&gt; [1] 1.127356</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $K</span></span>
+<span><span class="co">#&gt; [1] 2.400641</span></span></code></pre></div>
 <p>If we did this say, 199 times, we can make a fairly robust reference
 distribution. We will do this by putting the above code in a
 <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate()</a></code> call. <code><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate()</a></code> execute some
 code a number of times as determined by the first argument. This is how
 I calculate simulated p-values for many measures in sfdep.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">199</span>, <span class="op">{</span>
-  <span class="va">p_nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cond_permute_nb.html">cond_permute_nb</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span>
-  <span class="va">p_wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">p_nb</span><span class="op">)</span>
-  <span class="fu"><a href="../reference/global_c.html">global_c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">p_nb</span>, <span class="va">p_wt</span><span class="op">)</span><span class="op">[[</span><span class="st">"C"</span><span class="op">]</span><span class="op">]</span>
-<span class="op">}</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">reps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">199</span>, <span class="op">{</span></span>
+<span>  <span class="va">p_nb</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cond_permute_nb.html">cond_permute_nb</a></span><span class="op">(</span><span class="va">nb</span><span class="op">)</span></span>
+<span>  <span class="va">p_wt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/st_weights.html">st_weights</a></span><span class="op">(</span><span class="va">p_nb</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/global_c.html">global_c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">p_nb</span>, <span class="va">p_wt</span><span class="op">)</span><span class="op">[[</span><span class="st">"C"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <p>Here we can plot the reference distribution and the observed value
 over the reference distribution.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
-
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>sim_val <span class="op">=</span> <span class="va">reps</span><span class="op">)</span>, 
-       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">sim_val</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">observed</span><span class="op">[[</span><span class="st">"C"</span><span class="op">]</span><span class="op">]</span>, 
-             color <span class="op">=</span> <span class="st">"#6fb381"</span>, 
-             lty <span class="op">=</span> <span class="fl">2</span>,
-             <span class="op">)</span> <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>sim_val <span class="op">=</span> <span class="va">reps</span><span class="op">)</span>, </span>
+<span>       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">sim_val</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">geom_histogram</a></span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html" class="external-link">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">observed</span><span class="op">[[</span><span class="st">"C"</span><span class="op">]</span><span class="op">]</span>, </span>
+<span>             color <span class="op">=</span> <span class="st">"#6fb381"</span>, </span>
+<span>             lty <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>             <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="conditional-permutation_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>We can see that the observed Geary C value is not very extreme and
 falls some what close to the center of our distribution.</p>
 <p>We can now calculate the pseudo p-value using the formula <span class="math inline">\((M + 1) / (R + 1)\)</span></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># simulated p-value</span>
-<span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">observed</span><span class="op">[[</span><span class="st">"C"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="va">reps</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">199</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span>
-<span class="co">#&gt; [1] 0.955</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># simulated p-value</span></span>
+<span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">observed</span><span class="op">[[</span><span class="st">"C"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="va">reps</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">199</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.02</span></span></code></pre></div>
 <p>This is the approach taken by Pysal and by sfdep where other methods
 do not apply or are not provided by spdep.</p>
 </div>
@@ -199,8 +199,7 @@ do not apply or are not provided by spdep.</p>
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a>
-2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
     </footer>

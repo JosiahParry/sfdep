@@ -40,9 +40,9 @@ global_moran_test(x, nb, wt)
 }
 \seealso{
 Other global_moran: 
+\code{\link{global_moran}()},
 \code{\link{global_moran_bv}()},
 \code{\link{global_moran_perm}()},
-\code{\link{global_moran}()},
 \code{\link{local_moran_bv}()}
 }
 \concept{global_moran}

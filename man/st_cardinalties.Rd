@@ -21,7 +21,7 @@ st_cardinalties(nb)
 }
 \seealso{
 Other other: 
-\code{\link{st_nb_lag_cumul}()},
-\code{\link{st_nb_lag}()}
+\code{\link{st_nb_lag}()},
+\code{\link{st_nb_lag_cumul}()}
 }
 \concept{other}

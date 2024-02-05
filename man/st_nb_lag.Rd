@@ -15,7 +15,7 @@ st_nb_lag(nb, order)
 a list of class \code{nb}
 }
 \description{
-Identify higher order neighbors from a neighbor list. \code{order} must be greater than 1. When order equals 2 then the neighbors of the neighbors list is returned and so forth. See \href{https://spatial.uchicago.edu/sites/spatial.uchicago.edu/files/1_introandreview_reducedsize.pdf}{Anselin's slides} for an example.
+Identify higher order neighbors from a neighbor list. \code{order} must be greater than 1. When order equals 2 then the neighbors of the neighbors list is returned and so forth. See \href{https://spatialanalysis.github.io/handsonspatialdata/index.html}{Anselin's book} was: "https://spatial.uchicago.edu" "/sites/spatial.uchicago.edu/files/1_introandreview_reducedsize.pdf" for an example.
 }
 \details{
 Utilizes \code{\link[spdep:nblag]{spdep::nblag()}}

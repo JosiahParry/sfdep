@@ -48,6 +48,8 @@ if (require(dplyr, quietly = TRUE)) {
                    .time_col = "time_period")
 
   as_sf(bos)
-  as_spacetime(as_sf(bos) , ".region_id", "year")
+  if (require("dplyr", quietly=TRUE)) {
+    as_spacetime(as_sf(bos) , ".region_id", "year")
+  }
 }
 }
