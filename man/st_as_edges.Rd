@@ -54,8 +54,7 @@ guerry_nb \%>\%
 #>  8     2    58 0.167
 #>  9     2    73 0.167
 #> 10     2    76 0.167
-#> # ... with 410 more rows
-#> # i Use `print(n = ...)` to see more rows
+#> # i 410 more rows
 }\if{html}{\out{</div>}}
 }
 \examples{

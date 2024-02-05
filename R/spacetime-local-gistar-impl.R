@@ -8,7 +8,7 @@
 #' @param nb a spacetime neighbors list
 #' @param wt a weights list associated with `nb`
 #' @param n_locs the number of unique locations
-#' @param n_sim the number of simulations to run for calculating `p_sim`
+#' @param nsim the number of simulations to run for calculating `p_sim`
 #'
 #' @keywords internal
 local_g_spt <- function(x, times, nb, wt, n_locs, nsim) {

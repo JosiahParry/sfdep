@@ -2,7 +2,7 @@
 title: "Comparison to spdep and pysal"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{spdep-and-pysal}
+  %\VignetteIndexEntry{Comparison to spdep and pysal}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

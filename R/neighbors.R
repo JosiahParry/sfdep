@@ -82,7 +82,7 @@ st_dist_band <- function(geometry, lower = 0,
 
 #' Pure Higher Order Neighbors
 #'
-#' Identify higher order neighbors from a neighbor list. `order` must be greater than 1. When order equals 2 then the neighbors of the neighbors list is returned and so forth. See [Anselin's slides](https://spatial.uchicago.edu/sites/spatial.uchicago.edu/files/1_introandreview_reducedsize.pdf) for an example.
+#' Identify higher order neighbors from a neighbor list. `order` must be greater than 1. When order equals 2 then the neighbors of the neighbors list is returned and so forth. See [Anselin's book](https://spatialanalysis.github.io/handsonspatialdata/index.html) was: "https://spatial.uchicago.edu" "/sites/spatial.uchicago.edu/files/1_introandreview_reducedsize.pdf" for an example.
 #'
 #' @details
 #' Utilizes [`spdep::nblag()`]

@@ -27,7 +27,7 @@ Perform set operations element-wise on two lists of equal length.
 \itemize{
 \item \code{nb_union()} returns the union of elements in each element of x and y
 \item \code{nb_intersect()} returns the intersection of elements in each element of x and y
-\item \code{nb_setdiff()} returns the intersection of elements in each element of x and y
+\item \code{nb_setdiff()} returns the difference of elements in each element of x and y
 }
 }
 \examples{

@@ -25,7 +25,7 @@ Formulas come from Anselin & Morrison's \href{https://spatialanalysis.github.io/
 \item \code{triangular}: K(z) = (1-|z|) for |z| < 1
 \item \code{epanechnikov}: K(z) = (3/4)(1-z^2) for |z| < 1
 \item \code{quartic}: K(z) = (15/16)*(1-(z/threshold)^2^)2 for |z| < 1
-\item \code{guassian}: K(z) = (2pi)^{1/2} * exp(-z^2/2)
+\item \code{gaussian}: K(z) = (2pi)^\{1/2\} * exp(-z^2/2)
 }
 }
 \keyword{internal}

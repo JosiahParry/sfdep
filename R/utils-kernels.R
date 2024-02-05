@@ -12,7 +12,7 @@
 #' - `triangular`: K(z) = (1-|z|) for |z| < 1
 #' - `epanechnikov`: K(z) = (3/4)(1-z^2) for |z| < 1
 #' - `quartic`: K(z) = (15/16)*(1-(z/threshold)^2^)2 for |z| < 1
-#' - `guassian`: K(z) = (2pi)^{1/2} * exp(-z^2/2)
+#' - `gaussian`: K(z) = (2pi)^\{1/2\} * exp(-z^2/2)
 #'
 #' @keywords internal
 #' @returns a list of length 5 where each element is a kernel function.

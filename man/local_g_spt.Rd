@@ -17,7 +17,7 @@ local_g_spt(x, times, nb, wt, n_locs, nsim)
 
 \item{n_locs}{the number of unique locations}
 
-\item{n_sim}{the number of simulations to run for calculating \code{p_sim}}
+\item{nsim}{the number of simulations to run for calculating \code{p_sim}}
 }
 \description{
 An alternative implementation to \link[spdep:localG]{spdep::localG} intended for use with

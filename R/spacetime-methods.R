@@ -2,6 +2,7 @@
 # Selection ---------------------------------------------------------------
 # Selection method
 # to do  update `times` attribute when subset and data is active
+
 `[.spacetime` <- function(x, ...) {
   NextMethod()
 }
@@ -91,7 +92,9 @@ as_sf <- function(x, ...) {
 #'                    .time_col = "time_period")
 #'
 #'   as_sf(bos)
-#'   as_spacetime(as_sf(bos) , ".region_id", "year")
+#'   if (require("dplyr", quietly=TRUE)) {
+#'     as_spacetime(as_sf(bos) , ".region_id", "year")
+#'   }
 #'}
 #' @returns
 #' For `as_spacetime()` returns a spacetime object. For `as_sf()`, an sf object.
@@ -103,6 +106,7 @@ as_spacetime <- function(x, .loc_col, .time_col, ...) {
 #' @export
 as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
   d <- utils::getFromNamespace("distinct.sf", "sf")
+# distinct.sf requires dplyr (suggested here) and rlang (imported here)
   geometry <- d(x, !!rlang::sym(.loc_col), !!rlang::sym(attr(x, "sf_column")))
 
   new_spacetime_data(sf::st_drop_geometry(x), geometry, .loc_col, .time_col)

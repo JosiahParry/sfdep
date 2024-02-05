@@ -34,7 +34,7 @@ global_c_test(x, nb, wt)
 }
 \seealso{
 Other global_c: 
-\code{\link{global_c_perm}()},
-\code{\link{global_c}()}
+\code{\link{global_c}()},
+\code{\link{global_c_perm}()}
 }
 \concept{global_c}
