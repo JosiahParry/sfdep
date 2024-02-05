@@ -7,7 +7,7 @@
 permute_listw(listw)
 }
 \arguments{
-\item{a}{listw object.}
+\item{listw}{a listw object.}
 }
 \value{
 a \code{listw} object

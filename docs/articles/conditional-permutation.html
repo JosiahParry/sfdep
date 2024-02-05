@@ -146,7 +146,7 @@ each of the permutation.</p>
 <span> </span>
 <span> <span class="va">observed</span></span>
 <span><span class="co">#&gt; $C</span></span>
-<span><span class="co">#&gt; [1] 1.127356</span></span>
+<span><span class="co">#&gt; [1] 1.094095</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $K</span></span>
 <span><span class="co">#&gt; [1] 2.400641</span></span></code></pre></div>
@@ -181,7 +181,7 @@ falls some what close to the center of our distribution.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># simulated p-value</span></span>
 <span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">observed</span><span class="op">[[</span><span class="st">"C"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;=</span> <span class="va">reps</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">199</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.02</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.075</span></span></code></pre></div>
 <p>This is the approach taken by Pysal and by sfdep where other methods
 do not apply or are not provided by spdep.</p>
 </div>

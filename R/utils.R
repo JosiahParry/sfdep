@@ -110,7 +110,7 @@ cond_permute_nb <- function(nb, seed = NULL) {
 
 #' Conditionally permutes a listw object
 #'
-#' @param a listw object.
+#' @param listw  a listw object.
 #'
 #' @keywords internal
 #' @returns a `listw` object
