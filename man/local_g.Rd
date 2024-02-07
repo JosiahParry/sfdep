@@ -26,8 +26,10 @@ local_g_perm(x, nb, wt, nsim = 499, alternative = "two.sided", ...)
 a \code{data.frame} with columns:
 \itemize{
 \item \code{gi}: the observed statistic
+\item \code{cluster}: factor variable with two levels classification high or low
 \item \code{e_gi}: the permutation sample mean
 \item \code{var_gi}: the permutation sample variance
+\item \code{std_dev}: standard deviation of the Gi statistic
 \item \code{p_value}: the p-value using sample mean and standard deviation
 \item \code{p_folded_sim}: p-value based on the implementation of Pysal which always assumes a two-sided test taking the minimum possible p-value
 \item \code{skewness}: sample skewness
