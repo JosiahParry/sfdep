@@ -17,8 +17,10 @@
 #' @returns a `data.frame` with columns:
 #'
 #' - `gi`: the observed statistic
+#' - `cluster`: factor variable with two levels classification high or low
 #' - `e_gi`: the permutation sample mean
 #' - `var_gi`: the permutation sample variance
+#' - `std_dev`: standard deviation of the Gi statistic
 #' - `p_value`: the p-value using sample mean and standard deviation
 #' - `p_folded_sim`: p-value based on the implementation of Pysal which always assumes a two-sided test taking the minimum possible p-value
 #' - `skewness`: sample skewness
@@ -41,12 +43,14 @@ local_g_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", ...) 
   }
   listw <- recreate_listw(nb, wt)
   res <- spdep::localG_perm(x, listw, nsim = nsim, alternative = alternative, ...)
-  localg_names <- c("gi", "e_gi", "var_gi", "p_value",
+  localg_names <- c("gi", "cluster", "e_gi", "var_gi", "std_dev", "p_value",
                     "p_sim", "p_folded_sim", "skewness", "kurtosis")
 
   gi <- as.numeric(res)
   stats::setNames(
-    cbind("gi" = gi, as.data.frame(attr(res, "internals")[, 2:8])),
+    cbind(gi,                   # the statistic
+          attr(res, "cluster"), # the category
+          as.data.frame(attr(res, "internals")[, 2:9])),
     localg_names
     )
 }
