@@ -1,5 +1,3 @@
-# In need of a new maintainer!
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # sfdep

@@ -111,6 +111,7 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">geometry</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/geos_unary.html" class="external-link">st_centroid</a></span><span class="op">(</span><span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_geometry.html" class="external-link">st_geometry</a></span><span class="op">(</span><span class="va">guerry</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">st_nb_delaunay</span><span class="op">(</span><span class="va">geometry</span><span class="op">)</span></span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>style is M (missing); style should be set to a valid value</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Neighbour list object:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of regions: 85 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Number of nonzero links: 488 </span>
@@ -141,7 +142,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Josiah Parry.</p>
+  <p></p><p>Developed by Josiah Parry, Dexter H Locke.</p>
 </div>
 
 <div class="pkgdown-footer-right">
