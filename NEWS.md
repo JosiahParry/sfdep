@@ -1,3 +1,9 @@
+# sfdep 0.2.4
+
+- Dexter Locke is now the maintainer of sfdep
+- Address failing CRAN checks h/t [@rsbivand](https://github.com/rsbivand) <https://github.com/JosiahParry/sfdep/pull/43>
+- Address bug in local Gi/* statistics
+
 # sfdep 0.2.3
 
 - remove readr suggestion to pass `noSuggests` from CRAN. Much minuscule tasks for the overlords.
