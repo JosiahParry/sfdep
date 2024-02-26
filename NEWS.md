@@ -1,3 +1,7 @@
+# sfdep 0.2.4
+
+- updated spacetime_constructor to comply with updates to the cli package. No user-facing changes
+
 # sfdep 0.2.3
 
 - remove readr suggestion to pass `noSuggests` from CRAN. Much minuscule tasks for the overlords.

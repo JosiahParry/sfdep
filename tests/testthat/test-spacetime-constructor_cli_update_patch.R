@@ -4,7 +4,7 @@ test_that("local_g_perm", {
 
   # read in data
   df <- read.csv(
-    df_fp, colClasses = c("character", "character", "integer", "double", "Date") # makese .region_id chr to match geo's chr .region_id
+    df_fp, colClasses = c("character", "character", "integer", "double", "Date") # makes .region_id chr to match geo's chr .region_id
   )
 
   geo <- sf::st_read(geo_fp)
