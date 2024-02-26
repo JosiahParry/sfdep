@@ -119,20 +119,20 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_gstar_perm</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     gi_star       e_gi       var_gi    p_value      p_sim p_folded_sim skewness</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.342359 0.01281212 2.828987e-06  0.8669055 0.38599380        0.408    0.204</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.595578 0.01231754 2.534491e-06  2.1922882 0.02835870        0.036    0.018</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.388872 0.01226355 2.355173e-06  2.0995950 0.03576448        0.044    0.022</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.848187 0.01098208 2.788616e-06 -1.5970973 0.11024403        0.120    0.060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.209736 0.01146742 3.231416e-06 -1.2477284 0.21213055        0.212    0.106</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -2.034142 0.01097455 1.880792e-06 -1.5710781 0.11616450        0.120    0.060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      kurtosis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.11601646</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  0.13538275</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  0.07291573</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -0.05713113</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  0.13602702</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  0.05456544</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     gi_star cluster       e_gi       var_gi    std_dev    p_value p_sim</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  1.342359    High 0.01281212 2.828987e-06  0.8669055 0.38599380 0.408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.595578    High 0.01231754 2.534491e-06  2.1922882 0.02835870 0.036</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.388872    High 0.01226355 2.355173e-06  2.0995950 0.03576448 0.044</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.848187     Low 0.01098208 2.788616e-06 -1.5970973 0.11024403 0.120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.209736     Low 0.01146742 3.231416e-06 -1.2477284 0.21213055 0.212</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -2.034142     Low 0.01097455 1.880792e-06 -1.5710781 0.11616450 0.120</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   p_folded_sim    skewness    kurtosis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        0.204  0.11601646 -0.37505144</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        0.018  0.13538275 -0.07345225</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        0.022  0.07291573 -0.24293931</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        0.060 -0.05713113 -0.15455315</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        0.106  0.13602702 -0.40875762</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        0.060  0.05456544 -0.27237752</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_gstar</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
@@ -144,7 +144,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Josiah Parry.</p>
+  <p></p><p>Developed by Josiah Parry, Dexter H Locke.</p>
 </div>
 
 <div class="pkgdown-footer-right">

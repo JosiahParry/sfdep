@@ -1,4 +1,4 @@
-pandoc: 3.1.3
+pandoc: 3.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
@@ -9,5 +9,5 @@ articles:
   spacetime-s3: spacetime-s3.html
   spdep-and-pysal: spdep-and-pysal.html
   understanding-emerging-hotspots: understanding-emerging-hotspots.html
-last_built: 2024-02-05T18:53Z
+last_built: 2024-02-13T14:51Z
 

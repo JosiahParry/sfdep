@@ -2,11 +2,12 @@
 # Selection ---------------------------------------------------------------
 # Selection method
 # to do  update `times` attribute when subset and data is active
-
+#' @export
 `[.spacetime` <- function(x, ...) {
   NextMethod()
 }
 
+#' @export
 `[[.spacetime` <- function(x, ...) {
   NextMethod()
 }

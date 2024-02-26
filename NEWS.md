@@ -1,6 +1,9 @@
 # sfdep 0.2.4
 
 - updated spacetime_constructor to comply with updates to the cli package. No user-facing changes
+- Dexter Locke [@DHLocke] is now the maintainer of sfdep
+- Address failing CRAN checks h/t [@rsbivand](https://github.com/rsbivand) <https://github.com/JosiahParry/sfdep/pull/43>
+- Address bug in local Gi/* statistics
 
 # sfdep 0.2.3
 

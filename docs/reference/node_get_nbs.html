@@ -93,11 +93,11 @@
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     
-<ul><li><p><code>node_get_nbs()</code>: creates a neighbor list in the nodes context based on the adjacency list. This returns a <code>nb</code> class object with the <em>neighboring nodes</em>.</p><ul><li><p>Uses <code><a href="https://r.igraph.org/reference/get.adjlist.html" class="external-link">igraph::get.adjlist()</a></code></p></li>
+<ul><li><p><code>node_get_nbs()</code>: creates a neighbor list in the nodes context based on the adjacency list. This returns a <code>nb</code> class object with the <em>neighboring nodes</em>.</p><ul><li><p>Uses <code><a href="https://r.igraph.org/reference/as_adj_list.html" class="external-link">igraph::get.adjlist()</a></code></p></li>
 </ul></li>
-<li><p><code>node_get_edge_list()</code>: creates an edge list. The edge list contains the row index of the edge relationships in the edge context for each node.</p><ul><li><p>Uses <code><a href="https://r.igraph.org/reference/get.adjedgelist.html" class="external-link">igraph::get.adjedgelist()</a></code>.</p></li>
+<li><p><code>node_get_edge_list()</code>: creates an edge list. The edge list contains the row index of the edge relationships in the edge context for each node.</p><ul><li><p>Uses <code><a href="https://r.igraph.org/reference/as_adj_list.html" class="external-link">igraph::get.adjedgelist()</a></code>.</p></li>
 </ul></li>
-<li><p><code>node_get_edge_col()</code>: creates a list column containing edge attributes as a list column in the node context (much like <code><a href="find_xj.html">find_xj()</a></code>).</p><ul><li><p>Uses <code><a href="https://r.igraph.org/reference/get.edge.attribute.html" class="external-link">igraph::get.edge.attribute()</a></code></p></li>
+<li><p><code>node_get_edge_col()</code>: creates a list column containing edge attributes as a list column in the node context (much like <code><a href="find_xj.html">find_xj()</a></code>).</p><ul><li><p>Uses <code><a href="https://r.igraph.org/reference/edge_attr.html" class="external-link">igraph::get.edge.attribute()</a></code></p></li>
 </ul></li>
 </ul></div>
 
@@ -123,7 +123,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Josiah Parry.</p>
+  <p></p><p>Developed by Josiah Parry, Dexter H Locke.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -164,26 +164,26 @@ then unnest it using <code><a href="https://tidyr.tidyverse.org/reference/unnest
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">gi_star</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">donat_gistar</span></span>
-<span><span class="co">#&gt; Simple feature collection with 85 features and 8 fields</span></span>
+<span><span class="co">#&gt; Simple feature collection with 85 features and 10 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
 <span><span class="co">#&gt; Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span></span>
 <span><span class="co">#&gt; CRS:           NA</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 9</span></span></span>
-<span><span class="co">#&gt;    gi_star   e_gi     var_gi p_value  p_sim p_folded_sim skewness kurtosis</span></span>
-<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">1.49</span>  0.011<span style="text-decoration: underline;">3</span> 0.000<span style="text-decoration: underline;">013</span>6   -<span style="color: #BB0000;">1.38</span>  0.167          0.06    0.03     1.10 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">0.482</span> 0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">009</span>38  -<span style="color: #BB0000;">0.502</span> 0.616          0.67    0.335    0.733</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   0.652 0.012<span style="text-decoration: underline;">6</span> 0.000<span style="text-decoration: underline;">007</span>16   0.433 0.665          0.61    0.305    0.731</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">1.65</span>  0.010<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">008</span>91  -<span style="color: #BB0000;">1.47</span>  0.141          0.08    0.04     0.760</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  -<span style="color: #BB0000;">1.08</span>  0.011<span style="text-decoration: underline;">7</span> 0.000<span style="text-decoration: underline;">014</span>9   -<span style="color: #BB0000;">1.14</span>  0.252          0.12    0.06     0.957</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  -<span style="color: #BB0000;">2.38</span>  0.011<span style="text-decoration: underline;">2</span> 0.000<span style="text-decoration: underline;">011</span>3   -<span style="color: #BB0000;">1.87</span>  0.061<span style="text-decoration: underline;">4</span>         0.02    0.01     0.688</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  -<span style="color: #BB0000;">0.362</span> 0.011<span style="text-decoration: underline;">8</span> 0.000<span style="text-decoration: underline;">013</span>6   -<span style="color: #BB0000;">0.414</span> 0.679          0.8     0.4      0.882</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  -<span style="color: #BB0000;">0.720</span> 0.010<span style="text-decoration: underline;">2</span> 0.000<span style="text-decoration: underline;">010</span>9   -<span style="color: #BB0000;">0.429</span> 0.668          0.75    0.375    0.627</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  -<span style="color: #BB0000;">1.45</span>  0.011<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">009</span>95  -<span style="color: #BB0000;">1.33</span>  0.185          0.13    0.065    0.770</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">1.32</span>  0.010<span style="text-decoration: underline;">6</span> 0.000<span style="text-decoration: underline;">009</span>42  -<span style="color: #BB0000;">1.05</span>  0.295          0.25    0.125    1.02 </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 11</span></span></span>
+<span><span class="co">#&gt;    gi_star cluster   e_gi     var_gi std_dev p_value p_sim p_folded_sim skewness</span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  -<span style="color: #BB0000;">1.49</span>  Low     0.011<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">011</span>8   -<span style="color: #BB0000;">1.42</span>   0.156   0.08        0.04     0.912</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  -<span style="color: #BB0000;">0.482</span> High    0.012<span style="text-decoration: underline;">2</span> 0.000<span style="text-decoration: underline;">008</span>87  -<span style="color: #BB0000;">0.638</span>  0.523   0.6         0.3      0.813</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   0.652 High    0.012<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">008</span>91   0.296  0.768   0.66        0.33     1.00 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  -<span style="color: #BB0000;">1.65</span>  Low     0.010<span style="text-decoration: underline;">2</span> 0.000<span style="text-decoration: underline;">011</span>4   -<span style="color: #BB0000;">1.34</span>   0.181   0.08        0.04     1.72 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  -<span style="color: #BB0000;">1.08</span>  High    0.011<span style="text-decoration: underline;">9</span> 0.000<span style="text-decoration: underline;">014</span>9   -<span style="color: #BB0000;">1.20</span>   0.232   0.11        0.055    1.13 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  -<span style="color: #BB0000;">2.38</span>  Low     0.011<span style="text-decoration: underline;">1</span> 0.000<span style="text-decoration: underline;">007</span>81  -<span style="color: #BB0000;">2.19</span>   0.028<span style="text-decoration: underline;">9</span>  0.01        0.005    0.859</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  -<span style="color: #BB0000;">0.362</span> Low     0.011<span style="text-decoration: underline;">4</span> 0.000<span style="text-decoration: underline;">011</span>9   -<span style="color: #BB0000;">0.340</span>  0.734   0.82        0.41     0.744</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  -<span style="color: #BB0000;">0.720</span> Low     0.010<span style="text-decoration: underline;">3</span> 0.000<span style="text-decoration: underline;">011</span>8   -<span style="color: #BB0000;">0.451</span>  0.652   0.77        0.385    0.920</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  -<span style="color: #BB0000;">1.45</span>  Low     0.011<span style="text-decoration: underline;">2</span> 0.000<span style="text-decoration: underline;">011</span>1   -<span style="color: #BB0000;">1.28</span>   0.201   0.11        0.055    0.916</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  -<span style="color: #BB0000;">1.32</span>  Low     0.010<span style="text-decoration: underline;">5</span> 0.000<span style="text-decoration: underline;">009</span>51  -<span style="color: #BB0000;">1.04</span>   0.300   0.27        0.135    0.982</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 75 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: geometry &lt;MULTIPOLYGON&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: kurtosis &lt;dbl&gt;, geometry &lt;MULTIPOLYGON&gt;</span></span></span></code></pre></div>
 <p>Lastly, we classify the clusters using a combination of
 <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> and <code><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when()</a></code> which is then piped
 into a ggplot map. While not a perfect recreation of the GeoDa map, it
@@ -306,7 +306,7 @@ version, so please install with
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">readr</span><span class="fu">::</span><span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span><span class="va">df_fp</span>, col_types <span class="op">=</span> <span class="st">"ccidD"</span><span class="op">)</span></span>
 <span><span class="va">geo</span> <span class="op">&lt;-</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_read.html" class="external-link">st_read</a></span><span class="op">(</span><span class="va">geo_fp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Reading layer `bos-ecometric' from data source </span></span>
-<span><span class="co">#&gt;   `/tmp/RtmpjUxQna/temp_libpath151111eb2be80/sfdep/extdata/bos-ecometric.geojson' </span></span>
+<span><span class="co">#&gt;   `/private/var/folders/zc/tg2xwck53dg9sls8x4ndzdc00000gn/T/Rtmp2RGXTr/temp_libpath2b6f5ea0db20/sfdep/extdata/bos-ecometric.geojson' </span></span>
 <span><span class="co">#&gt;   using driver `GeoJSON'</span></span>
 <span><span class="co">#&gt; Simple feature collection with 168 features and 1 field</span></span>
 <span><span class="co">#&gt; Geometry type: POLYGON</span></span>
@@ -397,16 +397,16 @@ data frame column <code>gi_star</code>.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># Groups:   time_period [10]</span></span></span>
 <span><span class="co">#&gt;    .region_id  time_period gi_star p_folded_sim</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 25025010405 2010-01-01   -<span style="color: #BB0000;">0.987</span>        0.276</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 25025010404 2010-01-01   -<span style="color: #BB0000;">1.37</span>         0.348</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 25025010801 2010-01-01   -<span style="color: #BB0000;">1.48</span>         0.208</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 25025010702 2010-01-01   -<span style="color: #BB0000;">0.863</span>        0.304</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 25025010204 2010-01-01   -<span style="color: #BB0000;">1.32</span>         0.392</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 25025010802 2010-01-01   -<span style="color: #BB0000;">1.48</span>         0.236</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 25025010104 2010-01-01   -<span style="color: #BB0000;">1.68</span>         0.1  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 25025000703 2010-01-01   -<span style="color: #BB0000;">1.44</span>         0.288</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 25025000504 2010-01-01   -<span style="color: #BB0000;">1.42</span>         0.076</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 25025000704 2010-01-01   -<span style="color: #BB0000;">1.62</span>         0.152</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 25025010405 2010-01-01   -<span style="color: #BB0000;">0.987</span>        0.138</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 25025010404 2010-01-01   -<span style="color: #BB0000;">1.37</span>         0.152</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 25025010801 2010-01-01   -<span style="color: #BB0000;">1.48</span>         0.134</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 25025010702 2010-01-01   -<span style="color: #BB0000;">0.863</span>        0.14 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 25025010204 2010-01-01   -<span style="color: #BB0000;">1.32</span>         0.194</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 25025010802 2010-01-01   -<span style="color: #BB0000;">1.48</span>         0.114</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 25025010104 2010-01-01   -<span style="color: #BB0000;">1.68</span>         0.066</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 25025000703 2010-01-01   -<span style="color: #BB0000;">1.44</span>         0.104</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 25025000504 2010-01-01   -<span style="color: #BB0000;">1.42</span>         0.058</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 25025000704 2010-01-01   -<span style="color: #BB0000;">1.62</span>         0.062</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,670 more rows</span></span></span></code></pre></div>
 <p>With these Gi* measures we can then evaluate each location for a
 trend using the Mann-Kendall test.</p>
@@ -508,17 +508,16 @@ using the argument <code>k</code> which is set to 1 by default.</p>
 <span></span>
 <span><span class="co"># evaluate the classifications of our hotspots</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">ehsa</span>, <span class="va">classification</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 2</span></span></span>
 <span><span class="co">#&gt;   classification           n</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> consecutive hotspot     17</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> intensifying hotspot     3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> no pattern detected     20</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> oscilating hotspot       1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> persistent coldspot     11</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> persistent hotspot       7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> sporadic coldspot       83</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> sporadic hotspot        26</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> consecutive hotspot     19</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> intensifying hotspot     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> no pattern detected     14</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> persistent coldspot      8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> persistent hotspot       3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> sporadic coldspot       92</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> sporadic hotspot        30</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -528,7 +527,7 @@ using the argument <code>k</code> which is set to 1 by default.</p>
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Josiah Parry.</p>
+<p>Developed by Josiah Parry, Dexter H Locke.</p>
 </div>
 
 <div class="pkgdown-footer-right">
