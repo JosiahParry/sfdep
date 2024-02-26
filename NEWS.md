@@ -1,6 +1,8 @@
-# sfdep 0.2.4
-
+# sfdep (development version)
 - updated spacetime_constructor to comply with updates to the cli package. No user-facing changes
+
+# sfdep 0.2.4
+- CRAN
 
 # sfdep 0.2.3
 

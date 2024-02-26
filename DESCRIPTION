@@ -1,6 +1,6 @@
 Package: sfdep
 Title: Spatial Dependence for Simple Features
-Version: 0.2.4
+Version: 0.2.4.9000
 Authors@R: 
     person(given = "Josiah",
            family = "Parry",
@@ -45,4 +45,3 @@ Imports:
 Depends: 
     R (>= 3.5.0)
 LazyData: true
-
