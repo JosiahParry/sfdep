@@ -103,8 +103,10 @@
     
 
 <p>a <code>data.frame</code> with columns:</p><ul><li><p><code>gi</code>: the observed statistic</p></li>
+<li><p><code>cluster</code>: factor variable with two levels classification high or low</p></li>
 <li><p><code>e_gi</code>: the permutation sample mean</p></li>
 <li><p><code>var_gi</code>: the permutation sample variance</p></li>
+<li><p><code>std_dev</code>: standard deviation of the Gi statistic</p></li>
 <li><p><code>p_value</code>: the p-value using sample mean and standard deviation</p></li>
 <li><p><code>p_folded_sim</code>: p-value based on the implementation of Pysal which always assumes a two-sided test taking the minimum possible p-value</p></li>
 <li><p><code>skewness</code>: sample skewness</p></li>
@@ -120,20 +122,20 @@
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">local_g_perm</span><span class="op">(</span><span class="va">x</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           gi       e_gi       var_gi    p_value      p_sim p_folded_sim</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.8991367 0.01181669 5.294820e-06  0.8701837 0.38420001        0.424</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.4455980 0.01191097 2.889082e-06  2.4734589 0.01338122        0.008</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.1976551 0.01190228 2.679746e-06  2.3117279 0.02079268        0.036</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.5838690 0.01188818 4.847045e-06 -1.5148402 0.12981289        0.116</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.1902425 0.01187490 6.603139e-06 -1.1359518 0.25597672        0.252</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -1.6527255 0.01185289 2.372027e-06 -1.6352541 0.10199579        0.104</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   skewness    kurtosis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    0.212  0.06130549</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2    0.004 -0.13947731</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3    0.018  0.21507002</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    0.058  0.09450422</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    0.126  0.22713868</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6    0.052  0.16068469</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           gi cluster       e_gi       var_gi    std_dev    p_value p_sim</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  0.8991367    High 0.01181669 5.294820e-06  0.8701837 0.38420001 0.424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2.4455980    High 0.01191097 2.889082e-06  2.4734589 0.01338122 0.008</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2.1976551    High 0.01190228 2.679746e-06  2.3117279 0.02079268 0.036</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 -1.5838690     Low 0.01188818 4.847045e-06 -1.5148402 0.12981289 0.116</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 -1.1902425     Low 0.01187490 6.603139e-06 -1.1359518 0.25597672 0.252</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 -1.6527255     Low 0.01185289 2.372027e-06 -1.6352541 0.10199579 0.104</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   p_folded_sim    skewness    kurtosis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        0.212  0.06130549 -0.23895408</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        0.004 -0.13947731 -0.09884521</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3        0.018  0.21507002  0.01754043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4        0.058  0.09450422 -0.30518697</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5        0.126  0.22713868  0.04683920</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6        0.052  0.16068469  0.07086942</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -141,7 +143,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Josiah Parry.</p>
+  <p></p><p>Developed by Josiah Parry, Dexter H Locke.</p>
 </div>
 
 <div class="pkgdown-footer-right">

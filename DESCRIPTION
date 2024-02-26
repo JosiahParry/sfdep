@@ -1,5 +1,6 @@
 Package: sfdep
 Title: Spatial Dependence for Simple Features
+<<<<<<< HEAD
 Version: 0.2.4.9000
 Authors@R: 
     person(given = "Josiah",
@@ -7,6 +8,15 @@ Authors@R:
            role = c("aut", "cre"),
            email = "josiah.parry@gmail.com",
            comment = c(ORCID = "0000-0001-9910-865X"))
+=======
+Version: 0.2.4
+Authors@R: c(
+    person("Josiah", "Parry", , "josiah.parry@gmail.com", role = c("aut"),
+           comment = c(ORCID = "0000-0001-9910-865X")),
+    person("Dexter", "Locke", 'H', "dexter.locke@gmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-2704-9720"))
+  )
+>>>>>>> 1513402d3ad2064a3fa6c425e6c3ce1866f0cdd3
 Description: An interface to 'spdep' to integrate with 'sf' objects and the 'tidyverse'.
 License: GPL-3
 URL: https://sfdep.josiahparry.com, https://github.com/josiahparry/sfdep

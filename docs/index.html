@@ -80,13 +80,8 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="in-need-of-a-new-maintainer">In need of a new maintainer!<a class="anchor" aria-label="anchor" href="#in-need-of-a-new-maintainer"></a>
+<div class="page-header"><h1 id="sfdep">sfdep<a class="anchor" aria-label="anchor" href="#sfdep"></a>
 </h1></div>
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-</div>
-<div class="section level1">
-<h1 id="sfdep">sfdep<a class="anchor" aria-label="anchor" href="#sfdep"></a>
-</h1>
 <!-- badges: start -->
 
 <p>sfdep builds on the great shoulders of spdep package for spatial dependence. sfdep creates an sf and tidyverse friendly interface to the package as well as introduces new functionality that is not present in spdep. sfdep utilizes list columns extensively to make this interface possible.</p>
@@ -222,7 +217,6 @@
 <!-- ## Neighbor apply function --><!-- In the case that you want to create custom local level metrics, you can do so with the function `st_nb_apply()`. This provides a purrr like interface to do calculation on an observation $x_{i}$ using it's neighbors, $x_{ij}$, and their respective weights $w_{ij}$. In the formula syntax utilize `.xij`, `.nb` and `.wt` for these values respectively. We can specify the type of output with the suffix argument. By default this will be `"dbl"`. These can be any purrr sufix. To get the default list output use `"list"`.  --><!-- For example  --><!-- ```{r} --><!-- g %>%  --><!--   transmute(x = st_nb_apply(crime_pers, nb, wt,  --><!--                             .f = function(.xij, .wt, ...) sum((.xij - crime_pers)^2) / (length(.wt) + 1), suffix = "dbl")) --><!-- ``` -->
 </div>
 </div>
-
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
@@ -257,6 +251,7 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Josiah Parry <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-9910-865X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Dexter H Locke <br><small class="roles"> Author, contributor </small> <a href="https://orcid.org/0000-0003-2704-9720" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 
@@ -275,7 +270,7 @@
 
     <footer><div class="pkgdown-footer-left">
   <p></p>
-<p>Developed by Josiah Parry.</p>
+<p>Developed by Josiah Parry, Dexter H Locke.</p>
 </div>
 
 <div class="pkgdown-footer-right">
