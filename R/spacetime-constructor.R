@@ -176,8 +176,8 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
   if (!identical(.data_loc_class, .geo_loc_class)) {
     cli::cli_abort(
       c("Differing class types for {.var .loc_col}.",
-        i = "{.var .data}:       {.cls {.data_loc_class}}",
-        "i" = "{.var .geometry}: {.cls {.geo_loc_class}}.")
+        i = "{.var .data}:       {.cls {(.data_loc_class)}}",
+        "i" = "{.var .geometry}: {.cls {(.geo_loc_class)}}.")
     )
   }
 
