@@ -1,6 +1,6 @@
 # sfdep (development version)
 
-- fixes bug with cli and closes #49
+- Fixes bug with cli and closes #49
 
 # sfdep 0.2.4
 
