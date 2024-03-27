@@ -1,3 +1,7 @@
+# sfdep (development version)
+
+- fixes bug with cli and closes #49
+
 # sfdep 0.2.4
 
 - Dexter Locke is now the maintainer of sfdep

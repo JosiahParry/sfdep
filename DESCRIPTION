@@ -1,6 +1,6 @@
 Package: sfdep
 Title: Spatial Dependence for Simple Features
-Version: 0.2.4
+Version: 0.2.4.9000
 Authors@R: c(
     person("Josiah", "Parry", , "josiah.parry@gmail.com", role = c("aut"),
            comment = c(ORCID = "0000-0001-9910-865X")),
