@@ -23,6 +23,7 @@
 #' @export
 nb_union <- function(x, y) {
   res <- mapply(union, x, y, SIMPLIFY = FALSE)
+  res <- lapply(res, sort)
   res <- fill_missing_nb(res)
   class_modify(res, "nb")
 }
@@ -32,6 +33,7 @@ nb_union <- function(x, y) {
 #' @export
 nb_intersect <- function(x, y) {
   res <- mapply(intersect, x, y, SIMPLIFY = FALSE)
+  res <- lapply(res, sort)
   res <- fill_missing_nb(res)
   class_modify(res, "nb")
 }
@@ -40,6 +42,7 @@ nb_intersect <- function(x, y) {
 #' @export
 nb_setdiff <- function(x, y) {
   res <- mapply(setdiff, x, y, SIMPLIFY = FALSE)
+  res <- lapply(res, sort)
   res <- fill_missing_nb(res)
   class_modify(res, "nb")
 }
