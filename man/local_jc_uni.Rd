@@ -27,7 +27,7 @@ local_jc_uni(
 
 \item{alternative}{default \code{"greater"}. One of \code{"less"} or \code{"greater"}.}
 
-\item{iseed}{default NULL, used to set the seed for possible parallel RNGs}
+\item{iseed}{default NULL, used to set the seed; the output will only be reproducible if the count of CPU cores across which computation is distributed is the same}
 }
 \value{
 a \code{data.frame} with two columns \code{join_count} and \code{p_sim} and number of rows equal to the length of arguments \code{x}, \code{nb}, and \code{wt}.

@@ -13,7 +13,7 @@ as_spacetime(x, .loc_col, .time_col, ...)
 \method{as_spacetime}{sf}(x, .loc_col, .time_col, ...)
 }
 \arguments{
-\item{x}{for \code{\link[=st_as_sf]{st_as_sf()}} a spacetime object. For \code{\link[=as_spacetime]{as_spacetime()}}
+\item{x}{for \code{\link[sf:st_as_sf]{sf::st_as_sf()}} a spacetime object. For \code{\link[=as_spacetime]{as_spacetime()}}
 an sf object.}
 
 \item{...}{arguments passed to merge.}

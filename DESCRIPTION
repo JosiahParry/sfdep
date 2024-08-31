@@ -2,9 +2,9 @@ Package: sfdep
 Title: Spatial Dependence for Simple Features
 Version: 0.2.4.9000
 Authors@R: c(
-    person("Josiah", "Parry", , "josiah.parry@gmail.com", role = c("aut"),
+    person("Josiah", "Parry", email = "josiah.parry@gmail.com", role = c("aut"),
            comment = c(ORCID = "0000-0001-9910-865X")),
-    person("Dexter", "Locke", 'H', "dexter.locke@gmail.com", role = c("aut", "cre"),
+    person("Dexter", "Locke", email = "dexter.locke@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-2704-9720"))
   )
 Description: An interface to 'spdep' to integrate with 'sf' objects and the 'tidyverse'.
@@ -35,7 +35,7 @@ Suggests:
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Imports: 
     sf,
     cli,
