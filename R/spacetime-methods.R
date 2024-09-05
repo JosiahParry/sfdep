@@ -53,7 +53,7 @@ spt_update <- function(x, ...) {
 
 #' Cast between `spacetime` and `sf` classes
 #'
-#' @param x for [sfdep::st_as_sf()] a spacetime object. For [sfdep::as_spacetime()]
+#' @param x for [sf::st_as_sf()] a spacetime object. For [sfdep::as_spacetime()]
 #'   an sf object.
 #' @param ... arguments passed to merge.
 #' @export
