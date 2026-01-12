@@ -6,7 +6,7 @@
 #'
 #' The local join count statistic requires a binary weights list which can be generated with `st_weights(nb, style = "B")`. Additionally, ensure that the binary variable of interest is rarely occurring in no more than half of observations.
 #'
-#' P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see [Geoda Glossary](https://geodacenter.github.io/glossary.html#ppvalue).
+#' P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see [Geoda Glossary](https://raw.githubusercontent.com/GeoDaCenter/GeoDaCenter.github.io/refs/heads/update-1.22/glossary.html#ppvalue).
 
 #' Calls `spdep::local_joincount_uni()`.
 #'
@@ -29,7 +29,8 @@
 #' }
 #' @returns a `data.frame` with two columns `join_count` and `p_sim` and number of rows equal to the length of arguments `x`, `nb`, and `wt`.
 local_jc_uni <- function(fx, chosen, nb, wt = st_weights(nb, style = "B"),
-                         nsim = 499, alternative = "two.sided", iseed = NULL) {
+                         nsim = 499, alternative = "two.sided",
+                         ties.method = "average", iseed = NULL) {
   listw <- recreate_listw(nb ,wt)
-  spdep::local_joincount_uni(fx, chosen, listw, alternative, nsim, iseed)
+  spdep::local_joincount_uni(fx, chosen, listw, alternative, nsim, iseed, ties.method)
 }
