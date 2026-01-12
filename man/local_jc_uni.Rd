@@ -11,11 +11,12 @@ local_jc_uni(
   wt = st_weights(nb, style = "B"),
   nsim = 499,
   alternative = "two.sided",
+  ties.method = "average",
   iseed = NULL
 )
 }
 \arguments{
-\item{fx}{a binary variable either numeric or logical}
+\item{fx}{a factor with two levels; use of an ordered factor is not well understood.}
 
 \item{chosen}{a scalar character containing the level of \code{fx} that should be considered the observed value (1).}
 
@@ -26,6 +27,8 @@ local_jc_uni(
 \item{nsim}{the number of conditional permutation simulations}
 
 \item{alternative}{default \code{"greater"}. One of \code{"less"} or \code{"greater"}.}
+
+\item{ties.method}{default \code{"average"} passed through to \code{rank}, can take values accepted by \code{rank}: \code{c("average", "first", "last", "random", "max", "min")}, see \code{\link{rank}}}
 
 \item{iseed}{default NULL, used to set the seed; the output will only be reproducible if the count of CPU cores across which computation is distributed is the same}
 }
@@ -39,7 +42,7 @@ than half of the time.
 \details{
 The local join count statistic requires a binary weights list which can be generated with \code{st_weights(nb, style = "B")}. Additionally, ensure that the binary variable of interest is rarely occurring in no more than half of observations.
 
-P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see \href{https://geodacenter.github.io/glossary.html#ppvalue}{Geoda Glossary}.
+P-values are estimated using a conditional permutation approach. This creates a reference distribution from which the observed statistic is compared. For more see \href{https://raw.githubusercontent.com/GeoDaCenter/GeoDaCenter.github.io/refs/heads/update-1.22/glossary.html#ppvalue}{Geoda Glossary}.
 Calls \code{spdep::local_joincount_uni()}.
 }
 \examples{
