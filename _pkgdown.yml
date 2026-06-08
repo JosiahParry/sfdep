@@ -1,28 +1,31 @@
-url: ~
+url: https://josiahparry.github.io/sfdep/
 template:
   bootstrap: 5
-  #bootswatch: simplex
   bslib:
-    heading_font: {google: "Merriweather"}
-    code_font: {google: "Noto Sans Mono"}
-    base_font: {google: "Noto Sans Display"}
-    bg: "#fcfcfc"
-    fg: "#02382a"
-    primary: "#2c382d"
-    secondary: "#F1F5A7"
-    success: "#3D6F15"
-    info: "#577F90"
-    warning: "#D5A064"
-    danger: "#9A523C"
-    # navbar-default-type: "dark"
-    # navbar-default-bg: "dark"
-    # navbar-inverse-type: "light"
-    # navbar-inverse-bg: "secondary"
-
+    heading_font:
+      google: Merriweather
+    code_font:
+      google: Noto Sans Mono
+    base_font:
+      google: Noto Sans Display
+    bg: '#fcfcfc'
+    fg: '#02382a'
+    primary: '#2c382d'
+    secondary: '#F1F5A7'
+    success: '#3D6F15'
+    info: '#577F90'
+    warning: '#D5A064'
+    danger: '#9A523C'
 navbar:
   structure:
-    right:  [search, github]
-    left: [reference, articles, news, releases]
+    right:
+    - search
+    - github
+    left:
+    - reference
+    - articles
+    - news
+    - releases
   components:
     releases:
       text: Releases
@@ -42,12 +45,7 @@ navbar:
         href: articles/conditional-permutation.html
       - text: Emerging Hot Spot Analysis
         href: articles/understanding-emerging-hotspots.html
-
-
-
-
 reference:
-
 - title: Neighbors
   contents:
   - st_contiguity
@@ -62,14 +60,12 @@ reference:
   - st_nb_lag_cumul
   - st_cardinalties
   - cond_permute_nb
-
 - title: Weights
   contents:
   - st_weights
   - st_nb_dists
   - st_kernel_weights
   - st_inverse_distance
-
 - title: Local Indicators of Spatial Association (LISA)
   contents:
   - st_lag
@@ -77,13 +73,11 @@ reference:
   - losh
   - losh_perm
   - nb_match_test
-
 - title: Global Measure of Spatial Autocorrelation
   contents:
   - starts_with("global")
   - pairwise_colocation
   - spatial_gini
-
 - title: Spacetime
   contents:
   - spacetime
@@ -99,7 +93,6 @@ reference:
   - as_spacetime
   - as_sf
   - spt_update
-
 - title: Point Pattern
   contents:
   - center_mean
@@ -108,12 +101,8 @@ reference:
   - std_distance
   - std_dev_ellipse
   - ellipse
-
-
 - title: Data
-  contents:
-  - starts_with("guerry")
-
+  contents: starts_with("guerry")
 - title: Networks
   contents:
   - st_as_graph
@@ -122,7 +111,6 @@ reference:
   - node_get_nbs
   - node_get_edge_list
   - node_get_edge_col
-
 - title: Utility Functions
   contents:
   - tidyverse
@@ -136,7 +124,6 @@ reference:
   - pct_nonzero
   - nb_union
   - st_nb_apply
-
 - title: Internal functions
-  contents:
-  - has_keyword("internal")
+  contents: has_keyword("internal")
+

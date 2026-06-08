@@ -9,7 +9,7 @@ Authors@R: c(
   )
 Description: An interface to 'spdep' to integrate with 'sf' objects and the 'tidyverse'.
 License: GPL-3
-URL: https://sfdep.josiahparry.com, https://github.com/josiahparry/sfdep
+URL: https://sfdep.josiahparry.com, https://github.com/josiahparry/sfdep, https://josiahparry.github.io/sfdep/
 Suggests: 
     broom,
     dbscan,

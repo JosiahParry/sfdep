@@ -2,3 +2,4 @@ CRAN-RELEASE
 .Rproj.user
 renv/
 inst/doc
+docs
