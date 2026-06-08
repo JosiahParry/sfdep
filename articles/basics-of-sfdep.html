@@ -5,77 +5,61 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="sfdep">
 <title>The Basics of sfdep • sfdep</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Noto_Sans_Display-0.4.4/font.css" rel="stylesheet">
-<link href="../deps/Noto_Sans_Mono-0.4.4/font.css" rel="stylesheet">
-<link href="../deps/Merriweather-0.4.4/font.css" rel="stylesheet">
-<!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Basics of sfdep">
-<meta property="og:description" content="sfdep">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/Noto_Sans_Display-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Noto_Sans_Mono-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Merriweather-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Basics of sfdep">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">sfdep</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.4.9000</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-vignettes">Vignettes</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
-    <a class="dropdown-item" href="../articles/basics-of-sfdep.html">Basics of sfdep</a>
-    <a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a>
-    <a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a>
-    <a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a>
-    <a class="dropdown-item" href="../articles/understanding-emerging-hotspots.html">Emerging Hot Spot Analysis</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-vignettes" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Vignettes</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-vignettes">
+<li><a class="dropdown-item" href="../articles/basics-of-sfdep.html">Basics of sfdep</a></li>
+    <li><a class="dropdown-item" href="../articles/spacetime-s3.html">spacetime and spacetime cubes</a></li>
+    <li><a class="dropdown-item" href="../articles/colocation-analysis.html">Colocation Quotients</a></li>
+    <li><a class="dropdown-item" href="../articles/conditional-permutation.html">Conditional permutation</a></li>
+    <li><a class="dropdown-item" href="../articles/understanding-emerging-hotspots.html">Emerging Hot Spot Analysis</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-releases">Releases</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-releases">
-    <a class="dropdown-item" href="../articles/Version-0-2-0.html">Version 0.2.0</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-releases" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Releases</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-releases">
+<li><a class="dropdown-item" href="../articles/Version-0-2-0.html">Version 0.2.0</a></li>
+  </ul>
 </li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/josiahparry/sfdep/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/josiahparry/sfdep/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -84,10 +68,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>The Basics of sfdep</h1>
+
+      <h1>The Basics of sfdep</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/josiahparry/sfdep/blob/HEAD/vignettes/basics-of-sfdep.Rmd" class="external-link"><code>vignettes/basics-of-sfdep.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/josiahparry/sfdep/blob/main/vignettes/articles/basics-of-sfdep.Rmd" class="external-link"><code>vignettes/articles/basics-of-sfdep.Rmd</code></a></small>
       <div class="d-none name"><code>basics-of-sfdep.Rmd</code></div>
     </div>
 
@@ -104,6 +89,7 @@ sfdep:</p>
 <li>creating weights</li>
 <li>calculating a LISA</li>
 <li>
+</li>
 </ul>
 <div class="section level2">
 <h2 id="intro-what-is-spatial-relationship">Intro / what is spatial relationship<a class="anchor" aria-label="anchor" href="#intro-what-is-spatial-relationship"></a>
@@ -150,13 +136,13 @@ touching—think of the <em>contiguous</em> lower 48 states.</p>
 </h3>
 <p>The two most common contiguities are based on the game of chess.
 Let’s take a simple chess board.</p>
-<p><img src="basics-of-sfdep_files/figure-html/unnamed-chunk-2-1.png" width="600px"></p>
+<p><img src="basics-of-sfdep_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="" width="600px"></p>
 <p>In chess each piece can move in a different way. All pieces, with the
 exception of the knight, move either diagonally or horizontally and
 vertically. The most common contiguities are queen and rook
 contiguities. In chess, a queen can move diagonally and horizontal and
 vertically whereas a rook can only move horizontal and vertically.</p>
-<p><img src="basics-of-sfdep_files/figure-html/unnamed-chunk-3-1.png" width="600px"></p>
+<p><img src="basics-of-sfdep_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="600px"></p>
 <p>We extend this idea to polygons. Queen contiguities identify
 neighbors based on any polygon that is touching. With rook contiguities,
 we identify neighbors based on polygons that touch on the side. For most
@@ -165,7 +151,7 @@ contiguities.</p>
 <p>While a chess board might make intuitive sense, geographies are
 really wonky in real life. Below is map of the 47th observation in the
 <code>guerry</code> object and it’s queen contiguity neighbors.</p>
-<p><img src="basics-of-sfdep_files/figure-html/unnamed-chunk-4-1.png" width="600px"></p>
+<p><img src="basics-of-sfdep_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="600px"></p>
 <p>You can see that any polygon that is touching, even at a corner, will
 be considered a neighbor to the point in question. This will be done for
 <em>every</em> polygon in our data set.</p>
@@ -187,7 +173,7 @@ and look at the queen contiguities. There are 8 squares that immediately
 touch the square. Each one of these squares is considered a neighbor and
 given a value of 1. Then each square is divided by the total number or
 neighbors, 8.</p>
-<p><img src="basics-of-sfdep_files/figure-html/unnamed-chunk-5-1.png" width="600px">
+<p><img src="basics-of-sfdep_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="600px">
 Very simply it looks like the following</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">d4_nbs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
@@ -221,25 +207,25 @@ common usecase is likely via a dplyr pipeline.</p>
 <span><span class="co">#&gt; Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span></span>
 <span><span class="co">#&gt; CRS:           NA</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 29</span></span></span>
-<span><span class="co">#&gt;    nb        wt     code_dept count ave_i…¹  dept region depar…² crime…³ crime…⁴</span></span>
-<span><span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;int [4]&gt;</span> &lt;dbl&gt;  01            1      49     1 E      Ain       <span style="text-decoration: underline;">28</span>870   <span style="text-decoration: underline;">15</span>890</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;int [6]&gt;</span> &lt;dbl&gt;  02            1     812     2 N      Aisne     <span style="text-decoration: underline;">26</span>226    <span style="text-decoration: underline;">5</span>521</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;int [6]&gt;</span> &lt;dbl&gt;  03            1    <span style="text-decoration: underline;">1</span>418     3 C      Allier    <span style="text-decoration: underline;">26</span>747    <span style="text-decoration: underline;">7</span>925</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;int [4]&gt;</span> &lt;dbl&gt;  04            1    <span style="text-decoration: underline;">1</span>603     4 E      Basses…   <span style="text-decoration: underline;">12</span>935    <span style="text-decoration: underline;">7</span>289</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;int [3]&gt;</span> &lt;dbl&gt;  05            1    <span style="text-decoration: underline;">1</span>802     5 E      Hautes…   <span style="text-decoration: underline;">17</span>488    <span style="text-decoration: underline;">8</span>174</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;int [7]&gt;</span> &lt;dbl&gt;  07            1    <span style="text-decoration: underline;">2</span>249     7 S      Ardeche    <span style="text-decoration: underline;">9</span>474   <span style="text-decoration: underline;">10</span>263</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;int [3]&gt;</span> &lt;dbl&gt;  08            1   <span style="text-decoration: underline;">35</span>395     8 N      Ardenn…   <span style="text-decoration: underline;">35</span>203    <span style="text-decoration: underline;">8</span>847</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;int [3]&gt;</span> &lt;dbl&gt;  09            1    <span style="text-decoration: underline;">2</span>526     9 S      Ariege     <span style="text-decoration: underline;">6</span>173    <span style="text-decoration: underline;">9</span>597</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;int [5]&gt;</span> &lt;dbl&gt;  10            1   <span style="text-decoration: underline;">34</span>410    10 E      Aube      <span style="text-decoration: underline;">19</span>602    <span style="text-decoration: underline;">4</span>086</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;int [5]&gt;</span> &lt;dbl&gt;  11            1    <span style="text-decoration: underline;">2</span>807    11 S      Aude      <span style="text-decoration: underline;">15</span>647   <span style="text-decoration: underline;">10</span>431</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows, 19 more variables: literacy &lt;int&gt;, donations &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt;    nb        wt    code_dept count ave_id_geo  dept region department crime_pers</span></span>
+<span><span class="co">#&gt;  <span style="color: #BCBCBC;">*</span> <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lis&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 01            1         49     1 E      Ain             <span style="text-decoration: underline;">28</span>870</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 02            1        812     2 N      Aisne           <span style="text-decoration: underline;">26</span>226</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> <span style="color: #949494;">&lt;int [6]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 03            1       <span style="text-decoration: underline;">1</span>418     3 C      Allier          <span style="text-decoration: underline;">26</span>747</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> <span style="color: #949494;">&lt;int [4]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 04            1       <span style="text-decoration: underline;">1</span>603     4 E      Basses-Al…      <span style="text-decoration: underline;">12</span>935</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 05            1       <span style="text-decoration: underline;">1</span>802     5 E      Hautes-Al…      <span style="text-decoration: underline;">17</span>488</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> <span style="color: #949494;">&lt;int [7]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 07            1       <span style="text-decoration: underline;">2</span>249     7 S      Ardeche          <span style="text-decoration: underline;">9</span>474</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 08            1      <span style="text-decoration: underline;">35</span>395     8 N      Ardennes        <span style="text-decoration: underline;">35</span>203</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">&lt;int [3]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 09            1       <span style="text-decoration: underline;">2</span>526     9 S      Ariege           <span style="text-decoration: underline;">6</span>173</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 10            1      <span style="text-decoration: underline;">34</span>410    10 E      Aube            <span style="text-decoration: underline;">19</span>602</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">&lt;int [5]&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 11            1       <span style="text-decoration: underline;">2</span>807    11 S      Aude            <span style="text-decoration: underline;">15</span>647</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 75 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: crime_prop &lt;int&gt;, literacy &lt;int&gt;, donations &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   infants &lt;int&gt;, suicides &lt;int&gt;, main_city &lt;ord&gt;, wealth &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   commerce &lt;int&gt;, clergy &lt;int&gt;, crime_parents &lt;int&gt;, infanticide &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   donation_clergy &lt;int&gt;, lottery &lt;int&gt;, desertion &lt;int&gt;, instruction &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   prostitutes &lt;int&gt;, distance &lt;dbl&gt;, area &lt;int&gt;, pop1831 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   geometry &lt;MULTIPOLYGON&gt;, and abbreviated variable names ¹​ave_id_geo,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ²​department, ³​crime_pers, ⁴​crime_prop</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   geometry &lt;MULTIPOLYGON&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="calculating-lisas">Calculating LISAs<a class="anchor" aria-label="anchor" href="#calculating-lisas"></a>
@@ -264,54 +250,54 @@ for ease of analysis.</p>
 <span><span class="co">#&gt; Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span></span>
 <span><span class="co">#&gt; CRS:           NA</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 30</span></span></span>
-<span><span class="co">#&gt;    local_moran$ii nb    wt    code_…¹ count ave_i…²  dept region depar…³ crime…⁴</span></span>
-<span><span class="co">#&gt;  <span style="color: #BCBCBC;">*</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lis&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         0.522  &lt;int&gt; &lt;dbl&gt; 01          1      49     1 E      Ain       <span style="text-decoration: underline;">28</span>870</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0.828  &lt;int&gt; &lt;dbl&gt; 02          1     812     2 N      Aisne     <span style="text-decoration: underline;">26</span>226</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0.804  &lt;int&gt; &lt;dbl&gt; 03          1    <span style="text-decoration: underline;">1</span>418     3 C      Allier    <span style="text-decoration: underline;">26</span>747</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         0.742  &lt;int&gt; &lt;dbl&gt; 04          1    <span style="text-decoration: underline;">1</span>603     4 E      Basses…   <span style="text-decoration: underline;">12</span>935</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         0.231  &lt;int&gt; &lt;dbl&gt; 05          1    <span style="text-decoration: underline;">1</span>802     5 E      Hautes…   <span style="text-decoration: underline;">17</span>488</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         0.839  &lt;int&gt; &lt;dbl&gt; 07          1    <span style="text-decoration: underline;">2</span>249     7 S      Ardeche    <span style="text-decoration: underline;">9</span>474</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         0.623  &lt;int&gt; &lt;dbl&gt; 08          1   <span style="text-decoration: underline;">35</span>395     8 N      Ardenn…   <span style="text-decoration: underline;">35</span>203</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         1.65   &lt;int&gt; &lt;dbl&gt; 09          1    <span style="text-decoration: underline;">2</span>526     9 S      Ariege     <span style="text-decoration: underline;">6</span>173</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>        -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span> &lt;int&gt; &lt;dbl&gt; 10          1   <span style="text-decoration: underline;">34</span>410    10 E      Aube      <span style="text-decoration: underline;">19</span>602</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         0.695  &lt;int&gt; &lt;dbl&gt; 11          1    <span style="text-decoration: underline;">2</span>807    11 S      Aude      <span style="text-decoration: underline;">15</span>647</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows, 31 more variables: local_moran$eii &lt;dbl&gt;, $var_ii &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   $z_ii &lt;dbl&gt;, $p_ii &lt;dbl&gt;, $p_ii_sim &lt;dbl&gt;, $p_folded_sim &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   $skewness &lt;dbl&gt;, $kurtosis &lt;dbl&gt;, $mean &lt;fct&gt;, $median &lt;fct&gt;, $pysal &lt;fct&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   crime_prop &lt;int&gt;, literacy &lt;int&gt;, donations &lt;int&gt;, infants &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   suicides &lt;int&gt;, main_city &lt;ord&gt;, wealth &lt;int&gt;, commerce &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   clergy &lt;int&gt;, crime_parents &lt;int&gt;, infanticide &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   donation_clergy &lt;int&gt;, lottery &lt;int&gt;, desertion &lt;int&gt;, instruction &lt;int&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    local_moran$ii nb    wt    code_dept count ave_id_geo  dept region department</span></span>
+<span><span class="co">#&gt;  <span style="color: #BCBCBC;">*</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;nb&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lis&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>         0.522  <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 01            1         49     1 E      Ain       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>         0.828  <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 02            1        812     2 N      Aisne     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>         0.804  <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 03            1       <span style="text-decoration: underline;">1</span>418     3 C      Allier    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>         0.742  <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 04            1       <span style="text-decoration: underline;">1</span>603     4 E      Basses-Al…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>         0.231  <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 05            1       <span style="text-decoration: underline;">1</span>802     5 E      Hautes-Al…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>         0.839  <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 07            1       <span style="text-decoration: underline;">2</span>249     7 S      Ardeche   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>         0.623  <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 08            1      <span style="text-decoration: underline;">35</span>395     8 N      Ardennes  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>         1.65   <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 09            1       <span style="text-decoration: underline;">2</span>526     9 S      Ariege    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>        -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span> <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 10            1      <span style="text-decoration: underline;">34</span>410    10 E      Aube      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>         0.695  <span style="color: #949494;">&lt;int&gt;</span> <span style="color: #949494;">&lt;dbl&gt;</span> 11            1       <span style="text-decoration: underline;">2</span>807    11 S      Aude      </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 75 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 32 more variables: local_moran$eii &lt;dbl&gt;, $var_ii &lt;dbl&gt;, $z_ii &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   $p_ii &lt;dbl&gt;, $p_ii_sim &lt;dbl&gt;, $p_folded_sim &lt;dbl&gt;, $skewness &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   $kurtosis &lt;dbl&gt;, $mean &lt;fct&gt;, $median &lt;fct&gt;, $pysal &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   crime_pers &lt;int&gt;, crime_prop &lt;int&gt;, literacy &lt;int&gt;, donations &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   infants &lt;int&gt;, suicides &lt;int&gt;, main_city &lt;ord&gt;, wealth &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   commerce &lt;int&gt;, clergy &lt;int&gt;, crime_parents &lt;int&gt;, infanticide &lt;int&gt;, …</span></span></span></code></pre></div>
 <p>Now that we have a data frame, we need to unnest it.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lisa</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">local_moran</span><span class="op">)</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">local_moran</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 85 features and 40 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
 <span><span class="co">#&gt; Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span></span>
 <span><span class="co">#&gt; CRS:           NA</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 41</span></span></span>
-<span><span class="co">#&gt;         ii        eii   var_ii   z_ii    p_ii p_ii_sim p_fold…¹ skewness kurto…²</span></span>
-<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  0.522   0.018<span style="text-decoration: underline;">4</span>    0.380     0.817 0.414       0.49    0.245  1.47<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span> -<span style="color: #BB0000;">0.391</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  0.828   0.001<span style="text-decoration: underline;">06</span>   0.140     2.21  0.026<span style="text-decoration: underline;">9</span>      0.04    0.02   1.43<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span> -<span style="color: #BB0000;">0.071</span><span style="color: #BB0000; text-decoration: underline;">7</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  0.804  -<span style="color: #BB0000;">0.031</span><span style="color: #BB0000; text-decoration: underline;">4</span>    0.191     1.91  0.056<span style="text-decoration: underline;">1</span>      0.06    0.03   4.33<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span> -<span style="color: #BB0000;">0.517</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  0.742  -<span style="color: #BB0000;">0.027</span><span style="color: #BB0000; text-decoration: underline;">4</span>    0.240     1.57  0.116       0.16    0.08   3.40<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span> -<span style="color: #BB0000;">0.524</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  0.231  -<span style="color: #BB0000;">0.017</span><span style="color: #BB0000; text-decoration: underline;">3</span>    0.047<span style="text-decoration: underline;">2</span>    1.14  0.253       0.25    0.125  7.46<span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span> -<span style="color: #BB0000;">0.103</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  0.839   0.016<span style="text-decoration: underline;">4</span>    0.303     1.49  0.135       0.15    0.075  1.45<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span> -<span style="color: #BB0000;">0.424</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  0.623   0.001<span style="text-decoration: underline;">57</span>   1.50      0.507 0.612       0.61    0.305  1.15<span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span> -<span style="color: #BB0000;">0.288</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  1.65   -<span style="color: #BB0000;">0.049</span><span style="color: #BB0000; text-decoration: underline;">8</span>    1.27      1.51  0.132       0.15    0.075 -<span style="color: #BB0000;">7.36</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-2</span> -<span style="color: #BB0000;">0.626</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span> -<span style="color: #BB0000;">0.000</span><span style="color: #BB0000; text-decoration: underline;">085</span><span style="color: #BB0000;">6</span> 0.000<span style="text-decoration: underline;">510</span> -<span style="color: #BB0000;">0.871</span> 0.384       0.42    0.21  -<span style="color: #BB0000;">9.78</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-5</span> -<span style="color: #BB0000;">0.262</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  0.695   0.025<span style="text-decoration: underline;">2</span>    0.059<span style="text-decoration: underline;">2</span>    2.75  0.005<span style="text-decoration: underline;">90</span>     0.01    0.005 -<span style="color: #BB0000;">1.78</span><span style="color: #949494;">e</span><span style="color: #BB0000;">-1</span>  0.451 </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows, 32 more variables: mean &lt;fct&gt;, median &lt;fct&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pysal &lt;fct&gt;, nb &lt;nb&gt;, wt &lt;list&gt;, code_dept &lt;fct&gt;, count &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ave_id_geo &lt;dbl&gt;, dept &lt;int&gt;, region &lt;fct&gt;, department &lt;fct&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   crime_pers &lt;int&gt;, crime_prop &lt;int&gt;, literacy &lt;int&gt;, donations &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   infants &lt;int&gt;, suicides &lt;int&gt;, main_city &lt;ord&gt;, wealth &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   commerce &lt;int&gt;, clergy &lt;int&gt;, crime_parents &lt;int&gt;, infanticide &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   donation_clergy &lt;int&gt;, lottery &lt;int&gt;, desertion &lt;int&gt;, instruction &lt;int&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt;         ii      eii   var_ii   z_ii    p_ii p_ii_sim p_folded_sim skewness</span></span>
+<span><span class="co">#&gt;      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  0.522  -<span style="color: #BB0000;">0.075</span><span style="color: #BB0000; text-decoration: underline;">3</span>  0.396     0.950 0.342       0.35        0.175  -<span style="color: #BB0000;">0.036</span><span style="color: #BB0000; text-decoration: underline;">3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  0.828  -<span style="color: #BB0000;">0.020</span><span style="color: #BB0000; text-decoration: underline;">3</span>  0.130     2.35  0.018<span style="text-decoration: underline;">5</span>      0.03        0.015   0.156 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  0.804  -<span style="color: #BB0000;">0.012</span><span style="color: #BB0000; text-decoration: underline;">0</span>  0.136     2.21  0.027<span style="text-decoration: underline;">2</span>      0.05        0.025   0.269 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  0.742   0.043<span style="text-decoration: underline;">2</span>  0.230     1.46  0.145       0.15        0.075  -<span style="color: #BB0000;">0.011</span><span style="color: #BB0000; text-decoration: underline;">6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  0.231  -<span style="color: #BB0000;">0.016</span><span style="color: #BB0000; text-decoration: underline;">5</span>  0.033<span style="text-decoration: underline;">6</span>    1.35  0.177       0.19        0.095  -<span style="color: #BB0000;">0.167</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  0.839  -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">0</span>  0.298     1.57  0.116       0.1         0.05   -<span style="color: #BB0000;">0.089</span><span style="color: #BB0000; text-decoration: underline;">2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  0.623  -<span style="color: #BB0000;">0.246</span>   1.39      0.736 0.462       0.44        0.22    0.271 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  1.65   -<span style="color: #BB0000;">0.228</span>   1.22      1.70  0.089<span style="text-decoration: underline;">4</span>      0.11        0.055  -<span style="color: #BB0000;">0.062</span><span style="color: #BB0000; text-decoration: underline;">6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> -<span style="color: #BB0000;">0.019</span><span style="color: #BB0000; text-decoration: underline;">8</span>  0.002<span style="text-decoration: underline;">26</span> 0.000<span style="text-decoration: underline;">525</span> -<span style="color: #BB0000;">0.961</span> 0.337       0.33        0.165  -<span style="color: #BB0000;">0.047</span><span style="color: #BB0000; text-decoration: underline;">1</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  0.695  -<span style="color: #BB0000;">0.039</span><span style="color: #BB0000; text-decoration: underline;">9</span>  0.073<span style="text-decoration: underline;">0</span>    2.72  0.006<span style="text-decoration: underline;">53</span>     0.01        0.005  -<span style="color: #BB0000;">0.219</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 75 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 33 more variables: kurtosis &lt;dbl&gt;, mean &lt;fct&gt;, median &lt;fct&gt;, pysal &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   nb &lt;nb&gt;, wt &lt;list&gt;, code_dept &lt;fct&gt;, count &lt;dbl&gt;, ave_id_geo &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   dept &lt;int&gt;, region &lt;fct&gt;, department &lt;fct&gt;, crime_pers &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   crime_prop &lt;int&gt;, literacy &lt;int&gt;, donations &lt;int&gt;, infants &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   suicides &lt;int&gt;, main_city &lt;ord&gt;, wealth &lt;int&gt;, commerce &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   clergy &lt;int&gt;, crime_parents &lt;int&gt;, infanticide &lt;int&gt;, …</span></span></span></code></pre></div>
 <p>This can then be used for visualization or further analysis.</p>
 <p>Additionally, for other LISAs that can take any number of inputs,
 e.g. 3 or more numeric variables, we provide this as a list. Take for
@@ -320,55 +306,53 @@ example the Local C statistic.</p>
 <code class="sourceCode R"><span><span class="va">guerry_nb</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>local_c <span class="op">=</span> <span class="fu"><a href="../reference/local_c.html">local_c_perm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">crime_pers</span>, <span class="va">wealth</span><span class="op">)</span>, <span class="va">nb</span>, <span class="va">wt</span><span class="op">)</span>, </span>
 <span>         .before <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">local_c</span><span class="op">)</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">local_c</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Simple feature collection with 85 features and 38 fields</span></span>
 <span><span class="co">#&gt; Geometry type: MULTIPOLYGON</span></span>
 <span><span class="co">#&gt; Dimension:     XY</span></span>
 <span><span class="co">#&gt; Bounding box:  xmin: 47680 ymin: 1703258 xmax: 1031401 ymax: 2677441</span></span>
 <span><span class="co">#&gt; CRS:           NA</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 85 × 39</span></span></span>
-<span><span class="co">#&gt;       ci cluster   e_ci var_ci   z_ci   p_ci p_ci_sim p_folded…¹ skewn…² kurto…³</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1.53  Positive  2.43  0.643 -<span style="color: #BB0000;">1.11</span>  0.266     0.288      0.144  0.073<span style="text-decoration: underline;">0</span> -<span style="color: #BB0000;">0.447</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 0.500 Positive  1.73  0.402 -<span style="color: #BB0000;">1.93</span>  0.053<span style="text-decoration: underline;">2</span>    0.012      0.006  0.517   0.161 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 0.642 Positive  1.68  0.261 -<span style="color: #BB0000;">2.04</span>  0.041<span style="text-decoration: underline;">3</span>    0.028      0.014  0.267   0.011<span style="text-decoration: underline;">5</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 0.324 Positive  2.27  0.831 -<span style="color: #BB0000;">2.14</span>  0.032<span style="text-decoration: underline;">6</span>    0.012      0.006  0.261  -<span style="color: #BB0000;">0.333</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 0.298 Positive  2.29  0.989 -<span style="color: #BB0000;">2.01</span>  0.044<span style="text-decoration: underline;">8</span>    0.012      0.006  0.195  -<span style="color: #BB0000;">0.543</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1.60  Positive  3.36  0.758 -<span style="color: #BB0000;">2.02</span>  0.043<span style="text-decoration: underline;">8</span>    0.036      0.018  0.038<span style="text-decoration: underline;">2</span> -<span style="color: #BB0000;">0.109</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2.04  Positive  3.25  1.84  -<span style="color: #BB0000;">0.887</span> 0.375     0.412      0.206  0.411  -<span style="color: #BB0000;">0.306</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2.20  Positive  3.55  1.96  -<span style="color: #BB0000;">0.965</span> 0.335     0.336      0.168  0.187  -<span style="color: #BB0000;">0.379</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0.507 Positive  1.73  0.376 -<span style="color: #BB0000;">1.99</span>  0.046<span style="text-decoration: underline;">5</span>    0.028      0.014  0.255  -<span style="color: #BB0000;">0.384</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1.46  Positive  1.76  0.399 -<span style="color: #BB0000;">0.484</span> 0.628     0.68       0.34   0.358  -<span style="color: #BB0000;">0.164</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 75 more rows, 29 more variables: nb &lt;nb&gt;, wt &lt;list&gt;, code_dept &lt;fct&gt;,</span></span></span>
+<span><span class="co">#&gt;       ci cluster   e_ci var_ci   z_ci   p_ci p_ci_sim p_folded_sim skewness</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1.53  Positive  2.46  0.683 -<span style="color: #BB0000;">1.12</span>  0.265     0.272        0.136   0.164 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 0.500 Positive  1.75  0.398 -<span style="color: #BB0000;">1.98</span>  0.047<span style="text-decoration: underline;">9</span>    0.012        0.006   0.400 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 0.642 Positive  1.66  0.257 -<span style="color: #BB0000;">2.01</span>  0.044<span style="text-decoration: underline;">2</span>    0.032        0.016   0.203 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 0.324 Positive  2.31  0.795 -<span style="color: #BB0000;">2.23</span>  0.026<span style="text-decoration: underline;">1</span>    0.016        0.008   0.318 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 0.298 Positive  2.29  0.872 -<span style="color: #BB0000;">2.14</span>  0.032<span style="text-decoration: underline;">5</span>    0.016        0.008   0.278 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1.60  Positive  3.36  0.779 -<span style="color: #BB0000;">1.99</span>  0.046<span style="text-decoration: underline;">9</span>    0.052        0.026   0.041<span style="text-decoration: underline;">9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2.04  Positive  3.22  1.67  -<span style="color: #BB0000;">0.907</span> 0.364     0.424        0.212   0.317 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2.20  Positive  3.36  1.92  -<span style="color: #BB0000;">0.838</span> 0.402     0.428        0.214   0.328 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 0.507 Positive  1.69  0.375 -<span style="color: #BB0000;">1.92</span>  0.054<span style="text-decoration: underline;">4</span>    0.044        0.022   0.230 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1.46  Positive  1.76  0.469 -<span style="color: #BB0000;">0.434</span> 0.664     0.712        0.356   0.453 </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 75 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 30 more variables: kurtosis &lt;dbl&gt;, nb &lt;nb&gt;, wt &lt;list&gt;, code_dept &lt;fct&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   count &lt;dbl&gt;, ave_id_geo &lt;dbl&gt;, dept &lt;int&gt;, region &lt;fct&gt;, department &lt;fct&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   crime_pers &lt;int&gt;, crime_prop &lt;int&gt;, literacy &lt;int&gt;, donations &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   infants &lt;int&gt;, suicides &lt;int&gt;, main_city &lt;ord&gt;, wealth &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   commerce &lt;int&gt;, clergy &lt;int&gt;, crime_parents &lt;int&gt;, infanticide &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   donation_clergy &lt;int&gt;, lottery &lt;int&gt;, desertion &lt;int&gt;, instruction &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   prostitutes &lt;int&gt;, distance &lt;dbl&gt;, area &lt;int&gt;, pop1831 &lt;dbl&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   donation_clergy &lt;int&gt;, lottery &lt;int&gt;, desertion &lt;int&gt;, instruction &lt;int&gt;, …</span></span></span></code></pre></div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by Josiah Parry.</p>
+  <p>Developed by Josiah Parry, Dexter Locke.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
