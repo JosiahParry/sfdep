@@ -1,5 +1,5 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   articles/basics-of-sfdep: basics-of-sfdep.html
@@ -9,7 +9,7 @@ articles:
   articles/spdep-and-pysal: spdep-and-pysal.html
   articles/understanding-emerging-hotspots: understanding-emerging-hotspots.html
   articles/Version-0-2-0: Version-0-2-0.html
-last_built: 2026-06-08T17:17Z
+last_built: 2026-08-14T04:18Z
 urls:
   reference: https://josiahparry.github.io/sfdep/reference
   article: https://josiahparry.github.io/sfdep/articles
