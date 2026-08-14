@@ -17,7 +17,7 @@ st_nb_relative(geometry, .nnmult = 3)
 
 \item{.id}{default \code{NULL}. Passed as \code{spdep::tri2nb(x, row.names = .id)} to \code{spdep}.}
 
-\item{.nnmult}{default 3. Used for memory scalling. See \code{\link[spdep:graphneigh]{spdep::gabrielneigh()}} for more.}
+\item{.nnmult}{default 3. Used for memory scalling. See \code{\link[spdep:gabrielneigh]{spdep::gabrielneigh()}} for more.}
 }
 \value{
 an object of class nb
@@ -40,7 +40,7 @@ The relative neighborhood graph (RNG) is based on the Delaunay triangulation. It
 
 Note that Delaunay triangulation assumes a plane and thus uses Euclidean distances.
 
-See \code{\link[spdep:graphneigh]{spdep::gabrielneigh()}} for further descriptions of the graph neighbor implementations.
+See \code{\link[spdep:gabrielneigh]{spdep::gabrielneigh()}} for further descriptions of the graph neighbor implementations.
 }
 \examples{
 geometry <- sf::st_centroid(sf::st_geometry(guerry))

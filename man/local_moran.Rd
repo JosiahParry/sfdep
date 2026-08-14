@@ -20,19 +20,19 @@ local_moran(x, nb, wt, alternative = "two.sided", nsim = 499, ...)
 \item{...}{See \code{?spdep::localmoran_perm()} for more options.}
 }
 \value{
-a \code{data.frame} containing the columns \code{ii}, \code{eii}, \code{var_ii}, \code{z_ii}, \code{p_ii}, \code{p_ii_sim}, and \code{p_folded_sim}. For more details please see \code{\link[spdep:localmoran]{spdep::localmoran_perm()}}.
+a \code{data.frame} containing the columns \code{ii}, \code{eii}, \code{var_ii}, \code{z_ii}, \code{p_ii}, \code{p_ii_sim}, and \code{p_folded_sim}. For more details please see \code{\link[spdep:localmoran_perm]{spdep::localmoran_perm()}}.
 }
 \description{
 Moran's I is calculated for each polygon based on the neighbor and weight lists.
 }
 \details{
-\code{\link[=local_moran]{local_moran()}} calls \code{\link[spdep:localmoran]{spdep::localmoran_perm()}} and calculates the Moran I for each polygon. As well as provide simulated p-values.
+\code{\link[=local_moran]{local_moran()}} calls \code{\link[spdep:localmoran_perm]{spdep::localmoran_perm()}} and calculates the Moran I for each polygon. As well as provide simulated p-values.
 }
 \examples{
 local_moran(guerry_nb$crime_pers, guerry_nb$nb, guerry_nb$wt)
 }
 \seealso{
-Other stats: 
-\code{\link{st_lag}()}
+Other stats:
+\code{\link[=st_lag]{st_lag()}}
 }
 \concept{stats}

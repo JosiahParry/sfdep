@@ -34,9 +34,9 @@ wts <- st_inverse_distance(nb, geo, scale = 10000)
 head(wts, 3)
 }
 \seealso{
-Other weights: 
-\code{\link{st_kernel_weights}()},
-\code{\link{st_nb_dists}()},
-\code{\link{st_weights}()}
+Other weights:
+\code{\link[=st_kernel_weights]{st_kernel_weights()}},
+\code{\link[=st_nb_dists]{st_nb_dists()}},
+\code{\link[=st_weights]{st_weights()}}
 }
 \concept{weights}

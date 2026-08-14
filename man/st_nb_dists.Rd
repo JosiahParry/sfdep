@@ -30,9 +30,9 @@ dists <- st_nb_dists(geo, nb)
 head(dists)
 }
 \seealso{
-Other weights: 
-\code{\link{st_inverse_distance}()},
-\code{\link{st_kernel_weights}()},
-\code{\link{st_weights}()}
+Other weights:
+\code{\link[=st_inverse_distance]{st_inverse_distance()}},
+\code{\link[=st_kernel_weights]{st_kernel_weights()}},
+\code{\link[=st_weights]{st_weights()}}
 }
 \concept{weights}

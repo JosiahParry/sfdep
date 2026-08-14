@@ -33,7 +33,7 @@ wt <- st_weights(nb)
 st_lag(guerry$crime_pers, nb, wt)
 }
 \seealso{
-Other stats: 
-\code{\link{local_moran}()}
+Other stats:
+\code{\link[=local_moran]{local_moran()}}
 }
 \concept{stats}

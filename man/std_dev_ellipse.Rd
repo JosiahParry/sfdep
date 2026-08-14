@@ -7,7 +7,7 @@
 std_dev_ellipse(geometry)
 }
 \arguments{
-\item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:geos_unary]{sf::st_point_on_surface()}}.}
+\item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:st_point_on_surface]{sf::st_point_on_surface()}}.}
 }
 \value{
 An sf object with three columns

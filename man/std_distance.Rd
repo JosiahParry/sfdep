@@ -7,7 +7,7 @@
 std_distance(geometry)
 }
 \arguments{
-\item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:geos_unary]{sf::st_point_on_surface()}}.}
+\item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:st_point_on_surface]{sf::st_point_on_surface()}}.}
 }
 \value{
 A numeric scalar.
@@ -31,7 +31,7 @@ plot(pnts)
 std_distance(pnts)
 }
 \seealso{
-Other point-pattern: 
-\code{\link{center_mean}()}
+Other point-pattern:
+\code{\link[=center_mean]{center_mean()}}
 }
 \concept{point-pattern}

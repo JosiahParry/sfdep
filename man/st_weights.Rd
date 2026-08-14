@@ -40,9 +40,9 @@ wt <- st_weights(nb)
 wt[1:3]
 }
 \seealso{
-Other weights: 
-\code{\link{st_inverse_distance}()},
-\code{\link{st_kernel_weights}()},
-\code{\link{st_nb_dists}()}
+Other weights:
+\code{\link[=st_inverse_distance]{st_inverse_distance()}},
+\code{\link[=st_kernel_weights]{st_kernel_weights()}},
+\code{\link[=st_nb_dists]{st_nb_dists()}}
 }
 \concept{weights}

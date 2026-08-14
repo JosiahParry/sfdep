@@ -18,7 +18,7 @@ local_gstar_perm(x, nb, wt, nsim = 499, alternative = "two.sided", ...)
 
 \item{alternative}{default \code{"two.sided"}. Should be one of \code{"greater"}, \code{"less"}, or \code{"two.sided"} to specify the alternative hypothesis.}
 
-\item{...}{methods passed to \code{\link[spdep:localG]{spdep::localG()}} or \code{\link[spdep:localG]{spdep::localG_perm()}}}
+\item{...}{methods passed to \code{\link[spdep:localG]{spdep::localG()}} or \code{\link[spdep:localG_perm]{spdep::localG_perm()}}}
 
 \item{nsim}{The number of simulations to run.}
 }

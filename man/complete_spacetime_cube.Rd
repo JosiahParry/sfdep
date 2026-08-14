@@ -40,7 +40,7 @@ bos <- spacetime(df, geo,
 
 # create a sample of data
 set.seed(0)
-sample_index <- sample(1:nrow(bos), nrow(bos) * 0.95)
+sample_index <- sample(seq_len(nrow(bos)), nrow(bos) * 0.95)
 incomplete_spt <- bos[sample_index,]
 
 # check to see if is spacetime cube

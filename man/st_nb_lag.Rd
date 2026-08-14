@@ -25,8 +25,8 @@ nb <- st_contiguity(sf::st_geometry(guerry))
 st_nb_lag(nb, 3)
 }
 \seealso{
-Other other: 
-\code{\link{st_cardinalties}()},
-\code{\link{st_nb_lag_cumul}()}
+Other other:
+\code{\link[=st_cardinalties]{st_cardinalties()}},
+\code{\link[=st_nb_lag_cumul]{st_nb_lag_cumul()}}
 }
 \concept{other}

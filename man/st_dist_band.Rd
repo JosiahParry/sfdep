@@ -26,8 +26,8 @@ geo <- sf::st_geometry(guerry)
 st_dist_band(geo, upper = critical_threshold(geo))
 }
 \seealso{
-Other neighbors: 
-\code{\link{st_contiguity}()},
-\code{\link{st_knn}()}
+Other neighbors:
+\code{\link[=st_contiguity]{st_contiguity()}},
+\code{\link[=st_knn]{st_knn()}}
 }
 \concept{neighbors}

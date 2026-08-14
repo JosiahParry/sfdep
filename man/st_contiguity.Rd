@@ -34,8 +34,8 @@ guerry \%>\%
  }
 }
 \seealso{
-Other neighbors: 
-\code{\link{st_dist_band}()},
-\code{\link{st_knn}()}
+Other neighbors:
+\code{\link[=st_dist_band]{st_dist_band()}},
+\code{\link[=st_knn]{st_knn()}}
 }
 \concept{neighbors}

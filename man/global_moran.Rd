@@ -30,10 +30,10 @@ x <- guerry_nb$crime_pers
 moran <- global_moran(x, nb, wt)
 }
 \seealso{
-Other global_moran: 
-\code{\link{global_moran_bv}()},
-\code{\link{global_moran_perm}()},
-\code{\link{global_moran_test}()},
-\code{\link{local_moran_bv}()}
+Other global_moran:
+\code{\link[=global_moran_bv]{global_moran_bv()}},
+\code{\link[=global_moran_perm]{global_moran_perm()}},
+\code{\link[=global_moran_test]{global_moran_test()}},
+\code{\link[=local_moran_bv]{local_moran_bv()}}
 }
 \concept{global_moran}

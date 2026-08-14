@@ -28,8 +28,8 @@ This function utilizes \code{\link[spdep:knearneigh]{spdep::knearneigh()}} and \
 st_knn(sf::st_geometry(guerry), k = 8)
 }
 \seealso{
-Other neighbors: 
-\code{\link{st_contiguity}()},
-\code{\link{st_dist_band}()}
+Other neighbors:
+\code{\link[=st_contiguity]{st_contiguity()}},
+\code{\link[=st_dist_band]{st_dist_band()}}
 }
 \concept{neighbors}

@@ -13,7 +13,7 @@ center_median(geometry)
 euclidean_median(geometry, tolerance = 1e-09)
 }
 \arguments{
-\item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:geos_unary]{sf::st_point_on_surface()}}.}
+\item{geometry}{an sfc object. If a polygon, uses \code{\link[sf:st_point_on_surface]{sf::st_point_on_surface()}}.}
 
 \item{weights}{an optional vector of weights to apply to the coordinates before calculation.}
 
@@ -52,10 +52,7 @@ plot(cmed, col = "green", add = TRUE)
 }
 }
 \seealso{
-Other point-pattern: 
-\code{\link{std_distance}()}
-
-Other point-pattern: 
-\code{\link{std_distance}()}
+Other point-pattern:
+\code{\link[=std_distance]{std_distance()}}
 }
 \concept{point-pattern}

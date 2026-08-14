@@ -20,15 +20,15 @@ For example, if the order is 2 the result contains both 1st
 and 2nd order neighbors.
 }
 \details{
-Utilizes \code{\link[spdep:nblag]{spdep::nblag_cumul()}}
+Utilizes \code{\link[spdep:nblag_cumul]{spdep::nblag_cumul()}}
 }
 \examples{
 nb <- st_contiguity(sf::st_geometry(guerry))
 st_nb_lag_cumul(nb, 3)
 }
 \seealso{
-Other other: 
-\code{\link{st_cardinalties}()},
-\code{\link{st_nb_lag}()}
+Other other:
+\code{\link[=st_cardinalties]{st_cardinalties()}},
+\code{\link[=st_nb_lag]{st_nb_lag()}}
 }
 \concept{other}

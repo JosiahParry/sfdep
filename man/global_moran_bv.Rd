@@ -47,10 +47,10 @@ global_moran_bv(x, y, nb, wt)
 \href{https://geodacenter.github.io/workbook/5b_global_adv/lab5b.html}{Global Spatial Autocorrelation (2): Bivariate, Differential and EB Rate Moran Scatter Plot, Luc Anselin}
 }
 \seealso{
-Other global_moran: 
-\code{\link{global_moran}()},
-\code{\link{global_moran_perm}()},
-\code{\link{global_moran_test}()},
-\code{\link{local_moran_bv}()}
+Other global_moran:
+\code{\link[=global_moran]{global_moran()}},
+\code{\link[=global_moran_perm]{global_moran_perm()}},
+\code{\link[=global_moran_test]{global_moran_test()}},
+\code{\link[=local_moran_bv]{local_moran_bv()}}
 }
 \concept{global_moran}

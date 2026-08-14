@@ -42,10 +42,10 @@ local_moran_bv(x, y, nb, wt)
 \href{https://geodacenter.github.io/workbook/6c_local_multi/lab6c.html#principle}{Local Spatial Autocorrelation (3): Multivariate Local Spatial Autocorrelation, Luc Anselin}
 }
 \seealso{
-Other global_moran: 
-\code{\link{global_moran}()},
-\code{\link{global_moran_bv}()},
-\code{\link{global_moran_perm}()},
-\code{\link{global_moran_test}()}
+Other global_moran:
+\code{\link[=global_moran]{global_moran()}},
+\code{\link[=global_moran_bv]{global_moran_bv()}},
+\code{\link[=global_moran_perm]{global_moran_perm()}},
+\code{\link[=global_moran_test]{global_moran_test()}}
 }
 \concept{global_moran}

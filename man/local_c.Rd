@@ -16,7 +16,7 @@ local_c_perm(x, nb, wt, nsim = 499, alternative = "two.sided", ...)
 
 \item{wt}{a weights list}
 
-\item{...}{other arguments passed to \code{\link[spdep:localC]{spdep::localC_perm()}}, e.g. \code{zero.policy = TRUE} to allow for zones without neighbors.}
+\item{...}{other arguments passed to \code{\link[spdep:localC_perm]{spdep::localC_perm()}}, e.g. \code{zero.policy = TRUE} to allow for zones without neighbors.}
 
 \item{nsim}{The number of simulations used to generate reference distribution.}
 
@@ -52,9 +52,9 @@ The univariate Local Geary is calculated as \eqn{c_i = \sum_j w_{ij}(x_i - x_j)^
 
 \subsection{Implementation}{
 
-These functions are based on the implementations of the local Geary statistic in the development version of spdep. They are based on \link[spdep:localC]{spdep::localC} and \link[spdep:localC]{spdep::localC_perm}.
+These functions are based on the implementations of the local Geary statistic in the development version of spdep. They are based on \link[spdep:localC]{spdep::localC} and \link[spdep:localC_perm]{spdep::localC_perm}.
 
-\link[spdep:localC]{spdep::localC_perm} and thus \link{local_c_perm} utilize a conditional permutation approach to approximate a reference distribution where each observation \code{i} is held fixed, randomly samples neighbors, and calculated the local C statistic for that tuple (\code{ci}). This is repeated \code{nsim} times. From the simulations 3 different types of p-values are calculated—all of which have their potential flaws. So be \emph{extra judicious} with using p-values to make conclusions.
+\link[spdep:localC_perm]{spdep::localC_perm} and thus \link{local_c_perm} utilize a conditional permutation approach to approximate a reference distribution where each observation \code{i} is held fixed, randomly samples neighbors, and calculated the local C statistic for that tuple (\code{ci}). This is repeated \code{nsim} times. From the simulations 3 different types of p-values are calculated—all of which have their potential flaws. So be \emph{extra judicious} with using p-values to make conclusions.
 \itemize{
 \item \code{p_ci}: utilizes the sample mean and standard deviation. The p-value is then calculated using \code{pnorm()}--assuming a normal distribution which isn't always true.
 \item \code{p_ci_sim}: uses the rank of the observed statistic.

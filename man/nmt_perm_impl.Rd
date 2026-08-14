@@ -8,7 +8,7 @@ Given a kNN attribute neighbor list and a listw object, find the number of match
 nmt_perm_impl(knn_nb, listw)
 }
 \arguments{
-\item{knn_nb}{a list with numeric elements. For example as made by \code{\link[dbscan:NN]{dbscan::adjacencylist()}}}
+\item{knn_nb}{a list with numeric elements. For example as made by \code{\link[dbscan:adjacencylist]{dbscan::adjacencylist()}}}
 
 \item{listw}{a listw object likely created by \link{recreate_listw}.}
 }

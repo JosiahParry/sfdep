@@ -28,8 +28,8 @@ x <- guerry_nb$crime_pers
 global_c(x, nb, wt)
 }
 \seealso{
-Other global_c: 
-\code{\link{global_c_perm}()},
-\code{\link{global_c_test}()}
+Other global_c:
+\code{\link[=global_c_perm]{global_c_perm()}},
+\code{\link[=global_c_test]{global_c_test()}}
 }
 \concept{global_c}
