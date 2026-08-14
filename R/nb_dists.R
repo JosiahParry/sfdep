@@ -20,5 +20,3 @@ st_nb_dists <- function(x, nb, longlat = NULL) {
   x <- check_polygon(x)
   class_modify(spdep::nbdists(nb, x, longlat))
 }
-
-

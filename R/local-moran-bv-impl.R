@@ -27,8 +27,6 @@ local_moran_bv_perm_impl <- function(x, y, listw) {
   nb <- p_listw[["neighbours"]]
   wt <- p_listw[["weights"]]
 
-
-
   local_moran_bv_calc(x, y, nb, wt)
 }
 
@@ -37,19 +35,16 @@ local_moran_bv_perm_impl <- function(x, y, listw) {
 #' @inheritParams spdep::moran_bv
 #' @keywords internal
 local_moran_bv_impl <- function(x, y, listw, nsim) {
-
   x <- as.numeric(scale(x))
   y <- as.numeric(scale(y))
   nb <- listw[["neighbours"]]
   wt <- listw[["weights"]]
 
-  obs <- local_moran_bv_calc(x, y, nb,  wt)
+  obs <- local_moran_bv_calc(x, y, nb, wt)
   reps <- replicate(nsim, local_moran_bv_perm_impl(x, y, listw))
-  p_sim <- (rowSums(obs <= reps) + 1 )/ (nsim + 1)
+  p_sim <- (rowSums(obs <= reps) + 1) / (nsim + 1)
 
-  data.frame("Ib" = obs,
-       p_sim = pmin(p_sim, 1 - p_sim)
-  )
+  data.frame("Ib" = obs, p_sim = pmin(p_sim, 1 - p_sim))
 }
 #' Compute the Local Bivariate Moran's I Statistic
 #'

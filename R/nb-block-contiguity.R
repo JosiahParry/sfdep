@@ -15,7 +15,7 @@
 #' regime <- guerry$region
 #' st_block_nb(regime, id)
 #' @export
-st_block_nb <- function(regime, id = 1:length(regime), diag = FALSE) {
+st_block_nb <- function(regime, id = seq_along(regime), diag = FALSE) {
   id <- as.character(id)
   regime <- as.character(regime)
 
@@ -30,12 +30,12 @@ st_block_nb <- function(regime, id = 1:length(regime), diag = FALSE) {
   regime_lu <- vector(mode = "list", length = length(reg))
   names(regime_lu) <- reg
 
-  for (i in 1:length(reg)) {
+  for (i in seq_along(reg)) {
     regime_lu[[i]] <- which(regime == reg[i])
   }
 
   # fill results based on regime
-  for (i in 1:length(regime)) {
+  for (i in seq_along(regime)) {
     res[i] <- regime_lu[regime[i]]
   }
 
@@ -43,9 +43,9 @@ st_block_nb <- function(regime, id = 1:length(regime), diag = FALSE) {
   attr(res, "self.included") <- TRUE
   attr(res, "region.id") <- id
 
-  if (!diag) res <- remove_self(res)
+  if (!diag) {
+    res <- remove_self(res)
+  }
 
   class_modify(res, "nb")
 }
-
-

@@ -45,7 +45,9 @@ global_colocation_calc <- function(A, nb) {
 
   sum_ij <- lapply(aij, function(.x) {
     res <- table(.x) / length(.x)
-    if (length(res) == 0) res <- NA
+    if (length(res) == 0) {
+      res <- NA
+    }
     res
   })
 
@@ -74,7 +76,5 @@ global_colocation_perm_impl <- function(A, nb, nsim = 99) {
   l <- (sum((obs >= reps)) + 1) / (nsim + 1)
   g <- (sum((obs <= reps)) + 1) / (nsim + 1)
 
-  list(CLQ = obs,
-       p_sim = min(g, l))
-
+  list(CLQ = obs, p_sim = min(g, l))
 }

@@ -37,22 +37,45 @@ local_g <- function(x, nb, wt, alternative = "two.sided", ...) {
 
 #' @export
 #' @rdname local_g
-local_g_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", ...) {
+local_g_perm <- function(
+  x,
+  nb,
+  wt,
+  nsim = 499,
+  alternative = "two.sided",
+  ...
+) {
   if (!is.null(attr(nb, "self.included"))) {
     cli::cli_alert_warning("attr `self.include` is `TRUE`. Reporting Gi*.")
   }
   listw <- recreate_listw(nb, wt)
-  res <- spdep::localG_perm(x, listw, nsim = nsim, alternative = alternative, ...)
-  localg_names <- c("gi", "cluster", "e_gi", "var_gi", "std_dev", "p_value",
-                    "p_sim", "p_folded_sim", "skewness", "kurtosis")
+  res <- spdep::localG_perm(
+    x,
+    listw,
+    nsim = nsim,
+    alternative = alternative,
+    ...
+  )
+  localg_names <- c(
+    "gi",
+    "cluster",
+    "e_gi",
+    "var_gi",
+    "std_dev",
+    "p_value",
+    "p_sim",
+    "p_folded_sim",
+    "skewness",
+    "kurtosis"
+  )
 
   gi <- as.numeric(res)
   stats::setNames(
-    cbind(gi,                   # the statistic
-          attr(res, "cluster"), # the category
-          as.data.frame(attr(res, "internals")[, 2:9])),
+    cbind(
+      gi, # the statistic
+      attr(res, "cluster"), # the category
+      as.data.frame(attr(res, "internals")[, 2:9])
+    ),
     localg_names
-    )
+  )
 }
-
-

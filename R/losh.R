@@ -25,7 +25,7 @@ losh <- function(x, nb, wt, a = 2, ...) {
   # capture dots
   dots <- rlang::list2(...)
   # if var_hi set fewer columns are provided
-  if (!is.null(dots[["var_hi"]]) && dots[["var_hi"]] == FALSE) {
+  if (!is.null(dots[["var_hi"]]) && !dots[["var_hi"]]) {
     losh_names <- c("hi", "x_bar_i", "ei")
   } else {
     losh_names <- c("hi", "e_hi", "var_hi", "z_hi", "x_bar_i", "ei")
@@ -45,6 +45,5 @@ losh_perm <- function(x, nb, wt, a = 2, nsim = 499, ...) {
   res <- as.data.frame(spdep::LOSH.mc(x, listw, a = a, nsim = nsim, ...))
   stats::setNames(res, c("hi", "x_bar_i", "ei", "p_sim"))
 }
-
 
 # TODO implement LOSH Chi-Sq

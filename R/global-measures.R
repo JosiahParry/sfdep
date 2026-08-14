@@ -21,11 +21,14 @@
 #' @returns an `htest` object
 global_moran <- function(x, nb, wt, na_ok = FALSE, ...) {
   listw <- recreate_listw(nb, wt)
-  spdep::moran(x, listw = listw,
-               n = length(nb),
-               S0 = spdep::Szero(listw),
-               NAOK = na_ok, ...)
-
+  spdep::moran(
+    x,
+    listw = listw,
+    n = length(nb),
+    S0 = spdep::Szero(listw),
+    NAOK = na_ok,
+    ...
+  )
 }
 
 #' Global Moran Permutation Test
@@ -41,13 +44,22 @@ global_moran <- function(x, nb, wt, na_ok = FALSE, ...) {
 #' moran <- global_moran_perm(x, nb, wt)
 #' moran
 #' @returns an object of classes `htest`, and `mc.sim`.
-global_moran_perm <- function(x, nb, wt, alternative = "two.sided",
-                              nsim = 499, ...) {
+global_moran_perm <- function(
+  x,
+  nb,
+  wt,
+  alternative = "two.sided",
+  nsim = 499,
+  ...
+) {
   listw <- recreate_listw(nb, wt)
-  res <- spdep::moran.mc(x, listw = listw,
-           nsim = nsim,
-           alternative = alternative,
-           ...)
+  res <- spdep::moran.mc(
+    x,
+    listw = listw,
+    nsim = nsim,
+    alternative = alternative,
+    ...
+  )
 
   class_modify(res)
 }
@@ -63,13 +75,22 @@ global_moran_perm <- function(x, nb, wt, alternative = "two.sided",
 #' x <- guerry_nb$crime_pers
 #' global_moran_test(x, nb, wt)
 #' @returns an object of class `htest`
-global_moran_test <- function(x, nb, wt, alternative = "greater",
-                              randomization = TRUE,
-                              ...) {
-
+global_moran_test <- function(
+  x,
+  nb,
+  wt,
+  alternative = "greater",
+  randomization = TRUE,
+  ...
+) {
   listw <- recreate_listw(nb, wt)
-  res <- spdep::moran.test(x, listw, randomisation = randomization,
-                    alternative = alternative, ...)
+  res <- spdep::moran.test(
+    x,
+    listw,
+    randomisation = randomization,
+    alternative = alternative,
+    ...
+  )
 
   class_modify(res)
 }
@@ -91,10 +112,14 @@ global_moran_test <- function(x, nb, wt, alternative = "greater",
 #' @returns a list with two names elements `C` and `K` returning the value of Geary's C and sample kurtosis respectively.
 global_c <- function(x, nb, wt, allow_zero = NULL) {
   listw <- recreate_listw(nb, wt)
-  spdep::geary(x, listw,
-               length(nb), length(nb) - 1,
-               spdep::Szero(listw),
-               zero.policy = allow_zero)
+  spdep::geary(
+    x,
+    listw,
+    length(nb),
+    length(nb) - 1,
+    spdep::Szero(listw),
+    zero.policy = allow_zero
+  )
 }
 
 #' Global C Permutation Test
@@ -111,13 +136,24 @@ global_c <- function(x, nb, wt, allow_zero = NULL) {
 #' x <- guerry$crime_pers
 #' global_c_perm(x, nb, wt)
 #' @returns an object of classes `htest` and `mc.sim`
-global_c_perm <- function(x, nb, wt, nsim = 499, alternative = "greater",
-                          allow_zero = NULL, ...) {
+global_c_perm <- function(
+  x,
+  nb,
+  wt,
+  nsim = 499,
+  alternative = "greater",
+  allow_zero = NULL,
+  ...
+) {
   listw <- recreate_listw(nb, wt)
-  res <- spdep::geary.mc(x, listw, nsim = nsim,
-                 zero.policy = allow_zero,
-                 alternative = alternative,
-                 ...)
+  res <- spdep::geary.mc(
+    x,
+    listw,
+    nsim = nsim,
+    zero.policy = allow_zero,
+    alternative = alternative,
+    ...
+  )
   class_modify(res)
 }
 
@@ -133,10 +169,22 @@ global_c_perm <- function(x, nb, wt, nsim = 499, alternative = "greater",
 #' x <- guerry$crime_pers
 #' global_c_test(x, nb, wt)
 #' @returns an `htest` object
-global_c_test <- function(x, nb, wt, randomization = TRUE, allow_zero = NULL, ...) {
+global_c_test <- function(
+  x,
+  nb,
+  wt,
+  randomization = TRUE,
+  allow_zero = NULL,
+  ...
+) {
   listw <- recreate_listw(nb, wt)
-  res <- spdep::geary.test(x, listw, randomisation = randomization,
-                    zero.policy = allow_zero, ...)
+  res <- spdep::geary.test(
+    x,
+    listw,
+    randomisation = randomization,
+    zero.policy = allow_zero,
+    ...
+  )
   class_modify(res)
 }
 
@@ -154,19 +202,26 @@ global_c_test <- function(x, nb, wt, randomization = TRUE, allow_zero = NULL, ..
 #' x <- guerry$crime_pers
 #' global_g_test(x, nb, wt)
 #' @returns an `htest` object
-global_g_test <- function(x, nb, wt, alternative = "greater",
-                          allow_zero = NULL, ...) {
+global_g_test <- function(
+  x,
+  nb,
+  wt,
+  alternative = "greater",
+  allow_zero = NULL,
+  ...
+) {
   # TODO make friendlier warnings for weights type.
   listw <- recreate_listw(nb, wt)
-  res <- spdep::globalG.test(x, listw,
-                      zero.policy = allow_zero,
-                      alternative = alternative,
-                      ...)
+  res <- spdep::globalG.test(
+    x,
+    listw,
+    zero.policy = allow_zero,
+    alternative = alternative,
+    ...
+  )
 
   class_modify(res)
 }
-
-
 
 
 #' Global Join Counts
@@ -195,12 +250,25 @@ global_g_test <- function(x, nb, wt, alternative = "greater",
 #'
 #' tally_jc(fx, nb, wt)
 #' @returns an object of class `jclist` which is a list where each element is of class `htest` and `mc.sim`.
-global_jc_perm <- function(fx, nb, wt, alternative = "greater", nsim = 499, allow_zero = FALSE, ...) {
+global_jc_perm <- function(
+  fx,
+  nb,
+  wt,
+  alternative = "greater",
+  nsim = 499,
+  allow_zero = FALSE,
+  ...
+) {
   fx <- as.factor(fx)
   # TODO create broom tidy method
   listw <- recreate_listw(nb, wt)
-  res <- spdep::joincount.mc(fx, listw, nsim = nsim,
-                      zero.policy = allow_zero, ...)
+  res <- spdep::joincount.mc(
+    fx,
+    listw,
+    nsim = nsim,
+    zero.policy = allow_zero,
+    ...
+  )
   class_modify(res)
 }
 
@@ -211,13 +279,24 @@ global_jc_perm <- function(fx, nb, wt, alternative = "greater", nsim = 499, allo
 #' @param ... additional arguments passed to methods
 #' @export
 #'
-global_jc_test <- function(fx, nb, wt, alternative = "greater", allow_zero = NULL, ...) {
+global_jc_test <- function(
+  fx,
+  nb,
+  wt,
+  alternative = "greater",
+  allow_zero = NULL,
+  ...
+) {
   fx <- as.factor(fx)
   # TODO create broom tidy method
   listw <- recreate_listw(nb, wt)
-  res <- spdep::joincount.test(fx, listw,
-                        alternative = alternative,
-                        zero.policy = allow_zero, ...)
+  res <- spdep::joincount.test(
+    fx,
+    listw,
+    alternative = alternative,
+    zero.policy = allow_zero,
+    ...
+  )
   class_modify(res)
 }
 
@@ -227,7 +306,10 @@ tally_jc <- function(fx, nb, wt, allow_zero = TRUE, ...) {
   fx <- as.factor(fx)
   listw <- recreate_listw(nb, wt)
   res <- spdep::joincount.multi(
-    fx, listw, allow_zero, ...
+    fx,
+    listw,
+    allow_zero,
+    ...
   )
 
   colnames(res) <- tolower(colnames(res))

@@ -47,14 +47,12 @@ st_contiguity <- function(geometry, queen = TRUE, ...) {
 #' st_knn(sf::st_geometry(guerry), k = 8)
 #' @returns a list of class `nb`
 st_knn <- function(geometry, k = 1, symmetric = FALSE, ...) {
-
   pnts <- check_polygon(geometry)
 
   suppressWarnings({
     ks <- spdep::knearneigh(pnts, k = k, ...)
     nb <- spdep::knn2nb(ks, sym = symmetric)
   })
-
 
   class_modify(nb)
 }
@@ -73,8 +71,12 @@ st_knn <- function(geometry, k = 1, symmetric = FALSE, ...) {
 #' geo <- sf::st_geometry(guerry)
 #' st_dist_band(geo, upper = critical_threshold(geo))
 #' @returns a list of class `nb`
-st_dist_band <- function(geometry, lower = 0,
-                         upper = critical_threshold(geometry), ...) {
+st_dist_band <- function(
+  geometry,
+  lower = 0,
+  upper = critical_threshold(geometry),
+  ...
+) {
   x <- check_polygon(geometry)
   class_modify(spdep::dnearneigh(x, lower, upper, ...))
 }
@@ -129,14 +131,13 @@ st_nb_lag_cumul <- function(nb, order) {
 #' @returns
 #' Point geometry
 check_polygon <- function(geometry) {
-
-  polygon_check <- any(class(geometry) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON"))
+  polygon_check <- any(
+    class(geometry) %in% c("sfc_MULTIPOLYGON", "sfc_POLYGON")
+  )
 
   if (polygon_check) {
-
     cli::cli_alert_warning("Polygon provided. Using point on surface.")
     return(sf::st_point_on_surface(geometry))
   }
   geometry
 }
-

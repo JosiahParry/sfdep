@@ -5,11 +5,9 @@
 # check lengths on nbs and weights
 # check edge lists match weight list values
 
-
 # tests -------------------------------------------------------------------
 
 test_that("nbs is spdep compliant", {
-
   skip_on_cran()
   skip_on_ci()
 
@@ -28,7 +26,6 @@ test_that("nbs is spdep compliant", {
       elist = node_get_edge_list(),
       wt = node_get_edge_col(nb, "len")
     )
-
 
   node_df <- as_tibble(net)
 
@@ -66,7 +63,6 @@ test_that("nbs is spdep compliant", {
     lengths(node_df[["wt"]])
   )
 
-
   # "edge list contains correct neighbor nodes
   nb <- node_df[["nb"]]
   elist <- node_df[["elist"]]
@@ -98,5 +94,3 @@ test_that("nbs is spdep compliant", {
 
   expect_equal(lengths(elist), adj_vec)
 })
-
-

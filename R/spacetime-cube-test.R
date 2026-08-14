@@ -54,7 +54,6 @@
 #' is_spacetime_cube(guerry)
 #' }
 is_spacetime_cube <- function(x, ...) {
-
   check_pkg_suggests("zoo")
   # check if spacetime
   if (!inherits(x, "spacetime")) {
@@ -63,7 +62,9 @@ is_spacetime_cube <- function(x, ...) {
   }
 
   # ensure that data is active
-  if (active(x) == "geometry") x <- activate(x, "data")
+  if (active(x) == "geometry") {
+    x <- activate(x, "data")
+  }
 
   .time_col <- attr(x, "time_col")
   .loc_col <- attr(x, "loc_col")
@@ -76,7 +77,7 @@ is_spacetime_cube <- function(x, ...) {
   # meaning every location has 1 obs for each time period
   # check if every time-period and location have one obs
   # check number of rows = n_times * n_locs
-  if (!nrow(x) ==  (n_times * n_locs)) {
+  if (!nrow(x) == (n_times * n_locs)) {
     cli::cli_alert_warning(
       "Number of rows does not equal `n time-periods x n locations`"
     )
@@ -113,7 +114,9 @@ is_spacetime_cube <- function(x, ...) {
   # uses zoo here
   is_reg <- zoo::is.regular(zoo::zoo(seq_along(times), times))
 
-  if (!is_reg) cli::cli_alert_warning("Be careful: time-series is not regular.")
+  if (!is_reg) {
+    cli::cli_alert_warning("Be careful: time-series is not regular.")
+  }
 
   TRUE
 }

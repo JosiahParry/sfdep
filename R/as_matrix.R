@@ -39,8 +39,3 @@ wt_as_matrix <- function(nb, wt) {
 nb_as_matrix <- function(nb) {
   spdep::nb2mat(nb, style = "B")
 }
-
-
-
-
-

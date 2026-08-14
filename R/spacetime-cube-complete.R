@@ -1,6 +1,5 @@
 # Functionality for completing a space-time-series if the present one is incomplete
 
-
 #' Convert spacetime object to spacetime cube
 #'
 #' Given a spacetime object, convert it to a spacetime cube. A spacetime cube
@@ -30,7 +29,7 @@
 #'
 #' # create a sample of data
 #' set.seed(0)
-#' sample_index <- sample(1:nrow(bos), nrow(bos) * 0.95)
+#' sample_index <- sample(seq_len(nrow(bos)), nrow(bos) * 0.95)
 #' incomplete_spt <- bos[sample_index,]
 #'
 #' # check to see if is spacetime cube
@@ -47,7 +46,9 @@ complete_spacetime_cube <- function(x, ...) {
   })
 
   # activate data if not already
-  if (active(x) == "geometry") x <- activate(x, "data")
+  if (active(x) == "geometry") {
+    x <- activate(x, "data")
+  }
 
   .loc_col <- attr(x, "loc_col")
   .time_col <- attr(x, "time_col")
@@ -63,9 +64,11 @@ complete_spacetime_cube <- function(x, ...) {
     ))
   }
 
-  complete_spts <- expand.grid(locs = locs,
-                               times = times,
-                               stringsAsFactors = FALSE)
+  complete_spts <- expand.grid(
+    locs = locs,
+    times = times,
+    stringsAsFactors = FALSE
+  )
 
   names(complete_spts) <- c(.loc_col, .time_col)
 
@@ -75,5 +78,4 @@ complete_spacetime_cube <- function(x, ...) {
   class(res) <- .data_class
 
   new_spacetime(res, attr(x, "geometry"), .loc_col, .time_col)
-
 }

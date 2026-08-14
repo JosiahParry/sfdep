@@ -22,16 +22,18 @@
 #' [ellipse()] function is adapted from `ggVennDiagram`.
 #'
 #' @export
-ellipse <- function (x = 0, y = 0, sx = 2, sy = 1, rotation = 0, n = 100) {
-  rotation <- rotation * pi/180
-  theta <- 2 * pi/n
+ellipse <- function(x = 0, y = 0, sx = 2, sy = 1, rotation = 0, n = 100) {
+  rotation <- rotation * pi / 180
+  theta <- 2 * pi / n
   angles <- seq(0, 2 * pi, theta)
   x_coord <- vector(length = n + 1, mode = "numeric")
   y_coord <- vector(length = n + 1, mode = "numeric")
   for (i in 1:n) {
-    x_coord[i] <- x + sx* cos(angles[i]) * cos(rotation) -
+    x_coord[i] <- x +
+      sx * cos(angles[i]) * cos(rotation) -
       sy * sin(angles[i]) * sin(rotation)
-    y_coord[i] <- y + sx * cos(angles[i]) * sin(rotation) +
+    y_coord[i] <- y +
+      sx * cos(angles[i]) * sin(rotation) +
       sy * sin(angles[i]) * cos(rotation)
   }
   x_coord[n + 1] <- x_coord[1]

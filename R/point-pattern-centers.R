@@ -60,7 +60,6 @@ center_median <- function(geometry) {
 }
 
 
-
 #' @param tolerance a tolerance level to terminate the process. This is passed to [`pracma::geo_median()`].
 #' @rdname center_mean
 #' @export

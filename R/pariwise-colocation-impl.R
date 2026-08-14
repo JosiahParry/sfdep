@@ -52,7 +52,7 @@ pairwise_colocation_calc <- function(A, B, nb) {
   A <- as.factor(A)
   B <- as.factor(B)
   bij <- find_xj(B, nb)
-  n_a = table(A)
+  n_a <- table(A)
   a_vals <- levels(A)
   b_vals <- levels(B)
   # denominator is dependent upon its an A -> A comparison or A -> B
@@ -68,7 +68,9 @@ pairwise_colocation_calc <- function(A, B, nb) {
   # calculate proportions for each obs
   bij_sums <- lapply(bij, function(.x) {
     res <- table(.x) / length(.x)
-    if (length(res) == 0) res <- NA
+    if (length(res) == 0) {
+      res <- NA
+    }
     res
   })
 
@@ -98,17 +100,23 @@ pairwise_colocation_calc <- function(A, B, nb) {
 #' @returns a matrix used by pairwise_colocation
 pairwise_colocation_perm_impl <- function(A, B, nb, nsim = 199) {
   obs <- pairwise_colocation_calc(A, B, nb)
-  reps <- replicate(nsim,
-                    pairwise_colocation_calc(
-                      A, B, cond_permute_nb(nb)
-                      )
-                    )
-  a_vals <- names(reps[,1,1])
-  p_vals <- do.call(rbind, lapply(a_vals, function(.x) {
-    g <- rowSums(obs[.x,] >= reps[.x,,]) / (nsim + 1)
-    l <- rowSums(obs[.x,] <= reps[.x,,]) / (nsim + 1)
-    pmin(g, l)
-  }))
+  reps <- replicate(
+    nsim,
+    pairwise_colocation_calc(
+      A,
+      B,
+      cond_permute_nb(nb)
+    )
+  )
+  a_vals <- names(reps[, 1, 1])
+  p_vals <- do.call(
+    rbind,
+    lapply(a_vals, function(.x) {
+      g <- rowSums(obs[.x, ] >= reps[.x, , ]) / (nsim + 1)
+      l <- rowSums(obs[.x, ] <= reps[.x, , ]) / (nsim + 1)
+      pmin(g, l)
+    })
+  )
 
   colnames(p_vals) <- paste0("p_sim_", colnames(p_vals))
 

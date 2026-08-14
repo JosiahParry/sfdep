@@ -32,18 +32,17 @@ std_dev_ellipse <- function(geometry) {
   n <- nrow(xy)
 
   # ADD COLUMNS TO xy FOR SQUARED x,y TERMS
-  xy <- cbind(xy, xy[, 1] ^ 2, xy[, 2] ^ 2)
+  xy <- cbind(xy, xy[, 1]^2, xy[, 2]^2)
 
   # ADD COLUMNS TO xy FOR TRANSPOSED TERMS
   xy <- cbind(xy, xy[, 1] - cent_xy[1], xy[, 2] - cent_xy[2])
 
   # ADD COLUMNS FOR SQUARED TRANSPOSED TERMS AND PRODUCT OF TRANSPOSED TERMS
-  xy <- cbind(xy, xy[, 5] ^ 2, xy[, 6] ^ 2, xy[, 5] * xy[, 6])
+  xy <- cbind(xy, xy[, 5]^2, xy[, 6]^2, xy[, 5] * xy[, 6])
 
   # COMPUTE THETA (as in EBDON, 1985)
   top1 <- sum(xy[, 7]) - sum(xy[, 8])
-  top2 <- sqrt((sum(xy[, 7]) - sum(xy[, 8])) ^ 2 + 4 * (sum(xy[, 9])) ^
-                 2)
+  top2 <- sqrt((sum(xy[, 7]) - sum(xy[, 8]))^2 + 4 * (sum(xy[, 9]))^2)
   bottom <- (2 * sum(xy[, 9]))
   tantheta <- (top1 + top2) / bottom
 
@@ -55,21 +54,27 @@ std_dev_ellipse <- function(geometry) {
 
   sintheta <- sin_d(theta)
   costheta <- cos_d(theta)
-  sin2theta <- sintheta ^ 2
-  cos2theta <- costheta ^ 2
+  sin2theta <- sintheta^2
+  cos2theta <- costheta^2
   sinthetacostheta <- sintheta * costheta
   sigmax <-
-    sqrt(2) * sqrt((
-      (sum(xy[, 7])) * (cos2theta) - 2 * (sum(xy[, 9])) * (sinthetacostheta) + (sum(xy[, 8])) *
-        (sin2theta)
-    ) / (n - 2))
-  sigmay <- sqrt(2) *
-    sqrt((
-      (sum(xy[, 7])) * (sin2theta) +
+    sqrt(2) *
+    sqrt(
+      ((sum(xy[, 7])) *
+        (cos2theta) -
         2 * (sum(xy[, 9])) * (sinthetacostheta) +
-        (sum(xy[, 8])) * (cos2theta)
-    ) /
-      (n - 2))
+        (sum(xy[, 8])) *
+          (sin2theta)) /
+        (n - 2)
+    )
+  sigmay <- sqrt(2) *
+    sqrt(
+      ((sum(xy[, 7])) *
+        (sin2theta) +
+        2 * (sum(xy[, 9])) * (sinthetacostheta) +
+        (sum(xy[, 8])) * (cos2theta)) /
+        (n - 2)
+    )
 
   res <- sf::st_as_sf(cent)
   res[["sx"]] <- sigmax
@@ -85,10 +90,10 @@ std_dev_ellipse <- function(geometry) {
 # called `x`
 # Taken from Ecoserv tool
 #https://github.com/ecoservR/ecoserv_tool/blob/master/R/fun_spatial.R
-rename_geometry <- function(g, name){
-  current = attr(g, "sf_column")
-  names(g)[names(g) == current] = name
-  sf::st_geometry(g) = name
+rename_geometry <- function(g, name) {
+  current <- attr(g, "sf_column")
+  names(g)[names(g) == current] <- name
+  sf::st_geometry(g) <- name
   g
 }
 

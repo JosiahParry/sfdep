@@ -18,24 +18,25 @@
 #' local_moran(guerry_nb$crime_pers, guerry_nb$nb, guerry_nb$wt)
 #' @returns a `data.frame` containing the columns `ii`, `eii`, `var_ii`, `z_ii`, `p_ii`, `p_ii_sim`, and `p_folded_sim`. For more details please see [spdep::localmoran_perm()].
 #'
-local_moran <- function(x, nb, wt, alternative = "two.sided",
-                        nsim = 499, ...) {
-
+local_moran <- function(x, nb, wt, alternative = "two.sided", nsim = 499, ...) {
   listw <- recreate_listw(nb, wt)
 
-  lmp <- localmoran_perm(x,
-                  listw,
-                  nsim = nsim,
-                  alternative = alternative,
-                  ...)
+  lmp <- localmoran_perm(x, listw, nsim = nsim, alternative = alternative, ...)
 
-
-  lm_cols <- c("ii", "eii", "var_ii", "z_ii", "p_ii",
-               "p_ii_sim", "p_folded_sim", "skewness", "kurtosis")
+  lm_cols <- c(
+    "ii",
+    "eii",
+    "var_ii",
+    "z_ii",
+    "p_ii",
+    "p_ii_sim",
+    "p_folded_sim",
+    "skewness",
+    "kurtosis"
+  )
 
   lm_res <- stats::setNames(data.frame(lmp), lm_cols)
   lm_cats <- attr(lmp, "quadr")
 
   cbind(lm_res, lm_cats)
-
 }

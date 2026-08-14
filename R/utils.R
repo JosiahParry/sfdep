@@ -1,8 +1,10 @@
 #' @keywords internal
-`%||%` <- function (x, y) {
-  if (rlang::is_null(x))
+`%||%` <- function(x, y) {
+  if (rlang::is_null(x)) {
     y
-  else x
+  } else {
+    x
+  }
 }
 
 #' Check if a vector of packages are available
@@ -10,13 +12,19 @@
 #' @param x a character vector of package names
 #' @keywords internal
 check_pkg_suggests <- function(x) {
-  missing_pkgs <- !vapply(x, requireNamespace, FUN.VALUE = logical(1), quietly = TRUE)
+  missing_pkgs <- !vapply(
+    x,
+    requireNamespace,
+    FUN.VALUE = logical(1),
+    quietly = TRUE
+  )
 
   if (any(missing_pkgs)) {
-    cli::cli_alert_danger('Missing packages: {paste("`", x[missing_pkgs], "`", sep = "", collapse = ", ")}')
+    cli::cli_alert_danger(
+      'Missing packages: {paste("`", x[missing_pkgs], "`", sep = "", collapse = ", ")}'
+    )
     return(invisible(NULL))
   }
-
 }
 
 
@@ -44,20 +52,26 @@ class_modify <- function(x, class = "list") {
 #' recreate_listw(guerry_nb$nb, guerry_nb$wt)
 #' @returns a `listw` object
 recreate_listw <- function(nb, wt) {
-  which_style <- c(attr(wt, "W") %||% NA,
-                   attr(wt, "B") %||% NA,
-                   attr(wt, "C") %||% NA,
-                   attr(wt, "U") %||% NA,
-                   attr(wt, "minmax") %||% NA,
-                   attr(wt, "S") %||% NA)
+  which_style <- c(
+    attr(wt, "W") %||% NA,
+    attr(wt, "B") %||% NA,
+    attr(wt, "C") %||% NA,
+    attr(wt, "U") %||% NA,
+    attr(wt, "minmax") %||% NA,
+    attr(wt, "S") %||% NA
+  )
 
   possible_styles <- c("W", "B", "C", "U", "minmax", "S")
 
-  if (!inherits(nb, "nb")) nb <- class_modify(nb, "nb")
+  if (!inherits(nb, "nb")) {
+    nb <- class_modify(nb, "nb")
+  }
 
-  listw <- list(style = possible_styles[!is.na(which_style)],
-                neighbours = nb,
-                weights = wt)
+  listw <- list(
+    style = possible_styles[!is.na(which_style)],
+    neighbours = nb,
+    weights = wt
+  )
 
   class(listw) <- c("listw", "nb", "list")
 
@@ -97,13 +111,14 @@ find_xj <- function(x, nb) {
 #' perm_nb[1:5]
 #' @returns A list of class `nb` where each element contains a random sample of neighbors excluding the observed region.
 cond_permute_nb <- function(nb, seed = NULL) {
-  if (!is.null(seed)) set.seed(seed)
+  if (!is.null(seed)) {
+    set.seed(seed)
+  }
   n <- length(nb)
   cards <- lengths(nb)
   res <- mapply(shuffle_nbs, 1:n, n, cards, SIMPLIFY = FALSE)
   class_modify(res, "nb")
 }
-
 
 
 # Conditional Permutation -------------------------------------------------
@@ -138,5 +153,3 @@ shuffle_nbs <- function(i, n, card) {
   x <- 1:n
   sample(x[-i], size = card)
 }
-
-

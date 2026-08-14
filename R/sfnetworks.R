@@ -67,11 +67,13 @@ st_as_edges.sf <- function(x, nb, wt) {
 
   listw <- recreate_listw(nb, wt)
 
-
   dplyr::rename(
     spdep::listw2lines(listw, st_geometry(x)),
-    from = i, to = j, i = i_ID, j = j_ID)
-
+    from = i,
+    to = j,
+    i = i_ID,
+    j = j_ID
+  )
 }
 
 #' @rdname st_as_edges
@@ -80,24 +82,31 @@ st_as_edges.sfc <- function(x, nb, wt) {
   # if wt is missing use nb2lines
   if (rlang::is_missing(wt)) {
     res <-
-      dplyr::rename(spdep::nb2lines(nb, coords = x),
-                    from = i, to = j, i = i_ID, j = j_ID)
+      dplyr::rename(
+        spdep::nb2lines(nb, coords = x),
+        from = i,
+        to = j,
+        i = i_ID,
+        j = j_ID
+      )
 
     return(res)
   }
 
   listw <- recreate_listw(nb, wt)
 
-  dplyr::rename(spdep::listw2lines(listw, x),
-                from = i, to = j, i = i_ID, j = j_ID)
-
+  dplyr::rename(
+    spdep::listw2lines(listw, x),
+    from = i,
+    to = j,
+    i = i_ID,
+    j = j_ID
+  )
 }
 
 #edges <- st_as_edges(st_geometry(guerry), guerry_nb$nb, guerry_nb$wt)
 
-
 # nodes -------------------------------------------------------------------
-
 
 #' Convert to a node point object
 #'
@@ -145,7 +154,6 @@ st_as_nodes.sf <- function(x, nb) {
   }
 
   dplyr::mutate(x, "{i_col}" := attr(nb, "region.id"), .before = 1)
-
 }
 
 # guerry_nb %>%
@@ -156,13 +164,14 @@ st_as_nodes.sf <- function(x, nb) {
 st_as_nodes.sfc <- function(x, nb) {
   if (inherits(x, "sfc")) {
     if (!inherits(x, "sfc_POINT")) {
-      if (inherits(x, "sfc_POLYGON") || inherits(x,"sfc_MULTIPOLYGON"))
+      if (inherits(x, "sfc_POLYGON") || inherits(x, "sfc_MULTIPOLYGON")) {
         x <- sf::st_point_on_surface(x)
-      else stop("Point-conforming geometries required")
+      } else {
+        stop("Point-conforming geometries required")
+      }
     }
   }
-    dplyr::mutate(sf::st_as_sf(x), i = attr(nb, "region.id"), .before = 1)
-
+  dplyr::mutate(sf::st_as_sf(x), i = attr(nb, "region.id"), .before = 1)
 }
 
 # st_geometry(guerry) %>%
@@ -177,7 +186,6 @@ st_as_nodes.sfc <- function(x, nb) {
 # st_as_edges(geo, nb, wt)
 # gg <- st_as_graph(geo, nb, wt)
 #
-
 
 # graph -------------------------------------------------------------------
 
@@ -207,7 +215,9 @@ st_as_graph <- function(x, nb, wt) {
 st_as_graph.sf <- function(x, nb, wt) {
   check_pkg_suggests("sfnetworks")
 
-  if (!inherits(x, "sf")) rlang::abort("`x` must be an object of `sf` class.")
+  if (!inherits(x, "sf")) {
+    rlang::abort("`x` must be an object of `sf` class.")
+  }
 
   nb <- x[[rlang::ensym(nb)]]
   wt <- x[[rlang::ensym(wt)]]
@@ -226,7 +236,9 @@ st_as_graph.sf <- function(x, nb, wt) {
 #' @rdname st_as_graph
 #' @export
 st_as_graph.sfc <- function(x, nb, wt) {
-  if (!inherits(x, "sfc")) rlang::abort("`x` must be an object of class `sf` or `sfc`")
+  if (!inherits(x, "sfc")) {
+    rlang::abort("`x` must be an object of class `sf` or `sfc`")
+  }
 
   sfnetworks::sfnetwork(
     st_as_nodes(x, nb),

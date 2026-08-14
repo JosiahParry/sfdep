@@ -6,29 +6,32 @@ new_hotspot <- function(gs, sigs, n, ...) {
 }
 
 consecutive_hotspot <- function(gs, sigs, n, ...) {
-  if (!(sigs[n] && gs[n] > 0)) return(FALSE)
+  if (!(sigs[n] && gs[n] > 0)) {
+    return(FALSE)
+  }
 
   n_final_run <- which(diff(cumsum(c(rev(sigs), FALSE))) == 0)[1]
   run_index <- seq(n - n_final_run + 1, n, by = 1)
 
-  all(!sigs[-run_index]) &&
+  !any(sigs[-run_index]) &&
     all(sigs[run_index]) &&
-    all(!((sigs[-run_index]) & (gs[-run_index] > 0))) &&
-    all(!sigs[-run_index]) &&
+    !any(((sigs[-run_index]) & (gs[-run_index] > 0))) &&
+    !any(sigs[-run_index]) &&
     (sum(sigs & gs > 0) / n < 0.9)
 }
 
 intensifying_hotspot <- function(gs, sigs, n, tau, tau_p, threshold, ...) {
-  (sum(sigs) / n  >= .9) && (sigs[n]) && (tau > 0) && (tau_p < threshold)
+  (sum(sigs) / n >= 0.9) && (sigs[n]) && (tau > 0) && (tau_p < threshold)
 }
 
 persistent_hotspot <- function(gs, sigs, tau_p, threshold, n, ...) {
-  (sum(sigs & gs > 0) / n  >= .9) && (tau_p > threshold)
+  (sum(sigs & gs > 0) / n >= 0.9) && (tau_p > threshold)
 }
 
 diminishing_hotspot <- function(gs, sigs, tau, tau_p, threshold, n, ...) {
-  (sum(sigs & gs > 0) / n  >= .9) &&
-    (sigs[n]) && (tau < 0) &&
+  (sum(sigs & gs > 0) / n >= 0.9) &&
+    (sigs[n]) &&
+    (tau < 0) &&
     (tau_p <= threshold)
 }
 
@@ -72,36 +75,42 @@ consecutive_coldspot <- function(gs, sigs, n, ...) {
   # cold spot bins in the final time-step intervals. The location has never been
   # a statistically significant cold spot prior to the final cold spot run and
   # less than ninety percent of all bins are statistically significant cold spots
-  if (!(sigs[n] && gs[n] < 0)) return(FALSE)
+  if (!(sigs[n] && gs[n] < 0)) {
+    return(FALSE)
+  }
 
   n_final_run <- which(diff(cumsum(c(rev(sigs), FALSE))) == 0)[1]
-  run_index <- seq(n-n_final_run + 1, n, by = 1)
+  run_index <- seq(n - n_final_run + 1, n, by = 1)
 
-  all(!sigs[-run_index]) &&
+  !any(sigs[-run_index]) &&
     all(sigs[run_index]) &&
-    all(!((sigs[-run_index]) & (gs[-run_index] > 0))) &&
-    all(!sigs[-run_index]) &&
+    !any(((sigs[-run_index]) & (gs[-run_index] > 0))) &&
+    !any(sigs[-run_index]) &&
     (sum(sigs & gs < 0) / n < 0.9)
 }
 
-intensifying_coldspot <- function(gs, sigs, n, tau, tau_p,
-                                  threshold, ...){
-  (sum(sigs & gs < 0) / n  >= .9) &&
+intensifying_coldspot <- function(gs, sigs, n, tau, tau_p, threshold, ...) {
+  (sum(sigs & gs < 0) / n >= 0.9) &&
     (sigs[n]) &&
     (tau < 0) &&
     (tau_p <= threshold)
 }
 
 persistent_coldspot <- function(gs, sigs, n, tau_p, threshold, ...) {
-  (sum(sigs & gs < 0) / n  >= .9) && (tau_p > threshold)
+  (sum(sigs & gs < 0) / n >= 0.9) && (tau_p > threshold)
 }
 
-diminishing_coldspot <- function(gs, sigs, n, tau, tau_p, threshold, ...){
-  (sum(sigs & gs < 0) / n  >= .9) && (sigs[n]) && (tau > 0) && (tau_p <= threshold)
+diminishing_coldspot <- function(gs, sigs, n, tau, tau_p, threshold, ...) {
+  (sum(sigs & gs < 0) / n >= 0.9) &&
+    (sigs[n]) &&
+    (tau > 0) &&
+    (tau_p <= threshold)
 }
 
 oscilating_coldspot <- function(gs, sigs, n, ...) {
-  (sum((gs < 0) & sigs) / n < 0.9) && (gs[n] < 0 & sigs[n]) && (any(gs > 0 & sigs))
+  (sum((gs < 0) & sigs) / n < 0.9) &&
+    (gs[n] < 0 & sigs[n]) &&
+    (any(gs > 0 & sigs))
 }
 
 historical_coldspot <- function(gs, sigs, n, ...) {
@@ -125,8 +134,8 @@ fxs <- list(
   "historical coldspot" = historical_coldspot,
   "sporadic hotspot" = sporadic_hotspot,
   "sporadic coldspot" = sporadic_coldspot,
-  "no pattern detected" = function(...) TRUE)
-
+  "no pattern detected" = function(...) TRUE
+)
 
 
 #' Classify Hot Spot results
@@ -134,27 +143,25 @@ fxs <- list(
 #' Given the Gi* time-series and Mann Kendall scores classify the hotspot values
 #' @keywords internal
 classify_hotspot <- function(.x, threshold) {
-  gs = .x[["gi_star"]]
-  sigs = .x[["p_sim"]] <= threshold
-  n = length(gs)
+  gs <- .x[["gi_star"]]
+  sigs <- .x[["p_sim"]] <= threshold
+  n <- length(gs)
   mktest <- Kendall::MannKendall(gs)
-  tau = mktest[["tau"]]
-  tau_p = as.numeric(mktest[["sl"]])
+  tau <- mktest[["tau"]]
+  tau_p <- as.numeric(mktest[["sl"]])
 
-
-  res <- lapply(fxs, function(.x, ...) .x(...),
-                gs = gs,
-                sigs = sigs,
-                n = n,
-                tau = tau,
-                tau_p = tau_p,
-                threshold = threshold
+  res <- lapply(
+    fxs,
+    function(.x, ...) .x(...),
+    gs = gs,
+    sigs = sigs,
+    n = n,
+    tau = tau,
+    tau_p = tau_p,
+    threshold = threshold
   )
   cbind(
     as.data.frame(unclass(mktest)),
     classification = as.character(names(res[unlist(res)])[1])
   )
-
 }
-
-

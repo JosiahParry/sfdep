@@ -18,13 +18,12 @@ include_self <- function(nb) {
 #' @rdname include_self
 #' @export
 remove_self <- function(nb) {
-
   if (is.null(attr(nb, "self.included"))) {
     cli::cli_warn("Self not included. Cannot remove.")
     return(nb)
   }
 
-  for (i in 1:length(nb)) {
+  for (i in seq_along(nb)) {
     nb[[i]] <- nb[[i]][-which(nb[[i]] == i)]
   }
 
@@ -32,4 +31,3 @@ remove_self <- function(nb) {
 
   return(nb)
 }
-

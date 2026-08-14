@@ -29,7 +29,6 @@
 #' wt[1:3]
 #' @returns a list where each element is a numeric vector
 st_weights <- function(nb, style = "W", allow_zero = NULL, ...) {
-
   listw <- nb2listw(nb, style = style, zero.policy = allow_zero, ...)
 
   listw[["weights"]]

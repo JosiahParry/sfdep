@@ -23,19 +23,23 @@
 #' nb <- include_self(nb)
 #' res <- st_kernel_weights(nb, geometry)
 #' head(res, 3)
-st_kernel_weights <- function(nb, geometry, kernel = "uniform",
-                              threshold = critical_threshold(geometry),
-                              adaptive = FALSE,
-                              self_kernel = FALSE
-                              ) {
-
+st_kernel_weights <- function(
+  nb,
+  geometry,
+  kernel = "uniform",
+  threshold = critical_threshold(geometry),
+  adaptive = FALSE,
+  self_kernel = FALSE
+) {
   # if self isnt included elicit warning
   self_included <- !is.null(attr(nb, "self.included"))
   if (!self_included) {
     rlang::warn(
-      c("It is recommended to include the ith observation.",
-                    " Consider `nb = include_self(nb)`.")
+      c(
+        "It is recommended to include the ith observation.",
+        " Consider `nb = include_self(nb)`."
       )
+    )
   }
 
   # verify kernels
@@ -76,7 +80,7 @@ st_kernel_weights <- function(nb, geometry, kernel = "uniform",
   # set self to 1 if required
   if (!self_kernel && self_included) {
     n <- length(nb)
-    for(i in 1:n) {
+    for (i in 1:n) {
       res[[i]][which(nb[[i]] == i)] <- 1
     }
   }
@@ -92,7 +96,4 @@ st_kernel_weights <- function(nb, geometry, kernel = "uniform",
   # }
 
   res
-
 }
-
-

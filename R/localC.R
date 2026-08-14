@@ -61,15 +61,39 @@ local_c <- function(x, nb, wt, ...) {
 #' - `p_folded_sim`: p-value based on the implementation of Pysal which always assumes a two-sided test taking the minimum possible p-value
 #' - `skewness`: sample skewness
 #' - `kurtosis`: sample kurtosis
-local_c_perm <- function(x, nb, wt, nsim = 499, alternative = "two.sided", ...) {
-
-  lc_cols <- c("ci", "cluster", "e_ci", "var_ci", "z_ci", "p_ci",
-               "p_ci_sim", "p_folded_sim", "skewness", "kurtosis")
+local_c_perm <- function(
+  x,
+  nb,
+  wt,
+  nsim = 499,
+  alternative = "two.sided",
+  ...
+) {
+  lc_cols <- c(
+    "ci",
+    "cluster",
+    "e_ci",
+    "var_ci",
+    "z_ci",
+    "p_ci",
+    "p_ci_sim",
+    "p_folded_sim",
+    "skewness",
+    "kurtosis"
+  )
   listw <- recreate_listw(nb, wt)
-  lcp <- spdep::localC_perm(x, listw, nsim = nsim, alternative = alternative, ...)
-  res <- cbind(ci = as.numeric(lcp),
-               cluster = attr(lcp, "cluster"),
-               as.data.frame(attr(lcp, "pseudo-p")))
+  lcp <- spdep::localC_perm(
+    x,
+    listw,
+    nsim = nsim,
+    alternative = alternative,
+    ...
+  )
+  res <- cbind(
+    ci = as.numeric(lcp),
+    cluster = attr(lcp, "cluster"),
+    as.data.frame(attr(lcp, "pseudo-p"))
+  )
 
   stats::setNames(res, lc_cols)
 }

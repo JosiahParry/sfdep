@@ -1,4 +1,3 @@
-
 # Selection ---------------------------------------------------------------
 # Selection method
 # to do  update `times` attribute when subset and data is active
@@ -59,12 +58,12 @@ spt_update <- function(x, ...) {
 #' @export
 #' @rdname as_spacetime
 as_sf <- function(x, ...) {
-  if (active(x) == "geometry") x <- activate(x, "data")
+  if (active(x) == "geometry") {
+    x <- activate(x, "data")
+  }
 
-  merge(attr(x, "geometry"), x,
-        by = attr(x, "loc_col"), ...)
+  merge(attr(x, "geometry"), x, by = attr(x, "loc_col"), ...)
 }
-
 
 
 # From sf -----------------------------------------------------------------
@@ -107,7 +106,7 @@ as_spacetime <- function(x, .loc_col, .time_col, ...) {
 #' @export
 as_spacetime.sf <- function(x, .loc_col, .time_col, ...) {
   d <- utils::getFromNamespace("distinct.sf", "sf")
-# distinct.sf requires dplyr (suggested here) and rlang (imported here)
+  # distinct.sf requires dplyr (suggested here) and rlang (imported here)
   geometry <- d(x, !!rlang::sym(.loc_col), !!rlang::sym(attr(x, "sf_column")))
 
   new_spacetime_data(sf::st_drop_geometry(x), geometry, .loc_col, .time_col)
@@ -123,16 +122,22 @@ print.spacetime <- function(x, ...) {
   n_locs <- attr(x, "n_locs")
   n_times <- attr(x, "n_times")
   cli::cli_div(theme = list(rule = list(color = "grey")))
-  cli::cli_text(cli::style_bold(cli::style_italic("spacetime \u2500\u2500\u2500\u2500")))
-  cli::cli_text(cli::col_grey("Context:", cli::style_italic("{.var {context}}")))
-  cli::cli_text(cli::col_grey("{.emph {n_locs}} locations {.var {attr(x, 'loc_col')}}"))
+  cli::cli_text(cli::style_bold(cli::style_italic(
+    "spacetime \u2500\u2500\u2500\u2500"
+  )))
+  cli::cli_text(cli::col_grey(
+    "Context:",
+    cli::style_italic("{.var {context}}")
+  ))
+  cli::cli_text(cli::col_grey(
+    "{.emph {n_locs}} locations {.var {attr(x, 'loc_col')}}"
+  ))
   cli::cli_text(
     cli::col_grey("{.emph {n_times}} time periods {.var {attr(x, 'time_col')}}")
-    )
+  )
   cli::cli_rule(cli::col_grey(cli::style_italic("{context} context")))
   NextMethod()
 }
-
 
 
 # dplyr group_by ----------------------------------------------------------
@@ -162,7 +167,6 @@ mutate.spacetime <- function(.data, ...) {
 }
 
 
-
 #' @name tidyverse
 ungroup.spacetime <- function(.data, ...) {
   res <- NextMethod(.data, ...)
@@ -174,11 +178,10 @@ ungroup.spacetime <- function(.data, ...) {
 
 # from: https://raw.githubusercontent.com/r-spatial/sf/main/R/tidyverse.R
 # 2022-06-27 08:54:11
-register_all_s3_methods = function() {
+register_all_s3_methods <- function() {
   register_s3_method("dplyr", "group_by", "spacetime")
   register_s3_method("dplyr", "ungroup", "spacetime")
   register_s3_method("dplyr", "mutate", "spacetime")
-
 }
 
 # from: https://github.com/tidyverse/hms/blob/master/R/zzz.R

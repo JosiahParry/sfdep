@@ -28,7 +28,6 @@
 #'
 #' @export
 spatial_gini <- function(x, nb) {
-
   # cast as a matrix
   w <- nb_as_matrix(nb)
 
@@ -42,7 +41,7 @@ spatial_gini <- function(x, nb) {
   xdiffs <- vector("list", n)
   for (i in 1:n) {
     xi <- x[i]
-    wij <- w[i,]
+    wij <- w[i, ]
     xdiff <- abs(xi - x)
     xdiffs[[i]] <- xdiff
     lhs_num[i] <- sum(xdiff * wij)
@@ -88,9 +87,8 @@ spatial_gini <- function(x, nb) {
 # nb <- tract_clean$nb
 
 spatial_gini <- function(x, nb) {
-
   n <- length(x)
-  m <- matrix(rep(x, n), nrow = n, byrow = T)
+  m <- matrix(rep(x, n), nrow = n, byrow = TRUE)
   xdiff <- abs(x - m)
 
   spatial_gini_calc(x, nb, xdiff)
@@ -125,7 +123,6 @@ spatial_gini_calc <- function(x, nb, xdiff) {
 }
 
 spatial_gini_perm_impl <- function(x, nb, xdiff, nsim) {
-
   obs <- spatial_gini_calc(x, nb, xdiff)
   reps <- replicate(
     nsim,
@@ -134,20 +131,18 @@ spatial_gini_perm_impl <- function(x, nb, xdiff, nsim) {
   )
 
   r <- do.call("rbind", reps)
-  p_value <- pmin((sum(obs$SG >=  r$SG) + 1) / (nsim + 1),
-                  (sum(obs$SG <=  r$SG) + 1) / (nsim + 1))
+  p_value <- pmin(
+    (sum(obs$SG >= r$SG) + 1) / (nsim + 1),
+    (sum(obs$SG <= r$SG) + 1) / (nsim + 1)
+  )
 
   cbind(obs, p_value)
 }
 
 
-
 spatial_gini_perm <- function(x, nb, nsim = 49) {
-
   n <- length(x)
   m <- matrix(rep(x, n), nrow = n, byrow = TRUE)
   xdiff <- abs(x - m)
   spatial_gini_perm_impl(x, nb, xdiff, nsim)
 }
-
-

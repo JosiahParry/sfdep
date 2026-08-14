@@ -30,7 +30,9 @@
 #' st_nb_relative(geometry)
 #' @export
 st_nb_delaunay <- function(geometry, .id = NULL) {
-  if (!inherits(geometry, "sfc")) rlang::abort("`geometry` must be class `sfc`.")
+  if (!inherits(geometry, "sfc")) {
+    rlang::abort("`geometry` must be class `sfc`.")
+  }
   geo <- check_polygon(geometry)
   spdep::tri2nb(geo, .id)
 }
@@ -38,7 +40,9 @@ st_nb_delaunay <- function(geometry, .id = NULL) {
 #' @rdname st_nb_delaunay
 #' @export
 st_nb_gabriel <- function(geometry, .nnmult = 3) {
-  if (!inherits(geometry, "sfc")) rlang::abort("`geometry` must be class `sfc`.")
+  if (!inherits(geometry, "sfc")) {
+    rlang::abort("`geometry` must be class `sfc`.")
+  }
   geo <- check_polygon(geometry)
   gneigh <- spdep::gabrielneigh(geo, nnmult = .nnmult)
   spdep::graph2nb(gneigh)
@@ -48,9 +52,10 @@ st_nb_gabriel <- function(geometry, .nnmult = 3) {
 #' @export
 #' @returns an object of class nb
 st_nb_relative <- function(geometry, .nnmult = 3) {
-  if (!inherits(geometry, "sfc")) rlang::abort("`geometry` must be class `sfc`.")
+  if (!inherits(geometry, "sfc")) {
+    rlang::abort("`geometry` must be class `sfc`.")
+  }
   geo <- check_polygon(geometry)
   r_nb <- spdep::relativeneigh(geo, nnmult = .nnmult)
   spdep::graph2nb(r_nb)
 }
-

@@ -33,4 +33,3 @@ global_moran_bv <- function(x, y, nb, wt, nsim = 99, scale = TRUE) {
   listw <- recreate_listw(nb, wt)
   spdep::moran_bv(x, y, listw, nsim, scale)
 }
-

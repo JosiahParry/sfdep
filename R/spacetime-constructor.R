@@ -1,4 +1,3 @@
-
 # Class constructor -------------------------------------------------------
 
 #' Construct a `spacetime` object
@@ -73,16 +72,22 @@ spacetime <- function(.data, .geometry, .loc_col, .time_col, active = "data") {
 
 #' @rdname spacetime
 #' @export
-new_spacetime <- function(.data, .geometry, .loc_col,
-                          .time_col, active = "data") {
+new_spacetime <- function(
+  .data,
+  .geometry,
+  .loc_col,
+  .time_col,
+  active = "data"
+) {
   match.arg(active, c("data", "geometry"))
 
   # validate inputs
   validate_spacetime(.data, .geometry, .loc_col, .time_col)
 
-  switch(active,
-         geometry = new_spacetime_geo(.data, .geometry, .loc_col, .time_col),
-         data = new_spacetime_data(.data, .geometry, .loc_col, .time_col),
+  switch(
+    active,
+    geometry = new_spacetime_geo(.data, .geometry, .loc_col, .time_col),
+    data = new_spacetime_data(.data, .geometry, .loc_col, .time_col),
   )
 }
 
@@ -92,39 +97,41 @@ new_spacetime_geo <- function(.data, .geometry, .loc_col, .time_col) {
   n_times <- length(times)
   locs <- .geometry[[.loc_col]]
   n_locs <- length(.geometry[[.loc_col]])
-  structure(.geometry,
-            active = "geometry",
-            data = .data,
-            loc_col = .loc_col,
-            locs = locs,
-            n_locs = n_locs,
-            time_col = .time_col,
-            times = times,
-            n_times = n_times,
-            class = union("spacetime", class(.geometry)))
+  structure(
+    .geometry,
+    active = "geometry",
+    data = .data,
+    loc_col = .loc_col,
+    locs = locs,
+    n_locs = n_locs,
+    time_col = .time_col,
+    times = times,
+    n_times = n_times,
+    class = union("spacetime", class(.geometry))
+  )
 }
 
 #' @keywords internal
 new_spacetime_data <- function(.data, .geometry, .loc_col, .time_col) {
-
   times <- sort(unique(.data[[.time_col]]))
   n_times <- length(times)
   locs <- .geometry[[.loc_col]]
   n_locs <- length(locs)
 
-  structure(.data,
-            active = "data",
-            data = .data,
-            geometry = .geometry,
-            loc_col = .loc_col,
-            locs = locs,
-            n_locs = n_locs,
-            time_col = .time_col,
-            times = times,
-            n_times = n_times,
-            class = union("spacetime", class(.data)))
+  structure(
+    .data,
+    active = "data",
+    data = .data,
+    geometry = .geometry,
+    loc_col = .loc_col,
+    locs = locs,
+    n_locs = n_locs,
+    time_col = .time_col,
+    times = times,
+    n_times = n_times,
+    class = union("spacetime", class(.data))
+  )
 }
-
 
 
 # Class validator ---------------------------------------------------------
@@ -132,7 +139,6 @@ new_spacetime_data <- function(.data, .geometry, .loc_col, .time_col) {
 #' @rdname spacetime
 #' @export
 validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
-
   if (!inherits(.geometry, "sf")) {
     cli::cli_abort("{.var .geometry} must be an `sf` object.")
   }
@@ -145,13 +151,16 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
   # must have basetype of integer or double
   #  valid types: date, factor, ordered, int, dbl, posixlt
   times <- unique(.data[[.time_col]])
-  can_be_ordered <- (typeof(times) %in% c("double", "integer") | inherits(times, "POSIXlt"))
+  can_be_ordered <- (typeof(times) %in%
+    c("double", "integer") |
+    inherits(times, "POSIXlt"))
 
   if (!can_be_ordered) {
     cli::cli_abort(c(
       "Unable to order `.time_col`.",
       i = "{.var .time_col} must have a base `typeof()` {.cls numeric} or {.cls integer},",
-      "*" = "alternatively, must be of class {.cls POSIXlt}."))
+      "*" = "alternatively, must be of class {.cls POSIXlt}."
+    ))
   }
 
   # verify no missingness in geometry locations
@@ -167,7 +176,6 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
     cli::cli_abort("Duplicate geometries present.")
   }
 
-
   # Compare regions
   #  check types:
   .data_loc_class <- class(.data[[.loc_col]])
@@ -175,22 +183,27 @@ validate_spacetime <- function(.data, .geometry, .loc_col, .time_col) {
 
   if (!identical(.data_loc_class, .geo_loc_class)) {
     cli::cli_abort(
-      c("Differing class types for {.var .loc_col}.",
+      c(
+        "Differing class types for {.var .loc_col}.",
         i = "{.var .data}:       {.cls {(.data_loc_class)}}",
-        "i" = "{.var .geometry}: {.cls {(.geo_loc_class)}}.")
+        "i" = "{.var .geometry}: {.cls {(.geo_loc_class)}}."
+      )
     )
   }
-
 
   # check missingness in each column in .data that isn't necessary
   addtl_colnames <- setdiff(colnames(.data), c(.loc_col, .time_col))
 
-  n_missing <- unlist(lapply(addtl_colnames, function(.x) sum(is.na(.data[[.x]]))))
+  n_missing <- unlist(lapply(addtl_colnames, function(.x) {
+    sum(is.na(.data[[.x]]))
+  }))
   names(n_missing) <- addtl_colnames
   to_report <- n_missing[n_missing > 0]
 
   if (any(to_report > 0)) {
-    cli::cli_alert_warning("Vars(s) {.var {names(to_report)}} {?is/are} missing {to_report} value(s).")
+    cli::cli_alert_warning(
+      "Vars(s) {.var {names(to_report)}} {?is/are} missing {to_report} value(s)."
+    )
   }
 }
 
@@ -209,5 +222,3 @@ is_spacetime <- function(x, ...) {
 is.spacetime <- function(x, ...) {
   is_spacetime(x, ...)
 }
-
-

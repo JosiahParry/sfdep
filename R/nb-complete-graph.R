@@ -14,9 +14,8 @@ st_complete_nb <- function(n_elements, diag = FALSE) {
   res <- lapply(1:n_elements, function(x) 1:n_elements)
   attr(res, "self.included") <- TRUE
 
-  if (!diag) res <- remove_self(res)
+  if (!diag) {
+    res <- remove_self(res)
+  }
   class_modify(res, "nb")
 }
-
-
-

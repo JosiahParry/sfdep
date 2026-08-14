@@ -62,16 +62,19 @@ local_colocation_calc <- function(A, B, listw) {
     table(B) / (length(B) - 1)
   }
 
-  lclq <- Map(function(.xj, .wt) {
-    if (any(is.na(c(.xj, .wt)))) return(NA)
-    res <- stats::aggregate(. ~ .xj, data.frame(.xj, .wt),
-                     sum,
-                     na.rm = TRUE)
-    res[["prop"]] <- res[[".wt"]] / sum(.wt, na.rm = TRUE)
-    res <- res[["prop"]] / denominator[res[[".xj"]]]
-    res[b_vals]
-  }, bij, wt)
-
+  lclq <- Map(
+    function(.xj, .wt) {
+      if (anyNA(c(.xj, .wt))) {
+        return(NA)
+      }
+      res <- stats::aggregate(. ~ .xj, data.frame(.xj, .wt), sum, na.rm = TRUE)
+      res[["prop"]] <- res[[".wt"]] / sum(.wt, na.rm = TRUE)
+      res <- res[["prop"]] / denominator[res[[".xj"]]]
+      res[b_vals]
+    },
+    bij,
+    wt
+  )
 
   lclq <- do.call(rbind, lclq)
   colnames(lclq) <- b_vals
@@ -87,26 +90,27 @@ local_colocation_calc <- function(A, B, listw) {
 local_colocation_impl <- function(A, B, listw, nsim = 99) {
   obs <- local_colocation_calc(A, B, listw)
 
-  reps <- replicate(nsim, local_colocation_calc(A, B, permute_listw(listw)),
-                    simplify = "array")
+  reps <- replicate(
+    nsim,
+    local_colocation_calc(A, B, permute_listw(listw)),
+    simplify = "array"
+  )
 
   res_ps <- matrix(ncol = ncol(obs), nrow = nrow(obs))
 
-  for (j in 1:ncol(obs)) {
-    obs_j <- obs[,j]
-    reps_j <- reps[,j,]
-    l <- (rowSums(obs_j >=  reps_j, na.rm = TRUE) + 1) / (nsim + 1)
-    g <- (rowSums(obs_j <=  reps_j, na.rm = TRUE) + 1)/ (nsim + 1)
+  for (j in seq_len(ncol(obs))) {
+    obs_j <- obs[, j]
+    reps_j <- reps[, j, ]
+    l <- (rowSums(obs_j >= reps_j, na.rm = TRUE) + 1) / (nsim + 1)
+    g <- (rowSums(obs_j <= reps_j, na.rm = TRUE) + 1) / (nsim + 1)
     p <- pmin(l, g)
     p[is.na(obs_j)] <- NA
-    res_ps[,j] <- p
+    res_ps[, j] <- p
   }
 
   colnames(res_ps) <- paste0("p_sim_", colnames(obs), sep = "")
 
-  cbind(as.data.frame(obs),
-        as.data.frame(res_ps))
-
+  cbind(as.data.frame(obs), as.data.frame(res_ps))
 }
 
 # local_colocation_perm_impl(A, B, listw)
@@ -132,4 +136,3 @@ local_colocation_impl <- function(A, B, listw, nsim = 99) {
 # bij <- find_xj(B, nb)
 # listw <- recreate_listw(nb, wt)
 # b_vals <- levels(B)
-

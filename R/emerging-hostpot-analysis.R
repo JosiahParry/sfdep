@@ -94,14 +94,23 @@
 #' }
 #'
 #' @export
-emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
-                                      nb_col = NULL, wt_col = NULL,
-                                      nsim = 199, threshold = 0.01, ...) {
-
+emerging_hotspot_analysis <- function(
+  x,
+  .var,
+  k = 1,
+  include_gi = FALSE,
+  nb_col = NULL,
+  wt_col = NULL,
+  nsim = 199,
+  threshold = 0.01,
+  ...
+) {
   check_pkg_suggests("Kendall")
 
   # activate data if not already
-  if (active(x) == "geometry") x <- activate(x, "data")
+  if (active(x) == "geometry") {
+    x <- activate(x, "data")
+  }
 
   x <- spt_order(x)
 
@@ -124,7 +133,6 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
       nb <- include_self(st_dist_band(sf::st_geometry(attr(x, "geometry"))))
       wt <- st_weights(nb)
     }
-
   } else {
     nb <- attr(x, "geometry")[[nb_col]]
     wt <- attr(x, "geometry")[[wt_col]]
@@ -148,11 +156,10 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
 
   rownames(res_ehs) <- NULL
 
-
   res_ehs <- stats::setNames(
     res_ehs[, c("location", "tau", "sl", "classification")],
     c("location", "tau", "p_value", "classification")
-    )
+  )
 
   class(res_ehs) <- setdiff(class(x), "spacetime")
 
@@ -161,7 +168,4 @@ emerging_hotspot_analysis <- function(x, .var, k = 1, include_gi = FALSE,
   }
 
   res_ehs
-
 }
-
-

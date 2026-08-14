@@ -28,14 +28,10 @@ std_distance <- function(geometry) {
   cent_xy <- sf::st_coordinates(cent)
   xy <- sf::st_coordinates(geometry)
   n <- length(geometry)
-  lhs <- sum((xy[,1] - cent_xy[1])^2) / n
-  rhs <- sum(((xy[,2] - cent_xy[2])^2)) / n
+  lhs <- sum((xy[, 1] - cent_xy[1])^2) / n
+  rhs <- sum(((xy[, 2] - cent_xy[2])^2)) / n
   sqrt(lhs + rhs)
-
 }
-
-
-
 
 # Example data i used for validation from
 # http://pysal.org/notebooks/explore/pointpats/centrography.html#Dispersion-and-Orientation

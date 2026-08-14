@@ -44,31 +44,33 @@ activate.spacetime <- function(.data, what = NULL) {
   match.arg(what, c("geometry", "data", NULL))
   is_active <- active(.data)
   # if missing, set "what" to whatever is presently active
-  if (is.null(what)) return(.data)
+  if (is.null(what)) {
+    return(.data)
+  }
   # if what is the same as active, return input object
-  if (is_active == what) return(.data)
+  if (is_active == what) {
+    return(.data)
+  }
 
-  switch(what,
-         geometry = activate_geometry(.data),
-         data = activate_data(.data))
-
+  switch(what, geometry = activate_geometry(.data), data = activate_data(.data))
 }
 
 activate_geometry <- function(.data) {
   # class(x) <- setdiff(class(x), "spacetime")
-  new_spacetime_geo(.data,
-                    attr(.data, "geometry"),
-                    attr(.data, "loc_col"),
-                    attr(.data, "time_col"))
+  new_spacetime_geo(
+    .data,
+    attr(.data, "geometry"),
+    attr(.data, "loc_col"),
+    attr(.data, "time_col")
+  )
 }
 
 
 activate_data <- function(.data) {
-  new_spacetime_data(attr(.data, "data"),
-                     .data,
-                     attr(.data, "loc_col"),
-                     attr(.data, "time_col"))
+  new_spacetime_data(
+    attr(.data, "data"),
+    .data,
+    attr(.data, "loc_col"),
+    attr(.data, "time_col")
+  )
 }
-
-
-

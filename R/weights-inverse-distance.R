@@ -22,7 +22,7 @@
 #' head(wts, 3)
 #' @export
 st_inverse_distance <- function(nb, geometry, scale = 100, alpha = 1) {
-  pnts = check_polygon(geometry)
+  pnts <- check_polygon(geometry)
 
   dists <- spdep::nbdists(nb, pnts)
 
@@ -34,7 +34,7 @@ st_inverse_distance <- function(nb, geometry, scale = 100, alpha = 1) {
 #'
 #' @keywords internal
 inverse_dist_calc <- function(.x, scale, alpha) {
-  res <- 1 / ((.x/scale)^alpha)
+  res <- 1 / ((.x / scale)^alpha)
   res[which(is.infinite(res))] <- 0
   res
 }

@@ -4,7 +4,8 @@ test_that("local_g_perm", {
 
   # read in data
   df <- read.csv(
-    df_fp, colClasses = c("numeric", "character", "integer", "double", "Date")
+    df_fp,
+    colClasses = c("numeric", "character", "integer", "double", "Date")
   )
 
   geo <- sf::st_read(geo_fp)

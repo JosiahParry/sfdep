@@ -17,11 +17,11 @@
 #' @keywords internal
 #' @returns a list of length 5 where each element is a kernel function.
 kernels <- list(
-  uniform = function(x, ...) x * 0 + .5,
+  uniform = function(x, ...) x * 0 + 0.5,
   triangular = function(x, thresh) 1 - abs(x / thresh),
-  epanechnikov = function(x, thresh) .75 * (1- (x / thresh)^2),
-  quartic = function(x, thresh) (15/16)*(1-(x / thresh)^2)^2,
-  gaussian =  function(x, thresh) sqrt(2 * pi)*exp((-(x / thresh)^2)/2)
+  epanechnikov = function(x, thresh) 0.75 * (1 - (x / thresh)^2),
+  quartic = function(x, thresh) (15 / 16) * (1 - (x / thresh)^2)^2,
+  gaussian = function(x, thresh) sqrt(2 * pi) * exp((-(x / thresh)^2) / 2)
 )
 
 
@@ -40,4 +40,3 @@ critical_threshold <- function(geometry, k = 1) {
   knb <- spdep::knn2nb(spdep::knearneigh(pnts, k))
   max(unlist(spdep::nbdists(knb, pnts)))
 }
-

@@ -28,8 +28,15 @@
 #'
 #' }
 #' @returns a `data.frame` with two columns `join_count` and `p_sim` and number of rows equal to the length of arguments `x`, `nb`, and `wt`.
-local_jc_uni <- function(fx, chosen, nb, wt = st_weights(nb, style = "B"),
-                         nsim = 499, alternative = "two.sided", iseed = NULL) {
-  listw <- recreate_listw(nb ,wt)
+local_jc_uni <- function(
+  fx,
+  chosen,
+  nb,
+  wt = st_weights(nb, style = "B"),
+  nsim = 499,
+  alternative = "two.sided",
+  iseed = NULL
+) {
+  listw <- recreate_listw(nb, wt)
   spdep::local_joincount_uni(fx, chosen, listw, alternative, nsim, iseed)
 }

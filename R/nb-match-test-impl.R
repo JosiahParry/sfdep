@@ -22,12 +22,19 @@
 #' - `knn_nb` (list): the neighbors in attribute space
 #' - `probability` (numeric): the geometric probability of observing the number of matches
 #' - `p_sim` (numeric): a folded simulated p-value
-nb_match_test <- function(x, nb, wt = st_weights(nb),
-                          k = 10, nsim = 499,
-                          scale = TRUE, .method = "euclidian",
-                          .p = 2) {
-
-  if (inherits(x, "numeric")) x <- list(x)
+nb_match_test <- function(
+  x,
+  nb,
+  wt = st_weights(nb),
+  k = 10,
+  nsim = 499,
+  scale = TRUE,
+  .method = "euclidian",
+  .p = 2
+) {
+  if (inherits(x, "numeric")) {
+    x <- list(x)
+  }
 
   listw <- recreate_listw(nb, wt)
 
@@ -46,7 +53,6 @@ nmt_calc <- function(knn_nb, nb) {
   # identify matches
   mapply(base::intersect, knn_nb, nb)
 }
-
 
 
 #' Find conditionally permuted neighbor matches
@@ -80,15 +86,24 @@ nmt_perm_impl <- function(knn_nb, listw) {
 #'   - knn_nb
 #'   - probability
 #'   - p_sim
-nmt_impl <- function(x, k, listw, nsim = 199,
-                     scale = TRUE, .method = "euclidian",
-                     .p = 2) {
-
-  if (!requireNamespace("dbscan")) rlang::abort("Package `dbscan` must installed.")
+nmt_impl <- function(
+  x,
+  k,
+  listw,
+  nsim = 199,
+  scale = TRUE,
+  .method = "euclidian",
+  .p = 2
+) {
+  if (!requireNamespace("dbscan")) {
+    rlang::abort("Package `dbscan` must installed.")
+  }
   nb <- listw[["neighbours"]]
 
   m <- Reduce(cbind.data.frame, x)
-  if (scale) m <- scale(m)
+  if (scale) {
+    m <- scale(m)
+  }
 
   # kNN in attribute space
   d <- stats::dist(m, .method, p = .p)
@@ -122,9 +137,7 @@ nmt_impl <- function(x, k, listw, nsim = 199,
   )
 
   list2DF(res)
-
 }
-
 
 # TODO create this function
 # Folded Simulated P-value
@@ -134,4 +147,3 @@ nmt_impl <- function(x, k, listw, nsim = 199,
 # @param reps a matrix
 # folded_p_sim <- function(obs, reps) {
 # }
-

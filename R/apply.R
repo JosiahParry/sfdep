@@ -35,19 +35,20 @@
 #' }
 #' @export
 st_nb_apply <- function(x, nb, wt, .f, suffix = "dbl", ...) {
-
   if (!requireNamespace("purrr", quietly = TRUE)) {
     cli::cli_abort("`purrr` must be installed to use `st_nb_apply()")
   }
 
   match.arg(suffix, c("dbl", "int", "lgl", "chr", "list"))
 
-  map_fn <- switch(suffix,
-                   dbl = purrr::map2_dbl,
-                   int = purrr::map2_int,
-                   lgl = purrr::map2_lgl,
-                   chr = purrr::map2_chr,
-                   list = purrr::map2)
+  map_fn <- switch(
+    suffix,
+    dbl = purrr::map2_dbl,
+    int = purrr::map2_int,
+    lgl = purrr::map2_lgl,
+    chr = purrr::map2_chr,
+    list = purrr::map2
+  )
 
   f <- purrr::as_mapper(.f, ...)
 
@@ -55,10 +56,7 @@ st_nb_apply <- function(x, nb, wt, .f, suffix = "dbl", ...) {
     .xij <- x[.nb]
 
     f(.xij = .xij, .nb = .nb, .wt = .wt, ...)
-
   })
 }
-
-
 
 #st_nb_apply(x, nb, wt, .f = function(.xij, ...) sum(.xij), suffix = "dbl" )

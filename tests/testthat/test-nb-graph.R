@@ -1,4 +1,3 @@
-
 library(testthat)
 
 geometry <- sf::st_geometry(guerry)
@@ -6,9 +5,6 @@ geometry <- sf::st_geometry(guerry)
 nbd <- st_nb_delaunay(geometry)
 nbg <- st_nb_gabriel(geometry)
 nbr <- st_nb_relative(geometry)
-
-
-
 
 
 test_that("neighbors are of appropriate length", {
@@ -64,5 +60,4 @@ test_that("error on using lines", {
   expect_error(st_nb_delaunay(g2))
   expect_error(st_nb_gabriel(g2))
   expect_error(st_nb_relative(g2))
-
 })

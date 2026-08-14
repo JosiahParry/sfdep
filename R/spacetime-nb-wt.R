@@ -1,4 +1,3 @@
-
 # Neighbors ---------------------------------------------------------------
 #' Create time lagged spatial neighbors
 #'
@@ -28,14 +27,20 @@
 #' @returns a `nb` list
 spt_nb <- function(nb, n_times, n_locs, k = 1) {
   # if k is negative, exit
-  if (k < 0) cli::cli_abort("`k` ({k}) must be a positive integer.")
+  if (k < 0) {
+    cli::cli_abort("`k` ({k}) must be a positive integer.")
+  }
   # if k isn't an integer, exit
-  if ((k %% 1) != 0) cli::cli_abort("`k` ({k}) must be a positive integer")
+  if ((k %% 1) != 0) {
+    cli::cli_abort("`k` ({k}) must be a positive integer")
+  }
 
   nbt0 <- nb_time_index(n_times, n_locs, nb)
 
   # If k = 0 have an early exit
-  if (k == 0) return(nbt0)
+  if (k == 0) {
+    return(nbt0)
+  }
 
   nb_lag_k <- lapply(1:k, function(.k) nb_time_index_lag(nbt0, n_locs, .k))
   zip_lists(c(list(nbt0), nb_lag_k))
@@ -64,7 +69,6 @@ nb_time_index_lag <- function(nbt, n_locs, k) {
     stats::na.omit(ifelse(res < 1, NA, res))
   })
 }
-
 
 
 # Weights -----------------------------------------------------------------
@@ -113,8 +117,7 @@ spt_wt <- function(wt, nbt, n_times, n_locs, k) {
 # lengths(wtt) == lengths(nbt)
 # Utils -------------------------------------------------------------------
 
-
 # combine all lists element-wise
-zip_lists <- function (lists) {
+zip_lists <- function(lists) {
   do.call('Map', c(`c`, lists))
 }

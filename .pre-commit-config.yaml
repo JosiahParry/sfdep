@@ -1,0 +1,17 @@
+default_install_hook_types: [pre-commit, commit-msg]
+
+repos:
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+
+  - repo: local
+    hooks:
+      - id: just-lint
+        name: just lint
+        entry: just lint
+        language: system
+        pass_filenames: false
+        stages: [pre-commit]
