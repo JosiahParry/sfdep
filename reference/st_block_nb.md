@@ -11,7 +11,7 @@ Source:
 ## Usage
 
 ``` r
-st_block_nb(regime, id = 1:length(regime), diag = FALSE)
+st_block_nb(regime, id = seq_along(regime), diag = FALSE)
 ```
 
 ## Arguments

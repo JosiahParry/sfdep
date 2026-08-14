@@ -49,9 +49,6 @@ an sfc POINT object
 Other point-pattern:
 [`std_distance()`](https://josiahparry.github.io/sfdep/reference/std_distance.md)
 
-Other point-pattern:
-[`std_distance()`](https://josiahparry.github.io/sfdep/reference/std_distance.md)
-
 ## Examples
 
 ``` r

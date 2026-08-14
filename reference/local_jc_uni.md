@@ -22,7 +22,8 @@ local_jc_uni(
 
 - fx:
 
-  a binary variable either numeric or logical
+  a factor with two levels; use of an ordered factor is not well
+  understood.
 
 - chosen:
 

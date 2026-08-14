@@ -9,10 +9,6 @@ Kernel functions for creating kernel based weights with
 kernels
 ```
 
-## Format
-
-An object of class `list` of length 5.
-
 ## Value
 
 a list of length 5 where each element is a kernel function.
